@@ -1,0 +1,8 @@
+[Unit]
+Description=score finished live forecasts against Energinet realtime output
+[Timer]
+OnCalendar=*-*-* 01:30:00 Europe/Copenhagen
+OnCalendar=*-*-* 07:30:00 Europe/Copenhagen
+Persistent=true
+[Install]
+WantedBy=timers.target

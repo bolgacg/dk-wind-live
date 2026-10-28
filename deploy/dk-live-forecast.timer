@@ -1,0 +1,9 @@
+[Unit]
+Description=daily live wind forecast before the 12:00 day-ahead gate (retries at 11:00 and 11:30 skip if already issued)
+[Timer]
+OnCalendar=*-*-* 10:30:00 Europe/Copenhagen
+OnCalendar=*-*-* 11:00:00 Europe/Copenhagen
+OnCalendar=*-*-* 11:30:00 Europe/Copenhagen
+Persistent=false
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,4 @@
+models/
+reports/
+__pycache__/
+*.log
