@@ -75,10 +75,15 @@ def main():
     act = realtime_actuals(f"{(now - timedelta(days=CAP_WINDOW_DAYS + 3)):%Y-%m-%d}", f"{now + timedelta(days=1):%Y-%m-%d}")
     cap_now = capacity_proxy(act).iloc[-1]
 
-    boosters = {z: lgb.Booster(model_file=str(LIVE / "models" / f"{z}.txt")) for z in ZONES}
-    meta = json.load(open(LIVE / "models" / "meta.json"))
-    preds, missing = {}, {}
+    preds, missing, mapping = {}, {}, {}
     for short, model in LIVE_MODELS.items():
+        # each weather model uses its own trained mapping when one exists, else the IFS one
+        mdir = LIVE / "models" / model
+        if not (mdir / "meta.json").exists():
+            mdir = LIVE / "models" / "ecmwf_ifs025"
+        boosters = {z: lgb.Booster(model_file=str(mdir / f"{z}.txt")) for z in ZONES}
+        meta = json.load(open(mdir / "meta.json"))
+        mapping[short] = meta["weather"]
         try:
             sp, di = fetch_weather(model)
         except Exception as e:
@@ -101,7 +106,7 @@ def main():
            "gate_utc": str(pd.Timestamp(datetime.combine(day - timedelta(days=1), datetime.min.time(), tzinfo=CPH)
                                         .replace(hour=12)).tz_convert("UTC")),
            "hours_utc": [h.strftime("%Y-%m-%dT%H:%M") for h in hours], "capacity_proxy_mw": cap_now.round(1).to_dict(),
-           "blend_members": full, "missing": missing, "trained_on": meta["weather"],
+           "blend_members": full, "missing": missing, "mapping": mapping,
            "forecast_mw": {m: {z: [round(float(s.get(h, np.nan)), 1) if h in s.index else None for h in hours]
                                for z, s in zs.items()} for m, zs in preds.items()},
            "energinet_snapshot": energinet_da(start, end)}

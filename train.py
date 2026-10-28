@@ -31,7 +31,7 @@ def load_weather(model, lead=1):
             h = d["hourly"]
             parts.append(pd.DataFrame({"s": h[f"wind_speed_100m_previous_day{lead}"],
                                        "d": h[f"wind_direction_100m_previous_day{lead}"]},
-                                      index=pd.to_datetime(h["time"]).tz_localize("UTC")))
+                                      index=pd.to_datetime(h["time"]).tz_localize("UTC"), dtype=float))
         if not parts:
             raise SystemExit(f"no {model} data for {p} yet")
         df = pd.concat(parts)
@@ -74,9 +74,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--weather", default="ecmwf_ifs025")
     ap.add_argument("--final", action="store_true")
+    ap.add_argument("--since", help="drop training hours before this UTC date (for like-for-like model duels)")
     a = ap.parse_args()
     sp, di = load_weather(a.weather)
     X = features(sp, di)
+    X = X[sp.notna().mean(axis=1) > 0.9]  # hours before a model's archive starts are all empty
+    if a.since:
+        X = X[X.index >= pd.Timestamp(a.since, tz="UTC")]
     Y = load_actuals()
     cap = capacity_proxy(Y)
     da = load_energinet_da()
@@ -94,7 +98,7 @@ def main():
         mae_ours = (pred.loc[common] - act.loc[common]).abs().mean()
         mae_en = (da[z].loc[common] - act.loc[common]).abs().mean()
         # Energinet with its own bias removed: scale by actual/forecast over the previous 60 days (known before the day)
-        j = pd.concat([Y[z], da[z]], axis=1, keys=["a", "f"]).dropna()
+        j = pd.concat([Y[z], da[z]], axis=1, keys=["a", "f"], sort=True).dropna()
         r = (j.a.rolling("60D").sum() / j.f.rolling("60D").sum()).resample("D").last().shift(1)
         en_db = da[z] * r.reindex(da[z].index, method="ffill")
         mae_db = (en_db.loc[common] - act.loc[common]).abs().mean()
@@ -103,17 +107,18 @@ def main():
                          ratio_debiased=mae_ours / mae_db))
         if a.final:
             mf = lgb.train(PARAMS, lgb.Dataset(X, y), N_ROUNDS)
-            (LIVE / "models").mkdir(exist_ok=True)
-            mf.save_model(str(LIVE / "models" / f"{z}.txt"))
+            mdir = LIVE / "models" / a.weather
+            mdir.mkdir(parents=True, exist_ok=True)
+            mf.save_model(str(mdir / f"{z}.txt"))
     rep = pd.DataFrame(rows)
     print(rep.to_string(index=False, float_format=lambda v: f"{v:.3f}"))
     out = LIVE / "reports"
     out.mkdir(exist_ok=True)
-    rep.to_csv(out / f"test_{a.weather}.csv", index=False)
+    rep.to_csv(out / f"test_{a.weather}{'_since' + a.since if a.since else ''}.csv", index=False)
     if a.final:
         json.dump({"weather": a.weather, "hours": len(idx), "from": str(idx.min()), "to": str(idx.max()),
                    "params": PARAMS, "rounds": N_ROUNDS, "features": list(X.columns)},
-                  open(LIVE / "models" / "meta.json", "w"), indent=1)
+                  open(LIVE / "models" / a.weather / "meta.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

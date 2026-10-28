@@ -13,6 +13,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import LIVE, ZONES, realtime_actuals
 
 
+def energinet_da_frame(start, end):
+    from forecast import energinet_da
+    out = {}
+    for z, v in energinet_da(start, end).items():
+        out[z] = pd.Series(v["day_ahead"], index=pd.to_datetime(v["hours"]).tz_localize("UTC"), dtype=float)
+    return out
+
+
 def main():
     now = pd.Timestamp(datetime.now(timezone.utc))
     rows = []
@@ -33,6 +41,17 @@ def main():
             sources_note = "energinet_da_snapshot"
         en = {z: dict(zip(v["hours"], v["day_ahead"])) for z, v in snap.items()}
         sources["energinet_da"] ={z: [en.get(z, {}).get(h.strftime("%Y-%m-%dT%H:%M:%S")) for h in hours] for z in ZONES}
+        # Energinet scaled by actual/forecast over the 60 days before the target day (its DK1 offshore series is
+        # capped near 1,000 MW and covers only part of the fleet, so the raw series is not a skill bar there)
+        a0 = hours[0] - pd.Timedelta(days=60)
+        past_act = realtime_actuals(f"{a0:%Y-%m-%d}", f"{hours[0]:%Y-%m-%d}")
+        past_en = energinet_da_frame(a0, hours[0])
+        db = {}
+        for z in ZONES:
+            j = pd.concat([past_act.get(z), past_en.get(z)], axis=1, keys=["a", "f"], sort=True).dropna()
+            k = j.a.sum() / j.f.sum() if len(j) > 24 * 20 and j.f.sum() > 0 else float("nan")
+            db[z] = [None if v is None or k != k else v * k for v in sources["energinet_da"][z]]
+        sources["energinet_da_debiased"] = db
         for src, zs in sources.items():
             for z in ZONES:
                 p = pd.Series(zs.get(z, [None] * len(hours)), index=hours, dtype=float)
@@ -43,7 +62,7 @@ def main():
                 rows.append(dict(day=r["target_day_cph"], zone=z, source=src, hours=int(ok.sum()),
                                  actual_mwh=round(act[z][ok].sum()), mae_mw=round(err.abs().mean(), 1),
                                  bias_mw=round(err.mean(), 1),
-                                 note=sources_note if src == "energinet_da" else ""))
+                                 note=sources_note if src.startswith("energinet") else ""))
     if not rows:
         print("nothing to score yet")
         return
@@ -55,7 +74,8 @@ def main():
     tot = piv.mean().sort_values()
     lines = ["# Live scoreboard", "",
              f"Updated {now:%Y-%m-%d %H:%M} UTC. Error = mean absolute error in MW, summed over DK1/DK2 offshore and",
-             "onshore wind. Lower is better. energinet_da is Energinet's own day-ahead forecast, the bar to beat.", "",
+             "onshore wind. Lower is better. energinet_da is Energinet's own day-ahead forecast; energinet_da_debiased scales it"
+             ,"by its actual/forecast ratio over the previous 60 days, the fair bar to beat.", "",
              f"Days scored: {days}", "", "| source | mean error, MW |", "|---|---|"]
     lines += [f"| {s} | {v:.0f} |" for s, v in tot.items()]
     lines += ["", "Per day:", "", piv.round(0).to_markdown()]

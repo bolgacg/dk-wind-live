@@ -1,4 +1,5 @@
-models/
+
 reports/
 __pycache__/
 *.log
+queue_train.log
