@@ -1,0 +1,9 @@
+[Unit]
+Description=dk-wind-blend live provisional score of the day in progress
+After=network-online.target
+[Service]
+Type=oneshot
+User=bo
+Nice=10
+Environment=OMP_NUM_THREADS=2
+ExecStart=/home/bo/dk-wind-live/live/deploy/run.sh today

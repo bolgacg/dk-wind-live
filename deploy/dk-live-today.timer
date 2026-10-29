@@ -1,0 +1,7 @@
+[Unit]
+Description=hourly provisional score: put each measured hour on the page as soon as Energinet publishes it
+[Timer]
+OnCalendar=*-*-* *:08:00
+Persistent=true
+[Install]
+WantedBy=timers.target

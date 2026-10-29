@@ -55,6 +55,13 @@ Hover over or tap any source name for a one-line description.</p>
 
 <div class="tiles" id="tiles"></div>
 
+<h2 id="todayh">Today so far</h2>
+<figure>
+  <div id="today"></div>
+  <div id="todaytab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
+  <figcaption id="todaycap"></figcaption>
+</figure>
+
 <h2 id="weekh">The last seven live days, ranked</h2>
 <figure>
   <div id="week"></div>
@@ -279,6 +286,34 @@ function renderBand(B) {
     and the dots are the measured output: black inside the band, blue outside. Last seven days of ${B.from} to ${B.to},
     hourly, total Denmark, in MW.`;
 }
+function renderToday(T) {
+  const host = document.getElementById("today"), cap = document.getElementById("todaycap");
+  if (!T || !T.day) { host.innerHTML = "<p class='mute sans'>No measured hour yet for a forecast day; the first hour appears about an hour after it ends.</p>"; return; }
+  const S = T.series, W = 760, H = 260, L = 56, R = 12, top = 12, bot = 30;
+  const vals = S.flatMap(r => [r.hi, r.p, r.a]).filter(v => v != null), ymax = Math.max(...vals) * 1.08;
+  const x = i => L + i / (S.length - 1) * (W - L - R), y = v => top + (1 - v / ymax) * (H - top - bot);
+  const s = svg(host, W, H), step = Math.max(500, Math.ceil(ymax / 4 / 1000) * 1000);
+  for (let v = 0; v <= ymax; v += step) {
+    el("line", {x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "#eee"}, s);
+    el("text", {x: L - 6, y: y(v) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, v.toLocaleString("en")); }
+  const nb = S.filter(r => r.lo != null);
+  if (nb.length === S.length) el("path", {d: "M" + S.map((r, i) => `${x(i)},${y(r.hi)}`).join("L") + "L" +
+    S.map((r, i) => `${x(i)},${y(r.lo)}`).reverse().join("L") + "Z", fill: "#c2410c", opacity: .15}, s);
+  const meas = T.hours_measured;
+  el("path", {d: "M" + S.map((r, i) => `${x(i)},${y(r.p)}`).join("L"), fill: "none", stroke: "#c2410c", "stroke-width": 1.8}, s);
+  el("line", {x1: x(meas - 0.5), x2: x(meas - 0.5), y1: top, y2: H - bot, stroke: "#1d1d1b", "stroke-dasharray": "3 3"}, s);
+  el("text", {x: x(meas - 0.5) + 4, y: top + 10, "font-size": 11, fill: "#1d1d1b"}, s, "now");
+  S.forEach((r, i) => { if (r.a != null) el("circle", {cx: x(i), cy: y(r.a), r: 3, fill: r.lo == null || (r.a >= r.lo && r.a <= r.hi) ? "#1d1d1b" : "#1e40af"}, s); });
+  S.forEach((r, i) => { if (i % 6 === 0) { const hh = new Date(r.t + ":00Z").toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit", timeZone: "Europe/Copenhagen"});
+    el("text", {x: x(i), y: H - 8, "font-size": 11, fill: "#6b6a65", "text-anchor": "middle"}, s, hh); } });
+  document.getElementById("todaytab").innerHTML = "<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Rank so far</th><th style='padding:4px 8px'>Source</th><th style='padding:4px 8px;text-align:right'>Accuracy so far</th></tr>" +
+    T.ranking.map(r => `<tr style="border-top:1px solid #eee;${r.source === "blend" ? "font-weight:700;color:#c2410c" : ""}"><td style="padding:4px 8px">${r.rank}</td><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(r.source) || "").replace(/"/g, "&quot;")}">${r.name}</span></td><td style="padding:4px 8px;text-align:right">${r.acc.toFixed(1)}%</td></tr>`).join("") + "</table>";
+  const dd = new Date(T.day + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"});
+  document.getElementById("todayh").textContent = `${dd} so far: ${T.hours_measured} of ${T.hours_total} hours measured`;
+  cap.textContent = `Provisional. The orange line is my forecast for ${dd}, committed the day before, with its 80% band shaded; ` +
+    `the dots are Energinet's measured output, total Denmark in MW, added each hour as it is published (black inside the band, blue outside). ` +
+    `The ranking covers the measured hours only and changes as the day goes on. The official score for the whole day is computed at 01:30 the next night.`;
+}
 function renderHealth(h) {
   const n = document.getElementById("health"); if (!h || !h.last_forecast_day) { n.textContent = ""; return; }
   const fmt = t => new Date(t).toLocaleString("en-GB", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Copenhagen"});
@@ -292,8 +327,10 @@ function renderHealth(h) {
     `Page data built ${fmt(h.generated_utc)} Copenhagen time.` +
     (late ? ` <span class="warnline">The forecast for ${dd(dueDay)} is not on this page yet; the page updates three times a day.</span>` : "");
 }
-Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({}))]).then(([D, G]) => {
+Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({})),
+    fetch("today.json").then(r => r.json()).catch(() => null)]).then(([D, G, TD]) => {
   GLOSS = G;
+  renderToday(TD);
   renderHealth(D.health);
   renderWeek(D);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
