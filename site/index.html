@@ -220,7 +220,8 @@ function render(d) {
     const shade = 1 - (r.rank - 1) / (n - 1 || 1);
     const c = el("rect", {x: L + j * cw, y: 14 + i * 18, width: cw - 1, height: 16,
       fill: r.source === OURS ? "#c2410c" : r.source === "energinet" ? "#1e40af" : "#57534e", opacity: (0.08 + 0.92 * shade).toFixed(2)}, s);
-    el("title", {}, c, `${r.day}: rank ${r.rank} of ${n}, error ${r.nmae.toFixed(2)}% of capacity, accuracy ${r.acc.toFixed(1)}%`);
+    el("title", {}, c, r.no_forecast ? `${r.day}: no forecast, DKcast feed not ready; counted as last place with the day's worst error`
+      : `${r.day}: rank ${r.rank} of ${n}, error ${r.nmae.toFixed(2)}% of capacity, accuracy ${r.acc.toFixed(1)}%`);
   });
   el("text", {x: L, y: H3 - 2, "font-size": 11, fill: "#6b6a65"}, s, days[0]);
   el("text", {x: L + days.length * cw, y: H3 - 2, "font-size": 11, fill: "#6b6a65", "text-anchor": "end"}, s, days[days.length - 1]);
@@ -258,10 +259,12 @@ function renderWeek(D) {
   });
   const order = stats.map(s => s.src).reverse().sort((a, b) => (a === OURS) - (b === OURS) || (a === best.src) - (b === best.src));
   for (const src of order) {
-    const pts = days.map((d, i) => { const r = rows.find(q => q.day === d && q.source === src); return r ? [x(i), y(r.rank)] : null; }).filter(Boolean);
+    const pts = days.map((d, i) => { const r = rows.find(q => q.day === d && q.source === src); return r ? [x(i), y(r.rank), r] : null; }).filter(Boolean);
     const hi = src === OURS || src === best.src;
-    el("path", {d: "M" + pts.map(p => p.join(",")).join("L"), fill: "none", stroke: col(src), "stroke-width": hi ? 3 : 1.4}, s);
-    pts.forEach(p => el("circle", {cx: p[0], cy: p[1], r: hi ? 4.5 : 2.5, fill: col(src)}, s));
+    el("path", {d: "M" + pts.map(p => p[0] + "," + p[1]).join("L"), fill: "none", stroke: col(src), "stroke-width": hi ? 3 : 1.4}, s);
+    pts.forEach(p => { const miss = p[2].no_forecast;
+      const c = el("circle", {cx: p[0], cy: p[1], r: hi ? 4.5 : 2.5, fill: miss ? "#fff" : col(src), stroke: col(src), "stroke-width": miss ? 2 : 0}, s);
+      if (miss) el("title", {}, c, "No forecast: DKcast feed not ready. Counted as last place."); });
     if (hi) { const last = pts[pts.length - 1];
       const other = rows.find(q => q.day === days[days.length - 1] && q.source === (src === OURS ? best.src : OURS));
       const clash = other && Math.abs(y(other.rank) - last[1]) < 16, dy = clash ? (src === OURS ? -8 : 8) : 0;
@@ -274,6 +277,7 @@ function renderWeek(D) {
   document.getElementById("weekcap").textContent = `Daily rank of each source by error as a % of capacity, 1 = smallest error of ${n}. ` +
     `Orange is ${name[OURS] || OURS}; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
     `${nl} live day${nl === 1 ? "" : "s"} shown, each forecast committed before its day began. ` +
+    (rows.some(r => r.no_forecast) ? "A hollow point is a day with no forecast because the DKcast feed was not ready; it counts as last place, with that day's worst error. " : "") +
     `Over these days ${name[OURS] || OURS} averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
   document.getElementById("weekh").textContent = nl < 7 ? `The live days so far, ranked (${nl} of 7)` : "The last seven live days, ranked";
 }

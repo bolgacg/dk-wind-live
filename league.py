@@ -74,6 +74,27 @@ def live_hourly(path):
     return df[["hour", "day", "source", "zone", "pred", "actual", "cap", "spot", "imb"]]
 
 
+NO_FEED_FROM = "2026-10-31"  # from the dress rehearsal on, a missing J4catDK forecast counts against it
+
+
+def penalise_missing(d):
+    """A live day whose forecast went out without J4catDK (DKcast feed not ready at the last try) counts against it:
+    it takes that day's worst error and last place, flagged no_forecast, instead of dropping out of its average."""
+    rows = []
+    for f in sorted((LIVE / "forecasts").glob("*.json")):
+        r = json.load(open(f))
+        day = r["target_day_cph"]
+        if day < NO_FEED_FROM or "j4catdk" in r["forecast_mw"] or day not in set(d.day):
+            continue
+        g = d[d.day == day]
+        worst = g.sort_values("nmae").iloc[-1]
+        rows.append({**worst.to_dict(), "source": "j4catdk", "no_forecast": True, "rank": int(g["rank"].max()) + 1})
+    if rows:
+        d = pd.concat([d, pd.DataFrame(rows)], ignore_index=True)
+    d["no_forecast"] = d.get("no_forecast", pd.Series(False, index=d.index)).fillna(False).astype(bool)
+    return d
+
+
 def daily(df):
     """Per day and source, on the hours every ranked source covered: summed zone errors and output (for accuracy),
     and per area the summed absolute error of the area total and the summed capacity (for % of capacity)."""
@@ -142,6 +163,8 @@ def main():
         if h.empty:
             continue
         d = daily(h)
+        if kind == "live" and not d.empty:
+            d = penalise_missing(d)
         if d.empty:
             continue
         tot = summary(d)
@@ -153,7 +176,8 @@ def main():
                                       skill_energinet=r2(r.get("skill_energinet", float("nan"))),
                                       imb_eur_mwh=r2(r.imb_eur_mwh),
                                       days=int(r.days), wins=int(r.wins), top3=int(r.top3)) for s, r in tot.iterrows()],
-                     "daily": [dict(day=r.day, source=r.source, acc=round(r.acc, 2), nmae=round(r.nmae, 2), rank=int(r["rank"]))
+                     "daily": [dict(day=r.day, source=r.source, acc=round(r.acc, 2), nmae=round(r.nmae, 2), rank=int(r["rank"]),
+                                    no_forecast=bool(r.get("no_forecast", False)))
                                for _, r in d.sort_values(["day", "rank"]).iterrows()]}
         print(f"\n== {kind}: {out[kind]['days']} days, {out[kind]['from']} to {out[kind]['to']}")
         print(tot[["nmae", "nmae_DK1", "nmae_DK2", "acc", "imb_eur_mwh"] + [c for c in tot if c.startswith("skill")] + ["wins", "top3"]].round(2).to_string())
