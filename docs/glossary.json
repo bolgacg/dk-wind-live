@@ -1,11 +1,11 @@
 {
  "_about": "One sentence per forecast source, for hover and tap tooltips on both sites. Written by projects-97, read by projects-5a. Keys match live/common.py LIVE_MODELS short names plus Open-Meteo model ids.",
  "blend": {
-  "name": "DK Wind Live forecast",
+  "name": "4-model average",
   "aka": [
    "ecmwf_ifs025+ecmwf_aifs025_single+dmi_harmonie_arome_europe+icon_eu"
   ],
-  "text": "Four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE, DWD ICON-EU) each turned into megawatts by their own trained power model, then averaged with equal weight."
+  "text": "My first live forecast, headline until 29 Oct 2026: four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE, DWD ICON-EU) each turned into megawatts by their own trained power model, then averaged with equal weight. Now a competitor; J4catDK replaced it."
  },
  "energinet": {
   "name": "Energinet (bias-corrected)",
