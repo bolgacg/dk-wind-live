@@ -6,7 +6,7 @@ mkdir -p ../logs
 echo "=== $(date -u +%FT%TZ) $1" >> ../logs/$1.log
 ../.venv/bin/python $1.py >> ../logs/$1.log 2>&1
 if [ "$1" = score ] || [ "$1" = forecast ]; then  # forecast too, so the health line shows the new forecast
-  ../.venv/bin/python league.py --live-scores scores.csv >> ../logs/league.log 2>&1 \
+  ../.venv/bin/python league.py --live-scores hourly_scores.csv >> ../logs/league.log 2>&1 \
     && mkdir -p docs && cp site/*.html site/*.json docs/ \
     && git add docs && git commit -qm "league update $(date -u +%F)" >> ../logs/league.log 2>&1
 fi

@@ -2,7 +2,7 @@
 The official score is still score.py at 01:30, once the whole day is in; this file never touches scores.csv.
 
 Picks the newest forecast day that has at least one measured hour, scores every source on the hours measured so far
-(same accuracy as the league: 100% minus summed absolute error over summed output, four zones), and writes
+(as the league: area totals' absolute error as a % of capacity, plus accuracy as an extra), and writes
 site/today.json with the running ranking and the hourly series (forecast, 80% band, measured output).
 
 Usage: python3 live/today.py"""
@@ -14,7 +14,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import LIVE, ZONES, realtime_actuals
-from league import NAMES
+from league import AREAS, NAMES
 
 CACHE = LIVE.parent / "cache"
 
@@ -69,8 +69,12 @@ def main():
             if ok.sum() < done.sum():  # rank only sources that cover every measured hour
                 continue
             err = (p[ok] - act[ok]).abs().to_numpy().sum()
-            rows.append(dict(source=s, name=NAMES.get(s, s), acc=round(100 * (1 - err / act[ok].to_numpy().sum()), 2)))
-        rows.sort(key=lambda x: -x["acc"])
+            # headline: area totals' absolute error as a % of capacity (proxy stored in the forecast), as league.py
+            aerr = sum((p[ok][zs].sum(axis=1) - act[ok][zs].sum(axis=1)).abs().sum() for zs in AREAS.values())
+            capsum = sum(r["capacity_proxy_mw"][z] for z in ZONES) * int(ok.sum())
+            rows.append(dict(source=s, name=NAMES.get(s, s), nmae=round(100 * aerr / capsum, 2),
+                             acc=round(100 * (1 - err / act[ok].to_numpy().sum()), 2)))
+        rows.sort(key=lambda x: x["nmae"])
         for i, x in enumerate(rows):
             x["rank"] = i + 1
         b = r.get("band_total_mw") or {}

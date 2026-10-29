@@ -54,6 +54,14 @@ Hover over or tap any source name for a one-line description.</p>
 <p class="mute sans" id="period" style="font-size:.9rem;margin-top:10px"></p>
 
 <div class="tiles" id="tiles"></div>
+<p class="mute sans" id="second" style="font-size:.88rem;margin-top:-8px"></p>
+
+<h2 id="todayh">Today so far</h2>
+<figure>
+  <div id="today"></div>
+  <div id="todaytab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
+  <figcaption id="todaycap"></figcaption>
+</figure>
 
 <h2 id="weekh">The last seven live days, ranked</h2>
 <figure>
@@ -62,16 +70,18 @@ Hover over or tap any source name for a one-line description.</p>
   <figcaption id="weekcap"></figcaption>
 </figure>
 
-<h2>Accuracy over the whole period</h2>
+<h2>Error over the whole period, % of installed capacity</h2>
 <figure>
   <div id="dots"></div>
-  <figcaption>Each dot is one forecast source. Accuracy is 100% minus the total hourly error as a share of the total
-  wind output. The orange dot is my forecast. The blue dot is Energinet's own day-ahead forecast,
+  <figcaption>Each dot is one forecast source; lower is better. The measure is the wind industry's standard: the mean
+  absolute error of each area's hourly total, DK1 and DK2, as a percentage of installed capacity. Capacity is
+  estimated per zone as the 99.5th percentile of hourly output over the previous 60 days, known before each day,
+  because Energinet publishes no hourly capacity. The orange dot is my forecast. The blue dot is Energinet's own day-ahead forecast,
   scaled by its actual-to-forecast ratio over the previous 60 days. That scaling is needed because its offshore DK1
   series covers only part of the fleet.</figcaption>
 </figure>
 
-<h2>How often each source was the most accurate</h2>
+<h2>How often each source had the smallest error</h2>
 <figure>
   <div id="wins"></div>
   <figcaption>Dark bar: days a source ranked first. Light bar: days it ranked in the top three. An average of models
@@ -83,7 +93,7 @@ Hover over or tap any source name for a one-line description.</p>
 <figure class="strip">
   <div id="strip"></div>
   <figcaption>One column per day, one row per source. The darker the cell, the higher that source ranked that day.
-  Hover over a cell for the day's accuracy.</figcaption>
+  Days are ranked by error as a % of capacity. Hover over a cell for the day's numbers.</figcaption>
 </figure>
 
 <h2>How sure is the forecast?</h2>
@@ -103,6 +113,11 @@ a model publishes no 100 m wind) goes into a gradient-boosted model per zone, wh
 recent capacity. Every mapping was trained on that model's forecasts as they stood a day earlier, from Open-Meteo's
 archive of past runs, so the lead time matches a real day-ahead decision. The backtest tab shows 19 Jul to 18 Oct
 2026, months none of the mappings saw in training. The live tab grows by one day every night.</p>
+<p>Results are given on three standard scales. For the wind industry: mean absolute error as a % of installed
+capacity, per area, day-ahead. For meteorologists: skill score against ECMWF IFS, 1 minus my error over IFS's error on
+the same hours. For traders: imbalance cost, each hour's error settled at the difference between the day-ahead price
+and Energinet's imbalance price, per MWh produced. Accuracy, 100% minus error over output, is kept as a plain-language
+extra.</p>
 <footer>Data: Open-Meteo (CC BY 4.0), Energinet Energi Data Service, DMI. Code and every forecast:
 <a href="https://github.com/bolgacg/dk-wind-live">github.com/bolgacg/dk-wind-live</a>.</footer>
 </main>
@@ -142,19 +157,26 @@ function render(d) {
   const rank = o.findIndex(r => r.source === "blend") + 1;
   document.getElementById("period").textContent =
     `${d.from} to ${d.to}, ${d.days} days, ${o.length} sources compared.`;
+  const less = v => v == null ? "n/a" : `${Math.abs(v).toFixed(1)}% ${v >= 0 ? "less" : "more"}`;
   document.getElementById("lede").textContent = ours ?
-    `Over these ${d.days} days my forecast ranked ${rank === 1 ? "first" : "number " + rank} of ${o.length} on accuracy ` +
-    `(${ours.acc.toFixed(1)}%), against ${en ? en.acc.toFixed(1) + "% for Energinet's own forecast" : "the field"}, ` +
-    `and was the single most accurate source on ${ours.wins} of ${d.days} days.` : "No scored days yet.";
+    `Over these ${d.days} days my forecast's error was ${ours.nmae.toFixed(2)}% of installed capacity, ` +
+    `ranked ${rank === 1 ? "first" : "number " + rank} of ${o.length}: ${less(ours.skill_ifs)} error than ECMWF IFS ` +
+    `and ${less(ours.skill_energinet)} than Energinet's own day-ahead forecast.` : "No scored days yet.";
   const T = document.getElementById("tiles"); T.innerHTML = "";
-  if (ours) for (const [v, l] of [[ours.acc.toFixed(1) + "%", "accuracy of my forecast"],
-      [en ? (ours.acc - en.acc >= 0 ? "+" : "") + (ours.acc - en.acc).toFixed(1) + " pts" : "n/a", "against Energinet's forecast"],
-      [`${ours.wins} of ${d.days}`, "days ranked first"], [`${ours.top3} of ${d.days}`, "days in the top three"]]) {
-    const t = document.createElement("div"); t.className = "tile"; t.innerHTML = `<b>${v}</b><span>${l}</span>`; T.appendChild(t);
+  const tiles = ours ? [[`${ours.nmae_DK1.toFixed(2)}% / ${ours.nmae_DK2.toFixed(2)}%`, "error in DK1 / DK2, % of installed capacity (MAE, day-ahead)", "nmae"],
+      [ours.skill_ifs == null ? "n/a" : ours.skill_ifs.toFixed(1) + "%", "skill against ECMWF IFS (1 minus my error over its error)", "skill"],
+      [ours.skill_energinet == null ? "n/a" : ours.skill_energinet.toFixed(1) + "%", "skill against Energinet's day-ahead forecast", "skill"],
+      [ours.imb_eur_mwh == null ? "n/a" : "€" + ours.imb_eur_mwh.toFixed(2), `imbalance cost per MWh produced${en && en.imb_eur_mwh != null ? `, against €${en.imb_eur_mwh.toFixed(2)} for Energinet's forecast` : ""}`, "imbalance"]] : [];
+  for (const [v, l, k] of tiles) {
+    const t = document.createElement("div"); t.className = "tile"; t.innerHTML = `<b>${v}</b><span>${l}</span>`;
+    if (GLOSS[k]) { t.dataset.tip = GLOSS[k].text; t.classList.add("tip"); t.tabIndex = 0; }
+    T.appendChild(t);
   }
+  document.getElementById("second").textContent = ours ? `Also: accuracy ${ours.acc.toFixed(1)}% (100% minus total error over total output` +
+    `${en ? `; Energinet ${en.acc.toFixed(1)}%` : ""}); smallest error of all sources on ${ours.wins} of ${d.days} days, in the top three on ${ours.top3}.` : "";
   // dot plot
   const W = 760, L = 210, R = 60, rowH = 30, H = o.length * rowH + 40;
-  const lo = Math.floor(Math.min(...o.map(r => r.acc)) - 1), hi = Math.ceil(Math.max(...o.map(r => r.acc)) + 1);
+  const lo = Math.max(0, Math.floor(Math.min(...o.map(r => r.nmae)) - 0.5)), hi = Math.ceil(Math.max(...o.map(r => r.nmae)) + 0.5);
   const x = v => L + (v - lo) / (hi - lo) * (W - L - R);
   let s = svg(document.getElementById("dots"), W, H);
   for (let v = lo; v <= hi; v++) if ((v - lo) % Math.max(1, Math.round((hi - lo) / 6)) === 0) {
@@ -164,9 +186,9 @@ function render(d) {
   o.forEach((r, i) => {
     const y = 24 + i * rowH, c = COL(r.source), b = r.source === "blend";
     tip(el("text", {x: L - 12, y: y + 4, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name), r.source);
-    el("line", {x1: L, x2: x(r.acc), y1: y, y2: y, stroke: "#e4e1d9", "stroke-width": 1}, s);
-    el("circle", {cx: x(r.acc), cy: y, r: b ? 8 : 6, fill: c}, s);
-    el("text", {x: x(r.acc) + 12, y: y + 4, "font-size": 13, fill: c, "font-weight": b ? 700 : 400}, s, r.acc.toFixed(1) + "%");
+    el("line", {x1: L, x2: x(r.nmae), y1: y, y2: y, stroke: "#e4e1d9", "stroke-width": 1}, s);
+    el("circle", {cx: x(r.nmae), cy: y, r: b ? 8 : 6, fill: c}, s);
+    el("text", {x: x(r.nmae) + 12, y: y + 4, "font-size": 13, fill: c, "font-weight": b ? 700 : 400}, s, r.nmae.toFixed(2) + "%");
   });
   // wins: bars from zero
   const byWins = [...o].sort((a, b) => b.wins - a.wins || b.top3 - a.top3);
@@ -192,7 +214,7 @@ function render(d) {
     const shade = 1 - (r.rank - 1) / (n - 1 || 1);
     const c = el("rect", {x: L + j * cw, y: 14 + i * 18, width: cw - 1, height: 16,
       fill: r.source === "blend" ? "#c2410c" : r.source === "energinet" ? "#1e40af" : "#57534e", opacity: (0.08 + 0.92 * shade).toFixed(2)}, s);
-    el("title", {}, c, `${r.day}: rank ${r.rank} of ${n}, accuracy ${r.acc.toFixed(1)}%`);
+    el("title", {}, c, `${r.day}: rank ${r.rank} of ${n}, error ${r.nmae.toFixed(2)}% of capacity, accuracy ${r.acc.toFixed(1)}%`);
   });
   el("text", {x: L, y: H3 - 2, "font-size": 11, fill: "#6b6a65"}, s, days[0]);
   el("text", {x: L + days.length * cw, y: H3 - 2, "font-size": 11, fill: "#6b6a65", "text-anchor": "end"}, s, days[days.length - 1]);
@@ -243,7 +265,7 @@ function renderWeek(D) {
   tb.innerHTML = "<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Source</th><th style='padding:4px 8px;text-align:right'>Average rank</th><th style='padding:4px 8px;text-align:right'>Days in top three</th><th style='padding:4px 8px;text-align:right'>Worst day</th></tr>" +
     stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === "blend" ? "font-weight:700;color:#c2410c" : st.src === best.src ? "font-weight:700;color:#0f766e" : ""}"><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(st.src) || "").replace(/"/g, "&quot;")}">${name[st.src] || st.src}</span></td><td style="padding:4px 8px;text-align:right">${st.mean.toFixed(1)}</td><td style="padding:4px 8px;text-align:right">${st.top3} of ${st.n}</td><td style="padding:4px 8px;text-align:right">${st.worst}</td></tr>`).join("") + "</table>";
   const b = stats.find(s => s.src === "blend"), nl = days.filter(d => kindOf(d) === "live").length;
-  document.getElementById("weekcap").textContent = `Daily rank of each source by accuracy, 1 = most accurate of ${n}. ` +
+  document.getElementById("weekcap").textContent = `Daily rank of each source by error as a % of capacity, 1 = smallest error of ${n}. ` +
     `Orange is my forecast; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
     `${nl} live day${nl === 1 ? "" : "s"} shown, each forecast committed before its day began. ` +
     `Over these days my forecast averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
@@ -279,6 +301,34 @@ function renderBand(B) {
     and the dots are the measured output: black inside the band, blue outside. Last seven days of ${B.from} to ${B.to},
     hourly, total Denmark, in MW.`;
 }
+function renderToday(T) {
+  const host = document.getElementById("today"), cap = document.getElementById("todaycap");
+  if (!T || !T.day) { host.innerHTML = "<p class='mute sans'>No measured hour yet for a forecast day; the first hour appears about an hour after it ends.</p>"; return; }
+  const S = T.series, W = 760, H = 260, L = 56, R = 12, top = 12, bot = 30;
+  const vals = S.flatMap(r => [r.hi, r.p, r.a]).filter(v => v != null), ymax = Math.max(...vals) * 1.08;
+  const x = i => L + i / (S.length - 1) * (W - L - R), y = v => top + (1 - v / ymax) * (H - top - bot);
+  const s = svg(host, W, H), step = Math.max(500, Math.ceil(ymax / 4 / 1000) * 1000);
+  for (let v = 0; v <= ymax; v += step) {
+    el("line", {x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "#eee"}, s);
+    el("text", {x: L - 6, y: y(v) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, v.toLocaleString("en")); }
+  const nb = S.filter(r => r.lo != null);
+  if (nb.length === S.length) el("path", {d: "M" + S.map((r, i) => `${x(i)},${y(r.hi)}`).join("L") + "L" +
+    S.map((r, i) => `${x(i)},${y(r.lo)}`).reverse().join("L") + "Z", fill: "#c2410c", opacity: .15}, s);
+  const meas = T.hours_measured;
+  el("path", {d: "M" + S.map((r, i) => `${x(i)},${y(r.p)}`).join("L"), fill: "none", stroke: "#c2410c", "stroke-width": 1.8}, s);
+  el("line", {x1: x(meas - 0.5), x2: x(meas - 0.5), y1: top, y2: H - bot, stroke: "#1d1d1b", "stroke-dasharray": "3 3"}, s);
+  el("text", {x: x(meas - 0.5) + 4, y: top + 10, "font-size": 11, fill: "#1d1d1b"}, s, "now");
+  S.forEach((r, i) => { if (r.a != null) el("circle", {cx: x(i), cy: y(r.a), r: 3, fill: r.lo == null || (r.a >= r.lo && r.a <= r.hi) ? "#1d1d1b" : "#1e40af"}, s); });
+  S.forEach((r, i) => { if (i % 6 === 0) { const hh = new Date(r.t + ":00Z").toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit", timeZone: "Europe/Copenhagen"});
+    el("text", {x: x(i), y: H - 8, "font-size": 11, fill: "#6b6a65", "text-anchor": "middle"}, s, hh); } });
+  document.getElementById("todaytab").innerHTML = "<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Rank so far</th><th style='padding:4px 8px'>Source</th><th style='padding:4px 8px;text-align:right'>Error so far, % of capacity</th></tr>" +
+    T.ranking.map(r => `<tr style="border-top:1px solid #eee;${r.source === "blend" ? "font-weight:700;color:#c2410c" : ""}"><td style="padding:4px 8px">${r.rank}</td><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(r.source) || "").replace(/"/g, "&quot;")}">${r.name}</span></td><td style="padding:4px 8px;text-align:right">${r.nmae != null ? r.nmae.toFixed(2) + "%" : r.acc.toFixed(1) + "% accuracy"}</td></tr>`).join("") + "</table>";
+  const dd = new Date(T.day + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"});
+  document.getElementById("todayh").textContent = `${dd} so far: ${T.hours_measured} of ${T.hours_total} hours measured`;
+  cap.textContent = `Provisional. The orange line is my forecast for ${dd}, committed the day before, with its 80% band shaded; ` +
+    `the dots are Energinet's measured output, total Denmark in MW, added each hour as it is published (black inside the band, blue outside). ` +
+    `The ranking covers the measured hours only and changes as the day goes on. The official score for the whole day is computed at 01:30 the next night.`;
+}
 function renderHealth(h) {
   const n = document.getElementById("health"); if (!h || !h.last_forecast_day) { n.textContent = ""; return; }
   const fmt = t => new Date(t).toLocaleString("en-GB", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Copenhagen"});
@@ -292,8 +342,10 @@ function renderHealth(h) {
     `Page data built ${fmt(h.generated_utc)} Copenhagen time.` +
     (late ? ` <span class="warnline">The forecast for ${dd(dueDay)} is not on this page yet; the page updates three times a day.</span>` : "");
 }
-Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({}))]).then(([D, G]) => {
+Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({})),
+    fetch("today.json").then(r => r.json()).catch(() => null)]).then(([D, G, TD]) => {
   GLOSS = G;
+  renderToday(TD);
   renderHealth(D.health);
   renderWeek(D);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);

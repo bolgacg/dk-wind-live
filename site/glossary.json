@@ -1,27 +1,180 @@
 {
  "_about": "One sentence per forecast source, for hover and tap tooltips on both sites. Written by projects-97, read by projects-5a. Keys match live/common.py LIVE_MODELS short names plus Open-Meteo model ids.",
- "blend": {"name": "DK Wind Live forecast", "aka": ["ecmwf_ifs025+ecmwf_aifs025_single+dmi_harmonie_arome_europe+icon_eu"], "text": "Four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE, DWD ICON-EU) each turned into megawatts by their own trained power model, then averaged with equal weight."},
- "energinet": {"name": "Energinet (bias-corrected)", "text": "The Danish grid operator's own day-ahead wind forecast, rescaled by its actual-to-forecast ratio over the previous 60 days, because its DK1 offshore forecast covers only part of the fleet."},
- "energinet_raw": {"name": "Energinet (as published)", "text": "The Danish grid operator's own day-ahead wind forecast as published; its DK1 offshore part is capped near 1,000 MW while the fleet now peaks near 2,000 MW."},
- "ifs": {"name": "ECMWF IFS", "aka": ["ecmwf_ifs025"], "text": "The European weather centre's main physics model, run on a global grid of about 25 km in this archive; the reference most weather desks start from."},
- "ifs_9km": {"name": "ECMWF IFS 9 km", "aka": ["ecmwf_ifs"], "text": "The same European physics model at its native 9 km resolution."},
- "aifs": {"name": "ECMWF AIFS (AI)", "aka": ["ecmwf_aifs025_single"], "text": "The European weather centre's AI model, a neural network trained on decades of reconstructed past weather; fast and accurate on average, but smooth, so it tends to soften the strongest winds."},
- "harmonie": {"name": "DMI HARMONIE", "aka": ["dmi_harmonie_arome_europe"], "text": "The Danish Meteorological Institute's own high-resolution model, a grid of about 2 km over Northern Europe, run several times a day."},
- "knmi": {"name": "KNMI HARMONIE", "aka": ["knmi_harmonie_arome_europe"], "text": "The Dutch weather service's version of the same HARMONIE model, about 5.5 km grid, covering Denmark from the south-west."},
- "icon": {"name": "DWD ICON-EU", "aka": ["icon_eu"], "text": "The German weather service's European model, about 7 km grid; best at real Danish anemometers in the history study."},
- "icon_d2": {"name": "DWD ICON-D2", "aka": ["icon_d2"], "text": "The German weather service's 2 km model for Germany and its neighbours, which reaches only two days ahead."},
- "icon_global": {"name": "DWD ICON global", "aka": ["icon_global"], "text": "The German weather service's global model, about 11 km grid."},
- "gfs": {"name": "NOAA GFS", "aka": ["gfs_global"], "text": "The United States' global physics model, about 25 km grid, free and widely used."},
- "graphcast": {"name": "Google GraphCast (AI)", "aka": ["gfs_graphcast025"], "text": "Google DeepMind's AI weather model, here started from the American GFS analysis."},
- "ukmo": {"name": "UK Met Office", "aka": ["ukmo_global_deterministic_10km"], "text": "The British weather service's global model, about 10 km grid; only 10 m wind is archived, so it is scored at 10 m."},
- "ukmo_2km": {"name": "UK Met Office 2 km", "aka": ["ukmo_uk_deterministic_2km"], "text": "The British weather service's 2 km model for the UK and the North Sea."},
- "metno": {"name": "MET Norway Nordic", "aka": ["metno_nordic"], "text": "The Norwegian weather service's 1 km Nordic model, corrected with thousands of local observations."},
- "gem": {"name": "Canada GEM", "aka": ["gem_global"], "text": "Environment Canada's global model, about 15 km grid."},
- "jma": {"name": "Japan JMA", "aka": ["jma_seamless"], "text": "The Japan Meteorological Agency's global model, about 55 km grid over Europe, the coarsest in the field."},
- "cma": {"name": "China CMA GRAPES", "aka": ["cma_grapes_global"], "text": "The China Meteorological Administration's global model, about 15 km grid."},
- "bom": {"name": "Australia BOM ACCESS", "aka": ["bom_access_global"], "text": "Australia's Bureau of Meteorology global model, about 15 km grid."},
- "arpege": {"name": "Meteo-France ARPEGE", "aka": ["meteofrance_arpege_europe"], "text": "The French weather service's model, finest over Europe at about 10 km."},
- "era5": {"name": "ERA5", "text": "ECMWF's reconstruction of past weather: a weather model fed every available observation, giving an hourly map of the atmosphere on a 31 km grid back to 1940; the answer key for maps, but smooth."},
- "accuracy": {"name": "Accuracy", "text": "100% minus the day's total forecast error divided by the day's total output, over the four zones (DK1 and DK2, offshore and onshore); 100% would be perfect."},
- "band": {"name": "80% band", "text": "The range that should contain the real output in 8 hours out of 10; it widens when the four weather models disagree and when more wind is forecast."}
+ "blend": {
+  "name": "DK Wind Live forecast",
+  "aka": [
+   "ecmwf_ifs025+ecmwf_aifs025_single+dmi_harmonie_arome_europe+icon_eu"
+  ],
+  "text": "Four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE, DWD ICON-EU) each turned into megawatts by their own trained power model, then averaged with equal weight."
+ },
+ "energinet": {
+  "name": "Energinet (bias-corrected)",
+  "text": "The Danish grid operator's own day-ahead wind forecast, rescaled by its actual-to-forecast ratio over the previous 60 days, because its DK1 offshore forecast covers only part of the fleet."
+ },
+ "energinet_raw": {
+  "name": "Energinet (as published)",
+  "text": "The Danish grid operator's own day-ahead wind forecast as published; its DK1 offshore part is capped near 1,000 MW while the fleet now peaks near 2,000 MW."
+ },
+ "ifs": {
+  "name": "ECMWF IFS",
+  "aka": [
+   "ecmwf_ifs025"
+  ],
+  "text": "The European weather centre's main physics model, run on a global grid of about 25 km in this archive; the reference most weather desks start from."
+ },
+ "ifs_9km": {
+  "name": "ECMWF IFS 9 km",
+  "aka": [
+   "ecmwf_ifs"
+  ],
+  "text": "The same European physics model at its native 9 km resolution."
+ },
+ "aifs": {
+  "name": "ECMWF AIFS (AI)",
+  "aka": [
+   "ecmwf_aifs025_single"
+  ],
+  "text": "The European weather centre's AI model, a neural network trained on decades of reconstructed past weather; fast and accurate on average, but smooth, so it tends to soften the strongest winds."
+ },
+ "harmonie": {
+  "name": "DMI HARMONIE",
+  "aka": [
+   "dmi_harmonie_arome_europe"
+  ],
+  "text": "The Danish Meteorological Institute's own high-resolution model, a grid of about 2 km over Northern Europe, run several times a day."
+ },
+ "knmi": {
+  "name": "KNMI HARMONIE",
+  "aka": [
+   "knmi_harmonie_arome_europe"
+  ],
+  "text": "The Dutch weather service's version of the same HARMONIE model, about 5.5 km grid, covering Denmark from the south-west."
+ },
+ "icon": {
+  "name": "DWD ICON-EU",
+  "aka": [
+   "icon_eu"
+  ],
+  "text": "The German weather service's European model, about 7 km grid; best at real Danish anemometers in the history study."
+ },
+ "icon_d2": {
+  "name": "DWD ICON-D2",
+  "aka": [
+   "icon_d2"
+  ],
+  "text": "The German weather service's 2 km model for Germany and its neighbours, which reaches only two days ahead."
+ },
+ "icon_global": {
+  "name": "DWD ICON global",
+  "aka": [
+   "icon_global"
+  ],
+  "text": "The German weather service's global model, about 11 km grid."
+ },
+ "gfs": {
+  "name": "NOAA GFS",
+  "aka": [
+   "gfs_global"
+  ],
+  "text": "The United States' global physics model, about 25 km grid, free and widely used."
+ },
+ "graphcast": {
+  "name": "Google GraphCast (AI)",
+  "aka": [
+   "gfs_graphcast025"
+  ],
+  "text": "Google DeepMind's AI weather model, here started from the American GFS analysis."
+ },
+ "ukmo": {
+  "name": "UK Met Office",
+  "aka": [
+   "ukmo_global_deterministic_10km"
+  ],
+  "text": "The British weather service's global model, about 10 km grid; only 10 m wind is archived, so it is scored at 10 m."
+ },
+ "ukmo_2km": {
+  "name": "UK Met Office 2 km",
+  "aka": [
+   "ukmo_uk_deterministic_2km"
+  ],
+  "text": "The British weather service's 2 km model for the UK and the North Sea."
+ },
+ "metno": {
+  "name": "MET Norway Nordic",
+  "aka": [
+   "metno_nordic"
+  ],
+  "text": "The Norwegian weather service's 1 km Nordic model, corrected with thousands of local observations."
+ },
+ "gem": {
+  "name": "Canada GEM",
+  "aka": [
+   "gem_global"
+  ],
+  "text": "Environment Canada's global model, about 15 km grid."
+ },
+ "jma": {
+  "name": "Japan JMA",
+  "aka": [
+   "jma_seamless"
+  ],
+  "text": "The Japan Meteorological Agency's global model, about 55 km grid over Europe, the coarsest in the field."
+ },
+ "cma": {
+  "name": "China CMA GRAPES",
+  "aka": [
+   "cma_grapes_global"
+  ],
+  "text": "The China Meteorological Administration's global model, about 15 km grid."
+ },
+ "bom": {
+  "name": "Australia BOM ACCESS",
+  "aka": [
+   "bom_access_global"
+  ],
+  "text": "Australia's Bureau of Meteorology global model, about 15 km grid."
+ },
+ "arpege": {
+  "name": "Meteo-France ARPEGE",
+  "aka": [
+   "meteofrance_arpege_europe"
+  ],
+  "text": "The French weather service's model, finest over Europe at about 10 km."
+ },
+ "era5": {
+  "name": "ERA5",
+  "text": "ECMWF's reconstruction of past weather: a weather model fed every available observation, giving an hourly map of the atmosphere on a 31 km grid back to 1940; the answer key for maps, but smooth."
+ },
+ "accuracy": {
+  "name": "Accuracy",
+  "text": "A plain-language extra: 100% minus the total forecast error divided by the total output, over the four zones. The headline measure is error as a % of installed capacity."
+ },
+ "band": {
+  "name": "80% band",
+  "text": "The range that should contain the real output in 8 hours out of 10; it widens when the four weather models disagree and when more wind is forecast."
+ },
+ "j4cat": {
+  "name": "J4cat",
+  "text": "My own power model. J for joint: one model instead of four averaged. 4 for its four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE, DWD ICON-EU). cat for concatenated: each model's winds at 34 wind-farm sites go in side by side, so it learns which model to trust where and when."
+ },
+ "j4catdk": {
+  "name": "J4catDK",
+  "text": "J4cat with DKcast's corrected station winds added as extra inputs."
+ },
+ "dkcast": {
+  "name": "DKcast",
+  "text": "My own weather model: it corrects the public models' wind forecasts against what DMI's station anemometers actually measured, and gives a range as well as a single number."
+ },
+ "nmae": {
+  "name": "Error, % of installed capacity",
+  "text": "The wind industry's standard day-ahead measure: the mean absolute error of each area's hourly total (DK1, DK2) as a percentage of installed capacity. Lower is better. Capacity is estimated as the 99.5th percentile of the previous 60 days' hourly output."
+ },
+ "skill": {
+  "name": "Skill score",
+  "text": "1 minus my error divided by the reference's error, on the same hours. 10% means 10% less error than the reference; 0% means the same; negative means worse."
+ },
+ "imbalance": {
+  "name": "Imbalance cost",
+  "text": "What the forecast's errors would cost a wind producer that sells its forecast day-ahead: each hour's error settled at the difference between the day-ahead price and Energinet's imbalance price, per MWh produced. A perfect forecast costs nothing."
+ }
 }

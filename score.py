@@ -21,14 +21,30 @@ def energinet_da_frame(start, end):
     return out
 
 
+def imbalance_prices(start, end):
+    """Hourly spot and imbalance price per area (EUR/MWh) from Energinet's 15-minute ImbalancePrice feed."""
+    from common import get_json
+    d = get_json(f"https://api.energidataservice.dk/dataset/ImbalancePrice?start={start:%Y-%m-%dT%H:%M}"
+                 f"&end={end:%Y-%m-%dT%H:%M}&timezone=UTC&columns=TimeUTC,PriceArea,ImbalancePriceEUR,SpotPriceEUR&limit=0")
+    df = pd.DataFrame(d["records"])
+    if df.empty:
+        return {}
+    df["t"] = pd.to_datetime(df.TimeUTC).dt.floor("h").dt.tz_localize("UTC")
+    g = df.groupby(["t", "PriceArea"])[["SpotPriceEUR", "ImbalancePriceEUR"]].mean(numeric_only=True)
+    g = g[df.groupby(["t", "PriceArea"]).ImbalancePriceEUR.count() == 4]  # all four quarter-hours published
+    return {(t, a): (r.SpotPriceEUR, r.ImbalancePriceEUR) for (t, a), r in g.iterrows()}
+
+
 def main():
     now = pd.Timestamp(datetime.now(timezone.utc))
-    rows = []
+    rows, hourly = [], []
     for f in sorted((LIVE / "forecasts").glob("*.json")):
         r = json.load(open(f))
         hours = pd.to_datetime(r["hours_utc"]).tz_localize("UTC")
         if hours[-1] + pd.Timedelta(hours=1) > now - pd.Timedelta(minutes=30):
             continue
+        cap = r.get("capacity_proxy_mw", {})
+        px = imbalance_prices(hours[0], hours[-1] + pd.Timedelta(hours=1))
         act = realtime_actuals(f"{hours[0]:%Y-%m-%d}", f"{hours[-1] + pd.Timedelta(days=1):%Y-%m-%d}").reindex(hours)
         sources = dict(r["forecast_mw"])
         snap = r["energinet_snapshot"]
@@ -59,6 +75,10 @@ def main():
                 if ok.sum() < 20:
                     continue
                 err = p[ok] - act[z][ok]
+                hourly += [dict(day=r["target_day_cph"], hour_utc=f"{h:%Y-%m-%dT%H}", source=src, zone=z,
+                                pred=round(float(p[h]), 1), actual=round(float(act[z][h]), 1), cap=cap.get(z),
+                                spot=px.get((h, z[:3]), (None, None))[0], imb=px.get((h, z[:3]), (None, None))[1])
+                           for h in p.index[ok]]
                 rows.append(dict(day=r["target_day_cph"], zone=z, source=src, hours=int(ok.sum()),
                                  actual_mwh=round(act[z][ok].sum()), mae_mw=round(err.abs().mean(), 1),
                                  bias_mw=round(err.mean(), 1),
@@ -85,6 +105,8 @@ def main():
         pd.DataFrame(band_rows).to_csv(LIVE / "band_scores.csv", index=False)
     df = pd.DataFrame(rows)
     df.to_csv(LIVE / "scores.csv", index=False)
+    # hourly rows with the capacity proxy known at issue time: league.py derives % of capacity and skill from these
+    pd.DataFrame(hourly).to_csv(LIVE / "hourly_scores.csv", index=False)
     # scoreboard: mean absolute error summed over the four zones, per day and source
     piv = df.groupby(["day", "source"]).mae_mw.sum().unstack()
     days = len(piv)
@@ -102,7 +124,7 @@ def main():
     lines += ["", "Per day:", "", piv.round(0).to_markdown()]
     (LIVE / "SCOREBOARD.md").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
-    subprocess.run(["git", "-C", str(LIVE), "add", "scores.csv", "SCOREBOARD.md"]
+    subprocess.run(["git", "-C", str(LIVE), "add", "scores.csv", "SCOREBOARD.md", "hourly_scores.csv"]
                    + (["band_scores.csv"] if (LIVE / "band_scores.csv").exists() else []), check=True)
     subprocess.run(["git", "-C", str(LIVE), "commit", "-q", "-m", f"scores through {piv.index.max()}"], check=False)
 
