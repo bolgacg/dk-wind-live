@@ -48,6 +48,13 @@ When the day is over, it is scored against Energinet's measured output.</p>
 
 <div class="tiles" id="tiles"></div>
 
+<h2>The last seven days, ranked</h2>
+<figure>
+  <div id="week"></div>
+  <div id="weektab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
+  <figcaption id="weekcap"></figcaption>
+</figure>
+
 <h2>Accuracy over the whole period</h2>
 <figure>
   <div id="dots"></div>
@@ -164,6 +171,50 @@ function render(d) {
   el("text", {x: L, y: H3 - 2, "font-size": 11, fill: "#6b6a65"}, s, days[0]);
   el("text", {x: L + days.length * cw, y: H3 - 2, "font-size": 11, fill: "#6b6a65", "text-anchor": "end"}, s, days[days.length - 1]);
 }
+function renderWeek(D) {
+  const all = [...(D.backtest ? D.backtest.daily.map(r => ({...r, kind: "backtest"})) : []),
+               ...(D.live ? D.live.daily.map(r => ({...r, kind: "live"})) : [])];
+  const days = [...new Set(all.map(r => r.day))].sort().slice(-7);
+  const rows = all.filter(r => days.includes(r.day));
+  const kindOf = d => rows.find(r => r.day === d).kind;
+  const name = {}; for (const k of ["backtest", "live"]) if (D[k]) D[k].overall.forEach(o => name[o.source] = o.name);
+  const stats = Object.entries(rows.reduce((a, r) => ((a[r.source] = a[r.source] || []).push(r.rank), a), {}))
+    .map(([src, rk]) => ({src, mean: rk.reduce((x, y) => x + y, 0) / rk.length, top3: rk.filter(v => v <= 3).length,
+      worst: Math.max(...rk), n: rk.length})).sort((a, b) => a.mean - b.mean);
+  const best = stats.find(s => s.src !== "blend");
+  const col = src => src === "blend" ? "#c2410c" : src === best.src ? "#0f766e" : "#c9c6bd";
+  const n = Math.max(...rows.map(r => r.rank)), W = 760, L = 30, R = 190, top = 16, bot = 44;
+  const H = top + bot + n * 26, x = i => L + 20 + i / (days.length - 1) * (W - L - R - 20), y = r => top + (r - 1) * 26;
+  const s = svg(document.getElementById("week"), W, H);
+  for (let r = 1; r <= n; r++) el("text", {x: L - 6, y: y(r) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, r);
+  el("rect", {x: L, y: y(1) - 12, width: W - L - R + 10, height: 3 * 26 - 2, fill: "#f3efe6"}, s);
+  el("text", {x: W - R + 14, y: y(2) + 4, "font-size": 11, fill: "#6b6a65"}, s, "");
+  el("text", {x: L + 4, y: y(3) + 12, "font-size": 10, fill: "#6b6a65"}, s, "top three");
+  days.forEach((d, i) => {
+    el("text", {x: x(i), y: H - 22, "text-anchor": "middle", "font-size": 11, fill: "#1d1d1b"}, s,
+      new Date(d + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"}));
+    el("text", {x: x(i), y: H - 8, "text-anchor": "middle", "font-size": 10, fill: kindOf(d) === "live" ? "#c2410c" : "#6b6a65"}, s, kindOf(d));
+  });
+  const order = stats.map(s => s.src).reverse().sort((a, b) => (a === "blend") - (b === "blend") || (a === best.src) - (b === best.src));
+  for (const src of order) {
+    const pts = days.map((d, i) => { const r = rows.find(q => q.day === d && q.source === src); return r ? [x(i), y(r.rank)] : null; }).filter(Boolean);
+    const hi = src === "blend" || src === best.src;
+    el("path", {d: "M" + pts.map(p => p.join(",")).join("L"), fill: "none", stroke: col(src), "stroke-width": hi ? 3 : 1.4}, s);
+    pts.forEach(p => el("circle", {cx: p[0], cy: p[1], r: hi ? 4.5 : 2.5, fill: col(src)}, s));
+    if (hi) { const last = pts[pts.length - 1];
+      const other = rows.find(q => q.day === days[days.length - 1] && q.source === (src === "blend" ? best.src : "blend"));
+      const clash = other && Math.abs(y(other.rank) - last[1]) < 16, dy = clash ? (src === "blend" ? -8 : 8) : 0;
+      el("text", {x: last[0] + 12, y: last[1] + 4 + dy, "font-size": 13, "font-weight": 700, fill: col(src)}, s, name[src] || src); }
+  }
+  const tb = document.getElementById("weektab");
+  tb.innerHTML = "<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Source</th><th style='padding:4px 8px;text-align:right'>Average rank</th><th style='padding:4px 8px;text-align:right'>Days in top three</th><th style='padding:4px 8px;text-align:right'>Worst day</th></tr>" +
+    stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === "blend" ? "font-weight:700;color:#c2410c" : st.src === best.src ? "font-weight:700;color:#0f766e" : ""}"><td style="padding:4px 8px">${name[st.src] || st.src}</td><td style="padding:4px 8px;text-align:right">${st.mean.toFixed(1)}</td><td style="padding:4px 8px;text-align:right">${st.top3} of ${st.n}</td><td style="padding:4px 8px;text-align:right">${st.worst}</td></tr>`).join("") + "</table>";
+  const b = stats.find(s => s.src === "blend"), nl = days.filter(d => kindOf(d) === "live").length;
+  document.getElementById("weekcap").textContent = `Daily rank of each source by accuracy, 1 = most accurate of ${n}. ` +
+    `Orange is my blend; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
+    `${nl ? nl + " of these days are live forecasts, committed before the day began" : "All seven are backtest days, scored on archived forecasts"}` +
+    `${nl && nl < 7 ? "; the others are backtest days" : ""}. Over these days my blend averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
+}
 function renderBand(B) {
   const T = document.getElementById("btiles"), host = document.getElementById("band");
   if (!B) { T.innerHTML = ""; host.innerHTML = "<p class='mute sans'>No scored band days yet.</p>"; return; }
@@ -195,6 +246,7 @@ function renderBand(B) {
     hourly, total Denmark, in MW.`;
 }
 fetch("data.json").then(r => r.json()).then(D => {
+  renderWeek(D);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
     render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
   const hasLive = D.live && D.live.days > 0;
