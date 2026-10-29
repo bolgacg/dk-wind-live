@@ -1,11 +1,11 @@
-"""Final fit of J4catDK (and J4cat, the fallback when the DKcast feed is missing) for the live forecast, with the same
+"""Final fit of J4catDK (and J4cat, the same model without DKcast, a separate entrant) for the live forecast, with the same
 spec as the frozen 2026 test (studies/e3_test.py), trained on every hour from 18 Feb 2025 up to the newest settlement
 data, so the models have seen a winter.
 
 Writes live/models/<name>/: <zone>_s<k>.txt (stage 1, 5 seeds), stage2_<zone>.txt (offshore curtailment) and
 meta.json (feature order, seeds, training hours).
 
-Usage: OMP_NUM_THREADS=4 nice -n 10 python3 live/studies/train_j4.py"""
+Usage: OMP_NUM_THREADS=4 nice -n 10 python3 live/studies/train_j4.py [--until 2026-01-01 --out models_e3 --only j4catdk]"""
 import json, sys
 from pathlib import Path
 
@@ -29,7 +29,10 @@ def booster(X, y, seed=0, rounds=N_ROUNDS):
 
 
 def main():
-    joint.END = pd.Timestamp("2100-01-01", tz="UTC")
+    # --until 2026-01-01 --out models_e3 --only j4catdk reproduces the frozen test's model, for the replay simulation
+    arg = lambda k, d: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
+    until, outroot, only = pd.Timestamp(arg("--until", "2100-01-01"), tz="UTC"), arg("--out", "models"), arg("--only", None)
+    joint.END = until
     HOLIDAYS.update(HOL26)
     fr = member_frames()
     Y = load_actuals()
@@ -37,10 +40,12 @@ def main():
     pr = prices()
     JC = add_time(joint_cat(fr))
     for name, X in (("j4catdk", JC.join(dkcast(), how="inner")), ("j4cat", JC)):
+        if only and name != only:
+            continue
         idx = X.index.intersection(Y.dropna().index).intersection(cap.dropna().index)
-        tr = idx[idx >= TRAIN0]
+        tr = idx[(idx >= TRAIN0) & (idx < until)]
         print(f"{name}: {X.shape[1]} inputs, {len(tr)} h, {tr.min()} to {tr.max()}", flush=True)
-        out = LIVE / "models" / name
+        out = LIVE / outroot / name
         out.mkdir(parents=True, exist_ok=True)
         folds = np.array_split(np.arange(len(tr)), K)
         oof = pd.DataFrame(index=tr)

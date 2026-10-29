@@ -72,10 +72,16 @@ def day_ahead_prices(start_utc, end_utc):
     return df[df.PriceArea.isin(["DK1", "DK2"])].groupby(["t", "PriceArea"]).DayAheadPriceEUR.mean().unstack()
 
 
-def j4_forecast(frames, hours, cap_now, day):
+class FeedNotReady(Exception):
+    """The DKcast feed for the target day is missing, incomplete or fails the level check. Bo's rule (29 Oct 21:30):
+    J4catDK never runs without DKcast; the run waits for the next try instead."""
+
+
+def j4_forecast(frames, hours, cap_now, day, use_dk=True):
     """J4catDK, my own power model (studies/e3_test.py, 2026 test 5.56% of capacity): the four blend members' winds
-    side by side plus DKcast station wind, 5 seeds, then the offshore curtailment stage. Falls back to J4cat (no
-    DKcast) when the DKcast feed for the day is missing. Returns ({zone: Series MW}, variant note)."""
+    side by side plus DKcast station wind, 5 seeds, then the offshore curtailment stage. use_dk=False gives J4cat, the
+    same model without DKcast, issued as a separate entrant (never as a stand-in). Returns {zone: Series MW}.
+    J4_MODELS (environment) points at another models folder, for the replay simulation."""
     sys.path.insert(0, str(LIVE / "studies"))
     import joint
     from e3_test import HOL26
@@ -83,33 +89,30 @@ def j4_forecast(frames, hours, cap_now, day):
     X = pd.concat({m: features(*frames[m]).drop(columns=["hour", "doy"]) for m in BLEND}, axis=1)
     X.columns = [f"{m}|{c}" for m, c in X.columns]
     X = joint.add_time(X).reindex(hours)
-    name, note = "j4catdk", "j4catdk"
-    f = DKCAST_FEED / f"dkcast_wind_{day}.parquet"
-    if f.exists():
+    name = "j4catdk" if use_dk else "j4cat"
+    mdir = Path(os.environ.get("J4_MODELS", LIVE / "models")) / name
+    meta = json.load(open(mdir / "meta.json"))
+    if use_dk:
+        f = DKCAST_FEED / f"dkcast_wind_{day}.parquet"
+        if not f.exists():
+            raise FeedNotReady(f"no file {f.name}")
         d = pd.read_parquet(f)
         d["time"] = pd.to_datetime(d.time)
         d["time"] = d.time.dt.tz_localize("UTC") if d.time.dt.tz is None else d.time.dt.tz_convert("UTC")
         w = d.pivot_table(index="time", columns="point", values=["dk_mu", "dk_sd"])
         w.columns = [f"{a}_{b}" for a, b in w.columns]
         X = X.join(w)
-        # level guard (models/j4catdk/feed_check.json): the feed's daily mean must sit within 1.5 m/s of what the
-        # members' 100 m wind implies, fitted on 2025 days (residual sd 0.47 m/s); else fall back to J4cat
-        chk = json.load(open(LIVE / "models" / "j4catdk" / "feed_check.json"))
+        # the model was trained with some DKcast sites missing, so it tolerates a few; not fewer than 20 of 22
+        if (X.filter(like="dk_mu_").notna().sum(axis=1) < 20).any():
+            raise FeedNotReady(f"{f.name} has hours with fewer than 20 of 22 sites")
+        # level check (feed_check.json): the feed's daily mean within 1.5 m/s of what the members' 100 m wind implies,
+        # fitted on 2025 days (residual sd 0.47 m/s)
+        chk = json.load(open(mdir / "feed_check.json"))
         m100 = np.mean([frames[m][0].reindex(hours)[chk["points"]].mean().mean() for m in BLEND])
         exp_, got = chk["slope"] * m100 + chk["intercept"], X.filter(like="dk_mu_").mean().mean()
         if abs(got - exp_) > chk["threshold_ms"]:
-            return j4_fallback(frames, hours, cap_now, day,
-                               f"j4cat: DKcast feed level {got:.2f} m/s, expected {exp_:.2f} from the members")
-    else:
-        name, note = "j4cat", f"j4cat: DKcast feed missing ({f.name})"
-    mdir = LIVE / "models" / name
-    meta = json.load(open(mdir / "meta.json"))
+            raise FeedNotReady(f"{f.name} level {got:.2f} m/s, expected {exp_:.2f} from the weather models")
     X = X.reindex(columns=meta["features"])
-    # the model was trained with some DKcast sites missing (Lemvig is absent on recent days), so it tolerates a few;
-    # fall back when an hour has no DKcast at all or fewer than 20 of the 22 sites arrived
-    dk = X.filter(like="dk_mu_")
-    if name == "j4catdk" and (dk.notna().sum(axis=1) < 20).any():
-        return j4_fallback(frames, hours, cap_now, day, f"j4cat: DKcast feed has gaps ({f.name})")
     X = X[X.drop(columns=[c for c in X if c.startswith("dk_")]).notna().all(axis=1)]  # hours with all weather inputs
     cf = pd.DataFrame({z: sum(lgb.Booster(model_file=str(mdir / f"{z}_s{k}.txt")).predict(X)
                               for k in range(meta["seeds"])) / meta["seeds"] for z in ZONES}, index=X.index).clip(0, None)
@@ -120,17 +123,7 @@ def j4_forecast(frames, hours, cap_now, day):
         ok = S.notna().all(axis=1)
         adj = pd.Series(lgb.Booster(model_file=str(mdir / f"stage2_{z}.txt")).predict(S[ok]), index=S.index[ok])
         cf[z] = (cf[z] + adj.reindex(cf.index).fillna(0)).clip(0, None)
-    return {z: cf[z] * cap_now[z] for z in ZONES}, note
-
-
-def j4_fallback(frames, hours, cap_now, day, note):
-    global DKCAST_FEED
-    keep, DKCAST_FEED = DKCAST_FEED, Path("/nonexistent")
-    try:
-        out, _ = j4_forecast(frames, hours, cap_now, day)
-    finally:
-        DKCAST_FEED = keep
-    return out, note
+    return {z: cf[z] * cap_now[z] for z in ZONES}
 
 
 def main():
@@ -178,16 +171,23 @@ def main():
     full = [m for m in BLEND if m in preds and all(len(preds[m][z]) == len(hours) for z in ZONES)]
     if full:
         preds["blend"] = {z: sum(preds[m][z] for m in full) / len(full) for z in ZONES}
-    # my own model J4catDK, an extra entrant (from 30 Oct 2026); needs all four members' weather
+    # my own model J4catDK, the headline entrant; it never runs without DKcast (Bo, 29 Oct): if the feed is not
+    # ready, this try writes nothing and the 11:00 or 11:30 try picks it up; only the last try issues without it
     j4_note = None
     if all(m in frames for m in BLEND) and (LIVE / "models" / "j4catdk" / "meta.json").exists():
+        last_try = now.astimezone(CPH).hour * 60 + now.astimezone(CPH).minute >= 11 * 60 + 25
         try:
-            preds["j4catdk"], j4_note = j4_forecast(frames, hours, cap_now, day)
+            preds["j4catdk"] = j4_forecast(frames, hours, cap_now, day)
+            j4_note = "j4catdk with DKcast"
+        except FeedNotReady as e:
+            if not last_try:
+                print(f"{now:%Y-%m-%dT%H:%MZ} DKcast feed not ready ({e}); nothing written, waiting for the next try")
+                return
+            missing["j4catdk"] = f"DKcast feed not ready at the last try: {e}"
         except Exception as e:
             missing["j4catdk"] = f"{type(e).__name__}: {e}"
-        # J4cat, the same model without DKcast: the fallback, and a daily check on what DKcast adds
-        try:
-            preds["j4cat"], _ = j4_fallback(frames, hours, cap_now, day, "")
+        try:  # J4cat, the same model without DKcast: a separate entrant showing what DKcast adds
+            preds["j4cat"] = j4_forecast(frames, hours, cap_now, day, use_dk=False)
         except Exception as e:
             missing["j4cat"] = f"{type(e).__name__}: {e}"
     # 80% band for total Denmark from how much the blend members disagree (band.py); only with all four members
