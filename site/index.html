@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Denmark Wind League</title>
+<meta name="description" content="A live day-ahead forecast of Denmark's wind power, scored every day against Energinet and nine weather models.">
+<style>
+:root{--bg:#fbfaf7;--ink:#1d1d1b;--mute:#6b6a65;--line:#e4e1d9;--ours:#c2410c;--en:#1e40af;--other:#9a988f;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Iowan Old Style",serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:2rem;line-height:1.2;margin:0 0 8px}
+h2{font:600 1.15rem/1.3 system-ui,sans-serif;margin:44px 0 6px}
+p{margin:8px 0}
+.lede{font-size:1.15rem}
+.mute{color:var(--mute)}
+.sans{font-family:system-ui,sans-serif}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:24px 0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:system-ui,sans-serif}
+.tile b{display:block;font-size:1.7rem;line-height:1.1}
+.tile span{font-size:.85rem;color:var(--mute)}
+figure{margin:16px 0 0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px}
+figcaption{font:.88rem/1.45 system-ui,sans-serif;color:var(--mute);margin-top:10px}
+svg text{font-family:system-ui,sans-serif}
+.tabs{display:flex;gap:8px;margin:20px 0 0;font-family:system-ui,sans-serif}
+.tabs button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:.9rem}
+.tabs button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.strip{overflow-x:auto}
+footer{margin-top:48px;font:.85rem/1.5 system-ui,sans-serif;color:var(--mute)}
+a{color:var(--en)}
+</style>
+</head>
+<body>
+<main>
+<h1>Who forecasts Denmark's wind best?</h1>
+<p class="lede" id="lede">Loading results.</p>
+<p class="mute">Every morning before the 12:00 day-ahead gate, I forecast the next day's hourly wind power in Denmark's
+four wind zones, offshore and onshore in DK1 and DK2. Each forecast is
+<a href="https://github.com/bolgacg/dk-wind-live/tree/main/forecasts">committed publicly</a> before its day begins.
+When the day is over, it is scored against Energinet's measured output.</p>
+
+<div class="tabs" role="group" aria-label="Period">
+  <button id="t-live" aria-pressed="false">Live, since 30 Oct 2026</button>
+  <button id="t-backtest" aria-pressed="true">Backtest, 3 unseen months</button>
+</div>
+<p class="mute sans" id="period" style="font-size:.9rem;margin-top:10px"></p>
+
+<div class="tiles" id="tiles"></div>
+
+<h2>Accuracy over the whole period</h2>
+<figure>
+  <div id="dots"></div>
+  <figcaption>Each dot is one forecast source. Accuracy is 100% minus the total hourly error as a share of the total
+  wind output. The orange dot is my blend: the average of four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE and
+  DWD ICON-EU), each turned into power by its own trained mapping. The blue dot is Energinet's own day-ahead forecast,
+  scaled by its actual-to-forecast ratio over the previous 60 days. That scaling is needed because its offshore DK1
+  series covers only part of the fleet.</figcaption>
+</figure>
+
+<h2>How often each source was the most accurate</h2>
+<figure>
+  <div id="wins"></div>
+  <figcaption>Dark bar: days a source ranked first. Light bar: days it ranked in the top three. An average of models
+  seldom wins any single day outright, because on each day one of its members is closest. It wins over the whole period
+  because it is rarely far off, which shows here as the most top-three finishes.</figcaption>
+</figure>
+
+<h2>Day by day</h2>
+<figure class="strip">
+  <div id="strip"></div>
+  <figcaption>One column per day, one row per source. The darker the cell, the higher that source ranked that day.
+  Hover over a cell for the day's accuracy.</figcaption>
+</figure>
+
+<h2>Method</h2>
+<p>Each weather model's forecast at 34 points near Danish wind farms (100 m wind speed and direction, or 10 m where
+a model publishes no 100 m wind) goes into a gradient-boosted model per zone, which predicts output as a share of
+recent capacity. Every mapping was trained on that model's forecasts as they stood a day earlier, from Open-Meteo's
+archive of past runs, so the lead time matches a real day-ahead decision. The backtest tab shows 19 Jul to 18 Oct
+2026, months none of the mappings saw in training. The live tab grows by one day every night.</p>
+<footer>Data: Open-Meteo (CC BY 4.0), Energinet Energi Data Service, DMI. Code and every forecast:
+<a href="https://github.com/bolgacg/dk-wind-live">github.com/bolgacg/dk-wind-live</a>.</footer>
+</main>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const COL = s => s === "blend" ? "var(--ours)" : s === "energinet" ? "var(--en)" : "var(--other)";
+function el(tag, attrs, parent, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function svg(host, w, h) { host.innerHTML = ""; return el("svg", {viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img"}, host); }
+function render(d) {
+  const o = d.overall, ours = o.find(r => r.source === "blend"), en = o.find(r => r.source === "energinet");
+  const rank = o.findIndex(r => r.source === "blend") + 1;
+  document.getElementById("period").textContent =
+    `${d.from} to ${d.to}, ${d.days} days, ${o.length} sources compared.`;
+  document.getElementById("lede").textContent = ours ?
+    `Over these ${d.days} days my blend ranked ${rank === 1 ? "first" : "number " + rank} of ${o.length} on accuracy ` +
+    `(${ours.acc.toFixed(1)}%), against ${en ? en.acc.toFixed(1) + "% for Energinet's own forecast" : "the field"}, ` +
+    `and was the single most accurate source on ${ours.wins} of ${d.days} days.` : "No scored days yet.";
+  const T = document.getElementById("tiles"); T.innerHTML = "";
+  if (ours) for (const [v, l] of [[ours.acc.toFixed(1) + "%", "accuracy of my blend"],
+      [en ? (ours.acc - en.acc >= 0 ? "+" : "") + (ours.acc - en.acc).toFixed(1) + " pts" : "n/a", "against Energinet's forecast"],
+      [`${ours.wins} of ${d.days}`, "days ranked first"], [`${ours.top3} of ${d.days}`, "days in the top three"]]) {
+    const t = document.createElement("div"); t.className = "tile"; t.innerHTML = `<b>${v}</b><span>${l}</span>`; T.appendChild(t);
+  }
+  // dot plot
+  const W = 760, L = 210, R = 60, rowH = 30, H = o.length * rowH + 40;
+  const lo = Math.floor(Math.min(...o.map(r => r.acc)) - 1), hi = Math.ceil(Math.max(...o.map(r => r.acc)) + 1);
+  const x = v => L + (v - lo) / (hi - lo) * (W - L - R);
+  let s = svg(document.getElementById("dots"), W, H);
+  for (let v = lo; v <= hi; v++) if ((v - lo) % Math.max(1, Math.round((hi - lo) / 6)) === 0) {
+    el("line", {x1: x(v), x2: x(v), y1: 10, y2: H - 24, stroke: "#eee"}, s);
+    el("text", {x: x(v), y: H - 6, "text-anchor": "middle", "font-size": 12, fill: "#6b6a65"}, s, v + "%");
+  }
+  o.forEach((r, i) => {
+    const y = 24 + i * rowH, c = COL(r.source), b = r.source === "blend";
+    el("text", {x: L - 12, y: y + 4, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name);
+    el("line", {x1: L, x2: x(r.acc), y1: y, y2: y, stroke: "#e4e1d9", "stroke-width": 1}, s);
+    el("circle", {cx: x(r.acc), cy: y, r: b ? 8 : 6, fill: c}, s);
+    el("text", {x: x(r.acc) + 12, y: y + 4, "font-size": 13, fill: c, "font-weight": b ? 700 : 400}, s, r.acc.toFixed(1) + "%");
+  });
+  // wins: bars from zero
+  const byWins = [...o].sort((a, b) => b.wins - a.wins || b.top3 - a.top3);
+  const H2 = byWins.length * rowH + 30, xw = v => L + v / d.days * (W - L - R);
+  s = svg(document.getElementById("wins"), W, H2);
+  byWins.forEach((r, i) => {
+    const y = 14 + i * rowH, c = COL(r.source), b = r.source === "blend";
+    el("text", {x: L - 12, y: y + 13, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name);
+    el("rect", {x: L, y: y + 2, width: Math.max(0, xw(r.top3) - L), height: 16, fill: c, opacity: .25}, s);
+    el("rect", {x: L, y: y + 2, width: Math.max(0, xw(r.wins) - L), height: 16, fill: c}, s);
+    el("text", {x: xw(r.top3) + 8, y: y + 15, "font-size": 12, fill: "#6b6a65"}, s, `${r.wins} first, ${r.top3} top three`);
+  });
+  // strip
+  const days = [...new Set(d.daily.map(r => r.day))], n = o.length, cw = Math.max(6, Math.min(14, 560 / days.length));
+  const W3 = L + days.length * cw + 10, H3 = n * 18 + 30;
+  s = svg(document.getElementById("strip"), W3, H3);
+  s.setAttribute("width", Math.max(W3, 300)); s.style.minWidth = W3 + "px";
+  const idx = {}; o.forEach((r, i) => idx[r.source] = i);
+  o.forEach((r, i) => el("text", {x: L - 12, y: 14 + i * 18 + 11, "text-anchor": "end", "font-size": 12,
+    "font-weight": r.source === "blend" ? 700 : 400, fill: r.source === "blend" ? "var(--ours)" : "#1d1d1b"}, s, r.name));
+  d.daily.forEach(r => {
+    const j = days.indexOf(r.day), i = idx[r.source]; if (i === undefined) return;
+    const shade = 1 - (r.rank - 1) / (n - 1 || 1);
+    const c = el("rect", {x: L + j * cw, y: 14 + i * 18, width: cw - 1, height: 16,
+      fill: r.source === "blend" ? "#c2410c" : r.source === "energinet" ? "#1e40af" : "#57534e", opacity: (0.08 + 0.92 * shade).toFixed(2)}, s);
+    el("title", {}, c, `${r.day}: rank ${r.rank} of ${n}, accuracy ${r.acc.toFixed(1)}%`);
+  });
+  el("text", {x: L, y: H3 - 2, "font-size": 11, fill: "#6b6a65"}, s, days[0]);
+  el("text", {x: L + days.length * cw, y: H3 - 2, "font-size": 11, fill: "#6b6a65", "text-anchor": "end"}, s, days[days.length - 1]);
+}
+fetch("data.json").then(r => r.json()).then(D => {
+  const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
+    render(D[k]); };
+  const hasLive = D.live && D.live.days > 0;
+  document.getElementById("t-live").disabled = !hasLive;
+  if (!hasLive) document.getElementById("t-live").textContent = "Live: first scores from 31 Oct";
+  document.getElementById("t-live").onclick = () => hasLive && pick("live");
+  document.getElementById("t-backtest").onclick = () => pick("backtest");
+  pick(hasLive && D.live.days >= 7 ? "live" : "backtest");
+});
+</script>
+</body>
+</html>

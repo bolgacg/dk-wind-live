@@ -25,7 +25,12 @@ POINTS = {
 ZONES = ["DK1_offshore", "DK1_onshore", "DK2_offshore", "DK2_onshore"]
 # Weather models compared live. All take the same trained power mapping, so the only difference is the weather.
 LIVE_MODELS = {"ifs": "ecmwf_ifs025", "aifs": "ecmwf_aifs025_single", "harmonie": "dmi_harmonie_arome_europe",
-               "icon": "icon_eu"}
+               "icon": "icon_eu", "gfs": "gfs_global", "knmi": "knmi_harmonie_arome_europe", "icon_d2": "icon_d2",
+               "ukmo": "ukmo_global_deterministic_10km", "metno": "metno_nordic"}
+# Our custom model: equal-weight mean of these four, fixed on 28 Oct 2026. The rest are competitors only.
+BLEND = ["ifs", "aifs", "harmonie", "icon"]
+# Models whose archive and live feed have no 100 m wind use 10 m.
+LEVEL = {"ukmo": 10, "metno": 10}
 CAP_WINDOW_DAYS = 60
 CAP_Q = 0.995
 

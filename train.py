@@ -20,7 +20,7 @@ from common import LIVE, POINTS, RAW, ZONES, capacity_proxy, features
 TEST_START = pd.Timestamp("2026-07-19", tz="UTC")
 
 
-def load_weather(model, lead=1):
+def load_weather(model, lead=1, level=100):
     sp, di = {}, {}
     for p in POINTS:
         parts = []
@@ -29,8 +29,8 @@ def load_weather(model, lead=1):
             if "hourly" not in d:
                 continue
             h = d["hourly"]
-            parts.append(pd.DataFrame({"s": h[f"wind_speed_100m_previous_day{lead}"],
-                                       "d": h[f"wind_direction_100m_previous_day{lead}"]},
+            parts.append(pd.DataFrame({"s": h[f"wind_speed_{level}m_previous_day{lead}"],
+                                       "d": h[f"wind_direction_{level}m_previous_day{lead}"]},
                                       index=pd.to_datetime(h["time"]).tz_localize("UTC"), dtype=float))
         if not parts:
             raise SystemExit(f"no {model} data for {p} yet")
@@ -74,9 +74,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--weather", default="ecmwf_ifs025")
     ap.add_argument("--final", action="store_true")
+    ap.add_argument("--level", type=int, default=100, choices=(100, 10), help="wind height in metres")
     ap.add_argument("--since", help="drop training hours before this UTC date (for like-for-like model duels)")
     a = ap.parse_args()
-    sp, di = load_weather(a.weather)
+    sp, di = load_weather(a.weather, level=a.level)
     X = features(sp, di)
     X = X[sp.notna().mean(axis=1) > 0.9]  # hours before a model's archive starts are all empty
     if a.since:
@@ -88,12 +89,13 @@ def main():
     X, Y, cap = X.loc[idx], Y.loc[idx], cap.loc[idx]
     print(f"{a.weather}: {len(idx)} hours, {idx.min()} to {idx.max()}")
     tr, te = idx < TEST_START, idx >= TEST_START
-    rows = []
+    rows, test_pred = [], {}
     for z in ZONES:
         y = (Y[z] / cap[z]).clip(0, 1.2)
         m = lgb.train(PARAMS, lgb.Dataset(X[tr], y[tr]), N_ROUNDS)
         pred = np.clip(m.predict(X[te]), 0, None) * cap[z][te]
         act = Y[z][te]
+        test_pred[z] = pred
         common = act.index.intersection(da[z].dropna().index)
         mae_ours = (pred.loc[common] - act.loc[common]).abs().mean()
         mae_en = (da[z].loc[common] - act.loc[common]).abs().mean()
@@ -102,6 +104,7 @@ def main():
         r = (j.a.rolling("60D").sum() / j.f.rolling("60D").sum()).resample("D").last().shift(1)
         en_db = da[z] * r.reindex(da[z].index, method="ffill")
         mae_db = (en_db.loc[common] - act.loc[common]).abs().mean()
+        test_pred[f"energinet_{z}"], test_pred[f"actual_{z}"] = en_db.reindex(act.index), act
         rows.append(dict(zone=z, hours=len(common), mean_output=act.loc[common].mean(), mae_ours=mae_ours,
                          mae_energinet=mae_en, mae_energinet_debiased=mae_db, ratio_raw=mae_ours / mae_en,
                          ratio_debiased=mae_ours / mae_db))
@@ -115,9 +118,11 @@ def main():
     out = LIVE / "reports"
     out.mkdir(exist_ok=True)
     rep.to_csv(out / f"test_{a.weather}{'_since' + a.since if a.since else ''}.csv", index=False)
+    if not a.since:  # out-of-sample hourly predictions for the league backtest
+        pd.DataFrame(test_pred).to_csv(out / f"testpred_{a.weather}.csv", index_label="hour_utc")
     if a.final:
         json.dump({"weather": a.weather, "hours": len(idx), "from": str(idx.min()), "to": str(idx.max()),
-                   "params": PARAMS, "rounds": N_ROUNDS, "features": list(X.columns)},
+                   "level": a.level, "params": PARAMS, "rounds": N_ROUNDS, "features": list(X.columns)},
                   open(LIVE / "models" / a.weather / "meta.json", "w"), indent=1)
 
 

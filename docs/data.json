@@ -1,0 +1,5611 @@
+{
+"backtest": {
+"from": "2026-07-19",
+"to": "2026-10-18",
+"days": 92,
+"overall": [
+{
+"source": "blend",
+"name": "Our blend",
+"acc": 82.09,
+"days": 92,
+"wins": 17,
+"top3": 65
+},
+{
+"source": "ifs",
+"name": "ECMWF IFS",
+"acc": 81.66,
+"days": 92,
+"wins": 22,
+"top3": 50
+},
+{
+"source": "aifs",
+"name": "ECMWF AIFS (AI)",
+"acc": 81.17,
+"days": 92,
+"wins": 16,
+"top3": 42
+},
+{
+"source": "ukmo",
+"name": "UK Met Office",
+"acc": 79.45,
+"days": 92,
+"wins": 13,
+"top3": 23
+},
+{
+"source": "energinet",
+"name": "Energinet (bias-corrected)",
+"acc": 79.05,
+"days": 92,
+"wins": 8,
+"top3": 20
+},
+{
+"source": "icon_d2",
+"name": "DWD ICON-D2",
+"acc": 79.05,
+"days": 92,
+"wins": 3,
+"top3": 20
+},
+{
+"source": "gfs",
+"name": "NOAA GFS",
+"acc": 78.95,
+"days": 92,
+"wins": 8,
+"top3": 20
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"acc": 78.53,
+"days": 92,
+"wins": 3,
+"top3": 14
+},
+{
+"source": "knmi",
+"name": "KNMI HARMONIE",
+"acc": 78.51,
+"days": 92,
+"wins": 1,
+"top3": 13
+},
+{
+"source": "icon",
+"name": "DWD ICON-EU",
+"acc": 78.42,
+"days": 92,
+"wins": 1,
+"top3": 9
+}
+],
+"daily": [
+{
+"day": "2026-07-19",
+"source": "harmonie",
+"acc": 79.81,
+"rank": 1
+},
+{
+"day": "2026-07-19",
+"source": "knmi",
+"acc": 79.56,
+"rank": 2
+},
+{
+"day": "2026-07-19",
+"source": "blend",
+"acc": 79.28,
+"rank": 3
+},
+{
+"day": "2026-07-19",
+"source": "aifs",
+"acc": 76.96,
+"rank": 4
+},
+{
+"day": "2026-07-19",
+"source": "ukmo",
+"acc": 75.74,
+"rank": 5
+},
+{
+"day": "2026-07-19",
+"source": "icon",
+"acc": 75.51,
+"rank": 6
+},
+{
+"day": "2026-07-19",
+"source": "energinet",
+"acc": 75.38,
+"rank": 7
+},
+{
+"day": "2026-07-19",
+"source": "ifs",
+"acc": 74.96,
+"rank": 8
+},
+{
+"day": "2026-07-19",
+"source": "icon_d2",
+"acc": 71.24,
+"rank": 9
+},
+{
+"day": "2026-07-19",
+"source": "gfs",
+"acc": 69.18,
+"rank": 10
+},
+{
+"day": "2026-07-20",
+"source": "energinet",
+"acc": 84.33,
+"rank": 1
+},
+{
+"day": "2026-07-20",
+"source": "icon",
+"acc": 82.53,
+"rank": 2
+},
+{
+"day": "2026-07-20",
+"source": "icon_d2",
+"acc": 82.32,
+"rank": 3
+},
+{
+"day": "2026-07-20",
+"source": "ukmo",
+"acc": 81.57,
+"rank": 4
+},
+{
+"day": "2026-07-20",
+"source": "knmi",
+"acc": 80.86,
+"rank": 5
+},
+{
+"day": "2026-07-20",
+"source": "blend",
+"acc": 80.38,
+"rank": 6
+},
+{
+"day": "2026-07-20",
+"source": "harmonie",
+"acc": 79.4,
+"rank": 7
+},
+{
+"day": "2026-07-20",
+"source": "gfs",
+"acc": 78.27,
+"rank": 8
+},
+{
+"day": "2026-07-20",
+"source": "ifs",
+"acc": 77.35,
+"rank": 9
+},
+{
+"day": "2026-07-20",
+"source": "aifs",
+"acc": 76.42,
+"rank": 10
+},
+{
+"day": "2026-07-21",
+"source": "ifs",
+"acc": 83.82,
+"rank": 1
+},
+{
+"day": "2026-07-21",
+"source": "gfs",
+"acc": 82.91,
+"rank": 2
+},
+{
+"day": "2026-07-21",
+"source": "blend",
+"acc": 82.55,
+"rank": 3
+},
+{
+"day": "2026-07-21",
+"source": "aifs",
+"acc": 82.16,
+"rank": 4
+},
+{
+"day": "2026-07-21",
+"source": "ukmo",
+"acc": 80.89,
+"rank": 5
+},
+{
+"day": "2026-07-21",
+"source": "energinet",
+"acc": 79.99,
+"rank": 6
+},
+{
+"day": "2026-07-21",
+"source": "icon",
+"acc": 79.06,
+"rank": 7
+},
+{
+"day": "2026-07-21",
+"source": "icon_d2",
+"acc": 78.83,
+"rank": 8
+},
+{
+"day": "2026-07-21",
+"source": "knmi",
+"acc": 76.55,
+"rank": 9
+},
+{
+"day": "2026-07-21",
+"source": "harmonie",
+"acc": 72.99,
+"rank": 10
+},
+{
+"day": "2026-07-22",
+"source": "aifs",
+"acc": 88.45,
+"rank": 1
+},
+{
+"day": "2026-07-22",
+"source": "blend",
+"acc": 87.54,
+"rank": 2
+},
+{
+"day": "2026-07-22",
+"source": "ifs",
+"acc": 86.21,
+"rank": 3
+},
+{
+"day": "2026-07-22",
+"source": "icon_d2",
+"acc": 86.05,
+"rank": 4
+},
+{
+"day": "2026-07-22",
+"source": "ukmo",
+"acc": 85.83,
+"rank": 5
+},
+{
+"day": "2026-07-22",
+"source": "icon",
+"acc": 85.73,
+"rank": 6
+},
+{
+"day": "2026-07-22",
+"source": "gfs",
+"acc": 85.46,
+"rank": 7
+},
+{
+"day": "2026-07-22",
+"source": "harmonie",
+"acc": 83.68,
+"rank": 8
+},
+{
+"day": "2026-07-22",
+"source": "energinet",
+"acc": 83.54,
+"rank": 9
+},
+{
+"day": "2026-07-22",
+"source": "knmi",
+"acc": 82.92,
+"rank": 10
+},
+{
+"day": "2026-07-23",
+"source": "aifs",
+"acc": 79.37,
+"rank": 1
+},
+{
+"day": "2026-07-23",
+"source": "blend",
+"acc": 78.97,
+"rank": 2
+},
+{
+"day": "2026-07-23",
+"source": "knmi",
+"acc": 77.19,
+"rank": 3
+},
+{
+"day": "2026-07-23",
+"source": "ukmo",
+"acc": 77.12,
+"rank": 4
+},
+{
+"day": "2026-07-23",
+"source": "harmonie",
+"acc": 76.85,
+"rank": 5
+},
+{
+"day": "2026-07-23",
+"source": "ifs",
+"acc": 75.98,
+"rank": 6
+},
+{
+"day": "2026-07-23",
+"source": "energinet",
+"acc": 75.23,
+"rank": 7
+},
+{
+"day": "2026-07-23",
+"source": "gfs",
+"acc": 74.37,
+"rank": 8
+},
+{
+"day": "2026-07-23",
+"source": "icon_d2",
+"acc": 70.88,
+"rank": 9
+},
+{
+"day": "2026-07-23",
+"source": "icon",
+"acc": 70.77,
+"rank": 10
+},
+{
+"day": "2026-07-24",
+"source": "ifs",
+"acc": 88.33,
+"rank": 1
+},
+{
+"day": "2026-07-24",
+"source": "blend",
+"acc": 87.65,
+"rank": 2
+},
+{
+"day": "2026-07-24",
+"source": "icon",
+"acc": 85.74,
+"rank": 3
+},
+{
+"day": "2026-07-24",
+"source": "knmi",
+"acc": 85.18,
+"rank": 4
+},
+{
+"day": "2026-07-24",
+"source": "gfs",
+"acc": 85.07,
+"rank": 5
+},
+{
+"day": "2026-07-24",
+"source": "icon_d2",
+"acc": 85.06,
+"rank": 6
+},
+{
+"day": "2026-07-24",
+"source": "harmonie",
+"acc": 84.4,
+"rank": 7
+},
+{
+"day": "2026-07-24",
+"source": "ukmo",
+"acc": 82.85,
+"rank": 8
+},
+{
+"day": "2026-07-24",
+"source": "energinet",
+"acc": 82.34,
+"rank": 9
+},
+{
+"day": "2026-07-24",
+"source": "aifs",
+"acc": 82.21,
+"rank": 10
+},
+{
+"day": "2026-07-25",
+"source": "energinet",
+"acc": 75.25,
+"rank": 1
+},
+{
+"day": "2026-07-25",
+"source": "knmi",
+"acc": 75.1,
+"rank": 2
+},
+{
+"day": "2026-07-25",
+"source": "harmonie",
+"acc": 72.16,
+"rank": 3
+},
+{
+"day": "2026-07-25",
+"source": "gfs",
+"acc": 70.77,
+"rank": 4
+},
+{
+"day": "2026-07-25",
+"source": "blend",
+"acc": 70.55,
+"rank": 5
+},
+{
+"day": "2026-07-25",
+"source": "ukmo",
+"acc": 70.5,
+"rank": 6
+},
+{
+"day": "2026-07-25",
+"source": "aifs",
+"acc": 68.75,
+"rank": 7
+},
+{
+"day": "2026-07-25",
+"source": "icon_d2",
+"acc": 68.71,
+"rank": 8
+},
+{
+"day": "2026-07-25",
+"source": "icon",
+"acc": 68.62,
+"rank": 9
+},
+{
+"day": "2026-07-25",
+"source": "ifs",
+"acc": 67.88,
+"rank": 10
+},
+{
+"day": "2026-07-26",
+"source": "knmi",
+"acc": 66.61,
+"rank": 1
+},
+{
+"day": "2026-07-26",
+"source": "blend",
+"acc": 65.64,
+"rank": 2
+},
+{
+"day": "2026-07-26",
+"source": "aifs",
+"acc": 65.02,
+"rank": 3
+},
+{
+"day": "2026-07-26",
+"source": "harmonie",
+"acc": 64.04,
+"rank": 4
+},
+{
+"day": "2026-07-26",
+"source": "ifs",
+"acc": 62.3,
+"rank": 5
+},
+{
+"day": "2026-07-26",
+"source": "energinet",
+"acc": 59.01,
+"rank": 6
+},
+{
+"day": "2026-07-26",
+"source": "ukmo",
+"acc": 58.79,
+"rank": 7
+},
+{
+"day": "2026-07-26",
+"source": "icon",
+"acc": 57.88,
+"rank": 8
+},
+{
+"day": "2026-07-26",
+"source": "icon_d2",
+"acc": 56.31,
+"rank": 9
+},
+{
+"day": "2026-07-26",
+"source": "gfs",
+"acc": 55.85,
+"rank": 10
+},
+{
+"day": "2026-07-27",
+"source": "gfs",
+"acc": 86.9,
+"rank": 1
+},
+{
+"day": "2026-07-27",
+"source": "ukmo",
+"acc": 85.87,
+"rank": 2
+},
+{
+"day": "2026-07-27",
+"source": "blend",
+"acc": 85.09,
+"rank": 3
+},
+{
+"day": "2026-07-27",
+"source": "aifs",
+"acc": 84.42,
+"rank": 4
+},
+{
+"day": "2026-07-27",
+"source": "icon_d2",
+"acc": 84.36,
+"rank": 5
+},
+{
+"day": "2026-07-27",
+"source": "harmonie",
+"acc": 84.26,
+"rank": 6
+},
+{
+"day": "2026-07-27",
+"source": "icon",
+"acc": 83.94,
+"rank": 7
+},
+{
+"day": "2026-07-27",
+"source": "knmi",
+"acc": 83.84,
+"rank": 8
+},
+{
+"day": "2026-07-27",
+"source": "energinet",
+"acc": 83.42,
+"rank": 9
+},
+{
+"day": "2026-07-27",
+"source": "ifs",
+"acc": 82.78,
+"rank": 10
+},
+{
+"day": "2026-07-28",
+"source": "blend",
+"acc": 80.82,
+"rank": 1
+},
+{
+"day": "2026-07-28",
+"source": "ifs",
+"acc": 80.2,
+"rank": 2
+},
+{
+"day": "2026-07-28",
+"source": "icon",
+"acc": 79.02,
+"rank": 3
+},
+{
+"day": "2026-07-28",
+"source": "aifs",
+"acc": 78.36,
+"rank": 4
+},
+{
+"day": "2026-07-28",
+"source": "icon_d2",
+"acc": 78.16,
+"rank": 5
+},
+{
+"day": "2026-07-28",
+"source": "gfs",
+"acc": 75.52,
+"rank": 6
+},
+{
+"day": "2026-07-28",
+"source": "knmi",
+"acc": 73.93,
+"rank": 7
+},
+{
+"day": "2026-07-28",
+"source": "harmonie",
+"acc": 73.58,
+"rank": 8
+},
+{
+"day": "2026-07-28",
+"source": "energinet",
+"acc": 73.15,
+"rank": 9
+},
+{
+"day": "2026-07-28",
+"source": "ukmo",
+"acc": 72.21,
+"rank": 10
+},
+{
+"day": "2026-07-29",
+"source": "blend",
+"acc": 82.74,
+"rank": 1
+},
+{
+"day": "2026-07-29",
+"source": "energinet",
+"acc": 81.56,
+"rank": 2
+},
+{
+"day": "2026-07-29",
+"source": "aifs",
+"acc": 81.39,
+"rank": 3
+},
+{
+"day": "2026-07-29",
+"source": "icon_d2",
+"acc": 79.48,
+"rank": 4
+},
+{
+"day": "2026-07-29",
+"source": "ifs",
+"acc": 79.35,
+"rank": 5
+},
+{
+"day": "2026-07-29",
+"source": "gfs",
+"acc": 78.59,
+"rank": 6
+},
+{
+"day": "2026-07-29",
+"source": "ukmo",
+"acc": 78.51,
+"rank": 7
+},
+{
+"day": "2026-07-29",
+"source": "icon",
+"acc": 77.77,
+"rank": 8
+},
+{
+"day": "2026-07-29",
+"source": "harmonie",
+"acc": 71.51,
+"rank": 9
+},
+{
+"day": "2026-07-29",
+"source": "knmi",
+"acc": 67.56,
+"rank": 10
+},
+{
+"day": "2026-07-30",
+"source": "ukmo",
+"acc": 78.11,
+"rank": 1
+},
+{
+"day": "2026-07-30",
+"source": "energinet",
+"acc": 75.22,
+"rank": 2
+},
+{
+"day": "2026-07-30",
+"source": "blend",
+"acc": 72.57,
+"rank": 3
+},
+{
+"day": "2026-07-30",
+"source": "harmonie",
+"acc": 72.24,
+"rank": 4
+},
+{
+"day": "2026-07-30",
+"source": "icon_d2",
+"acc": 71.85,
+"rank": 5
+},
+{
+"day": "2026-07-30",
+"source": "aifs",
+"acc": 71.61,
+"rank": 6
+},
+{
+"day": "2026-07-30",
+"source": "knmi",
+"acc": 70.51,
+"rank": 7
+},
+{
+"day": "2026-07-30",
+"source": "gfs",
+"acc": 70.26,
+"rank": 8
+},
+{
+"day": "2026-07-30",
+"source": "icon",
+"acc": 68.3,
+"rank": 9
+},
+{
+"day": "2026-07-30",
+"source": "ifs",
+"acc": 66.07,
+"rank": 10
+},
+{
+"day": "2026-07-31",
+"source": "blend",
+"acc": 78.09,
+"rank": 1
+},
+{
+"day": "2026-07-31",
+"source": "energinet",
+"acc": 78.06,
+"rank": 2
+},
+{
+"day": "2026-07-31",
+"source": "knmi",
+"acc": 74.55,
+"rank": 3
+},
+{
+"day": "2026-07-31",
+"source": "aifs",
+"acc": 74.31,
+"rank": 4
+},
+{
+"day": "2026-07-31",
+"source": "ukmo",
+"acc": 72.58,
+"rank": 5
+},
+{
+"day": "2026-07-31",
+"source": "harmonie",
+"acc": 71.07,
+"rank": 6
+},
+{
+"day": "2026-07-31",
+"source": "ifs",
+"acc": 70.99,
+"rank": 7
+},
+{
+"day": "2026-07-31",
+"source": "icon",
+"acc": 69.74,
+"rank": 8
+},
+{
+"day": "2026-07-31",
+"source": "icon_d2",
+"acc": 66.29,
+"rank": 9
+},
+{
+"day": "2026-07-31",
+"source": "gfs",
+"acc": 64.22,
+"rank": 10
+},
+{
+"day": "2026-08-01",
+"source": "energinet",
+"acc": 78.91,
+"rank": 1
+},
+{
+"day": "2026-08-01",
+"source": "blend",
+"acc": 73.73,
+"rank": 2
+},
+{
+"day": "2026-08-01",
+"source": "ukmo",
+"acc": 72.51,
+"rank": 3
+},
+{
+"day": "2026-08-01",
+"source": "icon",
+"acc": 71.72,
+"rank": 4
+},
+{
+"day": "2026-08-01",
+"source": "aifs",
+"acc": 71.62,
+"rank": 5
+},
+{
+"day": "2026-08-01",
+"source": "knmi",
+"acc": 70.22,
+"rank": 6
+},
+{
+"day": "2026-08-01",
+"source": "icon_d2",
+"acc": 69.45,
+"rank": 7
+},
+{
+"day": "2026-08-01",
+"source": "ifs",
+"acc": 68.19,
+"rank": 8
+},
+{
+"day": "2026-08-01",
+"source": "harmonie",
+"acc": 65.96,
+"rank": 9
+},
+{
+"day": "2026-08-01",
+"source": "gfs",
+"acc": 61.35,
+"rank": 10
+},
+{
+"day": "2026-08-02",
+"source": "aifs",
+"acc": 76.89,
+"rank": 1
+},
+{
+"day": "2026-08-02",
+"source": "gfs",
+"acc": 75.17,
+"rank": 2
+},
+{
+"day": "2026-08-02",
+"source": "harmonie",
+"acc": 75.13,
+"rank": 3
+},
+{
+"day": "2026-08-02",
+"source": "blend",
+"acc": 74.56,
+"rank": 4
+},
+{
+"day": "2026-08-02",
+"source": "energinet",
+"acc": 74.54,
+"rank": 5
+},
+{
+"day": "2026-08-02",
+"source": "knmi",
+"acc": 72.06,
+"rank": 6
+},
+{
+"day": "2026-08-02",
+"source": "icon",
+"acc": 69.82,
+"rank": 7
+},
+{
+"day": "2026-08-02",
+"source": "ifs",
+"acc": 66.03,
+"rank": 8
+},
+{
+"day": "2026-08-02",
+"source": "icon_d2",
+"acc": 62.09,
+"rank": 9
+},
+{
+"day": "2026-08-02",
+"source": "ukmo",
+"acc": 58.24,
+"rank": 10
+},
+{
+"day": "2026-08-03",
+"source": "ifs",
+"acc": 72.61,
+"rank": 1
+},
+{
+"day": "2026-08-03",
+"source": "icon_d2",
+"acc": 68.37,
+"rank": 2
+},
+{
+"day": "2026-08-03",
+"source": "blend",
+"acc": 68.04,
+"rank": 3
+},
+{
+"day": "2026-08-03",
+"source": "icon",
+"acc": 67.1,
+"rank": 4
+},
+{
+"day": "2026-08-03",
+"source": "aifs",
+"acc": 62.65,
+"rank": 5
+},
+{
+"day": "2026-08-03",
+"source": "gfs",
+"acc": 61.7,
+"rank": 6
+},
+{
+"day": "2026-08-03",
+"source": "energinet",
+"acc": 58.77,
+"rank": 7
+},
+{
+"day": "2026-08-03",
+"source": "knmi",
+"acc": 57.57,
+"rank": 8
+},
+{
+"day": "2026-08-03",
+"source": "ukmo",
+"acc": 55.96,
+"rank": 9
+},
+{
+"day": "2026-08-03",
+"source": "harmonie",
+"acc": 54.36,
+"rank": 10
+},
+{
+"day": "2026-08-04",
+"source": "gfs",
+"acc": 75.66,
+"rank": 1
+},
+{
+"day": "2026-08-04",
+"source": "icon_d2",
+"acc": 74.71,
+"rank": 2
+},
+{
+"day": "2026-08-04",
+"source": "knmi",
+"acc": 74.67,
+"rank": 3
+},
+{
+"day": "2026-08-04",
+"source": "energinet",
+"acc": 71.97,
+"rank": 4
+},
+{
+"day": "2026-08-04",
+"source": "harmonie",
+"acc": 71.5,
+"rank": 5
+},
+{
+"day": "2026-08-04",
+"source": "aifs",
+"acc": 70.51,
+"rank": 6
+},
+{
+"day": "2026-08-04",
+"source": "ukmo",
+"acc": 69.72,
+"rank": 7
+},
+{
+"day": "2026-08-04",
+"source": "blend",
+"acc": 69.56,
+"rank": 8
+},
+{
+"day": "2026-08-04",
+"source": "ifs",
+"acc": 66.9,
+"rank": 9
+},
+{
+"day": "2026-08-04",
+"source": "icon",
+"acc": 59.42,
+"rank": 10
+},
+{
+"day": "2026-08-05",
+"source": "aifs",
+"acc": 79.44,
+"rank": 1
+},
+{
+"day": "2026-08-05",
+"source": "ifs",
+"acc": 78.63,
+"rank": 2
+},
+{
+"day": "2026-08-05",
+"source": "icon_d2",
+"acc": 78.6,
+"rank": 3
+},
+{
+"day": "2026-08-05",
+"source": "gfs",
+"acc": 77.97,
+"rank": 4
+},
+{
+"day": "2026-08-05",
+"source": "blend",
+"acc": 77.7,
+"rank": 5
+},
+{
+"day": "2026-08-05",
+"source": "energinet",
+"acc": 75.33,
+"rank": 6
+},
+{
+"day": "2026-08-05",
+"source": "ukmo",
+"acc": 73.89,
+"rank": 7
+},
+{
+"day": "2026-08-05",
+"source": "icon",
+"acc": 73.76,
+"rank": 8
+},
+{
+"day": "2026-08-05",
+"source": "knmi",
+"acc": 72.08,
+"rank": 9
+},
+{
+"day": "2026-08-05",
+"source": "harmonie",
+"acc": 70.41,
+"rank": 10
+},
+{
+"day": "2026-08-06",
+"source": "energinet",
+"acc": 83.76,
+"rank": 1
+},
+{
+"day": "2026-08-06",
+"source": "ukmo",
+"acc": 82.52,
+"rank": 2
+},
+{
+"day": "2026-08-06",
+"source": "gfs",
+"acc": 80.92,
+"rank": 3
+},
+{
+"day": "2026-08-06",
+"source": "blend",
+"acc": 80.87,
+"rank": 4
+},
+{
+"day": "2026-08-06",
+"source": "icon_d2",
+"acc": 80.69,
+"rank": 5
+},
+{
+"day": "2026-08-06",
+"source": "aifs",
+"acc": 80.69,
+"rank": 6
+},
+{
+"day": "2026-08-06",
+"source": "icon",
+"acc": 80.62,
+"rank": 7
+},
+{
+"day": "2026-08-06",
+"source": "harmonie",
+"acc": 79.91,
+"rank": 8
+},
+{
+"day": "2026-08-06",
+"source": "ifs",
+"acc": 78.53,
+"rank": 9
+},
+{
+"day": "2026-08-06",
+"source": "knmi",
+"acc": 78.52,
+"rank": 10
+},
+{
+"day": "2026-08-07",
+"source": "ifs",
+"acc": 89.92,
+"rank": 1
+},
+{
+"day": "2026-08-07",
+"source": "blend",
+"acc": 88.34,
+"rank": 2
+},
+{
+"day": "2026-08-07",
+"source": "aifs",
+"acc": 88.04,
+"rank": 3
+},
+{
+"day": "2026-08-07",
+"source": "energinet",
+"acc": 87.09,
+"rank": 4
+},
+{
+"day": "2026-08-07",
+"source": "icon_d2",
+"acc": 86.74,
+"rank": 5
+},
+{
+"day": "2026-08-07",
+"source": "ukmo",
+"acc": 85.63,
+"rank": 6
+},
+{
+"day": "2026-08-07",
+"source": "icon",
+"acc": 85.58,
+"rank": 7
+},
+{
+"day": "2026-08-07",
+"source": "gfs",
+"acc": 85.51,
+"rank": 8
+},
+{
+"day": "2026-08-07",
+"source": "harmonie",
+"acc": 85.06,
+"rank": 9
+},
+{
+"day": "2026-08-07",
+"source": "knmi",
+"acc": 82.74,
+"rank": 10
+},
+{
+"day": "2026-08-08",
+"source": "blend",
+"acc": 82.96,
+"rank": 1
+},
+{
+"day": "2026-08-08",
+"source": "ifs",
+"acc": 81.96,
+"rank": 2
+},
+{
+"day": "2026-08-08",
+"source": "harmonie",
+"acc": 79.95,
+"rank": 3
+},
+{
+"day": "2026-08-08",
+"source": "icon_d2",
+"acc": 79.76,
+"rank": 4
+},
+{
+"day": "2026-08-08",
+"source": "aifs",
+"acc": 79.66,
+"rank": 5
+},
+{
+"day": "2026-08-08",
+"source": "energinet",
+"acc": 79.38,
+"rank": 6
+},
+{
+"day": "2026-08-08",
+"source": "icon",
+"acc": 79.31,
+"rank": 7
+},
+{
+"day": "2026-08-08",
+"source": "ukmo",
+"acc": 77.56,
+"rank": 8
+},
+{
+"day": "2026-08-08",
+"source": "knmi",
+"acc": 76.32,
+"rank": 9
+},
+{
+"day": "2026-08-08",
+"source": "gfs",
+"acc": 76.2,
+"rank": 10
+},
+{
+"day": "2026-08-09",
+"source": "blend",
+"acc": 77.01,
+"rank": 1
+},
+{
+"day": "2026-08-09",
+"source": "knmi",
+"acc": 76.2,
+"rank": 2
+},
+{
+"day": "2026-08-09",
+"source": "ifs",
+"acc": 75.23,
+"rank": 3
+},
+{
+"day": "2026-08-09",
+"source": "icon_d2",
+"acc": 73.86,
+"rank": 4
+},
+{
+"day": "2026-08-09",
+"source": "gfs",
+"acc": 71.63,
+"rank": 5
+},
+{
+"day": "2026-08-09",
+"source": "harmonie",
+"acc": 70.34,
+"rank": 6
+},
+{
+"day": "2026-08-09",
+"source": "aifs",
+"acc": 68.77,
+"rank": 7
+},
+{
+"day": "2026-08-09",
+"source": "ukmo",
+"acc": 67.53,
+"rank": 8
+},
+{
+"day": "2026-08-09",
+"source": "energinet",
+"acc": 67.44,
+"rank": 9
+},
+{
+"day": "2026-08-09",
+"source": "icon",
+"acc": 65.71,
+"rank": 10
+},
+{
+"day": "2026-08-10",
+"source": "blend",
+"acc": 85.13,
+"rank": 1
+},
+{
+"day": "2026-08-10",
+"source": "harmonie",
+"acc": 84.05,
+"rank": 2
+},
+{
+"day": "2026-08-10",
+"source": "ifs",
+"acc": 83.71,
+"rank": 3
+},
+{
+"day": "2026-08-10",
+"source": "aifs",
+"acc": 82.84,
+"rank": 4
+},
+{
+"day": "2026-08-10",
+"source": "icon",
+"acc": 82.44,
+"rank": 5
+},
+{
+"day": "2026-08-10",
+"source": "icon_d2",
+"acc": 81.36,
+"rank": 6
+},
+{
+"day": "2026-08-10",
+"source": "energinet",
+"acc": 81.21,
+"rank": 7
+},
+{
+"day": "2026-08-10",
+"source": "knmi",
+"acc": 80.77,
+"rank": 8
+},
+{
+"day": "2026-08-10",
+"source": "gfs",
+"acc": 80.76,
+"rank": 9
+},
+{
+"day": "2026-08-10",
+"source": "ukmo",
+"acc": 79.57,
+"rank": 10
+},
+{
+"day": "2026-08-11",
+"source": "icon_d2",
+"acc": 84.49,
+"rank": 1
+},
+{
+"day": "2026-08-11",
+"source": "icon",
+"acc": 83.58,
+"rank": 2
+},
+{
+"day": "2026-08-11",
+"source": "aifs",
+"acc": 83.5,
+"rank": 3
+},
+{
+"day": "2026-08-11",
+"source": "blend",
+"acc": 83.47,
+"rank": 4
+},
+{
+"day": "2026-08-11",
+"source": "harmonie",
+"acc": 82.83,
+"rank": 5
+},
+{
+"day": "2026-08-11",
+"source": "gfs",
+"acc": 82.36,
+"rank": 6
+},
+{
+"day": "2026-08-11",
+"source": "ukmo",
+"acc": 82.22,
+"rank": 7
+},
+{
+"day": "2026-08-11",
+"source": "ifs",
+"acc": 81.09,
+"rank": 8
+},
+{
+"day": "2026-08-11",
+"source": "knmi",
+"acc": 80.37,
+"rank": 9
+},
+{
+"day": "2026-08-11",
+"source": "energinet",
+"acc": 79.49,
+"rank": 10
+},
+{
+"day": "2026-08-12",
+"source": "aifs",
+"acc": 65.72,
+"rank": 1
+},
+{
+"day": "2026-08-12",
+"source": "ifs",
+"acc": 64.77,
+"rank": 2
+},
+{
+"day": "2026-08-12",
+"source": "icon_d2",
+"acc": 61.78,
+"rank": 3
+},
+{
+"day": "2026-08-12",
+"source": "blend",
+"acc": 58.68,
+"rank": 4
+},
+{
+"day": "2026-08-12",
+"source": "icon",
+"acc": 55.51,
+"rank": 5
+},
+{
+"day": "2026-08-12",
+"source": "knmi",
+"acc": 46.13,
+"rank": 6
+},
+{
+"day": "2026-08-12",
+"source": "harmonie",
+"acc": 38.86,
+"rank": 7
+},
+{
+"day": "2026-08-12",
+"source": "ukmo",
+"acc": 35.66,
+"rank": 8
+},
+{
+"day": "2026-08-12",
+"source": "energinet",
+"acc": 15.37,
+"rank": 9
+},
+{
+"day": "2026-08-12",
+"source": "gfs",
+"acc": 12.18,
+"rank": 10
+},
+{
+"day": "2026-08-13",
+"source": "icon_d2",
+"acc": 76.67,
+"rank": 1
+},
+{
+"day": "2026-08-13",
+"source": "icon",
+"acc": 74.01,
+"rank": 2
+},
+{
+"day": "2026-08-13",
+"source": "blend",
+"acc": 71.23,
+"rank": 3
+},
+{
+"day": "2026-08-13",
+"source": "aifs",
+"acc": 67.67,
+"rank": 4
+},
+{
+"day": "2026-08-13",
+"source": "ifs",
+"acc": 63.42,
+"rank": 5
+},
+{
+"day": "2026-08-13",
+"source": "knmi",
+"acc": 62.55,
+"rank": 6
+},
+{
+"day": "2026-08-13",
+"source": "ukmo",
+"acc": 56.11,
+"rank": 7
+},
+{
+"day": "2026-08-13",
+"source": "harmonie",
+"acc": 55.75,
+"rank": 8
+},
+{
+"day": "2026-08-13",
+"source": "gfs",
+"acc": 50.17,
+"rank": 9
+},
+{
+"day": "2026-08-13",
+"source": "energinet",
+"acc": -8.14,
+"rank": 10
+},
+{
+"day": "2026-08-14",
+"source": "ifs",
+"acc": 79.8,
+"rank": 1
+},
+{
+"day": "2026-08-14",
+"source": "icon_d2",
+"acc": 76.26,
+"rank": 2
+},
+{
+"day": "2026-08-14",
+"source": "blend",
+"acc": 76.11,
+"rank": 3
+},
+{
+"day": "2026-08-14",
+"source": "aifs",
+"acc": 70.87,
+"rank": 4
+},
+{
+"day": "2026-08-14",
+"source": "icon",
+"acc": 70.33,
+"rank": 5
+},
+{
+"day": "2026-08-14",
+"source": "ukmo",
+"acc": 69.25,
+"rank": 6
+},
+{
+"day": "2026-08-14",
+"source": "energinet",
+"acc": 68.89,
+"rank": 7
+},
+{
+"day": "2026-08-14",
+"source": "knmi",
+"acc": 68.7,
+"rank": 8
+},
+{
+"day": "2026-08-14",
+"source": "harmonie",
+"acc": 64.08,
+"rank": 9
+},
+{
+"day": "2026-08-14",
+"source": "gfs",
+"acc": 49.35,
+"rank": 10
+},
+{
+"day": "2026-08-15",
+"source": "aifs",
+"acc": 84.05,
+"rank": 1
+},
+{
+"day": "2026-08-15",
+"source": "blend",
+"acc": 83.86,
+"rank": 2
+},
+{
+"day": "2026-08-15",
+"source": "knmi",
+"acc": 82.28,
+"rank": 3
+},
+{
+"day": "2026-08-15",
+"source": "harmonie",
+"acc": 81.87,
+"rank": 4
+},
+{
+"day": "2026-08-15",
+"source": "ukmo",
+"acc": 80.73,
+"rank": 5
+},
+{
+"day": "2026-08-15",
+"source": "icon",
+"acc": 80.33,
+"rank": 6
+},
+{
+"day": "2026-08-15",
+"source": "ifs",
+"acc": 79.16,
+"rank": 7
+},
+{
+"day": "2026-08-15",
+"source": "icon_d2",
+"acc": 76.21,
+"rank": 8
+},
+{
+"day": "2026-08-15",
+"source": "energinet",
+"acc": 75.4,
+"rank": 9
+},
+{
+"day": "2026-08-15",
+"source": "gfs",
+"acc": 73.2,
+"rank": 10
+},
+{
+"day": "2026-08-16",
+"source": "ukmo",
+"acc": 87.36,
+"rank": 1
+},
+{
+"day": "2026-08-16",
+"source": "blend",
+"acc": 86.79,
+"rank": 2
+},
+{
+"day": "2026-08-16",
+"source": "energinet",
+"acc": 86.73,
+"rank": 3
+},
+{
+"day": "2026-08-16",
+"source": "aifs",
+"acc": 86.67,
+"rank": 4
+},
+{
+"day": "2026-08-16",
+"source": "ifs",
+"acc": 85.7,
+"rank": 5
+},
+{
+"day": "2026-08-16",
+"source": "knmi",
+"acc": 85.38,
+"rank": 6
+},
+{
+"day": "2026-08-16",
+"source": "harmonie",
+"acc": 84.36,
+"rank": 7
+},
+{
+"day": "2026-08-16",
+"source": "icon",
+"acc": 83.15,
+"rank": 8
+},
+{
+"day": "2026-08-16",
+"source": "gfs",
+"acc": 82.23,
+"rank": 9
+},
+{
+"day": "2026-08-16",
+"source": "icon_d2",
+"acc": 81.17,
+"rank": 10
+},
+{
+"day": "2026-08-17",
+"source": "ukmo",
+"acc": 86.15,
+"rank": 1
+},
+{
+"day": "2026-08-17",
+"source": "energinet",
+"acc": 83.13,
+"rank": 2
+},
+{
+"day": "2026-08-17",
+"source": "icon_d2",
+"acc": 82.89,
+"rank": 3
+},
+{
+"day": "2026-08-17",
+"source": "blend",
+"acc": 82.8,
+"rank": 4
+},
+{
+"day": "2026-08-17",
+"source": "ifs",
+"acc": 82.51,
+"rank": 5
+},
+{
+"day": "2026-08-17",
+"source": "gfs",
+"acc": 82.45,
+"rank": 6
+},
+{
+"day": "2026-08-17",
+"source": "knmi",
+"acc": 82.2,
+"rank": 7
+},
+{
+"day": "2026-08-17",
+"source": "icon",
+"acc": 81.75,
+"rank": 8
+},
+{
+"day": "2026-08-17",
+"source": "aifs",
+"acc": 81.43,
+"rank": 9
+},
+{
+"day": "2026-08-17",
+"source": "harmonie",
+"acc": 80.37,
+"rank": 10
+},
+{
+"day": "2026-08-18",
+"source": "aifs",
+"acc": 73.84,
+"rank": 1
+},
+{
+"day": "2026-08-18",
+"source": "ifs",
+"acc": 72.18,
+"rank": 2
+},
+{
+"day": "2026-08-18",
+"source": "blend",
+"acc": 71.82,
+"rank": 3
+},
+{
+"day": "2026-08-18",
+"source": "icon",
+"acc": 68.45,
+"rank": 4
+},
+{
+"day": "2026-08-18",
+"source": "gfs",
+"acc": 65.16,
+"rank": 5
+},
+{
+"day": "2026-08-18",
+"source": "icon_d2",
+"acc": 63.95,
+"rank": 6
+},
+{
+"day": "2026-08-18",
+"source": "knmi",
+"acc": 55.95,
+"rank": 7
+},
+{
+"day": "2026-08-18",
+"source": "ukmo",
+"acc": 55.7,
+"rank": 8
+},
+{
+"day": "2026-08-18",
+"source": "harmonie",
+"acc": 55.25,
+"rank": 9
+},
+{
+"day": "2026-08-18",
+"source": "energinet",
+"acc": 54.32,
+"rank": 10
+},
+{
+"day": "2026-08-19",
+"source": "blend",
+"acc": 77.72,
+"rank": 1
+},
+{
+"day": "2026-08-19",
+"source": "aifs",
+"acc": 73.82,
+"rank": 2
+},
+{
+"day": "2026-08-19",
+"source": "gfs",
+"acc": 70.54,
+"rank": 3
+},
+{
+"day": "2026-08-19",
+"source": "ifs",
+"acc": 67.98,
+"rank": 4
+},
+{
+"day": "2026-08-19",
+"source": "ukmo",
+"acc": 67.07,
+"rank": 5
+},
+{
+"day": "2026-08-19",
+"source": "energinet",
+"acc": 67.0,
+"rank": 6
+},
+{
+"day": "2026-08-19",
+"source": "icon",
+"acc": 61.54,
+"rank": 7
+},
+{
+"day": "2026-08-19",
+"source": "harmonie",
+"acc": 57.38,
+"rank": 8
+},
+{
+"day": "2026-08-19",
+"source": "knmi",
+"acc": 55.59,
+"rank": 9
+},
+{
+"day": "2026-08-19",
+"source": "icon_d2",
+"acc": 49.12,
+"rank": 10
+},
+{
+"day": "2026-08-20",
+"source": "blend",
+"acc": 70.8,
+"rank": 1
+},
+{
+"day": "2026-08-20",
+"source": "icon",
+"acc": 69.51,
+"rank": 2
+},
+{
+"day": "2026-08-20",
+"source": "ifs",
+"acc": 69.08,
+"rank": 3
+},
+{
+"day": "2026-08-20",
+"source": "aifs",
+"acc": 68.6,
+"rank": 4
+},
+{
+"day": "2026-08-20",
+"source": "icon_d2",
+"acc": 68.52,
+"rank": 5
+},
+{
+"day": "2026-08-20",
+"source": "energinet",
+"acc": 62.97,
+"rank": 6
+},
+{
+"day": "2026-08-20",
+"source": "knmi",
+"acc": 60.4,
+"rank": 7
+},
+{
+"day": "2026-08-20",
+"source": "ukmo",
+"acc": 60.31,
+"rank": 8
+},
+{
+"day": "2026-08-20",
+"source": "gfs",
+"acc": 59.48,
+"rank": 9
+},
+{
+"day": "2026-08-20",
+"source": "harmonie",
+"acc": 58.44,
+"rank": 10
+},
+{
+"day": "2026-08-21",
+"source": "ifs",
+"acc": 81.6,
+"rank": 1
+},
+{
+"day": "2026-08-21",
+"source": "blend",
+"acc": 80.95,
+"rank": 2
+},
+{
+"day": "2026-08-21",
+"source": "icon_d2",
+"acc": 80.93,
+"rank": 3
+},
+{
+"day": "2026-08-21",
+"source": "energinet",
+"acc": 79.8,
+"rank": 4
+},
+{
+"day": "2026-08-21",
+"source": "icon",
+"acc": 79.76,
+"rank": 5
+},
+{
+"day": "2026-08-21",
+"source": "gfs",
+"acc": 79.41,
+"rank": 6
+},
+{
+"day": "2026-08-21",
+"source": "aifs",
+"acc": 78.29,
+"rank": 7
+},
+{
+"day": "2026-08-21",
+"source": "knmi",
+"acc": 77.46,
+"rank": 8
+},
+{
+"day": "2026-08-21",
+"source": "ukmo",
+"acc": 75.01,
+"rank": 9
+},
+{
+"day": "2026-08-21",
+"source": "harmonie",
+"acc": 74.63,
+"rank": 10
+},
+{
+"day": "2026-08-22",
+"source": "ukmo",
+"acc": 88.78,
+"rank": 1
+},
+{
+"day": "2026-08-22",
+"source": "blend",
+"acc": 87.74,
+"rank": 2
+},
+{
+"day": "2026-08-22",
+"source": "knmi",
+"acc": 87.5,
+"rank": 3
+},
+{
+"day": "2026-08-22",
+"source": "ifs",
+"acc": 87.43,
+"rank": 4
+},
+{
+"day": "2026-08-22",
+"source": "harmonie",
+"acc": 86.88,
+"rank": 5
+},
+{
+"day": "2026-08-22",
+"source": "aifs",
+"acc": 85.88,
+"rank": 6
+},
+{
+"day": "2026-08-22",
+"source": "icon",
+"acc": 84.78,
+"rank": 7
+},
+{
+"day": "2026-08-22",
+"source": "gfs",
+"acc": 84.55,
+"rank": 8
+},
+{
+"day": "2026-08-22",
+"source": "energinet",
+"acc": 82.9,
+"rank": 9
+},
+{
+"day": "2026-08-22",
+"source": "icon_d2",
+"acc": 82.32,
+"rank": 10
+},
+{
+"day": "2026-08-23",
+"source": "ukmo",
+"acc": 84.25,
+"rank": 1
+},
+{
+"day": "2026-08-23",
+"source": "gfs",
+"acc": 84.14,
+"rank": 2
+},
+{
+"day": "2026-08-23",
+"source": "aifs",
+"acc": 83.24,
+"rank": 3
+},
+{
+"day": "2026-08-23",
+"source": "blend",
+"acc": 83.23,
+"rank": 4
+},
+{
+"day": "2026-08-23",
+"source": "ifs",
+"acc": 82.98,
+"rank": 5
+},
+{
+"day": "2026-08-23",
+"source": "knmi",
+"acc": 82.39,
+"rank": 6
+},
+{
+"day": "2026-08-23",
+"source": "icon",
+"acc": 80.77,
+"rank": 7
+},
+{
+"day": "2026-08-23",
+"source": "harmonie",
+"acc": 80.54,
+"rank": 8
+},
+{
+"day": "2026-08-23",
+"source": "energinet",
+"acc": 79.64,
+"rank": 9
+},
+{
+"day": "2026-08-23",
+"source": "icon_d2",
+"acc": 79.11,
+"rank": 10
+},
+{
+"day": "2026-08-24",
+"source": "icon_d2",
+"acc": 71.63,
+"rank": 1
+},
+{
+"day": "2026-08-24",
+"source": "energinet",
+"acc": 71.16,
+"rank": 2
+},
+{
+"day": "2026-08-24",
+"source": "blend",
+"acc": 70.46,
+"rank": 3
+},
+{
+"day": "2026-08-24",
+"source": "harmonie",
+"acc": 68.4,
+"rank": 4
+},
+{
+"day": "2026-08-24",
+"source": "ifs",
+"acc": 68.36,
+"rank": 5
+},
+{
+"day": "2026-08-24",
+"source": "icon",
+"acc": 68.17,
+"rank": 6
+},
+{
+"day": "2026-08-24",
+"source": "knmi",
+"acc": 65.81,
+"rank": 7
+},
+{
+"day": "2026-08-24",
+"source": "aifs",
+"acc": 65.63,
+"rank": 8
+},
+{
+"day": "2026-08-24",
+"source": "gfs",
+"acc": 56.5,
+"rank": 9
+},
+{
+"day": "2026-08-24",
+"source": "ukmo",
+"acc": 52.99,
+"rank": 10
+},
+{
+"day": "2026-08-25",
+"source": "ifs",
+"acc": 72.68,
+"rank": 1
+},
+{
+"day": "2026-08-25",
+"source": "blend",
+"acc": 70.87,
+"rank": 2
+},
+{
+"day": "2026-08-25",
+"source": "aifs",
+"acc": 67.34,
+"rank": 3
+},
+{
+"day": "2026-08-25",
+"source": "ukmo",
+"acc": 67.16,
+"rank": 4
+},
+{
+"day": "2026-08-25",
+"source": "harmonie",
+"acc": 65.48,
+"rank": 5
+},
+{
+"day": "2026-08-25",
+"source": "gfs",
+"acc": 63.14,
+"rank": 6
+},
+{
+"day": "2026-08-25",
+"source": "knmi",
+"acc": 61.99,
+"rank": 7
+},
+{
+"day": "2026-08-25",
+"source": "icon",
+"acc": 57.0,
+"rank": 8
+},
+{
+"day": "2026-08-25",
+"source": "icon_d2",
+"acc": 53.14,
+"rank": 9
+},
+{
+"day": "2026-08-25",
+"source": "energinet",
+"acc": 51.11,
+"rank": 10
+},
+{
+"day": "2026-08-26",
+"source": "ifs",
+"acc": 85.04,
+"rank": 1
+},
+{
+"day": "2026-08-26",
+"source": "blend",
+"acc": 84.26,
+"rank": 2
+},
+{
+"day": "2026-08-26",
+"source": "aifs",
+"acc": 81.57,
+"rank": 3
+},
+{
+"day": "2026-08-26",
+"source": "icon_d2",
+"acc": 80.88,
+"rank": 4
+},
+{
+"day": "2026-08-26",
+"source": "icon",
+"acc": 79.72,
+"rank": 5
+},
+{
+"day": "2026-08-26",
+"source": "energinet",
+"acc": 77.78,
+"rank": 6
+},
+{
+"day": "2026-08-26",
+"source": "knmi",
+"acc": 75.31,
+"rank": 7
+},
+{
+"day": "2026-08-26",
+"source": "harmonie",
+"acc": 75.03,
+"rank": 8
+},
+{
+"day": "2026-08-26",
+"source": "ukmo",
+"acc": 74.31,
+"rank": 9
+},
+{
+"day": "2026-08-26",
+"source": "gfs",
+"acc": 72.85,
+"rank": 10
+},
+{
+"day": "2026-08-27",
+"source": "ifs",
+"acc": 86.65,
+"rank": 1
+},
+{
+"day": "2026-08-27",
+"source": "blend",
+"acc": 84.75,
+"rank": 2
+},
+{
+"day": "2026-08-27",
+"source": "aifs",
+"acc": 84.74,
+"rank": 3
+},
+{
+"day": "2026-08-27",
+"source": "icon_d2",
+"acc": 84.46,
+"rank": 4
+},
+{
+"day": "2026-08-27",
+"source": "energinet",
+"acc": 83.83,
+"rank": 5
+},
+{
+"day": "2026-08-27",
+"source": "gfs",
+"acc": 82.87,
+"rank": 6
+},
+{
+"day": "2026-08-27",
+"source": "knmi",
+"acc": 82.81,
+"rank": 7
+},
+{
+"day": "2026-08-27",
+"source": "ukmo",
+"acc": 82.74,
+"rank": 8
+},
+{
+"day": "2026-08-27",
+"source": "harmonie",
+"acc": 82.14,
+"rank": 9
+},
+{
+"day": "2026-08-27",
+"source": "icon",
+"acc": 81.73,
+"rank": 10
+},
+{
+"day": "2026-08-28",
+"source": "ifs",
+"acc": 81.79,
+"rank": 1
+},
+{
+"day": "2026-08-28",
+"source": "blend",
+"acc": 79.86,
+"rank": 2
+},
+{
+"day": "2026-08-28",
+"source": "icon_d2",
+"acc": 79.78,
+"rank": 3
+},
+{
+"day": "2026-08-28",
+"source": "energinet",
+"acc": 79.52,
+"rank": 4
+},
+{
+"day": "2026-08-28",
+"source": "icon",
+"acc": 77.83,
+"rank": 5
+},
+{
+"day": "2026-08-28",
+"source": "harmonie",
+"acc": 77.61,
+"rank": 6
+},
+{
+"day": "2026-08-28",
+"source": "aifs",
+"acc": 77.59,
+"rank": 7
+},
+{
+"day": "2026-08-28",
+"source": "gfs",
+"acc": 77.48,
+"rank": 8
+},
+{
+"day": "2026-08-28",
+"source": "ukmo",
+"acc": 76.13,
+"rank": 9
+},
+{
+"day": "2026-08-28",
+"source": "knmi",
+"acc": 74.4,
+"rank": 10
+},
+{
+"day": "2026-08-29",
+"source": "gfs",
+"acc": 81.06,
+"rank": 1
+},
+{
+"day": "2026-08-29",
+"source": "energinet",
+"acc": 79.78,
+"rank": 2
+},
+{
+"day": "2026-08-29",
+"source": "icon_d2",
+"acc": 79.39,
+"rank": 3
+},
+{
+"day": "2026-08-29",
+"source": "ifs",
+"acc": 79.21,
+"rank": 4
+},
+{
+"day": "2026-08-29",
+"source": "blend",
+"acc": 79.18,
+"rank": 5
+},
+{
+"day": "2026-08-29",
+"source": "icon",
+"acc": 78.88,
+"rank": 6
+},
+{
+"day": "2026-08-29",
+"source": "aifs",
+"acc": 78.49,
+"rank": 7
+},
+{
+"day": "2026-08-29",
+"source": "knmi",
+"acc": 77.73,
+"rank": 8
+},
+{
+"day": "2026-08-29",
+"source": "harmonie",
+"acc": 75.27,
+"rank": 9
+},
+{
+"day": "2026-08-29",
+"source": "ukmo",
+"acc": 73.6,
+"rank": 10
+},
+{
+"day": "2026-08-30",
+"source": "ifs",
+"acc": 77.77,
+"rank": 1
+},
+{
+"day": "2026-08-30",
+"source": "aifs",
+"acc": 76.52,
+"rank": 2
+},
+{
+"day": "2026-08-30",
+"source": "blend",
+"acc": 74.54,
+"rank": 3
+},
+{
+"day": "2026-08-30",
+"source": "ukmo",
+"acc": 71.13,
+"rank": 4
+},
+{
+"day": "2026-08-30",
+"source": "icon",
+"acc": 70.36,
+"rank": 5
+},
+{
+"day": "2026-08-30",
+"source": "energinet",
+"acc": 70.13,
+"rank": 6
+},
+{
+"day": "2026-08-30",
+"source": "icon_d2",
+"acc": 69.38,
+"rank": 7
+},
+{
+"day": "2026-08-30",
+"source": "knmi",
+"acc": 68.91,
+"rank": 8
+},
+{
+"day": "2026-08-30",
+"source": "gfs",
+"acc": 67.97,
+"rank": 9
+},
+{
+"day": "2026-08-30",
+"source": "harmonie",
+"acc": 64.12,
+"rank": 10
+},
+{
+"day": "2026-08-31",
+"source": "aifs",
+"acc": 54.88,
+"rank": 1
+},
+{
+"day": "2026-08-31",
+"source": "ukmo",
+"acc": 47.22,
+"rank": 2
+},
+{
+"day": "2026-08-31",
+"source": "ifs",
+"acc": 45.68,
+"rank": 3
+},
+{
+"day": "2026-08-31",
+"source": "blend",
+"acc": 33.49,
+"rank": 4
+},
+{
+"day": "2026-08-31",
+"source": "icon",
+"acc": 25.53,
+"rank": 5
+},
+{
+"day": "2026-08-31",
+"source": "knmi",
+"acc": 14.74,
+"rank": 6
+},
+{
+"day": "2026-08-31",
+"source": "harmonie",
+"acc": -8.05,
+"rank": 7
+},
+{
+"day": "2026-08-31",
+"source": "icon_d2",
+"acc": -9.78,
+"rank": 8
+},
+{
+"day": "2026-08-31",
+"source": "energinet",
+"acc": -36.83,
+"rank": 9
+},
+{
+"day": "2026-08-31",
+"source": "gfs",
+"acc": -51.17,
+"rank": 10
+},
+{
+"day": "2026-09-01",
+"source": "ifs",
+"acc": 85.24,
+"rank": 1
+},
+{
+"day": "2026-09-01",
+"source": "blend",
+"acc": 83.56,
+"rank": 2
+},
+{
+"day": "2026-09-01",
+"source": "aifs",
+"acc": 81.69,
+"rank": 3
+},
+{
+"day": "2026-09-01",
+"source": "icon",
+"acc": 81.49,
+"rank": 4
+},
+{
+"day": "2026-09-01",
+"source": "ukmo",
+"acc": 81.49,
+"rank": 5
+},
+{
+"day": "2026-09-01",
+"source": "gfs",
+"acc": 79.75,
+"rank": 6
+},
+{
+"day": "2026-09-01",
+"source": "harmonie",
+"acc": 76.03,
+"rank": 7
+},
+{
+"day": "2026-09-01",
+"source": "energinet",
+"acc": 74.58,
+"rank": 8
+},
+{
+"day": "2026-09-01",
+"source": "knmi",
+"acc": 73.02,
+"rank": 9
+},
+{
+"day": "2026-09-01",
+"source": "icon_d2",
+"acc": 70.56,
+"rank": 10
+},
+{
+"day": "2026-09-02",
+"source": "ifs",
+"acc": 86.51,
+"rank": 1
+},
+{
+"day": "2026-09-02",
+"source": "ukmo",
+"acc": 85.8,
+"rank": 2
+},
+{
+"day": "2026-09-02",
+"source": "blend",
+"acc": 84.63,
+"rank": 3
+},
+{
+"day": "2026-09-02",
+"source": "aifs",
+"acc": 83.7,
+"rank": 4
+},
+{
+"day": "2026-09-02",
+"source": "energinet",
+"acc": 83.3,
+"rank": 5
+},
+{
+"day": "2026-09-02",
+"source": "icon_d2",
+"acc": 83.28,
+"rank": 6
+},
+{
+"day": "2026-09-02",
+"source": "gfs",
+"acc": 82.95,
+"rank": 7
+},
+{
+"day": "2026-09-02",
+"source": "knmi",
+"acc": 81.74,
+"rank": 8
+},
+{
+"day": "2026-09-02",
+"source": "harmonie",
+"acc": 81.66,
+"rank": 9
+},
+{
+"day": "2026-09-02",
+"source": "icon",
+"acc": 80.94,
+"rank": 10
+},
+{
+"day": "2026-09-03",
+"source": "ukmo",
+"acc": 78.25,
+"rank": 1
+},
+{
+"day": "2026-09-03",
+"source": "blend",
+"acc": 76.92,
+"rank": 2
+},
+{
+"day": "2026-09-03",
+"source": "icon_d2",
+"acc": 76.05,
+"rank": 3
+},
+{
+"day": "2026-09-03",
+"source": "harmonie",
+"acc": 75.61,
+"rank": 4
+},
+{
+"day": "2026-09-03",
+"source": "ifs",
+"acc": 74.48,
+"rank": 5
+},
+{
+"day": "2026-09-03",
+"source": "energinet",
+"acc": 73.9,
+"rank": 6
+},
+{
+"day": "2026-09-03",
+"source": "aifs",
+"acc": 73.62,
+"rank": 7
+},
+{
+"day": "2026-09-03",
+"source": "gfs",
+"acc": 72.59,
+"rank": 8
+},
+{
+"day": "2026-09-03",
+"source": "icon",
+"acc": 70.61,
+"rank": 9
+},
+{
+"day": "2026-09-03",
+"source": "knmi",
+"acc": 70.45,
+"rank": 10
+},
+{
+"day": "2026-09-04",
+"source": "blend",
+"acc": 83.43,
+"rank": 1
+},
+{
+"day": "2026-09-04",
+"source": "ifs",
+"acc": 83.34,
+"rank": 2
+},
+{
+"day": "2026-09-04",
+"source": "aifs",
+"acc": 81.64,
+"rank": 3
+},
+{
+"day": "2026-09-04",
+"source": "gfs",
+"acc": 81.04,
+"rank": 4
+},
+{
+"day": "2026-09-04",
+"source": "knmi",
+"acc": 80.78,
+"rank": 5
+},
+{
+"day": "2026-09-04",
+"source": "harmonie",
+"acc": 79.66,
+"rank": 6
+},
+{
+"day": "2026-09-04",
+"source": "ukmo",
+"acc": 77.12,
+"rank": 7
+},
+{
+"day": "2026-09-04",
+"source": "icon",
+"acc": 76.31,
+"rank": 8
+},
+{
+"day": "2026-09-04",
+"source": "icon_d2",
+"acc": 75.9,
+"rank": 9
+},
+{
+"day": "2026-09-04",
+"source": "energinet",
+"acc": 71.59,
+"rank": 10
+},
+{
+"day": "2026-09-05",
+"source": "aifs",
+"acc": 87.46,
+"rank": 1
+},
+{
+"day": "2026-09-05",
+"source": "ifs",
+"acc": 86.63,
+"rank": 2
+},
+{
+"day": "2026-09-05",
+"source": "blend",
+"acc": 86.39,
+"rank": 3
+},
+{
+"day": "2026-09-05",
+"source": "gfs",
+"acc": 86.28,
+"rank": 4
+},
+{
+"day": "2026-09-05",
+"source": "icon_d2",
+"acc": 86.16,
+"rank": 5
+},
+{
+"day": "2026-09-05",
+"source": "icon",
+"acc": 85.17,
+"rank": 6
+},
+{
+"day": "2026-09-05",
+"source": "knmi",
+"acc": 84.57,
+"rank": 7
+},
+{
+"day": "2026-09-05",
+"source": "ukmo",
+"acc": 83.85,
+"rank": 8
+},
+{
+"day": "2026-09-05",
+"source": "harmonie",
+"acc": 83.8,
+"rank": 9
+},
+{
+"day": "2026-09-05",
+"source": "energinet",
+"acc": 82.45,
+"rank": 10
+},
+{
+"day": "2026-09-06",
+"source": "gfs",
+"acc": 87.43,
+"rank": 1
+},
+{
+"day": "2026-09-06",
+"source": "harmonie",
+"acc": 86.01,
+"rank": 2
+},
+{
+"day": "2026-09-06",
+"source": "blend",
+"acc": 85.97,
+"rank": 3
+},
+{
+"day": "2026-09-06",
+"source": "knmi",
+"acc": 85.62,
+"rank": 4
+},
+{
+"day": "2026-09-06",
+"source": "aifs",
+"acc": 84.83,
+"rank": 5
+},
+{
+"day": "2026-09-06",
+"source": "icon",
+"acc": 84.63,
+"rank": 6
+},
+{
+"day": "2026-09-06",
+"source": "icon_d2",
+"acc": 83.93,
+"rank": 7
+},
+{
+"day": "2026-09-06",
+"source": "ifs",
+"acc": 83.04,
+"rank": 8
+},
+{
+"day": "2026-09-06",
+"source": "ukmo",
+"acc": 81.73,
+"rank": 9
+},
+{
+"day": "2026-09-06",
+"source": "energinet",
+"acc": 79.01,
+"rank": 10
+},
+{
+"day": "2026-09-07",
+"source": "harmonie",
+"acc": 83.82,
+"rank": 1
+},
+{
+"day": "2026-09-07",
+"source": "energinet",
+"acc": 82.32,
+"rank": 2
+},
+{
+"day": "2026-09-07",
+"source": "knmi",
+"acc": 82.14,
+"rank": 3
+},
+{
+"day": "2026-09-07",
+"source": "blend",
+"acc": 81.6,
+"rank": 4
+},
+{
+"day": "2026-09-07",
+"source": "ifs",
+"acc": 81.45,
+"rank": 5
+},
+{
+"day": "2026-09-07",
+"source": "aifs",
+"acc": 80.1,
+"rank": 6
+},
+{
+"day": "2026-09-07",
+"source": "gfs",
+"acc": 79.25,
+"rank": 7
+},
+{
+"day": "2026-09-07",
+"source": "ukmo",
+"acc": 77.6,
+"rank": 8
+},
+{
+"day": "2026-09-07",
+"source": "icon_d2",
+"acc": 76.95,
+"rank": 9
+},
+{
+"day": "2026-09-07",
+"source": "icon",
+"acc": 72.06,
+"rank": 10
+},
+{
+"day": "2026-09-08",
+"source": "ifs",
+"acc": 77.68,
+"rank": 1
+},
+{
+"day": "2026-09-08",
+"source": "blend",
+"acc": 75.17,
+"rank": 2
+},
+{
+"day": "2026-09-08",
+"source": "aifs",
+"acc": 72.29,
+"rank": 3
+},
+{
+"day": "2026-09-08",
+"source": "energinet",
+"acc": 69.7,
+"rank": 4
+},
+{
+"day": "2026-09-08",
+"source": "harmonie",
+"acc": 69.06,
+"rank": 5
+},
+{
+"day": "2026-09-08",
+"source": "icon",
+"acc": 68.89,
+"rank": 6
+},
+{
+"day": "2026-09-08",
+"source": "gfs",
+"acc": 66.96,
+"rank": 7
+},
+{
+"day": "2026-09-08",
+"source": "ukmo",
+"acc": 66.66,
+"rank": 8
+},
+{
+"day": "2026-09-08",
+"source": "icon_d2",
+"acc": 66.46,
+"rank": 9
+},
+{
+"day": "2026-09-08",
+"source": "knmi",
+"acc": 66.02,
+"rank": 10
+},
+{
+"day": "2026-09-09",
+"source": "aifs",
+"acc": 77.89,
+"rank": 1
+},
+{
+"day": "2026-09-09",
+"source": "ifs",
+"acc": 77.57,
+"rank": 2
+},
+{
+"day": "2026-09-09",
+"source": "blend",
+"acc": 77.44,
+"rank": 3
+},
+{
+"day": "2026-09-09",
+"source": "icon_d2",
+"acc": 76.53,
+"rank": 4
+},
+{
+"day": "2026-09-09",
+"source": "ukmo",
+"acc": 76.09,
+"rank": 5
+},
+{
+"day": "2026-09-09",
+"source": "knmi",
+"acc": 72.95,
+"rank": 6
+},
+{
+"day": "2026-09-09",
+"source": "harmonie",
+"acc": 72.16,
+"rank": 7
+},
+{
+"day": "2026-09-09",
+"source": "icon",
+"acc": 72.08,
+"rank": 8
+},
+{
+"day": "2026-09-09",
+"source": "energinet",
+"acc": 70.64,
+"rank": 9
+},
+{
+"day": "2026-09-09",
+"source": "gfs",
+"acc": 63.05,
+"rank": 10
+},
+{
+"day": "2026-09-10",
+"source": "blend",
+"acc": 85.52,
+"rank": 1
+},
+{
+"day": "2026-09-10",
+"source": "harmonie",
+"acc": 85.31,
+"rank": 2
+},
+{
+"day": "2026-09-10",
+"source": "knmi",
+"acc": 84.73,
+"rank": 3
+},
+{
+"day": "2026-09-10",
+"source": "ifs",
+"acc": 84.42,
+"rank": 4
+},
+{
+"day": "2026-09-10",
+"source": "ukmo",
+"acc": 84.25,
+"rank": 5
+},
+{
+"day": "2026-09-10",
+"source": "aifs",
+"acc": 84.09,
+"rank": 6
+},
+{
+"day": "2026-09-10",
+"source": "gfs",
+"acc": 83.66,
+"rank": 7
+},
+{
+"day": "2026-09-10",
+"source": "icon",
+"acc": 82.23,
+"rank": 8
+},
+{
+"day": "2026-09-10",
+"source": "icon_d2",
+"acc": 81.16,
+"rank": 9
+},
+{
+"day": "2026-09-10",
+"source": "energinet",
+"acc": 78.29,
+"rank": 10
+},
+{
+"day": "2026-09-11",
+"source": "energinet",
+"acc": 84.44,
+"rank": 1
+},
+{
+"day": "2026-09-11",
+"source": "gfs",
+"acc": 84.17,
+"rank": 2
+},
+{
+"day": "2026-09-11",
+"source": "ifs",
+"acc": 83.37,
+"rank": 3
+},
+{
+"day": "2026-09-11",
+"source": "ukmo",
+"acc": 83.1,
+"rank": 4
+},
+{
+"day": "2026-09-11",
+"source": "blend",
+"acc": 83.01,
+"rank": 5
+},
+{
+"day": "2026-09-11",
+"source": "aifs",
+"acc": 82.2,
+"rank": 6
+},
+{
+"day": "2026-09-11",
+"source": "icon_d2",
+"acc": 80.94,
+"rank": 7
+},
+{
+"day": "2026-09-11",
+"source": "harmonie",
+"acc": 79.4,
+"rank": 8
+},
+{
+"day": "2026-09-11",
+"source": "knmi",
+"acc": 78.03,
+"rank": 9
+},
+{
+"day": "2026-09-11",
+"source": "icon",
+"acc": 77.63,
+"rank": 10
+},
+{
+"day": "2026-09-12",
+"source": "ifs",
+"acc": 83.09,
+"rank": 1
+},
+{
+"day": "2026-09-12",
+"source": "aifs",
+"acc": 82.93,
+"rank": 2
+},
+{
+"day": "2026-09-12",
+"source": "blend",
+"acc": 78.9,
+"rank": 3
+},
+{
+"day": "2026-09-12",
+"source": "ukmo",
+"acc": 77.19,
+"rank": 4
+},
+{
+"day": "2026-09-12",
+"source": "gfs",
+"acc": 76.24,
+"rank": 5
+},
+{
+"day": "2026-09-12",
+"source": "knmi",
+"acc": 72.78,
+"rank": 6
+},
+{
+"day": "2026-09-12",
+"source": "energinet",
+"acc": 72.47,
+"rank": 7
+},
+{
+"day": "2026-09-12",
+"source": "harmonie",
+"acc": 70.62,
+"rank": 8
+},
+{
+"day": "2026-09-12",
+"source": "icon_d2",
+"acc": 68.92,
+"rank": 9
+},
+{
+"day": "2026-09-12",
+"source": "icon",
+"acc": 68.87,
+"rank": 10
+},
+{
+"day": "2026-09-13",
+"source": "harmonie",
+"acc": 78.77,
+"rank": 1
+},
+{
+"day": "2026-09-13",
+"source": "ukmo",
+"acc": 78.19,
+"rank": 2
+},
+{
+"day": "2026-09-13",
+"source": "gfs",
+"acc": 76.9,
+"rank": 3
+},
+{
+"day": "2026-09-13",
+"source": "blend",
+"acc": 76.51,
+"rank": 4
+},
+{
+"day": "2026-09-13",
+"source": "energinet",
+"acc": 76.35,
+"rank": 5
+},
+{
+"day": "2026-09-13",
+"source": "ifs",
+"acc": 75.92,
+"rank": 6
+},
+{
+"day": "2026-09-13",
+"source": "knmi",
+"acc": 75.46,
+"rank": 7
+},
+{
+"day": "2026-09-13",
+"source": "icon_d2",
+"acc": 75.32,
+"rank": 8
+},
+{
+"day": "2026-09-13",
+"source": "icon",
+"acc": 73.32,
+"rank": 9
+},
+{
+"day": "2026-09-13",
+"source": "aifs",
+"acc": 72.98,
+"rank": 10
+},
+{
+"day": "2026-09-14",
+"source": "gfs",
+"acc": 81.01,
+"rank": 1
+},
+{
+"day": "2026-09-14",
+"source": "ifs",
+"acc": 80.3,
+"rank": 2
+},
+{
+"day": "2026-09-14",
+"source": "blend",
+"acc": 78.9,
+"rank": 3
+},
+{
+"day": "2026-09-14",
+"source": "energinet",
+"acc": 78.3,
+"rank": 4
+},
+{
+"day": "2026-09-14",
+"source": "aifs",
+"acc": 77.91,
+"rank": 5
+},
+{
+"day": "2026-09-14",
+"source": "icon",
+"acc": 74.26,
+"rank": 6
+},
+{
+"day": "2026-09-14",
+"source": "ukmo",
+"acc": 73.58,
+"rank": 7
+},
+{
+"day": "2026-09-14",
+"source": "knmi",
+"acc": 72.58,
+"rank": 8
+},
+{
+"day": "2026-09-14",
+"source": "harmonie",
+"acc": 71.62,
+"rank": 9
+},
+{
+"day": "2026-09-14",
+"source": "icon_d2",
+"acc": 71.45,
+"rank": 10
+},
+{
+"day": "2026-09-15",
+"source": "aifs",
+"acc": 81.72,
+"rank": 1
+},
+{
+"day": "2026-09-15",
+"source": "blend",
+"acc": 80.96,
+"rank": 2
+},
+{
+"day": "2026-09-15",
+"source": "icon_d2",
+"acc": 79.72,
+"rank": 3
+},
+{
+"day": "2026-09-15",
+"source": "gfs",
+"acc": 79.69,
+"rank": 4
+},
+{
+"day": "2026-09-15",
+"source": "ifs",
+"acc": 79.05,
+"rank": 5
+},
+{
+"day": "2026-09-15",
+"source": "energinet",
+"acc": 78.05,
+"rank": 6
+},
+{
+"day": "2026-09-15",
+"source": "icon",
+"acc": 77.98,
+"rank": 7
+},
+{
+"day": "2026-09-15",
+"source": "harmonie",
+"acc": 77.59,
+"rank": 8
+},
+{
+"day": "2026-09-15",
+"source": "knmi",
+"acc": 76.73,
+"rank": 9
+},
+{
+"day": "2026-09-15",
+"source": "ukmo",
+"acc": 72.42,
+"rank": 10
+},
+{
+"day": "2026-09-16",
+"source": "ukmo",
+"acc": 86.12,
+"rank": 1
+},
+{
+"day": "2026-09-16",
+"source": "aifs",
+"acc": 82.71,
+"rank": 2
+},
+{
+"day": "2026-09-16",
+"source": "knmi",
+"acc": 80.74,
+"rank": 3
+},
+{
+"day": "2026-09-16",
+"source": "harmonie",
+"acc": 80.19,
+"rank": 4
+},
+{
+"day": "2026-09-16",
+"source": "blend",
+"acc": 80.1,
+"rank": 5
+},
+{
+"day": "2026-09-16",
+"source": "icon_d2",
+"acc": 79.35,
+"rank": 6
+},
+{
+"day": "2026-09-16",
+"source": "ifs",
+"acc": 79.23,
+"rank": 7
+},
+{
+"day": "2026-09-16",
+"source": "energinet",
+"acc": 78.31,
+"rank": 8
+},
+{
+"day": "2026-09-16",
+"source": "gfs",
+"acc": 76.49,
+"rank": 9
+},
+{
+"day": "2026-09-16",
+"source": "icon",
+"acc": 74.67,
+"rank": 10
+},
+{
+"day": "2026-09-17",
+"source": "ukmo",
+"acc": 87.19,
+"rank": 1
+},
+{
+"day": "2026-09-17",
+"source": "aifs",
+"acc": 82.57,
+"rank": 2
+},
+{
+"day": "2026-09-17",
+"source": "energinet",
+"acc": 82.39,
+"rank": 3
+},
+{
+"day": "2026-09-17",
+"source": "gfs",
+"acc": 82.27,
+"rank": 4
+},
+{
+"day": "2026-09-17",
+"source": "ifs",
+"acc": 82.17,
+"rank": 5
+},
+{
+"day": "2026-09-17",
+"source": "blend",
+"acc": 82.12,
+"rank": 6
+},
+{
+"day": "2026-09-17",
+"source": "icon_d2",
+"acc": 80.9,
+"rank": 7
+},
+{
+"day": "2026-09-17",
+"source": "harmonie",
+"acc": 80.04,
+"rank": 8
+},
+{
+"day": "2026-09-17",
+"source": "knmi",
+"acc": 79.66,
+"rank": 9
+},
+{
+"day": "2026-09-17",
+"source": "icon",
+"acc": 78.04,
+"rank": 10
+},
+{
+"day": "2026-09-18",
+"source": "ifs",
+"acc": 87.93,
+"rank": 1
+},
+{
+"day": "2026-09-18",
+"source": "aifs",
+"acc": 86.54,
+"rank": 2
+},
+{
+"day": "2026-09-18",
+"source": "ukmo",
+"acc": 86.53,
+"rank": 3
+},
+{
+"day": "2026-09-18",
+"source": "blend",
+"acc": 86.33,
+"rank": 4
+},
+{
+"day": "2026-09-18",
+"source": "energinet",
+"acc": 86.17,
+"rank": 5
+},
+{
+"day": "2026-09-18",
+"source": "knmi",
+"acc": 85.92,
+"rank": 6
+},
+{
+"day": "2026-09-18",
+"source": "harmonie",
+"acc": 85.52,
+"rank": 7
+},
+{
+"day": "2026-09-18",
+"source": "gfs",
+"acc": 84.04,
+"rank": 8
+},
+{
+"day": "2026-09-18",
+"source": "icon_d2",
+"acc": 82.77,
+"rank": 9
+},
+{
+"day": "2026-09-18",
+"source": "icon",
+"acc": 82.2,
+"rank": 10
+},
+{
+"day": "2026-09-19",
+"source": "ifs",
+"acc": 84.74,
+"rank": 1
+},
+{
+"day": "2026-09-19",
+"source": "blend",
+"acc": 84.29,
+"rank": 2
+},
+{
+"day": "2026-09-19",
+"source": "harmonie",
+"acc": 83.23,
+"rank": 3
+},
+{
+"day": "2026-09-19",
+"source": "ukmo",
+"acc": 83.1,
+"rank": 4
+},
+{
+"day": "2026-09-19",
+"source": "gfs",
+"acc": 82.71,
+"rank": 5
+},
+{
+"day": "2026-09-19",
+"source": "aifs",
+"acc": 82.25,
+"rank": 6
+},
+{
+"day": "2026-09-19",
+"source": "icon_d2",
+"acc": 82.17,
+"rank": 7
+},
+{
+"day": "2026-09-19",
+"source": "icon",
+"acc": 81.29,
+"rank": 8
+},
+{
+"day": "2026-09-19",
+"source": "knmi",
+"acc": 81.02,
+"rank": 9
+},
+{
+"day": "2026-09-19",
+"source": "energinet",
+"acc": 79.52,
+"rank": 10
+},
+{
+"day": "2026-09-20",
+"source": "ukmo",
+"acc": 82.86,
+"rank": 1
+},
+{
+"day": "2026-09-20",
+"source": "aifs",
+"acc": 82.46,
+"rank": 2
+},
+{
+"day": "2026-09-20",
+"source": "ifs",
+"acc": 82.12,
+"rank": 3
+},
+{
+"day": "2026-09-20",
+"source": "gfs",
+"acc": 81.77,
+"rank": 4
+},
+{
+"day": "2026-09-20",
+"source": "blend",
+"acc": 81.32,
+"rank": 5
+},
+{
+"day": "2026-09-20",
+"source": "energinet",
+"acc": 80.74,
+"rank": 6
+},
+{
+"day": "2026-09-20",
+"source": "harmonie",
+"acc": 79.86,
+"rank": 7
+},
+{
+"day": "2026-09-20",
+"source": "knmi",
+"acc": 79.65,
+"rank": 8
+},
+{
+"day": "2026-09-20",
+"source": "icon",
+"acc": 79.44,
+"rank": 9
+},
+{
+"day": "2026-09-20",
+"source": "icon_d2",
+"acc": 77.88,
+"rank": 10
+},
+{
+"day": "2026-09-21",
+"source": "aifs",
+"acc": 90.3,
+"rank": 1
+},
+{
+"day": "2026-09-21",
+"source": "blend",
+"acc": 89.81,
+"rank": 2
+},
+{
+"day": "2026-09-21",
+"source": "ukmo",
+"acc": 89.79,
+"rank": 3
+},
+{
+"day": "2026-09-21",
+"source": "harmonie",
+"acc": 89.31,
+"rank": 4
+},
+{
+"day": "2026-09-21",
+"source": "energinet",
+"acc": 89.19,
+"rank": 5
+},
+{
+"day": "2026-09-21",
+"source": "ifs",
+"acc": 89.07,
+"rank": 6
+},
+{
+"day": "2026-09-21",
+"source": "knmi",
+"acc": 87.7,
+"rank": 7
+},
+{
+"day": "2026-09-21",
+"source": "icon_d2",
+"acc": 87.47,
+"rank": 8
+},
+{
+"day": "2026-09-21",
+"source": "icon",
+"acc": 86.93,
+"rank": 9
+},
+{
+"day": "2026-09-21",
+"source": "gfs",
+"acc": 86.88,
+"rank": 10
+},
+{
+"day": "2026-09-22",
+"source": "blend",
+"acc": 72.28,
+"rank": 1
+},
+{
+"day": "2026-09-22",
+"source": "ifs",
+"acc": 71.3,
+"rank": 2
+},
+{
+"day": "2026-09-22",
+"source": "aifs",
+"acc": 70.37,
+"rank": 3
+},
+{
+"day": "2026-09-22",
+"source": "icon_d2",
+"acc": 67.22,
+"rank": 4
+},
+{
+"day": "2026-09-22",
+"source": "gfs",
+"acc": 65.01,
+"rank": 5
+},
+{
+"day": "2026-09-22",
+"source": "icon",
+"acc": 63.86,
+"rank": 6
+},
+{
+"day": "2026-09-22",
+"source": "harmonie",
+"acc": 63.39,
+"rank": 7
+},
+{
+"day": "2026-09-22",
+"source": "knmi",
+"acc": 60.04,
+"rank": 8
+},
+{
+"day": "2026-09-22",
+"source": "ukmo",
+"acc": 57.24,
+"rank": 9
+},
+{
+"day": "2026-09-22",
+"source": "energinet",
+"acc": 37.37,
+"rank": 10
+},
+{
+"day": "2026-09-23",
+"source": "ifs",
+"acc": 77.13,
+"rank": 1
+},
+{
+"day": "2026-09-23",
+"source": "aifs",
+"acc": 75.27,
+"rank": 2
+},
+{
+"day": "2026-09-23",
+"source": "icon_d2",
+"acc": 74.54,
+"rank": 3
+},
+{
+"day": "2026-09-23",
+"source": "energinet",
+"acc": 74.27,
+"rank": 4
+},
+{
+"day": "2026-09-23",
+"source": "blend",
+"acc": 73.24,
+"rank": 5
+},
+{
+"day": "2026-09-23",
+"source": "gfs",
+"acc": 70.86,
+"rank": 6
+},
+{
+"day": "2026-09-23",
+"source": "icon",
+"acc": 67.95,
+"rank": 7
+},
+{
+"day": "2026-09-23",
+"source": "knmi",
+"acc": 58.84,
+"rank": 8
+},
+{
+"day": "2026-09-23",
+"source": "ukmo",
+"acc": 58.36,
+"rank": 9
+},
+{
+"day": "2026-09-23",
+"source": "harmonie",
+"acc": 57.68,
+"rank": 10
+},
+{
+"day": "2026-09-24",
+"source": "aifs",
+"acc": 79.51,
+"rank": 1
+},
+{
+"day": "2026-09-24",
+"source": "ifs",
+"acc": 78.18,
+"rank": 2
+},
+{
+"day": "2026-09-24",
+"source": "energinet",
+"acc": 78.12,
+"rank": 3
+},
+{
+"day": "2026-09-24",
+"source": "ukmo",
+"acc": 75.61,
+"rank": 4
+},
+{
+"day": "2026-09-24",
+"source": "blend",
+"acc": 74.74,
+"rank": 5
+},
+{
+"day": "2026-09-24",
+"source": "gfs",
+"acc": 71.41,
+"rank": 6
+},
+{
+"day": "2026-09-24",
+"source": "icon_d2",
+"acc": 70.19,
+"rank": 7
+},
+{
+"day": "2026-09-24",
+"source": "icon",
+"acc": 68.46,
+"rank": 8
+},
+{
+"day": "2026-09-24",
+"source": "knmi",
+"acc": 61.89,
+"rank": 9
+},
+{
+"day": "2026-09-24",
+"source": "harmonie",
+"acc": 59.52,
+"rank": 10
+},
+{
+"day": "2026-09-25",
+"source": "energinet",
+"acc": 80.83,
+"rank": 1
+},
+{
+"day": "2026-09-25",
+"source": "ifs",
+"acc": 80.23,
+"rank": 2
+},
+{
+"day": "2026-09-25",
+"source": "ukmo",
+"acc": 79.57,
+"rank": 3
+},
+{
+"day": "2026-09-25",
+"source": "blend",
+"acc": 79.41,
+"rank": 4
+},
+{
+"day": "2026-09-25",
+"source": "aifs",
+"acc": 78.51,
+"rank": 5
+},
+{
+"day": "2026-09-25",
+"source": "harmonie",
+"acc": 75.27,
+"rank": 6
+},
+{
+"day": "2026-09-25",
+"source": "icon_d2",
+"acc": 75.09,
+"rank": 7
+},
+{
+"day": "2026-09-25",
+"source": "gfs",
+"acc": 74.63,
+"rank": 8
+},
+{
+"day": "2026-09-25",
+"source": "icon",
+"acc": 73.26,
+"rank": 9
+},
+{
+"day": "2026-09-25",
+"source": "knmi",
+"acc": 72.89,
+"rank": 10
+},
+{
+"day": "2026-09-26",
+"source": "energinet",
+"acc": 81.14,
+"rank": 1
+},
+{
+"day": "2026-09-26",
+"source": "ifs",
+"acc": 79.09,
+"rank": 2
+},
+{
+"day": "2026-09-26",
+"source": "knmi",
+"acc": 77.27,
+"rank": 3
+},
+{
+"day": "2026-09-26",
+"source": "blend",
+"acc": 76.75,
+"rank": 4
+},
+{
+"day": "2026-09-26",
+"source": "gfs",
+"acc": 76.47,
+"rank": 5
+},
+{
+"day": "2026-09-26",
+"source": "harmonie",
+"acc": 76.29,
+"rank": 6
+},
+{
+"day": "2026-09-26",
+"source": "aifs",
+"acc": 74.4,
+"rank": 7
+},
+{
+"day": "2026-09-26",
+"source": "ukmo",
+"acc": 72.6,
+"rank": 8
+},
+{
+"day": "2026-09-26",
+"source": "icon_d2",
+"acc": 68.71,
+"rank": 9
+},
+{
+"day": "2026-09-26",
+"source": "icon",
+"acc": 66.35,
+"rank": 10
+},
+{
+"day": "2026-09-27",
+"source": "ifs",
+"acc": 88.37,
+"rank": 1
+},
+{
+"day": "2026-09-27",
+"source": "blend",
+"acc": 87.63,
+"rank": 2
+},
+{
+"day": "2026-09-27",
+"source": "gfs",
+"acc": 86.35,
+"rank": 3
+},
+{
+"day": "2026-09-27",
+"source": "icon_d2",
+"acc": 86.27,
+"rank": 4
+},
+{
+"day": "2026-09-27",
+"source": "harmonie",
+"acc": 85.89,
+"rank": 5
+},
+{
+"day": "2026-09-27",
+"source": "ukmo",
+"acc": 84.43,
+"rank": 6
+},
+{
+"day": "2026-09-27",
+"source": "icon",
+"acc": 84.41,
+"rank": 7
+},
+{
+"day": "2026-09-27",
+"source": "aifs",
+"acc": 83.59,
+"rank": 8
+},
+{
+"day": "2026-09-27",
+"source": "knmi",
+"acc": 83.23,
+"rank": 9
+},
+{
+"day": "2026-09-27",
+"source": "energinet",
+"acc": 82.01,
+"rank": 10
+},
+{
+"day": "2026-09-28",
+"source": "gfs",
+"acc": 82.19,
+"rank": 1
+},
+{
+"day": "2026-09-28",
+"source": "icon_d2",
+"acc": 75.7,
+"rank": 2
+},
+{
+"day": "2026-09-28",
+"source": "blend",
+"acc": 74.74,
+"rank": 3
+},
+{
+"day": "2026-09-28",
+"source": "ifs",
+"acc": 73.78,
+"rank": 4
+},
+{
+"day": "2026-09-28",
+"source": "aifs",
+"acc": 72.12,
+"rank": 5
+},
+{
+"day": "2026-09-28",
+"source": "knmi",
+"acc": 71.89,
+"rank": 6
+},
+{
+"day": "2026-09-28",
+"source": "harmonie",
+"acc": 71.13,
+"rank": 7
+},
+{
+"day": "2026-09-28",
+"source": "icon",
+"acc": 70.85,
+"rank": 8
+},
+{
+"day": "2026-09-28",
+"source": "ukmo",
+"acc": 65.85,
+"rank": 9
+},
+{
+"day": "2026-09-28",
+"source": "energinet",
+"acc": 62.39,
+"rank": 10
+},
+{
+"day": "2026-09-29",
+"source": "ifs",
+"acc": 82.16,
+"rank": 1
+},
+{
+"day": "2026-09-29",
+"source": "blend",
+"acc": 80.32,
+"rank": 2
+},
+{
+"day": "2026-09-29",
+"source": "gfs",
+"acc": 79.31,
+"rank": 3
+},
+{
+"day": "2026-09-29",
+"source": "energinet",
+"acc": 78.36,
+"rank": 4
+},
+{
+"day": "2026-09-29",
+"source": "icon_d2",
+"acc": 77.4,
+"rank": 5
+},
+{
+"day": "2026-09-29",
+"source": "aifs",
+"acc": 77.06,
+"rank": 6
+},
+{
+"day": "2026-09-29",
+"source": "knmi",
+"acc": 76.36,
+"rank": 7
+},
+{
+"day": "2026-09-29",
+"source": "harmonie",
+"acc": 75.63,
+"rank": 8
+},
+{
+"day": "2026-09-29",
+"source": "icon",
+"acc": 74.93,
+"rank": 9
+},
+{
+"day": "2026-09-29",
+"source": "ukmo",
+"acc": 73.23,
+"rank": 10
+},
+{
+"day": "2026-09-30",
+"source": "gfs",
+"acc": 89.54,
+"rank": 1
+},
+{
+"day": "2026-09-30",
+"source": "ifs",
+"acc": 89.38,
+"rank": 2
+},
+{
+"day": "2026-09-30",
+"source": "harmonie",
+"acc": 88.44,
+"rank": 3
+},
+{
+"day": "2026-09-30",
+"source": "icon_d2",
+"acc": 87.95,
+"rank": 4
+},
+{
+"day": "2026-09-30",
+"source": "knmi",
+"acc": 87.82,
+"rank": 5
+},
+{
+"day": "2026-09-30",
+"source": "blend",
+"acc": 87.59,
+"rank": 6
+},
+{
+"day": "2026-09-30",
+"source": "energinet",
+"acc": 85.24,
+"rank": 7
+},
+{
+"day": "2026-09-30",
+"source": "icon",
+"acc": 83.74,
+"rank": 8
+},
+{
+"day": "2026-09-30",
+"source": "ukmo",
+"acc": 83.48,
+"rank": 9
+},
+{
+"day": "2026-09-30",
+"source": "aifs",
+"acc": 83.09,
+"rank": 10
+},
+{
+"day": "2026-10-01",
+"source": "blend",
+"acc": 84.19,
+"rank": 1
+},
+{
+"day": "2026-10-01",
+"source": "ifs",
+"acc": 83.95,
+"rank": 2
+},
+{
+"day": "2026-10-01",
+"source": "harmonie",
+"acc": 82.89,
+"rank": 3
+},
+{
+"day": "2026-10-01",
+"source": "icon",
+"acc": 82.57,
+"rank": 4
+},
+{
+"day": "2026-10-01",
+"source": "aifs",
+"acc": 82.43,
+"rank": 5
+},
+{
+"day": "2026-10-01",
+"source": "energinet",
+"acc": 82.16,
+"rank": 6
+},
+{
+"day": "2026-10-01",
+"source": "icon_d2",
+"acc": 81.99,
+"rank": 7
+},
+{
+"day": "2026-10-01",
+"source": "gfs",
+"acc": 81.08,
+"rank": 8
+},
+{
+"day": "2026-10-01",
+"source": "knmi",
+"acc": 80.77,
+"rank": 9
+},
+{
+"day": "2026-10-01",
+"source": "ukmo",
+"acc": 75.33,
+"rank": 10
+},
+{
+"day": "2026-10-02",
+"source": "ukmo",
+"acc": 69.62,
+"rank": 1
+},
+{
+"day": "2026-10-02",
+"source": "blend",
+"acc": 69.01,
+"rank": 2
+},
+{
+"day": "2026-10-02",
+"source": "gfs",
+"acc": 68.72,
+"rank": 3
+},
+{
+"day": "2026-10-02",
+"source": "energinet",
+"acc": 67.81,
+"rank": 4
+},
+{
+"day": "2026-10-02",
+"source": "knmi",
+"acc": 67.49,
+"rank": 5
+},
+{
+"day": "2026-10-02",
+"source": "ifs",
+"acc": 67.4,
+"rank": 6
+},
+{
+"day": "2026-10-02",
+"source": "aifs",
+"acc": 66.67,
+"rank": 7
+},
+{
+"day": "2026-10-02",
+"source": "harmonie",
+"acc": 65.05,
+"rank": 8
+},
+{
+"day": "2026-10-02",
+"source": "icon_d2",
+"acc": 59.54,
+"rank": 9
+},
+{
+"day": "2026-10-02",
+"source": "icon",
+"acc": 54.44,
+"rank": 10
+},
+{
+"day": "2026-10-03",
+"source": "ukmo",
+"acc": 82.78,
+"rank": 1
+},
+{
+"day": "2026-10-03",
+"source": "ifs",
+"acc": 81.21,
+"rank": 2
+},
+{
+"day": "2026-10-03",
+"source": "harmonie",
+"acc": 80.36,
+"rank": 3
+},
+{
+"day": "2026-10-03",
+"source": "blend",
+"acc": 80.35,
+"rank": 4
+},
+{
+"day": "2026-10-03",
+"source": "aifs",
+"acc": 79.6,
+"rank": 5
+},
+{
+"day": "2026-10-03",
+"source": "knmi",
+"acc": 78.58,
+"rank": 6
+},
+{
+"day": "2026-10-03",
+"source": "energinet",
+"acc": 78.13,
+"rank": 7
+},
+{
+"day": "2026-10-03",
+"source": "gfs",
+"acc": 73.7,
+"rank": 8
+},
+{
+"day": "2026-10-03",
+"source": "icon_d2",
+"acc": 72.65,
+"rank": 9
+},
+{
+"day": "2026-10-03",
+"source": "icon",
+"acc": 70.92,
+"rank": 10
+},
+{
+"day": "2026-10-04",
+"source": "ifs",
+"acc": 83.41,
+"rank": 1
+},
+{
+"day": "2026-10-04",
+"source": "blend",
+"acc": 79.01,
+"rank": 2
+},
+{
+"day": "2026-10-04",
+"source": "aifs",
+"acc": 78.69,
+"rank": 3
+},
+{
+"day": "2026-10-04",
+"source": "gfs",
+"acc": 78.27,
+"rank": 4
+},
+{
+"day": "2026-10-04",
+"source": "energinet",
+"acc": 77.8,
+"rank": 5
+},
+{
+"day": "2026-10-04",
+"source": "harmonie",
+"acc": 76.58,
+"rank": 6
+},
+{
+"day": "2026-10-04",
+"source": "ukmo",
+"acc": 76.22,
+"rank": 7
+},
+{
+"day": "2026-10-04",
+"source": "knmi",
+"acc": 75.81,
+"rank": 8
+},
+{
+"day": "2026-10-04",
+"source": "icon",
+"acc": 72.89,
+"rank": 9
+},
+{
+"day": "2026-10-04",
+"source": "icon_d2",
+"acc": 70.33,
+"rank": 10
+},
+{
+"day": "2026-10-05",
+"source": "ifs",
+"acc": 91.05,
+"rank": 1
+},
+{
+"day": "2026-10-05",
+"source": "harmonie",
+"acc": 89.6,
+"rank": 2
+},
+{
+"day": "2026-10-05",
+"source": "blend",
+"acc": 89.6,
+"rank": 3
+},
+{
+"day": "2026-10-05",
+"source": "icon_d2",
+"acc": 89.41,
+"rank": 4
+},
+{
+"day": "2026-10-05",
+"source": "gfs",
+"acc": 89.02,
+"rank": 5
+},
+{
+"day": "2026-10-05",
+"source": "knmi",
+"acc": 88.37,
+"rank": 6
+},
+{
+"day": "2026-10-05",
+"source": "ukmo",
+"acc": 88.09,
+"rank": 7
+},
+{
+"day": "2026-10-05",
+"source": "energinet",
+"acc": 86.92,
+"rank": 8
+},
+{
+"day": "2026-10-05",
+"source": "aifs",
+"acc": 86.83,
+"rank": 9
+},
+{
+"day": "2026-10-05",
+"source": "icon",
+"acc": 86.0,
+"rank": 10
+},
+{
+"day": "2026-10-06",
+"source": "blend",
+"acc": 86.17,
+"rank": 1
+},
+{
+"day": "2026-10-06",
+"source": "aifs",
+"acc": 85.24,
+"rank": 2
+},
+{
+"day": "2026-10-06",
+"source": "gfs",
+"acc": 84.71,
+"rank": 3
+},
+{
+"day": "2026-10-06",
+"source": "ifs",
+"acc": 83.07,
+"rank": 4
+},
+{
+"day": "2026-10-06",
+"source": "icon",
+"acc": 82.93,
+"rank": 5
+},
+{
+"day": "2026-10-06",
+"source": "icon_d2",
+"acc": 82.0,
+"rank": 6
+},
+{
+"day": "2026-10-06",
+"source": "energinet",
+"acc": 78.86,
+"rank": 7
+},
+{
+"day": "2026-10-06",
+"source": "harmonie",
+"acc": 74.27,
+"rank": 8
+},
+{
+"day": "2026-10-06",
+"source": "knmi",
+"acc": 74.03,
+"rank": 9
+},
+{
+"day": "2026-10-06",
+"source": "ukmo",
+"acc": 72.44,
+"rank": 10
+},
+{
+"day": "2026-10-07",
+"source": "blend",
+"acc": 69.56,
+"rank": 1
+},
+{
+"day": "2026-10-07",
+"source": "ifs",
+"acc": 68.73,
+"rank": 2
+},
+{
+"day": "2026-10-07",
+"source": "aifs",
+"acc": 67.87,
+"rank": 3
+},
+{
+"day": "2026-10-07",
+"source": "gfs",
+"acc": 67.81,
+"rank": 4
+},
+{
+"day": "2026-10-07",
+"source": "icon",
+"acc": 62.66,
+"rank": 5
+},
+{
+"day": "2026-10-07",
+"source": "ukmo",
+"acc": 62.34,
+"rank": 6
+},
+{
+"day": "2026-10-07",
+"source": "energinet",
+"acc": 60.57,
+"rank": 7
+},
+{
+"day": "2026-10-07",
+"source": "icon_d2",
+"acc": 58.45,
+"rank": 8
+},
+{
+"day": "2026-10-07",
+"source": "harmonie",
+"acc": 56.53,
+"rank": 9
+},
+{
+"day": "2026-10-07",
+"source": "knmi",
+"acc": 54.47,
+"rank": 10
+},
+{
+"day": "2026-10-08",
+"source": "icon",
+"acc": 83.47,
+"rank": 1
+},
+{
+"day": "2026-10-08",
+"source": "blend",
+"acc": 83.09,
+"rank": 2
+},
+{
+"day": "2026-10-08",
+"source": "icon_d2",
+"acc": 82.98,
+"rank": 3
+},
+{
+"day": "2026-10-08",
+"source": "gfs",
+"acc": 82.85,
+"rank": 4
+},
+{
+"day": "2026-10-08",
+"source": "energinet",
+"acc": 82.53,
+"rank": 5
+},
+{
+"day": "2026-10-08",
+"source": "aifs",
+"acc": 82.34,
+"rank": 6
+},
+{
+"day": "2026-10-08",
+"source": "ifs",
+"acc": 81.37,
+"rank": 7
+},
+{
+"day": "2026-10-08",
+"source": "knmi",
+"acc": 77.94,
+"rank": 8
+},
+{
+"day": "2026-10-08",
+"source": "harmonie",
+"acc": 77.2,
+"rank": 9
+},
+{
+"day": "2026-10-08",
+"source": "ukmo",
+"acc": 71.8,
+"rank": 10
+},
+{
+"day": "2026-10-09",
+"source": "aifs",
+"acc": 87.77,
+"rank": 1
+},
+{
+"day": "2026-10-09",
+"source": "blend",
+"acc": 87.49,
+"rank": 2
+},
+{
+"day": "2026-10-09",
+"source": "ifs",
+"acc": 85.91,
+"rank": 3
+},
+{
+"day": "2026-10-09",
+"source": "icon",
+"acc": 85.05,
+"rank": 4
+},
+{
+"day": "2026-10-09",
+"source": "icon_d2",
+"acc": 84.97,
+"rank": 5
+},
+{
+"day": "2026-10-09",
+"source": "knmi",
+"acc": 84.36,
+"rank": 6
+},
+{
+"day": "2026-10-09",
+"source": "ukmo",
+"acc": 84.28,
+"rank": 7
+},
+{
+"day": "2026-10-09",
+"source": "gfs",
+"acc": 83.67,
+"rank": 8
+},
+{
+"day": "2026-10-09",
+"source": "harmonie",
+"acc": 83.45,
+"rank": 9
+},
+{
+"day": "2026-10-09",
+"source": "energinet",
+"acc": 83.25,
+"rank": 10
+},
+{
+"day": "2026-10-10",
+"source": "blend",
+"acc": 86.03,
+"rank": 1
+},
+{
+"day": "2026-10-10",
+"source": "ifs",
+"acc": 85.99,
+"rank": 2
+},
+{
+"day": "2026-10-10",
+"source": "icon",
+"acc": 84.11,
+"rank": 3
+},
+{
+"day": "2026-10-10",
+"source": "aifs",
+"acc": 83.77,
+"rank": 4
+},
+{
+"day": "2026-10-10",
+"source": "icon_d2",
+"acc": 82.13,
+"rank": 5
+},
+{
+"day": "2026-10-10",
+"source": "knmi",
+"acc": 82.13,
+"rank": 6
+},
+{
+"day": "2026-10-10",
+"source": "harmonie",
+"acc": 80.3,
+"rank": 7
+},
+{
+"day": "2026-10-10",
+"source": "ukmo",
+"acc": 79.65,
+"rank": 8
+},
+{
+"day": "2026-10-10",
+"source": "energinet",
+"acc": 79.0,
+"rank": 9
+},
+{
+"day": "2026-10-10",
+"source": "gfs",
+"acc": 70.82,
+"rank": 10
+},
+{
+"day": "2026-10-11",
+"source": "aifs",
+"acc": 79.19,
+"rank": 1
+},
+{
+"day": "2026-10-11",
+"source": "blend",
+"acc": 77.88,
+"rank": 2
+},
+{
+"day": "2026-10-11",
+"source": "icon_d2",
+"acc": 77.16,
+"rank": 3
+},
+{
+"day": "2026-10-11",
+"source": "icon",
+"acc": 75.4,
+"rank": 4
+},
+{
+"day": "2026-10-11",
+"source": "ifs",
+"acc": 74.14,
+"rank": 5
+},
+{
+"day": "2026-10-11",
+"source": "ukmo",
+"acc": 72.77,
+"rank": 6
+},
+{
+"day": "2026-10-11",
+"source": "harmonie",
+"acc": 71.12,
+"rank": 7
+},
+{
+"day": "2026-10-11",
+"source": "knmi",
+"acc": 70.97,
+"rank": 8
+},
+{
+"day": "2026-10-11",
+"source": "energinet",
+"acc": 66.07,
+"rank": 9
+},
+{
+"day": "2026-10-11",
+"source": "gfs",
+"acc": 64.05,
+"rank": 10
+},
+{
+"day": "2026-10-12",
+"source": "ukmo",
+"acc": 80.96,
+"rank": 1
+},
+{
+"day": "2026-10-12",
+"source": "icon_d2",
+"acc": 74.81,
+"rank": 2
+},
+{
+"day": "2026-10-12",
+"source": "blend",
+"acc": 71.24,
+"rank": 3
+},
+{
+"day": "2026-10-12",
+"source": "icon",
+"acc": 70.97,
+"rank": 4
+},
+{
+"day": "2026-10-12",
+"source": "aifs",
+"acc": 70.24,
+"rank": 5
+},
+{
+"day": "2026-10-12",
+"source": "harmonie",
+"acc": 68.51,
+"rank": 6
+},
+{
+"day": "2026-10-12",
+"source": "ifs",
+"acc": 67.87,
+"rank": 7
+},
+{
+"day": "2026-10-12",
+"source": "knmi",
+"acc": 65.89,
+"rank": 8
+},
+{
+"day": "2026-10-12",
+"source": "gfs",
+"acc": 65.42,
+"rank": 9
+},
+{
+"day": "2026-10-12",
+"source": "energinet",
+"acc": 65.28,
+"rank": 10
+},
+{
+"day": "2026-10-13",
+"source": "blend",
+"acc": 92.08,
+"rank": 1
+},
+{
+"day": "2026-10-13",
+"source": "ukmo",
+"acc": 91.71,
+"rank": 2
+},
+{
+"day": "2026-10-13",
+"source": "icon",
+"acc": 91.54,
+"rank": 3
+},
+{
+"day": "2026-10-13",
+"source": "ifs",
+"acc": 90.89,
+"rank": 4
+},
+{
+"day": "2026-10-13",
+"source": "icon_d2",
+"acc": 90.46,
+"rank": 5
+},
+{
+"day": "2026-10-13",
+"source": "energinet",
+"acc": 90.39,
+"rank": 6
+},
+{
+"day": "2026-10-13",
+"source": "harmonie",
+"acc": 89.66,
+"rank": 7
+},
+{
+"day": "2026-10-13",
+"source": "knmi",
+"acc": 89.17,
+"rank": 8
+},
+{
+"day": "2026-10-13",
+"source": "gfs",
+"acc": 88.21,
+"rank": 9
+},
+{
+"day": "2026-10-13",
+"source": "aifs",
+"acc": 87.65,
+"rank": 10
+},
+{
+"day": "2026-10-14",
+"source": "ukmo",
+"acc": 88.91,
+"rank": 1
+},
+{
+"day": "2026-10-14",
+"source": "gfs",
+"acc": 88.75,
+"rank": 2
+},
+{
+"day": "2026-10-14",
+"source": "blend",
+"acc": 88.39,
+"rank": 3
+},
+{
+"day": "2026-10-14",
+"source": "harmonie",
+"acc": 88.02,
+"rank": 4
+},
+{
+"day": "2026-10-14",
+"source": "knmi",
+"acc": 87.64,
+"rank": 5
+},
+{
+"day": "2026-10-14",
+"source": "icon_d2",
+"acc": 87.6,
+"rank": 6
+},
+{
+"day": "2026-10-14",
+"source": "icon",
+"acc": 87.58,
+"rank": 7
+},
+{
+"day": "2026-10-14",
+"source": "energinet",
+"acc": 87.32,
+"rank": 8
+},
+{
+"day": "2026-10-14",
+"source": "ifs",
+"acc": 86.45,
+"rank": 9
+},
+{
+"day": "2026-10-14",
+"source": "aifs",
+"acc": 85.14,
+"rank": 10
+},
+{
+"day": "2026-10-15",
+"source": "gfs",
+"acc": 92.86,
+"rank": 1
+},
+{
+"day": "2026-10-15",
+"source": "blend",
+"acc": 92.67,
+"rank": 2
+},
+{
+"day": "2026-10-15",
+"source": "aifs",
+"acc": 92.0,
+"rank": 3
+},
+{
+"day": "2026-10-15",
+"source": "ifs",
+"acc": 91.66,
+"rank": 4
+},
+{
+"day": "2026-10-15",
+"source": "knmi",
+"acc": 91.23,
+"rank": 5
+},
+{
+"day": "2026-10-15",
+"source": "icon_d2",
+"acc": 90.0,
+"rank": 6
+},
+{
+"day": "2026-10-15",
+"source": "ukmo",
+"acc": 89.86,
+"rank": 7
+},
+{
+"day": "2026-10-15",
+"source": "icon",
+"acc": 89.77,
+"rank": 8
+},
+{
+"day": "2026-10-15",
+"source": "harmonie",
+"acc": 89.53,
+"rank": 9
+},
+{
+"day": "2026-10-15",
+"source": "energinet",
+"acc": 87.14,
+"rank": 10
+},
+{
+"day": "2026-10-16",
+"source": "energinet",
+"acc": 71.86,
+"rank": 1
+},
+{
+"day": "2026-10-16",
+"source": "ifs",
+"acc": 69.25,
+"rank": 2
+},
+{
+"day": "2026-10-16",
+"source": "aifs",
+"acc": 65.79,
+"rank": 3
+},
+{
+"day": "2026-10-16",
+"source": "ukmo",
+"acc": 63.98,
+"rank": 4
+},
+{
+"day": "2026-10-16",
+"source": "blend",
+"acc": 63.34,
+"rank": 5
+},
+{
+"day": "2026-10-16",
+"source": "gfs",
+"acc": 60.82,
+"rank": 6
+},
+{
+"day": "2026-10-16",
+"source": "harmonie",
+"acc": 48.83,
+"rank": 7
+},
+{
+"day": "2026-10-16",
+"source": "knmi",
+"acc": 47.96,
+"rank": 8
+},
+{
+"day": "2026-10-16",
+"source": "icon",
+"acc": 44.26,
+"rank": 9
+},
+{
+"day": "2026-10-16",
+"source": "icon_d2",
+"acc": 43.67,
+"rank": 10
+},
+{
+"day": "2026-10-17",
+"source": "aifs",
+"acc": 85.58,
+"rank": 1
+},
+{
+"day": "2026-10-17",
+"source": "energinet",
+"acc": 84.99,
+"rank": 2
+},
+{
+"day": "2026-10-17",
+"source": "ifs",
+"acc": 83.89,
+"rank": 3
+},
+{
+"day": "2026-10-17",
+"source": "icon_d2",
+"acc": 83.21,
+"rank": 4
+},
+{
+"day": "2026-10-17",
+"source": "blend",
+"acc": 82.7,
+"rank": 5
+},
+{
+"day": "2026-10-17",
+"source": "ukmo",
+"acc": 79.42,
+"rank": 6
+},
+{
+"day": "2026-10-17",
+"source": "icon",
+"acc": 78.84,
+"rank": 7
+},
+{
+"day": "2026-10-17",
+"source": "knmi",
+"acc": 77.84,
+"rank": 8
+},
+{
+"day": "2026-10-17",
+"source": "gfs",
+"acc": 76.79,
+"rank": 9
+},
+{
+"day": "2026-10-17",
+"source": "harmonie",
+"acc": 75.23,
+"rank": 10
+},
+{
+"day": "2026-10-18",
+"source": "blend",
+"acc": 89.3,
+"rank": 1
+},
+{
+"day": "2026-10-18",
+"source": "energinet",
+"acc": 89.17,
+"rank": 2
+},
+{
+"day": "2026-10-18",
+"source": "aifs",
+"acc": 88.5,
+"rank": 3
+},
+{
+"day": "2026-10-18",
+"source": "ifs",
+"acc": 88.29,
+"rank": 4
+},
+{
+"day": "2026-10-18",
+"source": "icon",
+"acc": 87.68,
+"rank": 5
+},
+{
+"day": "2026-10-18",
+"source": "icon_d2",
+"acc": 87.2,
+"rank": 6
+},
+{
+"day": "2026-10-18",
+"source": "harmonie",
+"acc": 86.92,
+"rank": 7
+},
+{
+"day": "2026-10-18",
+"source": "gfs",
+"acc": 86.41,
+"rank": 8
+},
+{
+"day": "2026-10-18",
+"source": "knmi",
+"acc": 85.49,
+"rank": 9
+},
+{
+"day": "2026-10-18",
+"source": "ukmo",
+"acc": 85.24,
+"rank": 10
+}
+]
+}
+}
