@@ -19,4 +19,4 @@ cp site-common/glossary.json live/site/glossary.json  # shared with the study pa
 rsync -a --exclude reports/ --exclude forecasts/ --exclude .git/ --exclude scores.csv --exclude hourly_scores.csv --exclude SCOREBOARD.md --exclude docs/ --exclude site/data.json --exclude site/today.json --exclude live-public/ \
   live/ gene:dk-wind-live/live/ && echo "$(date -u +%FT%TZ) synced to gene"
 mkdir -p live/reports; ls live/reports/testpred_*.csv >/dev/null 2>&1 && \
-  rsync -a live/reports/testpred_*.csv live/reports/band_backtest.csv live/reports/capacity_backtest.csv live/reports/prices_backtest.csv gene:dk-wind-live/live/reports/
+  rsync -a live/reports/testpred_*.csv live/reports/band_backtest.csv live/reports/capacity_backtest.csv live/reports/prices_backtest.csv live/reports/e3_test_preds.csv gene:dk-wind-live/live/reports/

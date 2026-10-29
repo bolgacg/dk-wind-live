@@ -6,7 +6,7 @@ over the previous 60 days, known before the day (common.capacity_proxy). Denmark
 areas' capacity. Skill score against ECMWF IFS and against Energinet = 1 minus our error over theirs, in %, on the same
 days. Secondary: accuracy = 100% minus summed zone errors over summed output. Days are ranked by nMAE.
 Backtest: reports/testpred_<model>.csv, out-of-sample predictions on 19 Jul to 18 Oct 2026 from mappings trained
-before 19 Jul. Live: hourly_scores.csv from score.py (forecasts committed before each day). Each day ranks only the sources
+before 19 Jul; J4catDK from its frozen 2026 test (reports/e3_test_preds.csv, trained on 2025 only). Live: hourly_scores.csv from score.py (forecasts committed before each day). Each day ranks only the sources
 that covered at least 20 of its hours; the score uses the hours every ranked source covered.
 
 Usage: python3 live/league.py [--live-scores path/to/hourly_scores.csv]  ->  site/data.json"""
@@ -18,12 +18,12 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import BLEND, LIVE, LIVE_MODELS, ZONES
 
-NAMES = {"blend": "DK Wind Live forecast", "energinet": "Energinet (bias-corrected)", "ifs": "ECMWF IFS",
+NAMES = {"blend": "4-model average", "energinet": "Energinet (bias-corrected)", "ifs": "ECMWF IFS",
          "aifs": "ECMWF AIFS (AI)", "harmonie": "DMI HARMONIE", "icon": "DWD ICON-EU", "gfs": "NOAA GFS",
          "knmi": "KNMI HARMONIE", "icon_d2": "DWD ICON-D2", "ukmo": "UK Met Office", "metno": "MET Norway Nordic",
          "icon_global": "DWD ICON global", "gem": "Canada GEM", "jma": "Japan JMA", "cma": "China CMA GRAPES",
          "bom": "Australia BOM ACCESS", "ukmo_2km": "UK Met Office 2 km", "graphcast": "Google GraphCast (AI)",
-         "arpege": "Meteo-France ARPEGE", "ifs_9km": "ECMWF IFS 9 km",
+         "arpege": "Meteo-France ARPEGE", "ifs_9km": "ECMWF IFS 9 km", "j4catdk": "J4catDK (my own model)", "j4cat": "J4cat (mine, without DKcast)",
          "energinet_da": "Energinet (raw)", "energinet_da_debiased": "Energinet (bias-corrected)"}
 
 
@@ -44,6 +44,11 @@ def backtest_hourly():
     if all(m in preds for m in BLEND):
         preds["blend"] = sum(preds[m] for m in BLEND) / len(BLEND)
     preds["energinet"] = en
+    # J4catDK: its frozen 2026 test predictions (trained on 2025 only, studies/e3_test.py), the 92 days of this window
+    f = LIVE / "reports" / "e3_test_preds.csv"
+    if f.exists():
+        j = pd.read_csv(f, header=[0, 1], index_col=0, parse_dates=True)["j4catdk_c"]
+        preds["j4catdk"] = j[ZONES].reindex(act.index)
     cap = pd.read_csv(LIVE / "reports" / "capacity_backtest.csv", index_col=0, parse_dates=True).reindex(act.index)
     px = pd.read_csv(LIVE / "reports" / "prices_backtest.csv", index_col=0, parse_dates=True).reindex(act.index)
     long = []

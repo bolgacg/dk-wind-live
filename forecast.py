@@ -3,7 +3,7 @@ before) has not passed. Fetches each weather model's latest forecast at the 34 p
 snapshots Energinet's own day-ahead forecast as the bar, writes live/forecasts/<target>.json and commits it.
 
 Usage: python3 live/forecast.py"""
-import json, subprocess, sys, urllib.parse
+import json, os, subprocess, sys, urllib.parse
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -17,6 +17,8 @@ from common import (BLEND, CAP_WINDOW_DAYS, LEVEL, LIVE, LIVE_MODELS, POINTS, ZO
                     realtime_actuals)
 
 CPH = ZoneInfo("Europe/Copenhagen")
+# projects-5a writes dkcast_wind_<day>.parquet here by 10:30; the variable is for tests
+DKCAST_FEED = Path(os.environ.get("DKCAST_FEED", Path.home() / "dk-wind-blend" / "live_feed"))
 
 
 def target_day(now):
@@ -60,6 +62,69 @@ def energinet_da(start_utc, end_utc):
     return out
 
 
+def day_ahead_prices(start_utc, end_utc):
+    """Hourly day-ahead price per area (EUR/MWh), from Energinet's 15-minute DayAheadPrices."""
+    d = get_json("https://api.energidataservice.dk/dataset/DayAheadPrices?"
+                 f"start={start_utc:%Y-%m-%dT%H:%M}&end={end_utc:%Y-%m-%dT%H:%M}&timezone=UTC&limit=0"
+                 "&columns=TimeUTC,PriceArea,DayAheadPriceEUR")
+    df = pd.DataFrame(d["records"])
+    df["t"] = pd.to_datetime(df.TimeUTC).dt.floor("h").dt.tz_localize("UTC")
+    return df[df.PriceArea.isin(["DK1", "DK2"])].groupby(["t", "PriceArea"]).DayAheadPriceEUR.mean().unstack()
+
+
+def j4_forecast(frames, hours, cap_now, day):
+    """J4catDK, my own power model (studies/e3_test.py, 2026 test 5.56% of capacity): the four blend members' winds
+    side by side plus DKcast station wind, 5 seeds, then the offshore curtailment stage. Falls back to J4cat (no
+    DKcast) when the DKcast feed for the day is missing. Returns ({zone: Series MW}, variant note)."""
+    sys.path.insert(0, str(LIVE / "studies"))
+    import joint
+    from e3_test import HOL26
+    joint.HOLIDAYS.update(HOL26)
+    X = pd.concat({m: features(*frames[m]).drop(columns=["hour", "doy"]) for m in BLEND}, axis=1)
+    X.columns = [f"{m}|{c}" for m, c in X.columns]
+    X = joint.add_time(X).reindex(hours)
+    name, note = "j4catdk", "j4catdk"
+    f = DKCAST_FEED / f"dkcast_wind_{day}.parquet"
+    if f.exists():
+        d = pd.read_parquet(f)
+        d["time"] = pd.to_datetime(d.time)
+        d["time"] = d.time.dt.tz_localize("UTC") if d.time.dt.tz is None else d.time.dt.tz_convert("UTC")
+        w = d.pivot_table(index="time", columns="point", values=["dk_mu", "dk_sd"])
+        w.columns = [f"{a}_{b}" for a, b in w.columns]
+        X = X.join(w)
+    else:
+        name, note = "j4cat", f"j4cat: DKcast feed missing ({f.name})"
+    mdir = LIVE / "models" / name
+    meta = json.load(open(mdir / "meta.json"))
+    X = X.reindex(columns=meta["features"])
+    # the model was trained with some DKcast sites missing (Lemvig is absent on recent days), so it tolerates a few;
+    # fall back when an hour has no DKcast at all or fewer than 20 of the 22 sites arrived
+    dk = X.filter(like="dk_mu_")
+    if name == "j4catdk" and (dk.notna().sum(axis=1) < 20).any():
+        return j4_fallback(frames, hours, cap_now, day, f"j4cat: DKcast feed has gaps ({f.name})")
+    X = X[X.drop(columns=[c for c in X if c.startswith("dk_")]).notna().all(axis=1)]  # hours with all weather inputs
+    cf = pd.DataFrame({z: sum(lgb.Booster(model_file=str(mdir / f"{z}_s{k}.txt")).predict(X)
+                              for k in range(meta["seeds"])) / meta["seeds"] for z in ZONES}, index=X.index).clip(0, None)
+    # curtailment stage: day-ahead prices for the day before the target day are known at 10:30 that day
+    p0 = hours[0] - pd.Timedelta(days=2)
+    S = joint.stage2_inputs(cf, cf.index, day_ahead_prices(p0, hours[-1] - pd.Timedelta(hours=23)))[meta["stage2_features"]]
+    for z in meta["offshore_stage2"]:
+        ok = S.notna().all(axis=1)
+        adj = pd.Series(lgb.Booster(model_file=str(mdir / f"stage2_{z}.txt")).predict(S[ok]), index=S.index[ok])
+        cf[z] = (cf[z] + adj.reindex(cf.index).fillna(0)).clip(0, None)
+    return {z: cf[z] * cap_now[z] for z in ZONES}, note
+
+
+def j4_fallback(frames, hours, cap_now, day, note):
+    global DKCAST_FEED
+    keep, DKCAST_FEED = DKCAST_FEED, Path("/nonexistent")
+    try:
+        out, _ = j4_forecast(frames, hours, cap_now, day)
+    finally:
+        DKCAST_FEED = keep
+    return out, note
+
+
 def main():
     now = datetime.now(tz=ZoneInfo("UTC"))
     day = target_day(now)
@@ -75,7 +140,7 @@ def main():
     act = realtime_actuals(f"{(now - timedelta(days=CAP_WINDOW_DAYS + 3)):%Y-%m-%d}", f"{now + timedelta(days=1):%Y-%m-%d}")
     cap_now = capacity_proxy(act).iloc[-1]
 
-    preds, missing, mapping = {}, {}, {}
+    preds, missing, mapping, frames = {}, {}, {}, {}
     for short, model in LIVE_MODELS.items():
         # each weather model uses its own trained mapping when one exists, else the IFS one
         mdir = LIVE / "models" / model
@@ -91,6 +156,8 @@ def main():
         except Exception as e:
             missing[short] = str(e)
             continue
+        if short in BLEND:
+            frames[short] = (sp, di)
         X = features(sp, di).reindex(hours)[meta["features"]]
         if X.isna().any(axis=1).any():
             missing[short] = f"{int(X.isna().any(axis=1).sum())} of {len(hours)} hours without data"
@@ -103,6 +170,18 @@ def main():
     full = [m for m in BLEND if m in preds and all(len(preds[m][z]) == len(hours) for z in ZONES)]
     if full:
         preds["blend"] = {z: sum(preds[m][z] for m in full) / len(full) for z in ZONES}
+    # my own model J4catDK, an extra entrant (from 30 Oct 2026); needs all four members' weather
+    j4_note = None
+    if all(m in frames for m in BLEND) and (LIVE / "models" / "j4catdk" / "meta.json").exists():
+        try:
+            preds["j4catdk"], j4_note = j4_forecast(frames, hours, cap_now, day)
+        except Exception as e:
+            missing["j4catdk"] = f"{type(e).__name__}: {e}"
+        # J4cat, the same model without DKcast: the fallback, and a daily check on what DKcast adds
+        try:
+            preds["j4cat"], _ = j4_fallback(frames, hours, cap_now, day, "")
+        except Exception as e:
+            missing["j4cat"] = f"{type(e).__name__}: {e}"
     # 80% band for total Denmark from how much the blend members disagree (band.py); only with all four members
     band_out = None
     if (LIVE / "models" / "band.json").exists() and full == BLEND:
@@ -117,7 +196,7 @@ def main():
            "gate_utc": str(pd.Timestamp(datetime.combine(day - timedelta(days=1), datetime.min.time(), tzinfo=CPH)
                                         .replace(hour=12)).tz_convert("UTC")),
            "hours_utc": [h.strftime("%Y-%m-%dT%H:%M") for h in hours], "capacity_proxy_mw": cap_now.round(1).to_dict(),
-           "blend_members": full, "missing": missing, "mapping": mapping,
+           "blend_members": full, "missing": missing, "mapping": mapping, "j4_variant": j4_note,
            "forecast_mw": {m: {z: [round(float(s.get(h, np.nan)), 1) if h in s.index else None for h in hours]
                                for z, s in zs.items()} for m, zs in preds.items()},
            "band_total_mw": band_out,

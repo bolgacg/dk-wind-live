@@ -79,15 +79,16 @@ def main():
             x["rank"] = i + 1
         b = r.get("band_total_mw") or {}
         tot_act = act.sum(axis=1, min_count=4)
-        blend = pd.DataFrame({z: src["blend"][z] for z in ZONES}, index=hours).sum(axis=1, min_count=4) \
-            if "blend" in src else pd.Series(dtype=float)
+        head = "j4catdk" if "j4catdk" in src else "blend"  # the headline entrant's line
+        blend = pd.DataFrame({z: src[head][z] for z in ZONES}, index=hours).sum(axis=1, min_count=4) \
+            if head in src else pd.Series(dtype=float)
         series = []
         for i, h in enumerate(hours):
             series.append(dict(t=f"{h:%Y-%m-%dT%H}", p=None if blend.get(h) != blend.get(h) else round(blend[h]),
                                lo=round(b["lo"][i]) if b else None, hi=round(b["hi"][i]) if b else None,
                                a=None if tot_act[h] != tot_act[h] else round(tot_act[h])))
         last = hours[done.to_numpy()][-1]
-        out.update(day=r["target_day_cph"], hours_measured=int(done.sum()), hours_total=len(hours),
+        out.update(line_name=NAMES.get(head, head), day=r["target_day_cph"], hours_measured=int(done.sum()), hours_total=len(hours),
                    through_utc=f"{last + pd.Timedelta(hours=1):%Y-%m-%dT%H:%MZ}", ranking=rows, series=series)
         break
     (LIVE / "site").mkdir(exist_ok=True)
