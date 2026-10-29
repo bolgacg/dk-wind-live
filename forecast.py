@@ -3,7 +3,7 @@ before) has not passed. Fetches each weather model's latest forecast at the 34 p
 snapshots Energinet's own day-ahead forecast as the bar, writes live/forecasts/<target>.json and commits it.
 
 Usage: python3 live/forecast.py"""
-import json, os, subprocess, sys, urllib.parse
+import json, os, subprocess, sys, time, urllib.parse
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -154,6 +154,7 @@ def main():
         meta = json.load(open(mdir / "meta.json"))
         mapping[short] = meta["weather"]
         try:
+            time.sleep(6)  # 34 locations per request count as 34 calls; pace models under the 600-per-minute limit
             sp, di = fetch_weather(model, meta.get("level", 100))
         except Exception as e:
             missing[short] = str(e)
