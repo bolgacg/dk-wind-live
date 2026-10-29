@@ -3,11 +3,16 @@
 # COORDINATION.md), train its own live mapping once, then push models and code to gene. One job at a time.
 cd /home/bolgac/projects/dk-wind-blend || exit 1
 exec 9>/tmp/dk-live-queue.lock; flock -n 9 || exit 0
+# competitor set frozen for the live week 31 Oct to 6 Nov (Bo, 29 Oct); new models are added after it
 for m in ecmwf_aifs025_single icon_eu; do
   [ -f live/models/$m/meta.json ] && continue
+  [ -f live/models/$m.skip ] && continue
   grep -q "MODEL DONE $m" COORDINATION.md || continue
-  echo "=== $(date -u +%FT%TZ) training $m"
-  nice -n 10 python3 -W ignore live/train.py --weather $m --final || { echo "train $m FAILED"; continue; }
+  # 100 m wind when the archive has it, else 10 m; skip archives that are empty
+  lvl=$(python3 -I live/pick_level.py data/raw/openmeteo/$m)
+  if [ "$lvl" = none ]; then echo "$m: archive empty, skipped"; date -u > live/models/$m.skip; continue; fi
+  echo "=== $(date -u +%FT%TZ) training $m level $lvl"
+  OMP_NUM_THREADS=2 nice -n 10 python3 -W ignore live/train.py --weather $m --level $lvl --final || { echo "train $m FAILED"; continue; }
   echo "- $(date '+%d %b %H:%M') projects-97: live mapping trained for $m, test report live/reports/test_$m.csv" >> COORDINATION.md
 done
 rsync -a --exclude reports/ --exclude forecasts/ --exclude .git/ --exclude scores.csv --exclude SCOREBOARD.md --exclude docs/ --exclude site/data.json --exclude live-public/ \

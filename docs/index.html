@@ -48,7 +48,7 @@ When the day is over, it is scored against Energinet's measured output.</p>
 
 <div class="tiles" id="tiles"></div>
 
-<h2>The last seven days, ranked</h2>
+<h2 id="weekh">The last seven days, ranked</h2>
 <figure>
   <div id="week"></div>
   <div id="weektab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
@@ -172,8 +172,9 @@ function render(d) {
   el("text", {x: L + days.length * cw, y: H3 - 2, "font-size": 11, fill: "#6b6a65", "text-anchor": "end"}, s, days[days.length - 1]);
 }
 function renderWeek(D) {
-  const all = [...(D.backtest ? D.backtest.daily.map(r => ({...r, kind: "backtest"})) : []),
-               ...(D.live ? D.live.daily.map(r => ({...r, kind: "live"})) : [])];
+  // live days only; until the first live day is scored, the last backtest week is shown and labelled as such
+  const liveRows = D.live ? D.live.daily.map(r => ({...r, kind: "live"})) : [];
+  const all = liveRows.length ? liveRows : (D.backtest ? D.backtest.daily.map(r => ({...r, kind: "backtest"})) : []);
   const days = [...new Set(all.map(r => r.day))].sort().slice(-7);
   const rows = all.filter(r => days.includes(r.day));
   const kindOf = d => rows.find(r => r.day === d).kind;
@@ -184,7 +185,7 @@ function renderWeek(D) {
   const best = stats.find(s => s.src !== "blend");
   const col = src => src === "blend" ? "#c2410c" : src === best.src ? "#0f766e" : "#c9c6bd";
   const n = Math.max(...rows.map(r => r.rank)), W = 760, L = 30, R = 190, top = 16, bot = 44;
-  const H = top + bot + n * 26, x = i => L + 20 + i / (days.length - 1) * (W - L - R - 20), y = r => top + (r - 1) * 26;
+  const H = top + bot + n * 26, x = i => days.length < 2 ? (W - R + L) / 2 : L + 20 + i / (days.length - 1) * (W - L - R - 20), y = r => top + (r - 1) * 26;
   const s = svg(document.getElementById("week"), W, H);
   for (let r = 1; r <= n; r++) el("text", {x: L - 6, y: y(r) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, r);
   el("rect", {x: L, y: y(1) - 12, width: W - L - R + 10, height: 3 * 26 - 2, fill: "#f3efe6"}, s);
@@ -212,8 +213,10 @@ function renderWeek(D) {
   const b = stats.find(s => s.src === "blend"), nl = days.filter(d => kindOf(d) === "live").length;
   document.getElementById("weekcap").textContent = `Daily rank of each source by accuracy, 1 = most accurate of ${n}. ` +
     `Orange is my blend; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
-    `${nl ? nl + " of these days are live forecasts, committed before the day began" : "All seven are backtest days, scored on archived forecasts"}` +
-    `${nl && nl < 7 ? "; the others are backtest days" : ""}. Over these days my blend averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
+    (nl ? `Live week: ${nl} of 7 days scored so far (31 Oct to 6 Nov), each forecast committed before its day began. `
+        : "No live day is scored yet (the first is 31 Oct), so this shows the last backtest week, scored on archived forecasts. ") +
+    `Over these days my blend averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
+  document.getElementById("weekh").textContent = nl ? `Live week, day ${nl} of 7, ranked` : "Backtest week, until the live week starts on 31 Oct";
 }
 function renderBand(B) {
   const T = document.getElementById("btiles"), host = document.getElementById("band");

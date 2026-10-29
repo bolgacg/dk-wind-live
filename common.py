@@ -26,11 +26,15 @@ ZONES = ["DK1_offshore", "DK1_onshore", "DK2_offshore", "DK2_onshore"]
 # Weather models compared live. All take the same trained power mapping, so the only difference is the weather.
 LIVE_MODELS = {"ifs": "ecmwf_ifs025", "aifs": "ecmwf_aifs025_single", "harmonie": "dmi_harmonie_arome_europe",
                "icon": "icon_eu", "gfs": "gfs_global", "knmi": "knmi_harmonie_arome_europe", "icon_d2": "icon_d2",
-               "ukmo": "ukmo_global_deterministic_10km", "metno": "metno_nordic"}
+               "ukmo": "ukmo_global_deterministic_10km", "metno": "metno_nordic",
+               # added 29 Oct as competitors only, each once its archive is complete (MODEL DONE in COORDINATION.md)
+               "icon_global": "icon_global", "gem": "gem_global", "jma": "jma_seamless", "cma": "cma_grapes_global",
+               "bom": "bom_access_global", "ukmo_2km": "ukmo_uk_deterministic_2km", "graphcast": "gfs_graphcast025",
+               "arpege": "meteofrance_arpege_europe", "ifs_9km": "ecmwf_ifs"}
 # Our custom model: equal-weight mean of these four, fixed on 28 Oct 2026. The rest are competitors only.
 BLEND = ["ifs", "aifs", "harmonie", "icon"]
 # Models whose archive and live feed have no 100 m wind use 10 m.
-LEVEL = {"ukmo": 10, "metno": 10}
+LEVEL = {"ukmo": 10, "metno": 10}  # informational; the trained level is stored in each model's meta.json
 CAP_WINDOW_DAYS = 60
 CAP_Q = 0.995
 

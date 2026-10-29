@@ -17,6 +17,9 @@ from common import BLEND, LIVE, LIVE_MODELS, ZONES
 NAMES = {"blend": "Our blend", "energinet": "Energinet (bias-corrected)", "ifs": "ECMWF IFS",
          "aifs": "ECMWF AIFS (AI)", "harmonie": "DMI HARMONIE", "icon": "DWD ICON-EU", "gfs": "NOAA GFS",
          "knmi": "KNMI HARMONIE", "icon_d2": "DWD ICON-D2", "ukmo": "UK Met Office", "metno": "MET Norway Nordic",
+         "icon_global": "DWD ICON global", "gem": "Canada GEM", "jma": "Japan JMA", "cma": "China CMA GRAPES",
+         "bom": "Australia BOM ACCESS", "ukmo_2km": "UK Met Office 2 km", "graphcast": "Google GraphCast (AI)",
+         "arpege": "Meteo-France ARPEGE", "ifs_9km": "ECMWF IFS 9 km",
          "energinet_da": "Energinet (raw)", "energinet_da_debiased": "Energinet (bias-corrected)"}
 
 
