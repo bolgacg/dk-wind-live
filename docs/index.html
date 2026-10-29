@@ -173,7 +173,8 @@ function render(d) {
 }
 function renderWeek(D) {
   // live days only; until the first live day is scored, the last backtest week is shown and labelled as such
-  const liveRows = D.live ? D.live.daily.map(r => ({...r, kind: "live"})) : [];
+  // the live week starts 31 Oct: the 30 Oct forecast was issued before the full field of models and the band existed
+  const liveRows = D.live ? D.live.daily.filter(r => r.day >= "2026-10-31").map(r => ({...r, kind: "live"})) : [];
   const all = liveRows.length ? liveRows : (D.backtest ? D.backtest.daily.map(r => ({...r, kind: "backtest"})) : []);
   const days = [...new Set(all.map(r => r.day))].sort().slice(-7);
   const rows = all.filter(r => days.includes(r.day));
