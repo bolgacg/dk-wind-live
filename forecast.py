@@ -92,6 +92,14 @@ def j4_forecast(frames, hours, cap_now, day):
         w = d.pivot_table(index="time", columns="point", values=["dk_mu", "dk_sd"])
         w.columns = [f"{a}_{b}" for a, b in w.columns]
         X = X.join(w)
+        # level guard (models/j4catdk/feed_check.json): the feed's daily mean must sit within 1.5 m/s of what the
+        # members' 100 m wind implies, fitted on 2025 days (residual sd 0.47 m/s); else fall back to J4cat
+        chk = json.load(open(LIVE / "models" / "j4catdk" / "feed_check.json"))
+        m100 = np.mean([frames[m][0].reindex(hours)[chk["points"]].mean().mean() for m in BLEND])
+        exp_, got = chk["slope"] * m100 + chk["intercept"], X.filter(like="dk_mu_").mean().mean()
+        if abs(got - exp_) > chk["threshold_ms"]:
+            return j4_fallback(frames, hours, cap_now, day,
+                               f"j4cat: DKcast feed level {got:.2f} m/s, expected {exp_:.2f} from the members")
     else:
         name, note = "j4cat", f"j4cat: DKcast feed missing ({f.name})"
     mdir = LIVE / "models" / name

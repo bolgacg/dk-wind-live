@@ -1,0 +1,31 @@
+{
+ "slope": 0.6284827986117905,
+ "intercept": -0.3661044799073314,
+ "resid_sd": 0.4709310490248186,
+ "threshold_ms": 1.5,
+ "points": [
+  "aabenraa",
+  "bornholm",
+  "djursland",
+  "frederikshavn",
+  "fyn",
+  "herning",
+  "horns_rev1",
+  "horsens",
+  "jammerbugt",
+  "lemvig",
+  "lolland",
+  "middelgrunden",
+  "ringkobing",
+  "rodsand",
+  "samso",
+  "sprogo",
+  "thisted",
+  "tonder",
+  "varde",
+  "vesterhav_syd",
+  "vesthimmerland",
+  "w_zealand"
+ ],
+ "about": "daily mean DKcast 10 m wind vs the 4 members' mean 100 m wind at the same sites, 2025 days"
+}
