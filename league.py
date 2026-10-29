@@ -85,6 +85,25 @@ def main():
                                for _, r in d.sort_values(["day", "rank"]).iterrows()]}
         print(f"\n== {kind}: {out[kind]['days']} days, {out[kind]['from']} to {out[kind]['to']}")
         print(tot[["acc", "days", "wins", "top3"]].round(2).to_string())
+    out["band"] = {}
+    for kind, f in (("backtest", LIVE / "reports" / "band_backtest.csv"), ("live", LIVE / "band_scores.csv")):
+        if not f.exists():
+            continue
+        b = pd.read_csv(f)
+        b["t"] = pd.to_datetime(b["hour_utc"], utc=True)
+        b["inside"] = (b.actual >= b.lo) & (b.actual <= b.hi)
+        b["width"] = b.hi - b.lo
+        last = b[b.t >= b.t.max() - pd.Timedelta(days=7)]
+        out["band"][kind] = {"hours": len(b), "coverage": round(100 * b.inside.mean(), 1),
+                             "width": round(b.width.mean()), "from": f"{b.t.min():%Y-%m-%d}", "to": f"{b.t.max():%Y-%m-%d}",
+                             "series": [dict(t=f"{r.t:%Y-%m-%dT%H}", p=round(r.point), lo=round(r.lo), hi=round(r.hi),
+                                             a=round(r.actual)) for r in last.itertuples()]}
+        if "spread" in b:
+            calm = b.spread <= b.spread.median()
+            out["band"][kind].update(width_calm=round(b.width[calm].mean()), width_unsettled=round(b.width[~calm].mean()),
+                                     cov_calm=round(100 * b.inside[calm].mean(), 1),
+                                     cov_unsettled=round(100 * b.inside[~calm].mean(), 1))
+        print(f"band {kind}: coverage {out['band'][kind]['coverage']}% over {len(b)} hours")
     site = LIVE / "site"
     site.mkdir(exist_ok=True)
     json.dump(out, open(site / "data.json", "w"), indent=0)

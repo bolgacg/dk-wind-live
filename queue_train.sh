@@ -13,4 +13,4 @@ done
 rsync -a --exclude reports/ --exclude forecasts/ --exclude .git/ --exclude scores.csv --exclude SCOREBOARD.md --exclude docs/ --exclude site/data.json --exclude live-public/ \
   live/ gene:dk-wind-live/live/ && echo "$(date -u +%FT%TZ) synced to gene"
 mkdir -p live/reports; ls live/reports/testpred_*.csv >/dev/null 2>&1 && \
-  rsync -a live/reports/testpred_*.csv gene:dk-wind-live/live/reports/
+  rsync -a live/reports/testpred_*.csv live/reports/band_backtest.csv gene:dk-wind-live/live/reports/

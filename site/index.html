@@ -73,6 +73,17 @@ When the day is over, it is scored against Energinet's measured output.</p>
   Hover over a cell for the day's accuracy.</figcaption>
 </figure>
 
+<h2>How sure is the forecast?</h2>
+<p>Each forecast also carries an 80% band for total Danish wind: the range the real output should fall inside four
+hours out of five. The band comes from how far the four models in my blend disagree. When they agree, it is narrow;
+when they pull apart, as they do ahead of fronts, it widens.</p>
+<div class="tiles" id="btiles"></div>
+<figure>
+  <div id="band"></div>
+  <figcaption id="bcap">The shaded area is the 80% band, the line is my blend's forecast, and the dots are the measured
+  output. Last seven days shown.</figcaption>
+</figure>
+
 <h2>Method</h2>
 <p>Each weather model's forecast at 34 points near Danish wind farms (100 m wind speed and direction, or 10 m where
 a model publishes no 100 m wind) goes into a gradient-boosted model per zone, which predicts output as a share of
@@ -153,9 +164,39 @@ function render(d) {
   el("text", {x: L, y: H3 - 2, "font-size": 11, fill: "#6b6a65"}, s, days[0]);
   el("text", {x: L + days.length * cw, y: H3 - 2, "font-size": 11, fill: "#6b6a65", "text-anchor": "end"}, s, days[days.length - 1]);
 }
+function renderBand(B) {
+  const T = document.getElementById("btiles"), host = document.getElementById("band");
+  if (!B) { T.innerHTML = ""; host.innerHTML = "<p class='mute sans'>No scored band days yet.</p>"; return; }
+  T.innerHTML = "";
+  const tiles = [[B.coverage.toFixed(0) + "%", `of ${B.hours.toLocaleString("en")} hours inside the band (target 80%)`],
+    [B.width.toLocaleString("en") + " MW", "average band width"]];
+  if (B.width_calm) tiles.push([`${B.width_calm.toLocaleString("en")} / ${B.width_unsettled.toLocaleString("en")} MW`,
+    "width when the models agree / disagree"], [`${B.cov_calm.toFixed(0)}% / ${B.cov_unsettled.toFixed(0)}%`,
+    "coverage when they agree / disagree"]);
+  for (const [v, l] of tiles) { const t = document.createElement("div"); t.className = "tile";
+    t.innerHTML = `<b>${v}</b><span>${l}</span>`; T.appendChild(t); }
+  const S = B.series, W = 760, H = 280, L = 56, R = 12, top = 12, bot = 30;
+  const ymax = Math.max(...S.map(r => Math.max(r.hi, r.a))) * 1.05;
+  const x = i => L + i / (S.length - 1) * (W - L - R), y = v => top + (1 - v / ymax) * (H - top - bot);
+  const s = svg(host, W, H);
+  const step = Math.max(500, Math.ceil(ymax / 4 / 1000) * 1000);
+  for (let v = 0; v <= ymax; v += step) {
+    el("line", {x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "#eee"}, s);
+    el("text", {x: L - 6, y: y(v) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, v.toLocaleString("en")); }
+  el("path", {d: "M" + S.map((r, i) => `${x(i)},${y(r.hi)}`).join("L") + "L" +
+    S.map((r, i) => `${x(i)},${y(r.lo)}`).reverse().join("L") + "Z", fill: "#c2410c", opacity: .15}, s);
+  el("path", {d: "M" + S.map((r, i) => `${x(i)},${y(r.p)}`).join("L"), fill: "none", stroke: "#c2410c", "stroke-width": 1.8}, s);
+  S.forEach((r, i) => el("circle", {cx: x(i), cy: y(r.a), r: 1.8, fill: r.a >= r.lo && r.a <= r.hi ? "#1d1d1b" : "#1e40af"}, s));
+  S.forEach((r, i) => { if (r.t.endsWith("T00") && x(i) < W - 40)
+    el("text", {x: x(i), y: H - 8, "font-size": 11, fill: "#6b6a65", "text-anchor": "middle"}, s,
+      new Date(r.t.slice(0, 10) + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"})); });
+  document.getElementById("bcap").textContent = `The shaded area is the 80% band, the orange line is my blend's forecast,
+    and the dots are the measured output: black inside the band, blue outside. Last seven days of ${B.from} to ${B.to},
+    hourly, total Denmark, in MW.`;
+}
 fetch("data.json").then(r => r.json()).then(D => {
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
-    render(D[k]); };
+    render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
   const hasLive = D.live && D.live.days > 0;
   document.getElementById("t-live").disabled = !hasLive;
   if (!hasLive) document.getElementById("t-live").textContent = "Live: first scores from 31 Oct";

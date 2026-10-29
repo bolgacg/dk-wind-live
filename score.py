@@ -66,6 +66,23 @@ def main():
     if not rows:
         print("nothing to score yet")
         return
+    band_rows = []
+    for f in sorted((LIVE / "forecasts").glob("*.json")):
+        r = json.load(open(f))
+        b = r.get("band_total_mw")
+        if not b:
+            continue
+        hours = pd.to_datetime(r["hours_utc"]).tz_localize("UTC")
+        if hours[-1] + pd.Timedelta(hours=1) > now - pd.Timedelta(minutes=30):
+            continue
+        act = realtime_actuals(f"{hours[0]:%Y-%m-%d}", f"{hours[-1] + pd.Timedelta(days=1):%Y-%m-%d}").reindex(hours)
+        tot = act[ZONES].sum(axis=1, min_count=4)
+        for h, p_, lo, hi, a in zip(hours, b["point"], b["lo"], b["hi"], tot):
+            if a == a:
+                band_rows.append(dict(day=r["target_day_cph"], hour_utc=h.strftime("%Y-%m-%dT%H:%M"), point=p_,
+                                      lo=lo, hi=hi, actual=round(float(a), 1), inside=int(lo <= a <= hi)))
+    if band_rows:
+        pd.DataFrame(band_rows).to_csv(LIVE / "band_scores.csv", index=False)
     df = pd.DataFrame(rows)
     df.to_csv(LIVE / "scores.csv", index=False)
     # scoreboard: mean absolute error summed over the four zones, per day and source
@@ -78,10 +95,15 @@ def main():
              ,"by its actual/forecast ratio over the previous 60 days, the fair bar to beat.", "",
              f"Days scored: {days}", "", "| source | mean error, MW |", "|---|---|"]
     lines += [f"| {s} | {v:.0f} |" for s, v in tot.items()]
+    if band_rows:
+        bd = pd.DataFrame(band_rows)
+        lines += ["", f"80% band, total Denmark: actual inside the band in {bd.inside.mean():.0%} of "
+                  f"{len(bd)} scored hours (target 80%), mean width {(bd.hi - bd.lo).mean():.0f} MW."]
     lines += ["", "Per day:", "", piv.round(0).to_markdown()]
     (LIVE / "SCOREBOARD.md").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
-    subprocess.run(["git", "-C", str(LIVE), "add", "scores.csv", "SCOREBOARD.md"], check=True)
+    subprocess.run(["git", "-C", str(LIVE), "add", "scores.csv", "SCOREBOARD.md"]
+                   + (["band_scores.csv"] if (LIVE / "band_scores.csv").exists() else []), check=True)
     subprocess.run(["git", "-C", str(LIVE), "commit", "-q", "-m", f"scores through {piv.index.max()}"], check=False)
 
 

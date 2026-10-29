@@ -103,6 +103,15 @@ def main():
     full = [m for m in BLEND if m in preds and all(len(preds[m][z]) == len(hours) for z in ZONES)]
     if full:
         preds["blend"] = {z: sum(preds[m][z] for m in full) / len(full) for z in ZONES}
+    # 80% band for total Denmark from how much the blend members disagree (band.py); only with all four members
+    band_out = None
+    if (LIVE / "models" / "band.json").exists() and full == BLEND:
+        from band import apply
+        band = json.load(open(LIVE / "models" / "band.json"))
+        mem = pd.DataFrame({m: sum(preds[m][z] for z in ZONES) for m in BLEND})
+        point, lo, hi = apply(band, mem, cap_total=float(cap_now[ZONES].sum()))
+        band_out = {"q": band["q"], "point": [round(float(v), 1) for v in point],
+                    "lo": [round(float(v), 1) for v in lo], "hi": [round(float(v), 1) for v in hi]}
 
     rec = {"target_day_cph": str(day), "issued_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
            "gate_utc": str(pd.Timestamp(datetime.combine(day - timedelta(days=1), datetime.min.time(), tzinfo=CPH)
@@ -111,6 +120,7 @@ def main():
            "blend_members": full, "missing": missing, "mapping": mapping,
            "forecast_mw": {m: {z: [round(float(s.get(h, np.nan)), 1) if h in s.index else None for h in hours]
                                for z, s in zs.items()} for m, zs in preds.items()},
+           "band_total_mw": band_out,
            "energinet_snapshot": energinet_da(start, end)}
     out_f.parent.mkdir(exist_ok=True)
     json.dump(rec, open(out_f, "w"), indent=1)
