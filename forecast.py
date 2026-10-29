@@ -102,9 +102,10 @@ def j4_forecast(frames, hours, cap_now, day, use_dk=True):
         w = d.pivot_table(index="time", columns="point", values=["dk_mu", "dk_sd"])
         w.columns = [f"{a}_{b}" for a, b in w.columns]
         X = X.join(w)
-        # the model was trained with some DKcast sites missing, so it tolerates a few; not fewer than 20 of 22
-        if (X.filter(like="dk_mu_").notna().sum(axis=1) < 20).any():
-            raise FeedNotReady(f"{f.name} has hours with fewer than 20 of 22 sites")
+        # the model was trained with DKcast sites missing (10% of 2025 hours had fewer than 20 of 22, never fewer
+        # than 10), so it is only refused below what training saw; projects-5a's feed aims for all 22 x 24
+        if (X.filter(like="dk_mu_").notna().sum(axis=1) < 10).any():
+            raise FeedNotReady(f"{f.name} has hours with fewer than 10 of 22 sites")
         # level check (feed_check.json): the feed's daily mean within 1.5 m/s of what the members' 100 m wind implies,
         # fitted on 2025 days (residual sd 0.47 m/s)
         chk = json.load(open(mdir / "feed_check.json"))
