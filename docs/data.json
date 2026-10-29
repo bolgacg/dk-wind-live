@@ -6,7 +6,7 @@
 "overall": [
 {
 "source": "blend",
-"name": "Our blend",
+"name": "DK Wind Live forecast",
 "acc": 82.09,
 "days": 92,
 "wins": 17,
@@ -6805,5 +6805,11 @@
 "cov_calm": 76.3,
 "cov_unsettled": 82.0
 }
+},
+"health": {
+"generated_utc": "2026-10-29T15:05Z",
+"last_forecast_day": "2026-10-30",
+"last_forecast_issued_utc": "2026-10-28T22:16:00Z",
+"last_forecast_missing": {}
 }
 }

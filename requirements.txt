@@ -1,0 +1,4 @@
+pandas==3.1.0
+numpy==2.5.4
+lightgbm==4.7.0
+tabulate==0.10.0

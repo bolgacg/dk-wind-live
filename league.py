@@ -14,7 +14,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import BLEND, LIVE, LIVE_MODELS, ZONES
 
-NAMES = {"blend": "Our blend", "energinet": "Energinet (bias-corrected)", "ifs": "ECMWF IFS",
+NAMES = {"blend": "DK Wind Live forecast", "energinet": "Energinet (bias-corrected)", "ifs": "ECMWF IFS",
          "aifs": "ECMWF AIFS (AI)", "harmonie": "DMI HARMONIE", "icon": "DWD ICON-EU", "gfs": "NOAA GFS",
          "knmi": "KNMI HARMONIE", "icon_d2": "DWD ICON-D2", "ukmo": "UK Met Office", "metno": "MET Norway Nordic",
          "icon_global": "DWD ICON global", "gem": "Canada GEM", "jma": "Japan JMA", "cma": "China CMA GRAPES",
@@ -107,6 +107,16 @@ def main():
                                      cov_calm=round(100 * b.inside[calm].mean(), 1),
                                      cov_unsettled=round(100 * b.inside[~calm].mean(), 1))
         print(f"band {kind}: coverage {out['band'][kind]['coverage']}% over {len(b)} hours")
+    # health line for the page: the newest committed forecast and the newest scored day
+    fc = sorted((LIVE / "forecasts").glob("*.json"))
+    h = {"generated_utc": pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%dT%H:%MZ")}
+    if fc:
+        last = json.load(open(fc[-1]))
+        h.update(last_forecast_day=last["target_day_cph"], last_forecast_issued_utc=last["issued_utc"],
+                 last_forecast_missing=last.get("missing", []))
+    if "live" in out:
+        h["last_scored_day"] = out["live"]["to"]
+    out["health"] = h
     site = LIVE / "site"
     site.mkdir(exist_ok=True)
     json.dump(out, open(site / "data.json", "w"), indent=0)

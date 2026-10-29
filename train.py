@@ -25,7 +25,11 @@ def load_weather(model, lead=1, level=100):
     for p in POINTS:
         parts = []
         for f in sorted((RAW / "openmeteo" / model).glob(f"{p}_*.json.gz")):
-            d = json.load(gzip.open(f))
+            try:
+                d = json.load(gzip.open(f))
+            except (ValueError, OSError, EOFError):
+                print(f"  unreadable, skipped: {f.name}")  # e.g. a truncated download
+                continue
             if "hourly" not in d:
                 continue
             h = d["hourly"]

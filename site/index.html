@@ -27,6 +27,9 @@ svg text{font-family:system-ui,sans-serif}
 .tabs button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:.9rem}
 .tabs button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .strip{overflow-x:auto}
+.tip{cursor:help}
+#tipbox{position:fixed;z-index:9;max-width:300px;background:#1d1d1b;color:#fff;font:.85rem/1.4 system-ui,sans-serif;padding:8px 10px;border-radius:6px;display:none;pointer-events:none}
+.warnline{color:#b91c1c;font-weight:600}
 footer{margin-top:48px;font:.85rem/1.5 system-ui,sans-serif;color:var(--mute)}
 a{color:var(--en)}
 </style>
@@ -35,20 +38,24 @@ a{color:var(--en)}
 <main>
 <h1>Who forecasts Denmark's wind best?</h1>
 <p class="lede" id="lede">Loading results.</p>
+<p class="sans" id="health" style="font-size:.9rem;margin:4px 0 12px"></p>
 <p class="mute">Every morning before the 12:00 day-ahead gate, I forecast the next day's hourly wind power in Denmark's
 four wind zones, offshore and onshore in DK1 and DK2. Each forecast is
 <a href="https://github.com/bolgacg/dk-wind-live/tree/main/forecasts">committed publicly</a> before its day begins.
 When the day is over, it is scored against Energinet's measured output.</p>
+<p class="mute"><b style="color:var(--ours)">DK Wind Live forecast</b> is my forecast: four weather models (ECMWF IFS,
+ECMWF AIFS, DMI HARMONIE, DWD ICON-EU), each turned into megawatts by its own trained power model, then averaged.
+Hover over or tap any source name for a one-line description.</p>
 
 <div class="tabs" role="group" aria-label="Period">
-  <button id="t-live" aria-pressed="false">Live, since 30 Oct 2026</button>
-  <button id="t-backtest" aria-pressed="true">Backtest, 3 unseen months</button>
+  <button id="t-live" aria-pressed="true">Live, since 30 Oct 2026</button>
+  <button id="t-backtest" aria-pressed="false">Backtest, 92 past days</button>
 </div>
 <p class="mute sans" id="period" style="font-size:.9rem;margin-top:10px"></p>
 
 <div class="tiles" id="tiles"></div>
 
-<h2 id="weekh">The last seven days, ranked</h2>
+<h2 id="weekh">The last seven live days, ranked</h2>
 <figure>
   <div id="week"></div>
   <div id="weektab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
@@ -59,8 +66,7 @@ When the day is over, it is scored against Energinet's measured output.</p>
 <figure>
   <div id="dots"></div>
   <figcaption>Each dot is one forecast source. Accuracy is 100% minus the total hourly error as a share of the total
-  wind output. The orange dot is my blend: the average of four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE and
-  DWD ICON-EU), each turned into power by its own trained mapping. The blue dot is Energinet's own day-ahead forecast,
+  wind output. The orange dot is my forecast. The blue dot is Energinet's own day-ahead forecast,
   scaled by its actual-to-forecast ratio over the previous 60 days. That scaling is needed because its offshore DK1
   series covers only part of the fleet.</figcaption>
 </figure>
@@ -82,12 +88,12 @@ When the day is over, it is scored against Energinet's measured output.</p>
 
 <h2>How sure is the forecast?</h2>
 <p>Each forecast also carries an 80% band for total Danish wind: the range the real output should fall inside four
-hours out of five. The band comes from how far the four models in my blend disagree. When they agree, it is narrow;
+hours out of five. The band comes from how far the four weather models in my forecast disagree. When they agree, it is narrow;
 when they pull apart, as they do ahead of fronts, it widens.</p>
 <div class="tiles" id="btiles"></div>
 <figure>
   <div id="band"></div>
-  <figcaption id="bcap">The shaded area is the 80% band, the line is my blend's forecast, and the dots are the measured
+  <figcaption id="bcap">The shaded area is the 80% band, the line is my forecast, and the dots are the measured
   output. Last seven days shown.</figcaption>
 </figure>
 
@@ -100,7 +106,27 @@ archive of past runs, so the lead time matches a real day-ahead decision. The ba
 <footer>Data: Open-Meteo (CC BY 4.0), Energinet Energi Data Service, DMI. Code and every forecast:
 <a href="https://github.com/bolgacg/dk-wind-live">github.com/bolgacg/dk-wind-live</a>.</footer>
 </main>
+<div id="tipbox" role="tooltip"></div>
 <script>
+// one-line descriptions of every source, shared with the study page (site-common/glossary.json)
+let GLOSS = {};
+const tipText = src => (GLOSS[src] || GLOSS[src === "energinet_da" ? "energinet_raw" : ""] || {}).text;
+function tip(node, src) {
+  const t = tipText(src); if (!t) return node;
+  node.setAttribute("class", ((node.getAttribute("class") || "") + " tip").trim());
+  node.setAttribute("data-tip", t); node.setAttribute("tabindex", "0");
+  return node;
+}
+(() => {
+  const box = () => document.getElementById("tipbox");
+  const show = (e, t) => { const b = box(); b.textContent = t; b.style.display = "block";
+    const x = Math.min(e.clientX + 12, innerWidth - b.offsetWidth - 8), y = e.clientY + 16 + b.offsetHeight > innerHeight ? e.clientY - b.offsetHeight - 10 : e.clientY + 16;
+    b.style.left = Math.max(8, x) + "px"; b.style.top = y + "px"; };
+  const hide = () => box().style.display = "none";
+  document.addEventListener("mouseover", e => { const n = e.target.closest && e.target.closest("[data-tip]"); n ? show(e, n.dataset.tip) : hide(); });
+  document.addEventListener("click", e => { const n = e.target.closest && e.target.closest("[data-tip]"); n ? show(e, n.dataset.tip) : hide(); });
+  document.addEventListener("scroll", hide, {passive: true});
+})();
 const NS = "http://www.w3.org/2000/svg";
 const COL = s => s === "blend" ? "var(--ours)" : s === "energinet" ? "var(--en)" : "var(--other)";
 function el(tag, attrs, parent, text) {
@@ -117,11 +143,11 @@ function render(d) {
   document.getElementById("period").textContent =
     `${d.from} to ${d.to}, ${d.days} days, ${o.length} sources compared.`;
   document.getElementById("lede").textContent = ours ?
-    `Over these ${d.days} days my blend ranked ${rank === 1 ? "first" : "number " + rank} of ${o.length} on accuracy ` +
+    `Over these ${d.days} days my forecast ranked ${rank === 1 ? "first" : "number " + rank} of ${o.length} on accuracy ` +
     `(${ours.acc.toFixed(1)}%), against ${en ? en.acc.toFixed(1) + "% for Energinet's own forecast" : "the field"}, ` +
     `and was the single most accurate source on ${ours.wins} of ${d.days} days.` : "No scored days yet.";
   const T = document.getElementById("tiles"); T.innerHTML = "";
-  if (ours) for (const [v, l] of [[ours.acc.toFixed(1) + "%", "accuracy of my blend"],
+  if (ours) for (const [v, l] of [[ours.acc.toFixed(1) + "%", "accuracy of my forecast"],
       [en ? (ours.acc - en.acc >= 0 ? "+" : "") + (ours.acc - en.acc).toFixed(1) + " pts" : "n/a", "against Energinet's forecast"],
       [`${ours.wins} of ${d.days}`, "days ranked first"], [`${ours.top3} of ${d.days}`, "days in the top three"]]) {
     const t = document.createElement("div"); t.className = "tile"; t.innerHTML = `<b>${v}</b><span>${l}</span>`; T.appendChild(t);
@@ -137,7 +163,7 @@ function render(d) {
   }
   o.forEach((r, i) => {
     const y = 24 + i * rowH, c = COL(r.source), b = r.source === "blend";
-    el("text", {x: L - 12, y: y + 4, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name);
+    tip(el("text", {x: L - 12, y: y + 4, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name), r.source);
     el("line", {x1: L, x2: x(r.acc), y1: y, y2: y, stroke: "#e4e1d9", "stroke-width": 1}, s);
     el("circle", {cx: x(r.acc), cy: y, r: b ? 8 : 6, fill: c}, s);
     el("text", {x: x(r.acc) + 12, y: y + 4, "font-size": 13, fill: c, "font-weight": b ? 700 : 400}, s, r.acc.toFixed(1) + "%");
@@ -148,7 +174,7 @@ function render(d) {
   s = svg(document.getElementById("wins"), W, H2);
   byWins.forEach((r, i) => {
     const y = 14 + i * rowH, c = COL(r.source), b = r.source === "blend";
-    el("text", {x: L - 12, y: y + 13, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name);
+    tip(el("text", {x: L - 12, y: y + 13, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name), r.source);
     el("rect", {x: L, y: y + 2, width: Math.max(0, xw(r.top3) - L), height: 16, fill: c, opacity: .25}, s);
     el("rect", {x: L, y: y + 2, width: Math.max(0, xw(r.wins) - L), height: 16, fill: c}, s);
     el("text", {x: xw(r.top3) + 8, y: y + 15, "font-size": 12, fill: "#6b6a65"}, s, `${r.wins} first, ${r.top3} top three`);
@@ -159,8 +185,8 @@ function render(d) {
   s = svg(document.getElementById("strip"), W3, H3);
   s.setAttribute("width", Math.max(W3, 300)); s.style.minWidth = W3 + "px";
   const idx = {}; o.forEach((r, i) => idx[r.source] = i);
-  o.forEach((r, i) => el("text", {x: L - 12, y: 14 + i * 18 + 11, "text-anchor": "end", "font-size": 12,
-    "font-weight": r.source === "blend" ? 700 : 400, fill: r.source === "blend" ? "var(--ours)" : "#1d1d1b"}, s, r.name));
+  o.forEach((r, i) => tip(el("text", {x: L - 12, y: 14 + i * 18 + 11, "text-anchor": "end", "font-size": 12,
+    "font-weight": r.source === "blend" ? 700 : 400, fill: r.source === "blend" ? "var(--ours)" : "#1d1d1b"}, s, r.name), r.source));
   d.daily.forEach(r => {
     const j = days.indexOf(r.day), i = idx[r.source]; if (i === undefined) return;
     const shade = 1 - (r.rank - 1) / (n - 1 || 1);
@@ -175,7 +201,12 @@ function renderWeek(D) {
   // live days only; until the first live day is scored, the last backtest week is shown and labelled as such
   // the live week starts 31 Oct: the 30 Oct forecast was issued before the full field of models and the band existed
   const liveRows = D.live ? D.live.daily.filter(r => r.day >= "2026-10-31").map(r => ({...r, kind: "live"})) : [];
-  const all = liveRows.length ? liveRows : (D.backtest ? D.backtest.daily.map(r => ({...r, kind: "backtest"})) : []);
+  if (!liveRows.length) {
+    document.getElementById("week").innerHTML = "<p class='mute sans'>The first live day (31 Oct) is scored at 01:30 on 1 Nov. Until then, the backtest tab below shows 92 past days.</p>";
+    document.getElementById("weektab").innerHTML = ""; document.getElementById("weekcap").textContent = "";
+    document.getElementById("weekh").textContent = "The last seven live days, ranked"; return;
+  }
+  const all = liveRows;
   const days = [...new Set(all.map(r => r.day))].sort().slice(-7);
   const rows = all.filter(r => days.includes(r.day));
   const kindOf = d => rows.find(r => r.day === d).kind;
@@ -206,18 +237,17 @@ function renderWeek(D) {
     if (hi) { const last = pts[pts.length - 1];
       const other = rows.find(q => q.day === days[days.length - 1] && q.source === (src === "blend" ? best.src : "blend"));
       const clash = other && Math.abs(y(other.rank) - last[1]) < 16, dy = clash ? (src === "blend" ? -8 : 8) : 0;
-      el("text", {x: last[0] + 12, y: last[1] + 4 + dy, "font-size": 13, "font-weight": 700, fill: col(src)}, s, name[src] || src); }
+      tip(el("text", {x: last[0] + 12, y: last[1] + 4 + dy, "font-size": 13, "font-weight": 700, fill: col(src)}, s, (name[src] || src).replace(" (bias-corrected)", "")), src); }
   }
   const tb = document.getElementById("weektab");
   tb.innerHTML = "<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Source</th><th style='padding:4px 8px;text-align:right'>Average rank</th><th style='padding:4px 8px;text-align:right'>Days in top three</th><th style='padding:4px 8px;text-align:right'>Worst day</th></tr>" +
-    stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === "blend" ? "font-weight:700;color:#c2410c" : st.src === best.src ? "font-weight:700;color:#0f766e" : ""}"><td style="padding:4px 8px">${name[st.src] || st.src}</td><td style="padding:4px 8px;text-align:right">${st.mean.toFixed(1)}</td><td style="padding:4px 8px;text-align:right">${st.top3} of ${st.n}</td><td style="padding:4px 8px;text-align:right">${st.worst}</td></tr>`).join("") + "</table>";
+    stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === "blend" ? "font-weight:700;color:#c2410c" : st.src === best.src ? "font-weight:700;color:#0f766e" : ""}"><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(st.src) || "").replace(/"/g, "&quot;")}">${name[st.src] || st.src}</span></td><td style="padding:4px 8px;text-align:right">${st.mean.toFixed(1)}</td><td style="padding:4px 8px;text-align:right">${st.top3} of ${st.n}</td><td style="padding:4px 8px;text-align:right">${st.worst}</td></tr>`).join("") + "</table>";
   const b = stats.find(s => s.src === "blend"), nl = days.filter(d => kindOf(d) === "live").length;
   document.getElementById("weekcap").textContent = `Daily rank of each source by accuracy, 1 = most accurate of ${n}. ` +
-    `Orange is my blend; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
-    (nl ? `Live week: ${nl} of 7 days scored so far (31 Oct to 6 Nov), each forecast committed before its day began. `
-        : "No live day is scored yet (the first is 31 Oct), so this shows the last backtest week, scored on archived forecasts. ") +
-    `Over these days my blend averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
-  document.getElementById("weekh").textContent = nl ? `Live week, day ${nl} of 7, ranked` : "Backtest week, until the live week starts on 31 Oct";
+    `Orange is my forecast; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
+    `${nl} live day${nl === 1 ? "" : "s"} shown, each forecast committed before its day began. ` +
+    `Over these days my forecast averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
+  document.getElementById("weekh").textContent = nl < 7 ? `The live days so far, ranked (${nl} of 7)` : "The last seven live days, ranked";
 }
 function renderBand(B) {
   const T = document.getElementById("btiles"), host = document.getElementById("band");
@@ -245,11 +275,26 @@ function renderBand(B) {
   S.forEach((r, i) => { if (r.t.endsWith("T00") && x(i) < W - 40)
     el("text", {x: x(i), y: H - 8, "font-size": 11, fill: "#6b6a65", "text-anchor": "middle"}, s,
       new Date(r.t.slice(0, 10) + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"})); });
-  document.getElementById("bcap").textContent = `The shaded area is the 80% band, the orange line is my blend's forecast,
+  document.getElementById("bcap").textContent = `The shaded area is the 80% band, the orange line is my forecast,
     and the dots are the measured output: black inside the band, blue outside. Last seven days of ${B.from} to ${B.to},
     hourly, total Denmark, in MW.`;
 }
-fetch("data.json").then(r => r.json()).then(D => {
+function renderHealth(h) {
+  const n = document.getElementById("health"); if (!h || !h.last_forecast_day) { n.textContent = ""; return; }
+  const fmt = t => new Date(t).toLocaleString("en-GB", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Copenhagen"});
+  const dd = d => new Date(d + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"});
+  // a forecast for tomorrow is due by 12:00 Copenhagen time
+  const now = new Date(), cph = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Copenhagen"}));
+  const due = new Date(cph); due.setDate(due.getDate() + (cph.getHours() >= 12 ? 1 : 0));
+  const dueDay = due.toISOString().slice(0, 10), late = h.last_forecast_day < dueDay;
+  n.innerHTML = `Last forecast: for ${dd(h.last_forecast_day)}, issued ${fmt(h.last_forecast_issued_utc)}. ` +
+    (h.last_scored_day ? `Last day scored: ${dd(h.last_scored_day)}. ` : "No live day scored yet. ") +
+    `Page data built ${fmt(h.generated_utc)} Copenhagen time.` +
+    (late ? ` <span class="warnline">The forecast for ${dd(dueDay)} is not on this page yet; the page updates three times a day.</span>` : "");
+}
+Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({}))]).then(([D, G]) => {
+  GLOSS = G;
+  renderHealth(D.health);
   renderWeek(D);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
     render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
@@ -258,7 +303,7 @@ fetch("data.json").then(r => r.json()).then(D => {
   if (!hasLive) document.getElementById("t-live").textContent = "Live: first scores from 31 Oct";
   document.getElementById("t-live").onclick = () => hasLive && pick("live");
   document.getElementById("t-backtest").onclick = () => pick("backtest");
-  pick(hasLive && D.live.days >= 7 ? "live" : "backtest");
+  pick(hasLive ? "live" : "backtest");
 });
 </script>
 </body>
