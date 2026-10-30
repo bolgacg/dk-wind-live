@@ -1,0 +1,29 @@
+/* adopted from projects-b4's picker, 30 Oct 2026: top B, numbers A; light mode only */
+/* top B: day cards */
+.daycards{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 8px}
+.daycard{flex:1 1 300px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px 10px;font-family:system-ui,sans-serif}
+.daycard h3{font:700 .95rem/1.3 system-ui,sans-serif;margin:0 0 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chip{font:600 .72rem/1 system-ui,sans-serif;padding:5px 9px;border-radius:20px;white-space:nowrap}
+.chip.ok{background:#fff1e6;color:#9a3412}
+.chip.wait{background:#f1efe9;color:#57534e}
+.chip.bad{background:#fee2e2;color:#991b1b}
+.daycard .big{font-size:.92rem;margin:8px 0 2px}
+.daycard .small{font-size:.82rem;color:var(--mute);margin:2px 0}
+
+/* numbers A: one table */
+.tblwrap{overflow-x:auto;margin:20px 0 6px}
+.scales{width:100%;border-collapse:separate;border-spacing:0;font:.95rem/1.4 system-ui,sans-serif;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.scales th,.scales td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.scales thead th{border-top:0;font-weight:600;font-size:.84rem;text-align:right;color:var(--ink)}
+.scales thead th:first-child{text-align:left;color:var(--mute);font-weight:400}
+.scales td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scales td:first-child{text-align:left;white-space:normal;min-width:190px}
+.scales .k{font-weight:600;display:block}
+.scales .u{display:block;font-size:.8rem;color:var(--mute)}
+.scales .sub{display:block;font-size:.78rem;color:var(--mute);font-weight:400}
+.scales .best{font-weight:700}
+.scales .c-ours{color:var(--ours)} .scales .c-en{color:var(--en)}
+.scales td.c-ours{background:#fffaf5}
+.note{font:.86rem/1.5 system-ui,sans-serif;color:var(--mute);margin:6px 0}
+
+@media (max-width:600px){.scales,.scales tbody{display:block}.scales thead{display:none}.scales tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.scales td,.scales .sub{white-space:normal}.scales td{border-top:0;padding:4px 10px 12px}.scales td:first-child{grid-column:1/-1;border-top:1px solid var(--line);padding-top:12px;min-width:0}.scales tr:first-child td:first-child{border-top:0}.scales td[data-l]::before{content:attr(data-l);display:block;font-size:.72rem;color:var(--mute);font-weight:400;white-space:normal}.scales td.c-ours{background:transparent}}

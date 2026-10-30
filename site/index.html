@@ -34,31 +34,23 @@ footer{margin-top:48px;font:.85rem/1.5 system-ui,sans-serif;color:var(--mute)}
 a{color:var(--en)}
 @media (max-width:600px){figure{overflow-x:auto} figure svg{min-width:620px}}
 </style>
+<link rel="stylesheet" href="extra.css">
+<script src="extra.js"></script>
 </head>
 <body>
 <main>
 <h1>Who forecasts Denmark's wind best?</h1>
 <div class="tabs" role="group" aria-label="View" style="margin:6px 0 14px"><button id="v-e" aria-pressed="true">Energy: wind power</button><button id="v-w" aria-pressed="false">Weather: DKcast</button></div>
 <div id="v-energy">
-<p class="lede" id="lede">Loading results.</p>
-<div class="sans" id="health" style="font-size:.9rem;margin:4px 0 12px"></div>
-<p class="mute">Every morning before the 12:00 day-ahead gate, I forecast the next day's hourly wind power in Denmark's
-four wind zones, offshore and onshore in DK1 and DK2. Each forecast is
-<a href="https://github.com/bolgacg/dk-wind-live/tree/main/forecasts">committed publicly</a> before its day begins.
-When the day is over, it is scored against Energinet's measured output.</p>
-<p class="mute"><b style="color:var(--ours)">J4catDK</b> is my own power model. J for joint: one model instead of
-several averaged. 4 for its four weather models (ECMWF IFS, ECMWF AIFS, DMI HARMONIE, DWD ICON-EU), whose winds at 34
-wind-farm sites go in side by side ("cat", concatenated), so it learns which model to trust where. DK for DKcast, my
-weather model's corrected winds at 22 Danish stations. A second stage learns how much offshore output gets switched
-off when prices are low. In its one test on 2026 data, frozen and published before it ran, its error was 5.56% of
-installed capacity, against 6.68% for Energinet's own forecast. Hover over or tap any source name for a one-line
-description.</p>
+<div id="topB"></div>
+<div hidden><p id="lede"></p><div id="health"></div></div>
 
 <div class="tabs" role="group" aria-label="Period">
   <button id="t-live" aria-pressed="true">Live, since 30 Oct 2026</button>
   <button id="t-backtest" aria-pressed="false">Backtest, 92 past days</button>
 </div>
 <p class="mute sans" id="period" style="font-size:.9rem;margin-top:10px"></p>
+<div id="numA"></div>
 
 
 <h2 id="weekh">Who came first each day</h2>
@@ -74,22 +66,9 @@ description.</p>
   <figcaption id="tlcap"></figcaption>
 </figure>
 
-<h2>Error over the whole period, % of installed capacity</h2>
-<figure>
-  <div id="dots"></div>
-  <figcaption>Each dot is one forecast source; lower is better. The measure is the wind industry's standard: the mean
-  absolute error of each area's hourly total, DK1 and DK2, as a percentage of installed capacity. Capacity is
-  estimated per zone as the 99.5th percentile of hourly output over the previous 60 days, known before each day,
-  because Energinet publishes no hourly capacity. The orange dot is J4catDK. The blue dot is Energinet's own day-ahead forecast,
-  scaled by its actual-to-forecast ratio over the previous 60 days. That scaling is needed because its offshore DK1
-  series covers only part of the fleet.</figcaption>
-</figure>
-
-<h2>How often each source had the smallest error</h2>
-<figure>
-  <div id="wins"></div>
-  <figcaption>Days on which each source had the smallest error of all sources, by error as a % of installed capacity.</figcaption>
-</figure>
+<h2>Average error, and days in first place</h2>
+<figure><div id="lowAfig"></div><figcaption id="lowAcap"></figcaption></figure>
+<div hidden><div id="dots"></div><div id="wins"></div></div>
 
 <h2>Day by day: did J4catDK win, and by how much?</h2>
 <figure>
@@ -418,7 +397,7 @@ function renderTimeline(TL) {
   cap.textContent = `Total Danish wind output, hour by hour, in MW. Black is what was measured, orange is my forecast (J4catDK), blue is ` +
     `Energinet's own day-ahead forecast. Above each day: both errors as a % of installed capacity, the smaller one in bold. ` +
     `The faded days before today are replayed: my model, trained only on data up to 18 Oct, run on the weather forecasts as they stood the day before, exactly as the morning run would have. ` +
-    `From 31 Oct every forecast is live, committed before 12:00 the day before. Days marked "not forecast" fall between the replay and the first live day. ` +
+    `From 31 Oct every forecast is live, committed before 12:00 the day before. ` +
     (sc.length ? `Mine had the smaller error on ${won} of the ${sc.length} complete days shown. ` : "") + `Hover or tap the chart for exact values.`;
 }
 function renderToday(T) {
@@ -477,8 +456,9 @@ function renderHealth(h, TD) {
     `<div style="display:flex;flex-wrap:wrap;gap:10px">${panel(today, "Today")}${panel(tomorrow, "Tomorrow")}</div>`;
 }
 Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({})),
-    fetch("today.json").then(r => r.json()).catch(() => null), fetch("timeline.json").then(r => r.json()).catch(() => null), fetch("weather.json").then(r => r.json()).catch(() => null)]).then(([D, G, TD, TL, WX]) => {
+    fetch("today.json").then(r => r.json()).catch(() => null), fetch("timeline.json").then(r => r.json()).catch(() => null), fetch("weather.json").then(r => r.json()).catch(() => null), fetch("summary.json").then(r => r.json()).catch(() => null)]).then(([D, G, TD, TL, WX, SM]) => {
   renderWeather(WX);
+  Object.assign(ALT, {D, TD, S: SM});
   const view = w => { document.getElementById("v-energy").hidden = w; document.getElementById("v-weather").hidden = !w;
     document.getElementById("v-e").setAttribute("aria-pressed", !w); document.getElementById("v-w").setAttribute("aria-pressed", w); };
   document.getElementById("v-e").onclick = () => view(false); document.getElementById("v-w").onclick = () => view(true);
@@ -488,8 +468,9 @@ Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then
   renderTimeline(TL);
   renderWeek(D, TL);
   renderHealth(D.health, TD);
+  topB(dayInfo());
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
-    render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
+    render(D[k]); numA(D[k]); lowA(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
   const hasLive = D.live && D.live.days > 0;
   document.getElementById("t-live").disabled = !hasLive;
   if (!hasLive) { const b = document.getElementById("t-live"); b.textContent = "Live: first day scored 1 Nov, 01:30"; b.style.cssText += ";border-style:dashed;cursor:default;opacity:1;color:#6b6a65"; }
