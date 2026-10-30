@@ -1,51 +1,51 @@
 {
-"built_utc": "2026-10-30T00:08Z",
+"built_utc": "2026-10-30T01:08Z",
 "line_name": "4-model average",
 "day": "2026-10-30",
-"hours_measured": 1,
+"hours_measured": 2,
 "hours_total": 24,
-"through_utc": "2026-10-30T00:00Z",
+"through_utc": "2026-10-30T01:00Z",
 "ranking": [
 {
 "source": "aifs",
 "name": "ECMWF AIFS (AI)",
-"nmae": 0.74,
-"acc": 93.22,
+"nmae": 1.18,
+"acc": 91.66,
 "rank": 1
-},
-{
-"source": "harmonie",
-"name": "DMI HARMONIE",
-"nmae": 3.22,
-"acc": 82.93,
-"rank": 2
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 3.7,
-"acc": 80.38,
-"rank": 3
+"nmae": 4.12,
+"acc": 77.95,
+"rank": 2
 },
 {
 "source": "blend",
 "name": "4-model average",
-"nmae": 3.97,
-"acc": 78.71,
-"rank": 4
+"nmae": 4.85,
+"acc": 73.92,
+"rank": 3
 },
 {
-"source": "icon",
-"name": "DWD ICON-EU",
-"nmae": 6.48,
-"acc": 61.93,
-"rank": 5
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"nmae": 4.92,
+"acc": 73.7,
+"rank": 4
 },
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 6.92,
-"acc": 60.46,
+"nmae": 7.9,
+"acc": 55.21,
+"rank": 5
+},
+{
+"source": "icon",
+"name": "DWD ICON-EU",
+"nmae": 7.96,
+"acc": 53.37,
 "rank": 6
 }
 ],
@@ -62,7 +62,7 @@
 "p": 1657,
 "lo": null,
 "hi": null,
-"a": null
+"a": 1265
 },
 {
 "t": "2026-10-30T01",
