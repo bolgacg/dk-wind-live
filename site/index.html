@@ -38,6 +38,8 @@ a{color:var(--en)}
 <body>
 <main>
 <h1>Who forecasts Denmark's wind best?</h1>
+<div class="tabs" role="group" aria-label="View" style="margin:6px 0 14px"><button id="v-e" aria-pressed="true">Energy: wind power</button><button id="v-w" aria-pressed="false">Weather: DKcast</button></div>
+<div id="v-energy">
 <p class="lede" id="lede">Loading results.</p>
 <div class="sans" id="health" style="font-size:.9rem;margin:4px 0 12px"></div>
 <p class="mute">Every morning before the 12:00 day-ahead gate, I forecast the next day's hourly wind power in Denmark's
@@ -61,18 +63,10 @@ description.</p>
 <div class="tiles" id="tiles"></div>
 <p class="mute sans" id="second" style="font-size:.88rem;margin-top:-8px"></p>
 
-<h2 id="todayh">Today so far</h2>
+<h2>Forecast against what happened: the last week, today and tomorrow</h2>
 <figure>
-  <div id="today"></div>
-  <div id="todaytab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
-  <figcaption id="todaycap"></figcaption>
-</figure>
-
-<h2 id="weekh">The last seven live days, ranked</h2>
-<figure>
-  <div id="week"></div>
-  <div id="weektab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
-  <figcaption id="weekcap"></figcaption>
+  <div id="tl"></div>
+  <figcaption id="tlcap"></figcaption>
 </figure>
 
 <h2>Error over the whole period, % of installed capacity</h2>
@@ -119,6 +113,13 @@ capacity, per area, day-ahead. For meteorologists: skill score against ECMWF IFS
 the same hours. For traders: imbalance cost, each hour's error settled at the difference between the day-ahead price
 and Energinet's imbalance price, per MWh produced. Accuracy, 100% minus error over output, is kept as a plain-language
 extra.</p>
+</div>
+<div id="v-weather" hidden>
+<p class="lede">The power forecast stands on my own weather forecast, DKcast. Here is how DKcast did against the best public weather forecast at Danish weather stations, on 2026 data it never saw.</p>
+<div id="wx"></div>
+<p class="mute sans" id="wxnote" style="font-size:.88rem"></p>
+<p class="sans">Station by station, with today's and tomorrow's weather: <a href="https://bolgacg.github.io/dkcast/">the DKcast page</a>.</p>
+</div>
 <footer>Data: Open-Meteo (CC BY 4.0), Energinet Energi Data Service, DMI. Code and every forecast:
 <a href="https://github.com/bolgacg/dk-wind-live">github.com/bolgacg/dk-wind-live</a>.</footer>
 </main>
@@ -320,6 +321,114 @@ function renderBand(B) {
     and the dots are the measured output: black inside the band, blue outside. Last seven days of ${B.from} to ${B.to},
     hourly, total Denmark, in MW.` + (S.some(r => r.t === "2026-10-16T09") ? " On 16 Oct a short burst of wind more than doubled the output in five hours, from 1,500 to 3,800 MW, and the forecast missed it, so the dots leave the band that morning." : "");
 }
+function renderWeather(WX) {
+  // DKcast's 2026 test against the strongest public forecast for each variable (projects-5a's study)
+  const host = document.getElementById("wx"); if (!WX) { host.innerHTML = "<p class='mute sans'>Weather scores not available.</p>"; return; }
+  host.innerHTML = "";
+  for (const v of WX.vars) {
+    const brier = v.metric.startsWith("Brier"), a = brier ? v.dkcast_brier : v.dkcast_rmse, b = brier ? v.ref_brier : v.ref_rmse;
+    const ref = v.ref_name.replace(", station-corrected", ", corrected at each station").replace("average of raw models", "average of the public models")
+      .replace("icon_eu", "DWD ICON-EU").replace("ecmwf_ifs025", "ECMWF IFS").replace("icon_d2", "DWD ICON-D2");
+    const unit = brier ? "" : " " + v.unit, f = x => brier ? x.toFixed(4) : x.toFixed(2);
+    const card = document.createElement("div"); card.className = "sans";
+    card.style.cssText = "border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0;background:var(--card)";
+    const bar = (lab, val, col, bold) => `<div style="display:flex;align-items:center;gap:8px;margin-top:6px"><div style="width:230px;flex:none;font-size:.85rem;${bold ? "font-weight:700;color:" + col : ""}">${lab}</div>` +
+      `<div class="tip" tabindex="0" data-tip="${lab}: ${f(val)}${unit} ${brier ? "Brier score" : "RMSE"}" style="height:16px;width:${(val / b * 60).toFixed(1)}%;background:${col};border-radius:3px"></div><div style="font-size:.85rem">${f(val)}${unit}</div></div>`;
+    card.innerHTML = `<div style="font-weight:700">${v.name}: ${v.skill_pct.toFixed(1)}% ${brier ? "better at calling rain or no rain" : "less error"}</div>` +
+      bar("DKcast, mine", a, "#c2410c", true) + bar(`Best public: ${ref}`, b, "#6b6a65", false);
+    host.appendChild(card);
+  }
+  document.getElementById("wxnote").textContent = "Error is the root mean square error of each hourly day-ahead forecast at the stations (shorter bar is better); " +
+    "for rain it is the Brier score of rain or no rain. The public reference is, for each variable, the best of every public model, corrected at each station, and their average, picked on the test itself, so the comparison is against the strongest one. Hover a bar for its value.";
+}
+function renderTimeline(TL) {
+  // one timeline: the last seven days faded, today and tomorrow bright; measured output, my forecast and Energinet's
+  const host = document.getElementById("tl"), cap = document.getElementById("tlcap");
+  if (!TL || !TL.series || !TL.series.length) { host.innerHTML = "<p class='mute sans'>Timeline not built yet.</p>"; return; }
+  const S = TL.series, D = TL.days, W = 760, L = 64, R = 10, top = 58, bot = 62, H = 380;
+  const x = i => L + (i + .5) / S.length * (W - L - R);
+  const vals = S.flatMap(r => [r.a, r.j, r.e]).filter(v => v != null), ymax = Math.max(...vals) * 1.06;
+  const y = v => top + (1 - v / ymax) * (H - top - bot);
+  const s = svg(host, W, H);
+  const tz = {timeZone: "Europe/Copenhagen"};
+  const dname = d => new Date(d + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"});
+  // day columns: faded before today, a tint on today and tomorrow
+  let i0 = 0;
+  const dayIdx = D.map(d => { const n = d.hours, a = i0; i0 += n; return [a, i0 - 1]; });
+  D.forEach((d, k) => {
+    const [a, b] = dayIdx[k], xa = x(a) - (x(1) - x(0)) / 2, xb = x(b) + (x(1) - x(0)) / 2, mid = (xa + xb) / 2;
+    const recent = d.day >= TL.today;
+    if (recent) el("rect", {x: xa, y: top - 52, width: xb - xa, height: H - bot - top + 52, fill: "#fbf3ea"}, s);
+    el("line", {x1: xa, x2: xa, y1: top - 52, y2: H - bot, stroke: "#e4e1d9"}, s);
+    const lab = d.day === TL.today ? "today" : d.day > TL.today ? "tomorrow" : d.kind === "replayed" ? "replayed" : d.kind === "live" ? "live" : "no forecast";
+    el("text", {x: mid, y: H - bot + 16, "text-anchor": "middle", "font-size": 11, fill: recent ? "#1d1d1b" : "#6b6a65", "font-weight": recent ? 700 : 400}, s, dname(d.day));
+    el("text", {x: mid, y: H - bot + 30, "text-anchor": "middle", "font-size": 10, fill: d.kind === "live" || recent ? "#c2410c" : "#9a978f"}, s, lab);
+    // each day's error: mine over Energinet's, % of capacity; bold for the smaller one
+    const e = d.err || {};
+    if (e.j4catdk != null) {
+      const win = e.j4catdk <= e.energinet, prov = !d.complete ? " so far" : "";
+      el("text", {x: mid, y: top - 34, "text-anchor": "middle", "font-size": 12, fill: "#c2410c", "font-weight": win ? 700 : 400}, s, `${e.j4catdk.toFixed(1)}%`);
+      el("text", {x: mid, y: top - 18, "text-anchor": "middle", "font-size": 12, fill: "#1e40af", "font-weight": win ? 400 : 700}, s, `${e.energinet.toFixed(1)}%`);
+      if (prov) el("text", {x: mid, y: top - 6, "text-anchor": "middle", "font-size": 10, fill: "#6b6a65"}, s, "so far");
+    } else el("text", {x: mid, y: top - 20, "text-anchor": "middle", "font-size": 10, fill: "#9a978f"}, s,
+      d.day >= TL.today && d.kind ? "scored 01:30" : "");
+  });
+  el("text", {x: L - 4, y: top - 46, "text-anchor": "end", "font-size": 10, fill: "#6b6a65"}, s, "error");
+  el("text", {x: L - 4, y: top - 34, "text-anchor": "end", "font-size": 10, fill: "#c2410c"}, s, "mine");
+  el("text", {x: L - 4, y: top - 18, "text-anchor": "end", "font-size": 10, fill: "#1e40af"}, s, "Energinet");
+  const step = Math.max(1000, Math.ceil(ymax / 4 / 1000) * 1000);
+  for (let v = 0; v <= ymax; v += step) {
+    el("line", {x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "#eee"}, s);
+    el("text", {x: L - 6, y: y(v) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, v.toLocaleString("en")); }
+  // lines, split where data is missing; faded before today
+  const todayStart = S.findIndex(r => new Date(r.t + ":00Z").toLocaleDateString("en-CA", tz) >= TL.today);
+  const line = (key, col, w, dash) => {
+    for (const [a, b, op] of [[0, todayStart, .45], [Math.max(0, todayStart - 1), S.length, 1]]) {
+      let d = "", pen = false;
+      for (let i = a; i < b; i++) { const v = S[i][key];
+        if (v == null) { pen = false; continue; }
+        d += (pen ? "L" : "M") + x(i).toFixed(1) + "," + y(v).toFixed(1); pen = true; }
+      if (d) el("path", {d, fill: "none", stroke: col, "stroke-width": w, opacity: op, "stroke-dasharray": dash || "none", "stroke-linejoin": "round"}, s);
+    }
+  };
+  line("e", "#1e40af", 1.3);
+  line("j", "#c2410c", 2.4);
+  line("a", "#1d1d1b", 2);
+  const ni = S.findIndex(r => r.a == null && r.t >= TL.now_utc.slice(0, 13));
+  const nowI = ni < 0 ? S.length - 1 : ni;
+  el("line", {x1: x(nowI) - (x(1) - x(0)) / 2, x2: x(nowI) - (x(1) - x(0)) / 2, y1: top, y2: H - bot, stroke: "#1d1d1b", "stroke-dasharray": "3 3"}, s);
+  el("text", {x: x(nowI) - (x(1) - x(0)) / 2 + 4, y: top + 12, "font-size": 11, fill: "#1d1d1b"}, s, "now");
+  // legend, in place
+  const lg = [["#1d1d1b", "measured"], ["#c2410c", "J4catDK, mine"], ["#1e40af", "Energinet"]];
+  let lx = W - R - 300; for (const [c, t] of lg) { el("line", {x1: lx, x2: lx + 18, y1: H - 9, y2: H - 9, stroke: c, "stroke-width": 2.4}, s);
+    el("text", {x: lx + 22, y: H - 5, "font-size": 11, fill: c}, s, t); lx += 30 + t.length * 6.2; }
+  // hover: a crosshair and the exact values
+  const cross = el("line", {x1: 0, x2: 0, y1: top, y2: H - bot, stroke: "#6b6a65", opacity: 0}, s);
+  const dots = ["a", "j", "e"].map((k, n) => el("circle", {r: 3.5, fill: ["#1d1d1b", "#c2410c", "#1e40af"][n], opacity: 0}, s));
+  const pad = el("rect", {x: L, y: top, width: W - L - R, height: H - top - bot, fill: "transparent"}, s);
+  const box = document.getElementById("tipbox"), fmt = v => v == null ? "n/a" : v.toLocaleString("en") + " MW";
+  const move = ev => {
+    const pt = s.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+    const p = pt.matrixTransform(s.getScreenCTM().inverse());
+    const i = Math.max(0, Math.min(S.length - 1, Math.round((p.x - L) / (W - L - R) * S.length - .5))), r = S[i];
+    cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("opacity", 1);
+    ["a", "j", "e"].forEach((k, n) => { if (r[k] == null) dots[n].setAttribute("opacity", 0);
+      else { dots[n].setAttribute("cx", x(i)); dots[n].setAttribute("cy", y(r[k])); dots[n].setAttribute("opacity", 1); } });
+    const when = new Date(r.t + ":00Z").toLocaleString("en-GB", {weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", ...tz});
+    box.innerHTML = `<b>${when}</b><br>Measured: ${fmt(r.a)}<br><span style="color:#c2410c">J4catDK: ${fmt(r.j)}</span><br><span style="color:#1e40af">Energinet: ${fmt(r.e)}</span>`;
+    box.style.display = "block";
+    box.style.left = Math.max(8, Math.min(ev.clientX + 14, innerWidth - box.offsetWidth - 8)) + "px";
+    box.style.top = (ev.clientY + 16 + box.offsetHeight > innerHeight ? ev.clientY - box.offsetHeight - 10 : ev.clientY + 16) + "px";
+  };
+  pad.addEventListener("mousemove", move); pad.addEventListener("click", move);
+  pad.addEventListener("mouseleave", () => { cross.setAttribute("opacity", 0); dots.forEach(c => c.setAttribute("opacity", 0)); box.style.display = "none"; });
+  const sc = D.filter(d => d.err && d.err.j4catdk != null && d.complete), won = sc.filter(d => d.err.j4catdk <= d.err.energinet).length;
+  cap.textContent = `Total Danish wind output, hour by hour, in MW. Black is what was measured, orange is my forecast (J4catDK), blue is ` +
+    `Energinet's own day-ahead forecast. Above each day: both errors as a % of installed capacity, the smaller one in bold. ` +
+    `The faded days before today are replayed: my model, trained only on data up to 18 Oct, run on the weather forecasts as they stood the day before, exactly as the morning run would have. ` +
+    `From 31 Oct every forecast is live, committed before 12:00 the day before. Days marked "not forecast" fall between the replay and the first live day. ` +
+    (sc.length ? `Mine had the smaller error on ${won} of the ${sc.length} complete days shown. ` : "") + `Hover or tap the chart for exact values.`;
+}
 function renderToday(T) {
   const host = document.getElementById("today"), cap = document.getElementById("todaycap");
   if (!T || !T.day) { host.innerHTML = "<p class='mute sans'>No hour of today has been measured yet. The first one appears about an hour after it ends; when today's forecast was issued is at the top of the page.</p>"; return; }
@@ -376,13 +485,16 @@ function renderHealth(h, TD) {
     `<div style="display:flex;flex-wrap:wrap;gap:10px">${panel(today, "Today")}${panel(tomorrow, "Tomorrow")}</div>`;
 }
 Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({})),
-    fetch("today.json").then(r => r.json()).catch(() => null)]).then(([D, G, TD]) => {
+    fetch("today.json").then(r => r.json()).catch(() => null), fetch("timeline.json").then(r => r.json()).catch(() => null), fetch("weather.json").then(r => r.json()).catch(() => null)]).then(([D, G, TD, TL, WX]) => {
+  renderWeather(WX);
+  const view = w => { document.getElementById("v-energy").hidden = w; document.getElementById("v-weather").hidden = !w;
+    document.getElementById("v-e").setAttribute("aria-pressed", !w); document.getElementById("v-w").setAttribute("aria-pressed", w); };
+  document.getElementById("v-e").onclick = () => view(false); document.getElementById("v-w").onclick = () => view(true);
   GLOSS = G;
   const srcs = new Set(["backtest", "live"].flatMap(k => D[k] ? D[k].overall.map(r => r.source) : []));
   if (srcs.has("j4catdk")) OURS = "j4catdk";
-  renderToday(TD);
+  renderTimeline(TL);
   renderHealth(D.health, TD);
-  renderWeek(D);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
     render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
   const hasLive = D.live && D.live.days > 0;

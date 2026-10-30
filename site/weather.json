@@ -1,0 +1,51 @@
+{
+ "source": "experiments/results/dkcast_<var>_test.csv, projects-5a's frozen 2026 test (1 Jan to 18 Oct 2026), hourly, day-ahead, Danish weather stations",
+ "vars": [
+  {
+   "key": "wind",
+   "name": "Wind speed",
+   "unit": "m/s",
+   "dkcast_rmse": 1.408,
+   "ref_name": "icon_eu, station-corrected",
+   "ref_rmse": 1.679,
+   "ifs_rmse": 1.996,
+   "skill_pct": 16.1,
+   "metric": "RMSE"
+  },
+  {
+   "key": "temp",
+   "name": "Temperature",
+   "unit": "\u00b0C",
+   "dkcast_rmse": 0.857,
+   "ref_name": "average of raw models",
+   "ref_rmse": 0.981,
+   "ifs_rmse": 1.286,
+   "skill_pct": 12.6,
+   "metric": "RMSE"
+  },
+  {
+   "key": "sun",
+   "name": "Sunshine (solar radiation)",
+   "unit": "W/m\u00b2",
+   "dkcast_rmse": 12.684,
+   "ref_name": "average of raw models",
+   "ref_rmse": 15.012,
+   "ifs_rmse": 21.204,
+   "skill_pct": 15.5,
+   "metric": "RMSE"
+  },
+  {
+   "key": "rain",
+   "name": "Rain",
+   "unit": "mm/h",
+   "dkcast_rmse": 0.203,
+   "ref_name": "ecmwf_ifs025, station-corrected",
+   "ref_rmse": 0.221,
+   "ifs_rmse": 0.328,
+   "skill_pct": 15.6,
+   "metric": "Brier score (will it rain this hour)",
+   "dkcast_brier": 0.0412,
+   "ref_brier": 0.0488
+  }
+ ]
+}

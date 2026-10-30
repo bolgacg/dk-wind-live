@@ -8,12 +8,14 @@ echo "=== $(date -u +%FT%TZ) $1" >> ../logs/$1.log
 if [ "$1" = score ] || [ "$1" = forecast ]; then  # forecast too, so the health line shows the new forecast
   ../.venv/bin/python league.py --live-scores hourly_scores.csv >> ../logs/league.log 2>&1 \
     && ../.venv/bin/python export_summary.py >> ../logs/league.log 2>&1 \
+    && { ../.venv/bin/python timeline.py >> ../logs/league.log 2>&1; true; } \
     && mkdir -p docs && cp site/*.html site/*.json docs/ \
     && git add docs && git commit -qm "league update $(date -u +%F)" >> ../logs/league.log 2>&1
 fi
 if [ "$1" = today ]; then  # provisional running score of the day in progress, hourly
   ../.venv/bin/python export_summary.py >> ../logs/today.log 2>&1
-  mkdir -p docs && cp site/today.json site/summary.json docs/ && git add docs/today.json docs/summary.json site/today.json site/summary.json \
+  ../.venv/bin/python timeline.py >> ../logs/today.log 2>&1
+  mkdir -p docs && cp site/today.json site/summary.json site/timeline.json docs/ && git add docs/today.json docs/summary.json docs/timeline.json site/today.json site/summary.json site/timeline.json \
     && git commit -qm "provisional score $(date -u +%FT%H:00Z)" >> ../logs/today.log 2>&1
 fi
 exit 0
