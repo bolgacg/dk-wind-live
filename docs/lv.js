@@ -147,5 +147,5 @@ function lvStart(D, TL) {
   Promise.all([lvj(PUB + "dk-forecast/data/weather.json"), lvj("data_alt/wx_ranks.json"), lvj(PUB + "dkcast/dkcast.json"), lvj("data_alt/wx_ranks_more.json")])
     .then(([FW, RK, DK, RM]) => { Object.assign(LV, {FW, RK, DK, RM}); if (FW) wxB(); });
   if (TL) { tlA(); lvEnergyWindow(); }
-  lkA();
+
 }
