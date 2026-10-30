@@ -1,7 +1,7 @@
 {
-"built_utc": "2026-10-30T08:33Z",
+"built_utc": "2026-10-30T08:42Z",
 "today": "2026-10-30",
-"now_utc": "2026-10-30T08:33Z",
+"now_utc": "2026-10-30T08:42Z",
 "days": [
 {
 "day": "2026-10-23",
@@ -1412,5 +1412,572 @@
 "j": null,
 "e": null
 }
-]
+],
+"ranks": [
+{
+"day": "2026-10-23",
+"source": "ukmo",
+"nmae": 3.183,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "j4catdk",
+"nmae": 3.191,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "blend",
+"nmae": 3.542,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "aifs",
+"nmae": 3.806,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "knmi",
+"nmae": 3.929,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "gfs",
+"nmae": 4.177,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "harmonie",
+"nmae": 4.225,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "ifs",
+"nmae": 4.296,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "icon_d2",
+"nmae": 5.372,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "icon",
+"nmae": 5.503,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-23",
+"source": "energinet",
+"nmae": 5.808,
+"rank": 11,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "j4catdk",
+"nmae": 4.619,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "aifs",
+"nmae": 4.748,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "blend",
+"nmae": 6.62,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "ukmo",
+"nmae": 6.734,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "ifs",
+"nmae": 6.939,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "icon_d2",
+"nmae": 8.002,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "icon",
+"nmae": 8.62,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "energinet",
+"nmae": 9.311,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "knmi",
+"nmae": 10.211,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "harmonie",
+"nmae": 10.394,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-24",
+"source": "gfs",
+"nmae": 12.272,
+"rank": 11,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "aifs",
+"nmae": 8.817,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "gfs",
+"nmae": 9.548,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "ifs",
+"nmae": 10.014,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "blend",
+"nmae": 10.018,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "ukmo",
+"nmae": 10.03,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "icon_d2",
+"nmae": 10.459,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "knmi",
+"nmae": 10.482,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "energinet",
+"nmae": 11.671,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "icon",
+"nmae": 11.855,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "harmonie",
+"nmae": 12.418,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-25",
+"source": "j4catdk",
+"nmae": 12.432,
+"rank": 11,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "energinet",
+"nmae": 3.903,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "ifs",
+"nmae": 7.11,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "harmonie",
+"nmae": 7.756,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "knmi",
+"nmae": 7.951,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "blend",
+"nmae": 8.546,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "aifs",
+"nmae": 10.428,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "icon",
+"nmae": 11.049,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "j4catdk",
+"nmae": 11.089,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "icon_d2",
+"nmae": 13.34,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "gfs",
+"nmae": 13.422,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-26",
+"source": "ukmo",
+"nmae": 15.103,
+"rank": 11,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "blend",
+"nmae": 4.312,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "harmonie",
+"nmae": 4.58,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "j4catdk",
+"nmae": 4.798,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "knmi",
+"nmae": 5.019,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "icon",
+"nmae": 5.195,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "ifs",
+"nmae": 5.25,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "icon_d2",
+"nmae": 6.008,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "ukmo",
+"nmae": 6.45,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "aifs",
+"nmae": 6.527,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "energinet",
+"nmae": 7.661,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-27",
+"source": "gfs",
+"nmae": 7.78,
+"rank": 11,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "ifs",
+"nmae": 5.19,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "blend",
+"nmae": 6.684,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "j4catdk",
+"nmae": 6.847,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "icon_d2",
+"nmae": 7.06,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "energinet",
+"nmae": 7.345,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "harmonie",
+"nmae": 7.462,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "icon",
+"nmae": 7.917,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "knmi",
+"nmae": 8.122,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "aifs",
+"nmae": 8.218,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "gfs",
+"nmae": 8.221,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-28",
+"source": "ukmo",
+"nmae": 9.512,
+"rank": 11,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "energinet",
+"nmae": 2.313,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "harmonie",
+"nmae": 3.006,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "j4catdk",
+"nmae": 3.14,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "knmi",
+"nmae": 3.239,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "blend",
+"nmae": 3.445,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "ifs",
+"nmae": 3.831,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "aifs",
+"nmae": 3.922,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "ukmo",
+"nmae": 4.28,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "icon",
+"nmae": 4.753,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "icon_d2",
+"nmae": 4.982,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-29",
+"source": "gfs",
+"nmae": 6.784,
+"rank": 11,
+"kind": "replayed"
+}
+],
+"names": {
+"blend": "4-model average",
+"energinet": "Energinet (bias-corrected)",
+"ifs": "ECMWF IFS",
+"aifs": "ECMWF AIFS (AI)",
+"harmonie": "DMI HARMONIE",
+"icon": "DWD ICON-EU",
+"gfs": "NOAA GFS",
+"knmi": "KNMI HARMONIE",
+"icon_d2": "DWD ICON-D2",
+"ukmo": "UK Met Office",
+"metno": "MET Norway Nordic",
+"icon_global": "DWD ICON global",
+"gem": "Canada GEM",
+"jma": "Japan JMA",
+"cma": "China CMA GRAPES",
+"bom": "Australia BOM ACCESS",
+"ukmo_2km": "UK Met Office 2 km",
+"graphcast": "Google GraphCast (AI)",
+"arpege": "Meteo-France ARPEGE",
+"ifs_9km": "ECMWF IFS 9 km",
+"j4catdk": "J4catDK (my own model)",
+"j4cat": "J4cat (mine, without DKcast)",
+"energinet_da": "Energinet (raw)",
+"energinet_da_debiased": "Energinet (bias-corrected)"
+}
 }

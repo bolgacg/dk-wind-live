@@ -238,16 +238,19 @@ function render(d) {
     `${o.length - 1} sources that day. An orange bar is a day ${nm} had the smallest error of all, ${won} of ${per.length} days; ` +
     `a grey bar is a day another source did better. ` + (o[0].source === OURS ? `The best other source changes from day to day; over the whole period none of them beats ${nm}. ` : "") + `Hover a bar for the numbers.`;
 }
-function renderWeek(D) {
+function renderWeek(D, TL) {
   // live days only; until the first live day is scored, the last backtest week is shown and labelled as such
   // the live week starts 31 Oct: the 30 Oct forecast was issued before the full field of models and the band existed
   const liveRows = D.live ? D.live.daily.filter(r => r.day >= "2026-10-31").map(r => ({...r, kind: "live"})) : [];
-  const all = liveRows.length ? liveRows : (D.backtest ? D.backtest.daily.map(r => ({...r, kind: "backtest"})) : []);
+  // the days leading up to the live start are replayed (every source run on the weather forecasts issued the day
+  // before); from 31 Oct the live days carry on in the same chart
+  const repRows = TL && TL.ranks ? TL.ranks.filter(r => r.day < "2026-10-31").map(r => ({...r, kind: "replayed"})) : [];
+  const all = [...repRows, ...liveRows];
   if (!all.length) { document.getElementById("week").innerHTML = ""; return; }
-  const days = [...new Set(all.map(r => r.day))].sort().slice(-7);
+  const days = [...new Set(all.map(r => r.day))].sort().slice(-14);
   const rows = all.filter(r => days.includes(r.day));
   const kindOf = d => rows.find(r => r.day === d).kind;
-  const name = {}; for (const k of ["backtest", "live"]) if (D[k]) D[k].overall.forEach(o => name[o.source] = o.name);
+  const name = Object.assign({}, TL && TL.names); for (const k of ["backtest", "live"]) if (D[k]) D[k].overall.forEach(o => name[o.source] = o.name);
   const stats = Object.entries(rows.reduce((a, r) => ((a[r.source] = a[r.source] || []).push(r.rank), a), {}))
     .map(([src, rk]) => ({src, mean: rk.reduce((x, y) => x + y, 0) / rk.length, first: rk.filter(v => v === 1).length,
       worst: Math.max(...rk), n: rk.length})).sort((a, b) => a.mean - b.mean);
@@ -281,10 +284,11 @@ function renderWeek(D) {
   const b = stats.find(s => s.src === OURS), nl = days.filter(d => kindOf(d) === "live").length;
   document.getElementById("weekcap").textContent = `Daily rank of each source by error as a % of capacity, 1 = smallest error of ${n}. ` +
     `Orange is ${name[OURS] || OURS}; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
-    (nl ? `${nl} live day${nl === 1 ? "" : "s"} shown, each forecast committed before its day began. ` : "The last seven days of the backtest, until the first live day is scored at 01:30 on 1 Nov. ") +
+    `Days marked "replayed" come before the live start: every source run on the weather forecasts issued the day before, as the morning run does. ` +
+    (nl ? `${nl} live day${nl === 1 ? "" : "s"} follow, each forecast committed before its day began. ` : "The first live day, 31 Oct, joins at 01:30 on 1 Nov. ") +
     (rows.some(r => r.no_forecast) ? "A hollow point is a day with no forecast because the DKcast feed was not ready; it counts as last place, with that day's worst error. " : "") +
     `Over these days ${name[OURS] || OURS} averaged rank ${b.mean.toFixed(1)}, first on ${b.first} of ${b.n} days.`;
-  document.getElementById("weekh").textContent = !nl ? "Who came first each day: the last week of the backtest" : nl < 7 ? `Who came first each day: the live days so far (${nl} of 7)` : "Who came first each day: the last seven live days";
+  document.getElementById("weekh").textContent = nl ? `Who came first each day: the run-up, then ${nl} live day${nl === 1 ? "" : "s"}` : "Who came first each day: the run-up to the live start";
 }
 function renderBand(B) {
   const T = document.getElementById("btiles"), host = document.getElementById("band");
@@ -362,7 +366,7 @@ function renderTimeline(TL) {
       d.day >= TL.today && d.kind ? "scored 01:30" : "");
   });
   el("text", {x: L - 4, y: top - 46, "text-anchor": "end", "font-size": 10, fill: "#6b6a65"}, s, "error");
-  el("text", {x: L - 4, y: top - 34, "text-anchor": "end", "font-size": 10, fill: "#c2410c"}, s, "mine");
+  el("text", {x: L - 4, y: top - 34, "text-anchor": "end", "font-size": 10, fill: "#c2410c"}, s, "J4catDK");
   el("text", {x: L - 4, y: top - 18, "text-anchor": "end", "font-size": 10, fill: "#1e40af"}, s, "Energinet");
   const step = Math.max(1000, Math.ceil(ymax / 4 / 1000) * 1000);
   for (let v = 0; v <= ymax; v += step) {
@@ -387,7 +391,7 @@ function renderTimeline(TL) {
   el("line", {x1: x(nowI) - (x(1) - x(0)) / 2, x2: x(nowI) - (x(1) - x(0)) / 2, y1: top, y2: H - bot, stroke: "#1d1d1b", "stroke-dasharray": "3 3"}, s);
   el("text", {x: x(nowI) - (x(1) - x(0)) / 2 + 4, y: top + 12, "font-size": 11, fill: "#1d1d1b"}, s, "now");
   // legend, in place
-  const lg = [["#1d1d1b", "measured"], ["#c2410c", "J4catDK, mine"], ["#1e40af", "Energinet"]];
+  const lg = [["#1d1d1b", "measured"], ["#c2410c", "J4catDK"], ["#1e40af", "Energinet"]];
   let lx = W - R - 300; for (const [c, t] of lg) { el("line", {x1: lx, x2: lx + 18, y1: H - 9, y2: H - 9, stroke: c, "stroke-width": 2.4}, s);
     el("text", {x: lx + 22, y: H - 5, "font-size": 11, fill: c}, s, t); lx += 30 + t.length * 6.2; }
   // hover: a crosshair and the exact values
@@ -482,7 +486,7 @@ Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then
   const srcs = new Set(["backtest", "live"].flatMap(k => D[k] ? D[k].overall.map(r => r.source) : []));
   if (srcs.has("j4catdk")) OURS = "j4catdk";
   renderTimeline(TL);
-  renderWeek(D);
+  renderWeek(D, TL);
   renderHealth(D.health, TD);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
     render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };

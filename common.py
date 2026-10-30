@@ -84,7 +84,36 @@ def realtime_actuals(start: str, end: str) -> pd.DataFrame:
             out[z] = out[z][n >= 10]  # require at least 10 of 12 five-minute values
     res = pd.DataFrame(out)
     res.index = res.index.tz_localize("UTC") if res.index.tz is None else res.index
+    # the realtime feed has holes (the repeated hour at the October clock change, outages); fill each missing hour
+    # from Energinet's settlement data, the official metered values, once they are published (about ten days later)
+    full = pd.date_range(res.index.min(), res.index.max(), freq="h") if len(res) else res.index
+    res = res.reindex(full)
+    gaps = res[ZONES].isna().any(axis=1)
+    if gaps.any():
+        try:
+            st = settlement_actuals(f"{full[gaps.to_numpy()][0]:%Y-%m-%dT%H:%M}", f"{full[gaps.to_numpy()][-1] + pd.Timedelta(hours=1):%Y-%m-%dT%H:%M}")
+            res = res.fillna(st.reindex(res.index))
+        except Exception as e:
+            print(f"  settlement fill skipped: {e}")
     return res
+
+
+def settlement_actuals(start: str, end: str) -> pd.DataFrame:
+    """Hourly MWh per zone from ProductionConsumptionSettlement (metered, published with a lag), [start, end) UTC."""
+    d = get_json(f"https://api.energidataservice.dk/dataset/ProductionConsumptionSettlement?start={start}"
+                 f"&end={end}&timezone=UTC&limit=0")
+    df = pd.DataFrame(d["records"])
+    if df.empty:
+        return pd.DataFrame(columns=ZONES)
+    df["t"] = pd.to_datetime(df.HourUTC).dt.tz_localize("UTC")
+    df = df[df[["OffshoreWindLt100MW_MWh", "OffshoreWindGe100MW_MWh", "OnshoreWindLt50kW_MWh", "OnshoreWindGe50kW_MWh"]].notna().any(axis=1)]
+    df["off"] = df["OffshoreWindLt100MW_MWh"].fillna(0) + df["OffshoreWindGe100MW_MWh"].fillna(0)
+    df["on"] = df["OnshoreWindLt50kW_MWh"].fillna(0) + df["OnshoreWindGe50kW_MWh"].fillna(0)
+    out = {}
+    for area in ("DK1", "DK2"):
+        g = df[df.PriceArea == area].groupby("t")
+        out[f"{area}_offshore"], out[f"{area}_onshore"] = g["off"].sum(), g["on"].sum()
+    return pd.DataFrame(out)
 
 
 def capacity_proxy(actual: pd.DataFrame) -> pd.DataFrame:
