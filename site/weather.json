@@ -25,8 +25,8 @@
   },
   {
    "key": "sun",
-   "name": "Sunshine (solar radiation)",
-   "unit": "W/m\u00b2",
+   "name": "Sunshine",
+   "unit": "min/h",
    "dkcast_rmse": 12.684,
    "ref_name": "average of raw models",
    "ref_rmse": 15.012,

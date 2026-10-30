@@ -40,7 +40,7 @@ a{color:var(--en)}
 <body>
 <main>
 <h1>Who forecasts Denmark's wind best?</h1>
-<div class="tabs" role="group" aria-label="View" style="margin:6px 0 14px"><button id="v-e" aria-pressed="true">Energy: wind power</button><button id="v-w" aria-pressed="false">Weather: DKcast</button></div>
+<div class="tabs" role="group" aria-label="View" style="margin:6px 0 14px"><button id="v-e" aria-pressed="true">Energy: J4catDK</button><button id="v-w" aria-pressed="false">Meteorology: DKcast</button></div>
 <div id="v-energy">
 <div id="topB"></div>
 <div hidden><p id="lede"></p><div id="health"></div></div>
@@ -61,30 +61,14 @@ a{color:var(--en)}
 </figure>
 
 <h2>Forecast against what happened: the last week, today and tomorrow</h2>
-<figure>
-  <div id="tl"></div>
-  <figcaption id="tlcap"></figcaption>
-</figure>
+<figure><div id="tlA"></div><figcaption id="tlAcap"></figcaption></figure>
+<div hidden><div id="tl"></div><div id="tlcap"></div></div>
 
 <h2>Average error, and days in first place</h2>
 <figure><div id="lowAfig"></div><figcaption id="lowAcap"></figcaption></figure>
 <div hidden><div id="dots"></div><div id="wins"></div></div>
 
-<h2>Day by day: did J4catDK win, and by how much?</h2>
-<figure>
-  <div id="strip"></div>
-  <figcaption id="stripcap"></figcaption>
-</figure>
-
-<h2>How sure is the forecast?</h2>
-<p>Each forecast also carries an 80% band for total Danish wind: the range the real output should fall inside four
-hours out of five. The band comes from how far the four weather models disagree, and is centred on their average (the 4-model average
-in the table), not yet on J4catDK. When they agree, it is narrow; when they pull apart, as they do ahead of fronts, it widens.</p>
-<div id="btiles" style="margin:8px 0"></div>
-<figure>
-  <div id="band"></div>
-  <figcaption id="bcap"></figcaption>
-</figure>
+<div hidden><div id="strip"></div><div id="stripcap"></div><div id="btiles"></div><div id="band"></div><div id="bcap"></div></div>
 
 <h2>Method</h2>
 <p>Each weather model's forecast at 34 points near Danish wind farms (100 m wind speed and direction, or 10 m where
@@ -99,11 +83,10 @@ and Energinet's imbalance price, per MWh produced. Accuracy, 100% minus error ov
 extra.</p>
 </div>
 <div id="v-weather" hidden>
-<p class="lede">The power forecast stands on my own weather forecast, DKcast. Here is how DKcast did against the best public weather forecast at Danish weather stations, on 2026 data it never saw.</p>
-<div id="wx"></div>
-<p class="mute sans" id="wxnote" style="font-size:.88rem"></p>
-<p class="sans">Station by station, with today's and tomorrow's weather: <a href="https://bolgacg.github.io/dkcast/">the DKcast page</a>.</p>
+<div id="wxB"></div>
+<div hidden><div id="wx"></div><p id="wxnote"></p></div>
 </div>
+<div id="lkA"></div>
 <footer>Data: Open-Meteo (CC BY 4.0), Energinet Energi Data Service, DMI. Code and every forecast:
 <a href="https://github.com/bolgacg/dk-wind-live">github.com/bolgacg/dk-wind-live</a>.</footer>
 </main>
@@ -467,6 +450,7 @@ Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then
   if (srcs.has("j4catdk")) OURS = "j4catdk";
   renderTimeline(TL);
   renderWeek(D, TL);
+  lvStart(D, TL);
   renderHealth(D.health, TD);
   topB(dayInfo());
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
@@ -479,5 +463,6 @@ Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then
   pick(hasLive ? "live" : "backtest");
 });
 </script>
+<script src="lv.js"></script>
 </body>
 </html>

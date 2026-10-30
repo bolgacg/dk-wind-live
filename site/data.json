@@ -9457,17 +9457,30 @@
 }
 },
 "health": {
-"generated_utc": "2026-10-30T07:50Z",
-"last_forecast_day": "2026-10-30",
-"last_forecast_issued_utc": "2026-10-28T22:16:00Z",
+"generated_utc": "2026-10-30T10:30Z",
+"last_forecast_day": "2026-10-31",
+"last_forecast_issued_utc": "2026-10-30T09:30:20Z",
 "last_forecast_missing": {},
 "forecasts": {
 "2026-10-30": {
 "issued_utc": "2026-10-28T22:16:00Z",
 "j4_variant": null,
 "missing": {}
+},
+"2026-10-31": {
+"issued_utc": "2026-10-30T09:30:20Z",
+"j4_variant": "j4catdk with DKcast",
+"missing": {}
 }
 },
-"tries": {}
+"tries": {
+"2026-10-31": [
+{
+"at_utc": "2026-10-30T09:30Z",
+"result": "issued",
+"final": true
+}
+]
+}
 }
 }
