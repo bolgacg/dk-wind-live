@@ -37,18 +37,31 @@
   "note": "one run of a frozen script, published before it ran; nMAE = mean absolute error of each area's hourly total as % of installed capacity"
  },
  "health": {
-  "generated_utc": "2026-10-30T07:50Z",
-  "last_forecast_day": "2026-10-30",
-  "last_forecast_issued_utc": "2026-10-28T22:16:00Z",
+  "generated_utc": "2026-10-30T10:00Z",
+  "last_forecast_day": "2026-10-31",
+  "last_forecast_issued_utc": "2026-10-30T09:30:20Z",
   "last_forecast_missing": {},
   "forecasts": {
    "2026-10-30": {
     "issued_utc": "2026-10-28T22:16:00Z",
     "j4_variant": null,
     "missing": {}
+   },
+   "2026-10-31": {
+    "issued_utc": "2026-10-30T09:30:20Z",
+    "j4_variant": "j4catdk with DKcast",
+    "missing": {}
    }
   },
-  "tries": {}
+  "tries": {
+   "2026-10-31": [
+    {
+     "at_utc": "2026-10-30T09:30Z",
+     "result": "issued",
+     "final": true
+    }
+   ]
+  }
  },
  "backtest": {
   "from": "2026-07-19",
@@ -88,53 +101,53 @@
   }
  },
  "today": {
-  "built_utc": "2026-10-30T09:08Z",
+  "built_utc": "2026-10-30T10:08Z",
   "line_name": "4-model average",
   "day": "2026-10-30",
-  "hours_measured": 10,
+  "hours_measured": 11,
   "hours_total": 24,
-  "through_utc": "2026-10-30T09:00Z",
+  "through_utc": "2026-10-30T10:00Z",
   "ranking": [
    {
     "source": "blend",
     "name": "4-model average",
     "nmae": 2.83,
-    "acc": 80.34,
+    "acc": 80.17,
     "rank": 1
    },
    {
     "source": "energinet",
     "name": "Energinet (bias-corrected)",
-    "nmae": 3.06,
-    "acc": 75.12,
+    "nmae": 2.95,
+    "acc": 73.89,
     "rank": 2
    },
    {
     "source": "ifs",
     "name": "ECMWF IFS",
-    "nmae": 3.76,
-    "acc": 73.81,
+    "nmae": 3.61,
+    "acc": 74.54,
     "rank": 3
    },
    {
     "source": "aifs",
     "name": "ECMWF AIFS (AI)",
-    "nmae": 4.64,
-    "acc": 71.46,
+    "nmae": 4.72,
+    "acc": 70.48,
     "rank": 4
    },
    {
     "source": "harmonie",
     "name": "DMI HARMONIE",
-    "nmae": 4.78,
-    "acc": 69.12,
+    "nmae": 4.88,
+    "acc": 68.06,
     "rank": 5
    },
    {
     "source": "icon",
     "name": "DWD ICON-EU",
-    "nmae": 5.91,
-    "acc": 56.66,
+    "nmae": 5.42,
+    "acc": 59.08,
     "rank": 6
    }
   ],
@@ -214,7 +227,7 @@
     "p": 883,
     "lo": null,
     "hi": null,
-    "a": null
+    "a": 888
    },
    {
     "t": "2026-10-30T10",
