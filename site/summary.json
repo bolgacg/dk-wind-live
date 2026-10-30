@@ -1,0 +1,312 @@
+{
+ "test_2026": {
+  "period": "1 Jan to 18 Oct 2026",
+  "hours": 6933,
+  "days": 290,
+  "nmae_pct": {
+   "j4catdk": 5.56,
+   "blend": 6.24,
+   "ifs": 6.6,
+   "energinet": 6.68
+  },
+  "nmae_pct_dk1_dk2": {
+   "j4catdk": [
+    5.27,
+    6.47
+   ],
+   "energinet": [
+    6.19,
+    8.27
+   ]
+  },
+  "skill_vs_energinet_pct": 16.8,
+  "skill_vs_energinet_ci95": [
+   12.6,
+   20.8
+  ],
+  "skill_vs_ifs_pct": 15.8,
+  "skill_vs_ifs_ci95": [
+   12.8,
+   18.7
+  ],
+  "days_better_than_energinet_pct": 76,
+  "imbalance_eur_mwh": {
+   "j4catdk": 3.01,
+   "energinet": 3.33
+  },
+  "note": "one run of a frozen script, published before it ran; nMAE = mean absolute error of each area's hourly total as % of installed capacity"
+ },
+ "health": {
+  "generated_utc": "2026-10-30T07:50Z",
+  "last_forecast_day": "2026-10-30",
+  "last_forecast_issued_utc": "2026-10-28T22:16:00Z",
+  "last_forecast_missing": {},
+  "forecasts": {
+   "2026-10-30": {
+    "issued_utc": "2026-10-28T22:16:00Z",
+    "j4_variant": null,
+    "missing": {}
+   }
+  },
+  "tries": {}
+ },
+ "backtest": {
+  "from": "2026-07-19",
+  "to": "2026-10-18",
+  "days": 92,
+  "sources": 11,
+  "rank_j4catdk": 1,
+  "j4catdk": {
+   "name": "J4catDK (my own model)",
+   "nmae": 5.37,
+   "nmae_DK1": 5.08,
+   "nmae_DK2": 6.35,
+   "skill_ifs": 8.79,
+   "skill_energinet": 23.55,
+   "imb_eur_mwh": 3.3,
+   "wins": 26
+  },
+  "energinet": {
+   "name": "Energinet (bias-corrected)",
+   "nmae": 7.03,
+   "nmae_DK1": 6.43,
+   "nmae_DK2": 9.01,
+   "skill_ifs": -19.32,
+   "skill_energinet": 0.0,
+   "imb_eur_mwh": 3.26,
+   "wins": 10
+  },
+  "ifs": {
+   "name": "ECMWF IFS",
+   "nmae": 5.89,
+   "nmae_DK1": 5.46,
+   "nmae_DK2": 7.34,
+   "skill_ifs": 0.0,
+   "skill_energinet": 16.19,
+   "imb_eur_mwh": 3.71,
+   "wins": 15
+  }
+ },
+ "today": {
+  "built_utc": "2026-10-30T07:08Z",
+  "line_name": "4-model average",
+  "day": "2026-10-30",
+  "hours_measured": 8,
+  "hours_total": 24,
+  "through_utc": "2026-10-30T07:00Z",
+  "ranking": [
+   {
+    "source": "blend",
+    "name": "4-model average",
+    "nmae": 2.92,
+    "acc": 80.01,
+    "rank": 1
+   },
+   {
+    "source": "energinet",
+    "name": "Energinet (bias-corrected)",
+    "nmae": 3.02,
+    "acc": 77.3,
+    "rank": 2
+   },
+   {
+    "source": "ifs",
+    "name": "ECMWF IFS",
+    "nmae": 4.01,
+    "acc": 73.1,
+    "rank": 3
+   },
+   {
+    "source": "aifs",
+    "name": "ECMWF AIFS (AI)",
+    "nmae": 4.21,
+    "acc": 74.89,
+    "rank": 4
+   },
+   {
+    "source": "harmonie",
+    "name": "DMI HARMONIE",
+    "nmae": 4.29,
+    "acc": 72.62,
+    "rank": 5
+   },
+   {
+    "source": "icon",
+    "name": "DWD ICON-EU",
+    "nmae": 6.72,
+    "acc": 54.19,
+    "rank": 6
+   }
+  ],
+  "series": [
+   {
+    "t": "2026-10-29T23",
+    "p": 1562,
+    "lo": null,
+    "hi": null,
+    "a": 1290
+   },
+   {
+    "t": "2026-10-30T00",
+    "p": 1657,
+    "lo": null,
+    "hi": null,
+    "a": 1265
+   },
+   {
+    "t": "2026-10-30T01",
+    "p": 1571,
+    "lo": null,
+    "hi": null,
+    "a": 1302
+   },
+   {
+    "t": "2026-10-30T02",
+    "p": 1357,
+    "lo": null,
+    "hi": null,
+    "a": 1302
+   },
+   {
+    "t": "2026-10-30T03",
+    "p": 1204,
+    "lo": null,
+    "hi": null,
+    "a": 1212
+   },
+   {
+    "t": "2026-10-30T04",
+    "p": 1088,
+    "lo": null,
+    "hi": null,
+    "a": 1055
+   },
+   {
+    "t": "2026-10-30T05",
+    "p": 1063,
+    "lo": null,
+    "hi": null,
+    "a": 1053
+   },
+   {
+    "t": "2026-10-30T06",
+    "p": 982,
+    "lo": null,
+    "hi": null,
+    "a": 976
+   },
+   {
+    "t": "2026-10-30T07",
+    "p": 971,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T08",
+    "p": 966,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T09",
+    "p": 883,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T10",
+    "p": 780,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T11",
+    "p": 746,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T12",
+    "p": 749,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T13",
+    "p": 764,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T14",
+    "p": 770,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T15",
+    "p": 756,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T16",
+    "p": 722,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T17",
+    "p": 739,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T18",
+    "p": 750,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T19",
+    "p": 638,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T20",
+    "p": 591,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T21",
+    "p": 508,
+    "lo": null,
+    "hi": null,
+    "a": null
+   },
+   {
+    "t": "2026-10-30T22",
+    "p": 475,
+    "lo": null,
+    "hi": null,
+    "a": null
+   }
+  ]
+ }
+}
