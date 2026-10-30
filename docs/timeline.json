@@ -1,20 +1,8 @@
 {
-"built_utc": "2026-10-30T22:08Z",
-"today": "2026-10-30",
-"now_utc": "2026-10-30T22:08Z",
+"built_utc": "2026-10-30T23:08Z",
+"today": "2026-10-31",
+"now_utc": "2026-10-30T23:08Z",
 "days": [
-{
-"day": "2026-10-23",
-"kind": "replayed",
-"issued_utc": null,
-"hours": 24,
-"hours_scored": 24,
-"complete": true,
-"err": {
-"j4catdk": 3.19,
-"energinet": 5.81
-}
-},
 {
 "day": "2026-10-24",
 "kind": "replayed",
@@ -92,11 +80,11 @@
 "kind": "replayed",
 "issued_utc": null,
 "hours": 24,
-"hours_scored": 23,
-"complete": false,
+"hours_scored": 24,
+"complete": true,
 "err": {
-"j4catdk": 2.38,
-"energinet": 3.42
+"j4catdk": 2.41,
+"energinet": 3.53
 }
 },
 {
@@ -107,153 +95,18 @@
 "hours_scored": 0,
 "complete": false,
 "err": {}
+},
+{
+"day": "2026-11-01",
+"kind": null,
+"issued_utc": null,
+"hours": 24,
+"hours_scored": 0,
+"complete": false,
+"err": {}
 }
 ],
 "series": [
-{
-"t": "2026-10-22T22",
-"a": 2399,
-"j": 2093,
-"e": 2517
-},
-{
-"t": "2026-10-22T23",
-"a": 2050,
-"j": 1874,
-"e": 2222
-},
-{
-"t": "2026-10-23T00",
-"a": 1496,
-"j": 1643,
-"e": 1919
-},
-{
-"t": "2026-10-23T01",
-"a": 1277,
-"j": 1281,
-"e": 1635
-},
-{
-"t": "2026-10-23T02",
-"a": 1083,
-"j": 1028,
-"e": 1415
-},
-{
-"t": "2026-10-23T03",
-"a": 895,
-"j": 820,
-"e": 1237
-},
-{
-"t": "2026-10-23T04",
-"a": 750,
-"j": 684,
-"e": 1139
-},
-{
-"t": "2026-10-23T05",
-"a": 887,
-"j": 718,
-"e": 1149
-},
-{
-"t": "2026-10-23T06",
-"a": 1034,
-"j": 964,
-"e": 1281
-},
-{
-"t": "2026-10-23T07",
-"a": 1154,
-"j": 1253,
-"e": 1536
-},
-{
-"t": "2026-10-23T08",
-"a": 1265,
-"j": 1451,
-"e": 1766
-},
-{
-"t": "2026-10-23T09",
-"a": 1429,
-"j": 1617,
-"e": 1993
-},
-{
-"t": "2026-10-23T10",
-"a": 1961,
-"j": 2054,
-"e": 2365
-},
-{
-"t": "2026-10-23T11",
-"a": 2777,
-"j": 2586,
-"e": 2827
-},
-{
-"t": "2026-10-23T12",
-"a": 3378,
-"j": 2971,
-"e": 3184
-},
-{
-"t": "2026-10-23T13",
-"a": 3708,
-"j": 3477,
-"e": 3443
-},
-{
-"t": "2026-10-23T14",
-"a": 3994,
-"j": 3917,
-"e": 3675
-},
-{
-"t": "2026-10-23T15",
-"a": 4413,
-"j": 4462,
-"e": 3859
-},
-{
-"t": "2026-10-23T16",
-"a": 4762,
-"j": 4679,
-"e": 4051
-},
-{
-"t": "2026-10-23T17",
-"a": 4864,
-"j": 4881,
-"e": 4153
-},
-{
-"t": "2026-10-23T18",
-"a": 4867,
-"j": 5019,
-"e": 4302
-},
-{
-"t": "2026-10-23T19",
-"a": 4804,
-"j": 5044,
-"e": 4429
-},
-{
-"t": "2026-10-23T20",
-"a": 4793,
-"j": 5001,
-"e": 4463
-},
-{
-"t": "2026-10-23T21",
-"a": 4916,
-"j": 5000,
-"e": 4342
-},
 {
 "t": "2026-10-23T22",
 "a": 4981,
@@ -1264,7 +1117,7 @@
 },
 {
 "t": "2026-10-30T22",
-"a": null,
+"a": 368,
 "j": 503,
 "e": 778
 },
@@ -1411,86 +1264,153 @@
 "a": null,
 "j": 245,
 "e": 272
+},
+{
+"t": "2026-10-31T23",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T00",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T01",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T02",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T03",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T04",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T05",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T06",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T07",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T08",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T09",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T10",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T11",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T12",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T13",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T14",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T15",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T16",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T17",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T18",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T19",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T20",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T21",
+"a": null,
+"j": null,
+"e": null
+},
+{
+"t": "2026-11-01T22",
+"a": null,
+"j": null,
+"e": null
 }
 ],
 "ranks": [
-{
-"day": "2026-10-23",
-"source": "ukmo",
-"nmae": 3.183,
-"rank": 1,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "j4catdk",
-"nmae": 3.191,
-"rank": 2,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "blend",
-"nmae": 3.542,
-"rank": 3,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "aifs",
-"nmae": 3.806,
-"rank": 4,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "knmi",
-"nmae": 3.929,
-"rank": 5,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "gfs",
-"nmae": 4.177,
-"rank": 6,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "harmonie",
-"nmae": 4.225,
-"rank": 7,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "ifs",
-"nmae": 4.296,
-"rank": 8,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "icon_d2",
-"nmae": 5.372,
-"rank": 9,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "icon",
-"nmae": 5.503,
-"rank": 10,
-"kind": "replayed"
-},
-{
-"day": "2026-10-23",
-"source": "energinet",
-"nmae": 5.808,
-"rank": 11,
-"kind": "replayed"
-},
 {
 "day": "2026-10-24",
 "source": "j4catdk",
@@ -1950,6 +1870,83 @@
 "day": "2026-10-29",
 "source": "gfs",
 "nmae": 6.784,
+"rank": 11,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "j4catdk",
+"nmae": 2.408,
+"rank": 1,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "blend",
+"nmae": 2.705,
+"rank": 2,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "knmi",
+"nmae": 2.778,
+"rank": 3,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "harmonie",
+"nmae": 3.058,
+"rank": 4,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "ifs",
+"nmae": 3.25,
+"rank": 5,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "icon_d2",
+"nmae": 3.482,
+"rank": 6,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "ukmo",
+"nmae": 3.494,
+"rank": 7,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "energinet",
+"nmae": 3.532,
+"rank": 8,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "icon",
+"nmae": 3.564,
+"rank": 9,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "gfs",
+"nmae": 3.991,
+"rank": 10,
+"kind": "replayed"
+},
+{
+"day": "2026-10-30",
+"source": "aifs",
+"nmae": 4.109,
 "rank": 11,
 "kind": "replayed"
 }
