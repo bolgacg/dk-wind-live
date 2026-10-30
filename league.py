@@ -207,6 +207,13 @@ def main():
         last = json.load(open(fc[-1]))
         h.update(last_forecast_day=last["target_day_cph"], last_forecast_issued_utc=last["issued_utc"],
                  last_forecast_missing=last.get("missing", []))
+    # every forecast try for the newest two days (10:30, 11:00, 11:30), so the page shows when each was made
+    h["forecasts"] = {}
+    for f in fc[-2:]:  # the newest two forecast days (today and tomorrow), with when each was issued
+        r = json.load(open(f))
+        h["forecasts"][r["target_day_cph"]] = {"issued_utc": r["issued_utc"], "j4_variant": r.get("j4_variant"),
+                                               "missing": r.get("missing", {})}
+    h["tries"] = {f.stem: json.load(open(f)) for f in sorted((LIVE / "tries").glob("*.json"))[-2:]}
     if "live" in out:
         h["last_scored_day"] = out["live"]["to"]
     out["health"] = h

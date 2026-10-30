@@ -134,6 +134,8 @@ def main():
     end = pd.Timestamp(datetime.combine(day + timedelta(days=1), datetime.min.time(), tzinfo=CPH)).tz_convert("UTC")
     hours = pd.date_range(start, end, freq="h", inclusive="left")
     out_f = LIVE / "forecasts" / f"{day}.json"
+    tries_f = LIVE / "tries" / f"{day}.json"  # every try with its time and result, shown on the page
+    tries = json.load(open(tries_f)) if tries_f.exists() else []
     if out_f.exists() and "--force" not in sys.argv:
         print(f"{out_f} exists, skipping")
         return
@@ -184,6 +186,12 @@ def main():
         except FeedNotReady as e:
             if not last_try:
                 print(f"{now:%Y-%m-%dT%H:%MZ} DKcast feed not ready ({e}); nothing written, waiting for the next try")
+                tries.append({"at_utc": now.strftime("%Y-%m-%dT%H:%MZ"), "result": "waiting", "why": str(e)})
+                tries_f.parent.mkdir(exist_ok=True)
+                json.dump(tries, open(tries_f, "w"), indent=1)
+                subprocess.run(["git", "-C", str(LIVE), "add", str(tries_f)], check=True)
+                subprocess.run(["git", "-C", str(LIVE), "commit", "-q", "-m", f"forecast try for {day} at {now:%H:%MZ}"],
+                               check=True)
                 return
             missing["j4catdk"] = f"DKcast feed not ready at the last try: {e}"
         except Exception as e:
@@ -211,8 +219,13 @@ def main():
                                for z, s in zs.items()} for m, zs in preds.items()},
            "band_total_mw": band_out,
            "energinet_snapshot": energinet_da(start, end)}
+    # this try is the one issued before the 12:00 gate, so it is the final forecast and the one that is scored
+    tries.append({"at_utc": now.strftime("%Y-%m-%dT%H:%MZ"), "result": "issued", "final": True})
+    rec["tries"] = tries
     out_f.parent.mkdir(exist_ok=True)
+    tries_f.parent.mkdir(exist_ok=True)
     json.dump(rec, open(out_f, "w"), indent=1)
+    json.dump(tries, open(tries_f, "w"), indent=1)
     tot = {m: round(sum(sum(v for v in rec["forecast_mw"][m][z] if v is not None) for z in ZONES)) for m in preds}
     print(f"issued {day} at {rec['issued_utc']}, total MWh by model: {tot}, missing: {missing}")
     # commit code and models together with the forecast, so each forecast records the exact state that made it

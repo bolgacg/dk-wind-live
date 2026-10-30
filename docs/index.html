@@ -32,13 +32,14 @@ svg text{font-family:system-ui,sans-serif}
 .warnline{color:#b91c1c;font-weight:600}
 footer{margin-top:48px;font:.85rem/1.5 system-ui,sans-serif;color:var(--mute)}
 a{color:var(--en)}
+@media (max-width:600px){figure{overflow-x:auto} figure svg{min-width:620px}}
 </style>
 </head>
 <body>
 <main>
 <h1>Who forecasts Denmark's wind best?</h1>
 <p class="lede" id="lede">Loading results.</p>
-<p class="sans" id="health" style="font-size:.9rem;margin:4px 0 12px"></p>
+<div class="sans" id="health" style="font-size:.9rem;margin:4px 0 12px"></div>
 <p class="mute">Every morning before the 12:00 day-ahead gate, I forecast the next day's hourly wind power in Denmark's
 four wind zones, offshore and onshore in DK1 and DK2. Each forecast is
 <a href="https://github.com/bolgacg/dk-wind-live/tree/main/forecasts">committed publicly</a> before its day begins.
@@ -88,28 +89,23 @@ description.</p>
 <h2>How often each source had the smallest error</h2>
 <figure>
   <div id="wins"></div>
-  <figcaption>Dark bar: days a source ranked first. Light bar: days it ranked in the top three. An average of models
-  seldom wins any single day outright, because on each day one of its members is closest. It wins over the whole period
-  because it is rarely far off, which shows here as the most top-three finishes.</figcaption>
+  <figcaption>Days on which each source had the smallest error of all sources, by error as a % of installed capacity.</figcaption>
 </figure>
 
-<h2>Day by day</h2>
-<figure class="strip">
+<h2>Day by day: did J4catDK win, and by how much?</h2>
+<figure>
   <div id="strip"></div>
-  <figcaption>One column per day, one row per source. The darker the cell, the higher that source ranked that day.
-  Days are ranked by error as a % of capacity. Hover over a cell for the day's numbers.</figcaption>
+  <figcaption id="stripcap"></figcaption>
 </figure>
 
 <h2>How sure is the forecast?</h2>
 <p>Each forecast also carries an 80% band for total Danish wind: the range the real output should fall inside four
 hours out of five. The band comes from how far the four weather models disagree, and is centred on their average (the 4-model average
-in the table), not yet on J4catDK. When they agree, it is narrow;
-when they pull apart, as they do ahead of fronts, it widens.</p>
-<div class="tiles" id="btiles"></div>
+in the table), not yet on J4catDK. When they agree, it is narrow; when they pull apart, as they do ahead of fronts, it widens.</p>
+<div id="btiles" style="margin:8px 0"></div>
 <figure>
   <div id="band"></div>
-  <figcaption id="bcap">The shaded area is the 80% band, the line is the 4-model average, and the dots are the measured
-  output. Last seven days shown.</figcaption>
+  <figcaption id="bcap"></figcaption>
 </figure>
 
 <h2>Method</h2>
@@ -179,7 +175,7 @@ function render(d) {
     T.appendChild(t);
   }
   document.getElementById("second").textContent = ours ? `Also: accuracy ${ours.acc.toFixed(1)}% (100% minus total error over total output` +
-    `${en ? `; Energinet ${en.acc.toFixed(1)}%` : ""}); smallest error of all sources on ${ours.wins} of ${d.days} days, in the top three on ${ours.top3}.` : "";
+    `${en ? `; Energinet ${en.acc.toFixed(1)}%` : ""}); smallest error of all sources on ${ours.wins} of ${d.days} days.` : "";
   // dot plot
   const W = 760, L = 210, R = 60, rowH = 30, H = o.length * rowH + 40;
   const lo = Math.max(0, Math.floor(Math.min(...o.map(r => r.nmae)) - 0.5)), hi = Math.ceil(Math.max(...o.map(r => r.nmae)) + 0.5);
@@ -196,102 +192,115 @@ function render(d) {
     el("circle", {cx: x(r.nmae), cy: y, r: b ? 8 : 6, fill: c}, s);
     el("text", {x: x(r.nmae) + 12, y: y + 4, "font-size": 13, fill: c, "font-weight": b ? 700 : 400}, s, r.nmae.toFixed(2) + "%");
   });
-  // wins: bars from zero
-  const byWins = [...o].sort((a, b) => b.wins - a.wins || b.top3 - a.top3);
+  // wins: days with the smallest error, bars from zero
+  const byWins = [...o].sort((a, b) => b.wins - a.wins || a.nmae - b.nmae);
   const H2 = byWins.length * rowH + 30, xw = v => L + v / d.days * (W - L - R);
   s = svg(document.getElementById("wins"), W, H2);
   byWins.forEach((r, i) => {
     const y = 14 + i * rowH, c = COL(r.source), b = r.source === OURS;
     tip(el("text", {x: L - 12, y: y + 13, "text-anchor": "end", "font-size": 14, "font-weight": b ? 700 : 400, fill: b ? c : "#1d1d1b"}, s, r.name), r.source);
-    el("rect", {x: L, y: y + 2, width: Math.max(0, xw(r.top3) - L), height: 16, fill: c, opacity: .25}, s);
     el("rect", {x: L, y: y + 2, width: Math.max(0, xw(r.wins) - L), height: 16, fill: c}, s);
-    el("text", {x: xw(r.top3) + 8, y: y + 15, "font-size": 12, fill: "#6b6a65"}, s, `${r.wins} first, ${r.top3} top three`);
+    el("text", {x: xw(r.wins) + 8, y: y + 15, "font-size": 12, fill: "#6b6a65"}, s, `${r.wins} of ${d.days} days`);
   });
-  // strip
-  const days = [...new Set(d.daily.map(r => r.day))], n = o.length, cw = Math.max(6, Math.min(14, 560 / days.length));
-  const W3 = L + days.length * cw + 10, H3 = n * 18 + 30;
-  s = svg(document.getElementById("strip"), W3, H3);
-  s.setAttribute("width", Math.max(W3, 300)); s.style.minWidth = W3 + "px";
-  const idx = {}; o.forEach((r, i) => idx[r.source] = i);
-  o.forEach((r, i) => tip(el("text", {x: L - 12, y: 14 + i * 18 + 11, "text-anchor": "end", "font-size": 12,
-    "font-weight": r.source === OURS ? 700 : 400, fill: r.source === OURS ? "var(--ours)" : "#1d1d1b"}, s, r.name), r.source));
-  d.daily.forEach(r => {
-    const j = days.indexOf(r.day), i = idx[r.source]; if (i === undefined) return;
-    const shade = 1 - (r.rank - 1) / (n - 1 || 1);
-    const c = el("rect", {x: L + j * cw, y: 14 + i * 18, width: cw - 1, height: 16,
-      fill: r.source === OURS ? "#c2410c" : r.source === "energinet" ? "#1e40af" : "#57534e", opacity: (0.08 + 0.92 * shade).toFixed(2)}, s);
-    el("title", {}, c, r.no_forecast ? `${r.day}: no forecast, DKcast feed not ready; counted as last place with the day's worst error`
-      : `${r.day}: rank ${r.rank} of ${n}, error ${r.nmae.toFixed(2)}% of capacity, accuracy ${r.acc.toFixed(1)}%`);
+  // day by day: one bar per day for our error, a black dot for the best other source that day; orange means we won
+  const days = [...new Set(d.daily.map(r => r.day))].sort();
+  const per = days.map(dy => { const rs = d.daily.filter(r => r.day === dy);
+    return {dy, me: rs.find(r => r.source === OURS), ot: rs.filter(r => r.source !== OURS).sort((a, b) => a.nmae - b.nmae)[0]}; })
+    .filter(p => p.me && p.ot);
+  const host3 = document.getElementById("strip"), cap3 = document.getElementById("stripcap");
+  if (!per.length) { host3.innerHTML = "<p class='mute sans'>No scored days yet.</p>"; cap3.textContent = ""; return; }
+  const W3 = 760, L3 = 40, R3 = 10, t3 = 10, H3 = 240, bw = (W3 - L3 - R3) / per.length;
+  const m3 = Math.ceil(Math.max(...per.flatMap(p => [p.me.nmae, p.ot.nmae])));
+  const y3 = v => t3 + (1 - v / m3) * (H3 - t3 - 30);
+  s = svg(host3, W3, H3);
+  for (let v = 0; v <= m3; v += Math.max(1, Math.round(m3 / 5))) {
+    el("line", {x1: L3, x2: W3 - R3, y1: y3(v), y2: y3(v), stroke: "#eee"}, s);
+    el("text", {x: L3 - 6, y: y3(v) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, v + "%"); }
+  let won = 0;
+  per.forEach((p, j) => {
+    const w = p.me.nmae <= p.ot.nmae && !p.me.no_forecast, xx = L3 + j * bw; won += w;
+    const r = el("rect", {x: xx + bw * .12, y: y3(p.me.nmae), width: bw * .76, height: y3(0) - y3(p.me.nmae), fill: w ? "#c2410c" : "#c9c6bd"}, s);
+    el("title", {}, r, p.me.no_forecast ? `${p.dy}: no forecast, DKcast feed not ready; counted with the day's worst error`
+      : `${p.dy}: ${OURS === "j4catdk" ? "J4catDK" : p.me.name} ${p.me.nmae.toFixed(2)}%, best other (${p.ot.name}) ${p.ot.nmae.toFixed(2)}% of capacity`);
+    el("circle", {cx: xx + bw / 2, cy: y3(p.ot.nmae), r: Math.max(1.5, Math.min(3.5, bw * .3)), fill: "#1d1d1b"}, s);
+    if (j === 0 || j === per.length - 1 || p.dy.endsWith("-01")) el("text", {x: xx + bw / 2, y: H3 - 8, "font-size": 11, fill: "#6b6a65",
+      "text-anchor": j === 0 ? "start" : j === per.length - 1 ? "end" : "middle"}, s,
+      new Date(p.dy + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"}));
   });
-  el("text", {x: L, y: H3 - 2, "font-size": 11, fill: "#6b6a65"}, s, days[0]);
-  el("text", {x: L + days.length * cw, y: H3 - 2, "font-size": 11, fill: "#6b6a65", "text-anchor": "end"}, s, days[days.length - 1]);
+  const nm = OURS === "j4catdk" ? "J4catDK" : (o.find(r => r.source === OURS) || {}).name;
+  cap3.textContent = `Each bar is one day: ${nm}'s error as a % of installed capacity. The black dot is the best of the other ` +
+    `${o.length - 1} sources that day. An orange bar is a day ${nm} had the smallest error of all, ${won} of ${per.length} days; ` +
+    `a grey bar is a day another source did better. ` + (o[0].source === OURS ? `The best other source changes from day to day; over the whole period none of them beats ${nm}. ` : "") + `Hover a bar for the numbers.`;
 }
 function renderWeek(D) {
-  // live days only; until the first live day is scored, the last backtest week is shown and labelled as such
-  // the live week starts 31 Oct: the 30 Oct forecast was issued before the full field of models and the band existed
-  const liveRows = D.live ? D.live.daily.filter(r => r.day >= "2026-10-31").map(r => ({...r, kind: "live"})) : [];
-  if (!liveRows.length) {
-    document.getElementById("week").innerHTML = "<p class='mute sans'>The first live day (31 Oct) is scored at 01:30 on 1 Nov. Until then, the backtest tab below shows 92 past days.</p>";
-    document.getElementById("weektab").innerHTML = ""; document.getElementById("weekcap").textContent = "";
-    document.getElementById("weekh").textContent = "The last seven live days, ranked"; return;
-  }
-  const all = liveRows;
-  const days = [...new Set(all.map(r => r.day))].sort().slice(-7);
-  const rows = all.filter(r => days.includes(r.day));
-  const kindOf = d => rows.find(r => r.day === d).kind;
+  // the last seven test days drawn muted, then the live days in full colour, with empty slots for live days still to come
   const name = {}; for (const k of ["backtest", "live"]) if (D[k]) D[k].overall.forEach(o => name[o.source] = o.name);
-  const stats = Object.entries(rows.reduce((a, r) => ((a[r.source] = a[r.source] || []).push(r.rank), a), {}))
-    .map(([src, rk]) => ({src, mean: rk.reduce((x, y) => x + y, 0) / rk.length, top3: rk.filter(v => v <= 3).length,
-      worst: Math.max(...rk), n: rk.length})).sort((a, b) => a.mean - b.mean);
-  const best = stats.find(s => s.src !== OURS);
-  const col = src => src === OURS ? "#c2410c" : src === best.src ? "#0f766e" : "#c9c6bd";
-  const n = Math.max(...rows.map(r => r.rank)), W = 760, L = 30, R = 190, top = 16, bot = 44;
-  const H = top + bot + n * 26, x = i => days.length < 2 ? (W - R + L) / 2 : L + 20 + i / (days.length - 1) * (W - L - R - 20), y = r => top + (r - 1) * 26;
+  const short = src => (name[src] || src).replace(" (my own model)", "").replace(" (bias-corrected)", "");
+  const live = D.live ? D.live.daily.filter(r => r.day >= "2026-10-31").map(r => ({...r, kind: "live"})) : [];
+  const liveDays = [...new Set(live.map(r => r.day))].sort().slice(-7);
+  const past = D.backtest && liveDays.length < 7 ? D.backtest.daily.map(r => ({...r, kind: "test"})) : [];
+  const pastDays = [...new Set(past.map(r => r.day))].sort().slice(-7);
+  const rows = [...past.filter(r => pastDays.includes(r.day)), ...live.filter(r => liveDays.includes(r.day))];
+  const future = [], nx = new Date((liveDays[liveDays.length - 1] || "2026-10-30") + "T12:00Z");
+  while (liveDays.length + future.length < 7) { nx.setUTCDate(nx.getUTCDate() + 1); future.push(nx.toISOString().slice(0, 10)); }
+  const slots = [...pastDays.map(d => [d, "test"]), ...liveDays.map(d => [d, "live"]), ...future.map(d => [d, "next"])];
+  const n = Math.max(...rows.map(r => r.rank)), W = 760, L = 30, R = 96, top = 16, bot = 44, step = 24;
+  const H = top + bot + (n - 1) * step + 10, x = i => L + 14 + i / (slots.length - 1) * (W - L - R - 14), y = r => top + (r - 1) * step;
   const s = svg(document.getElementById("week"), W, H);
-  for (let r = 1; r <= n; r++) el("text", {x: L - 6, y: y(r) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, r);
-  el("rect", {x: L, y: y(1) - 12, width: W - L - R + 10, height: 3 * 26 - 2, fill: "#f3efe6"}, s);
-  el("text", {x: W - R + 14, y: y(2) + 4, "font-size": 11, fill: "#6b6a65"}, s, "");
-  el("text", {x: L + 4, y: y(3) + 12, "font-size": 10, fill: "#6b6a65"}, s, "top three");
-  days.forEach((d, i) => {
-    el("text", {x: x(i), y: H - 22, "text-anchor": "middle", "font-size": 11, fill: "#1d1d1b"}, s,
-      new Date(d + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"}));
-    el("text", {x: x(i), y: H - 8, "text-anchor": "middle", "font-size": 10, fill: kindOf(d) === "live" ? "#c2410c" : "#6b6a65"}, s, kindOf(d));
-  });
-  const order = stats.map(s => s.src).reverse().sort((a, b) => (a === OURS) - (b === OURS) || (a === best.src) - (b === best.src));
-  for (const src of order) {
-    const pts = days.map((d, i) => { const r = rows.find(q => q.day === d && q.source === src); return r ? [x(i), y(r.rank), r] : null; }).filter(Boolean);
-    const hi = src === OURS || src === best.src;
-    el("path", {d: "M" + pts.map(p => p[0] + "," + p[1]).join("L"), fill: "none", stroke: col(src), "stroke-width": hi ? 3 : 1.4}, s);
-    pts.forEach(p => { const miss = p[2].no_forecast;
-      const c = el("circle", {cx: p[0], cy: p[1], r: hi ? 4.5 : 2.5, fill: miss ? "#fff" : col(src), stroke: col(src), "stroke-width": miss ? 2 : 0}, s);
-      if (miss) el("title", {}, c, "No forecast: DKcast feed not ready. Counted as last place."); });
-    if (hi) { const last = pts[pts.length - 1];
-      const other = rows.find(q => q.day === days[days.length - 1] && q.source === (src === OURS ? best.src : OURS));
-      const clash = other && Math.abs(y(other.rank) - last[1]) < 16, dy = clash ? (src === OURS ? -8 : 8) : 0;
-      tip(el("text", {x: last[0] + 12, y: last[1] + 4 + dy, "font-size": 13, "font-weight": 700, fill: col(src)}, s, (name[src] || src).replace(" (bias-corrected)", "")), src); }
+  const first = slots.findIndex(z => z[1] !== "test");
+  if (first > 0) {
+    const xb = (x(first - 1) + x(first)) / 2;
+    el("rect", {x: xb, y: top - 12, width: W - R - xb + 12, height: H - bot - top + 18, fill: "#fbf3ea"}, s);
+    el("line", {x1: xb, x2: xb, y1: top - 12, y2: H - bot + 6, stroke: "#c2410c", "stroke-dasharray": "3 3"}, s);
   }
-  const tb = document.getElementById("weektab");
-  tb.innerHTML = "<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Source</th><th style='padding:4px 8px;text-align:right'>Average rank</th><th style='padding:4px 8px;text-align:right'>Days in top three</th><th style='padding:4px 8px;text-align:right'>Worst day</th></tr>" +
-    stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === OURS ? "font-weight:700;color:#c2410c" : st.src === best.src ? "font-weight:700;color:#0f766e" : ""}"><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(st.src) || "").replace(/"/g, "&quot;")}">${name[st.src] || st.src}</span></td><td style="padding:4px 8px;text-align:right">${st.mean.toFixed(1)}</td><td style="padding:4px 8px;text-align:right">${st.top3} of ${st.n}</td><td style="padding:4px 8px;text-align:right">${st.worst}</td></tr>`).join("") + "</table>";
-  const b = stats.find(s => s.src === OURS), nl = days.filter(d => kindOf(d) === "live").length;
-  document.getElementById("weekcap").textContent = `Daily rank of each source by error as a % of capacity, 1 = smallest error of ${n}. ` +
-    `Orange is ${name[OURS] || OURS}; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
-    `${nl} live day${nl === 1 ? "" : "s"} shown, each forecast committed before its day began. ` +
-    (rows.some(r => r.no_forecast) ? "A hollow point is a day with no forecast because the DKcast feed was not ready; it counts as last place, with that day's worst error. " : "") +
-    `Over these days ${name[OURS] || OURS} averaged rank ${b.mean.toFixed(1)}, in the top three on ${b.top3} of ${b.n} days.`;
-  document.getElementById("weekh").textContent = nl < 7 ? `The live days so far, ranked (${nl} of 7)` : "The last seven live days, ranked";
+  for (let r = 1; r <= n; r++) el("text", {x: L - 6, y: y(r) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, r);
+  slots.forEach(([d, k], i) => {
+    if (k === "next") el("line", {x1: x(i), x2: x(i), y1: top - 6, y2: y(n) + 6, stroke: "#e4d5c3", "stroke-dasharray": "2 4"}, s);
+    el("text", {x: x(i), y: H - 22, "text-anchor": "middle", "font-size": 11, fill: k === "test" ? "#9a978f" : "#1d1d1b"}, s,
+      new Date(d + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"}));
+    el("text", {x: x(i), y: H - 8, "text-anchor": "middle", "font-size": 10, fill: k === "test" ? "#9a978f" : "#c2410c"}, s,
+      k === "test" ? "test" : k === "live" ? "live" : "to come");
+  });
+  const col = src => src === OURS ? "#c2410c" : src === "energinet" ? "#1e40af" : "#c9c6bd";
+  const srcs = [...new Set(rows.map(r => r.source))].sort((a, b) => (a === OURS) - (b === OURS) || (a === "energinet") - (b === "energinet"));
+  for (const src of srcs) for (const kind of ["test", "live"]) {
+    const hi = src === OURS || src === "energinet";
+    const pts = slots.map(([d, k], i) => { if (k !== kind) return null;
+      const r = rows.find(q => q.day === d && q.source === src); return r ? [x(i), y(r.rank), r] : null; }).filter(Boolean);
+    if (!pts.length) continue;
+    const g = el("g", {opacity: kind === "test" ? .35 : 1}, s);
+    el("path", {d: "M" + pts.map(p => p[0] + "," + p[1]).join("L"), fill: "none", stroke: col(src), "stroke-width": hi ? 3 : 1.4}, g);
+    pts.forEach(p => { const miss = p[2].no_forecast;
+      const c = el("circle", {cx: p[0], cy: p[1], r: hi ? 4.5 : 2.5, fill: miss ? "#fff" : col(src), stroke: col(src), "stroke-width": miss ? 2 : 0}, g);
+      el("title", {}, c, miss ? `${p[2].day}: no forecast, DKcast feed not ready. Counted as last place.`
+        : `${short(src)}, ${p[2].day}: rank ${p[2].rank} of ${n}, error ${p[2].nmae.toFixed(2)}% of capacity`); });
+  }
+  // names at the newest point of the two lines that matter
+  const lastPt = src => { for (let i = slots.length - 1; i >= 0; i--) { const r = rows.find(q => q.day === slots[i][0] && q.source === src); if (r) return [i, r]; } return null; };
+  const a = lastPt(OURS), b = lastPt("energinet");
+  const clash = a && b && a[0] === b[0] && Math.abs(a[1].rank - b[1].rank) * step < 16;
+  for (const [src, p] of [[OURS, a], ["energinet", b]]) if (p) tip(el("text", {x: x(p[0]) + 12, y: y(p[1].rank) + 4 + (clash ? (src === OURS ? -8 : 8) : 0),
+    "font-size": 13, "font-weight": 700, fill: col(src)}, s, short(src)), src);
+  const base = liveDays.length ? rows.filter(r => r.kind === "live") : rows;
+  const stats = Object.entries(base.reduce((m, r) => ((m[r.source] = m[r.source] || []).push(r.rank), m), {}))
+    .map(([src, rk]) => ({src, mean: rk.reduce((p, q) => p + q, 0) / rk.length, first: rk.filter(v => v === 1).length,
+      worst: Math.max(...rk), n: rk.length})).sort((p, q) => p.mean - q.mean);
+  const td = "padding:4px 8px;text-align:right";
+  document.getElementById("weektab").innerHTML = `<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Source (${liveDays.length ? "live days" : "test days shown"})</th><th style='${td}'>Average rank</th><th style='${td}'>Days with the smallest error</th><th style='${td}'>Worst day</th></tr>` +
+    stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === OURS ? "font-weight:700;color:#c2410c" : st.src === "energinet" ? "color:#1e40af" : ""}"><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(st.src) || "").replace(/"/g, "&quot;")}">${name[st.src] || st.src}</span></td><td style="${td}">${st.mean.toFixed(1)}</td><td style="${td}">${st.first} of ${st.n}</td><td style="${td}">${st.worst}</td></tr>`).join("") + "</table>";
+  const nl = liveDays.length;
+  document.getElementById("weekcap").textContent = `Daily rank of each source, 1 = smallest error of ${n}, by error as a % of installed capacity. ` +
+    `Orange is ${short(OURS)}, blue is Energinet's own forecast, grey are the other sources. ` +
+    (pastDays.length ? `Muted, on the left: the last ${pastDays.length} days of the test, forecasts from the same model run on past weather forecasts, not live. ` : "") +
+    `On the right: the live days, each forecast committed before 12:00 the day before, ${nl ? `${nl} scored so far` : "the first scored at 01:30 on 1 Nov"}; ` +
+    `the empty slots fill in as each day is scored at 01:30 the night after.` +
+    (rows.some(r => r.no_forecast) ? " A hollow point is a day with no forecast because the DKcast feed was not ready; it counts as last place." : "");
+  document.getElementById("weekh").textContent = nl >= 7 ? "The last seven live days, ranked" : "Rank, day by day: the last test week, then the live week";
 }
 function renderBand(B) {
   const T = document.getElementById("btiles"), host = document.getElementById("band");
   if (!B) { T.innerHTML = ""; host.innerHTML = "<p class='mute sans'>No scored band days yet.</p>"; return; }
-  T.innerHTML = "";
-  const tiles = [[B.coverage.toFixed(0) + "%", `of ${B.hours.toLocaleString("en")} hours inside the band (target 80%)`],
-    [B.width.toLocaleString("en") + " MW", "average band width"]];
-  if (B.width_calm) tiles.push([`${B.width_calm.toLocaleString("en")} / ${B.width_unsettled.toLocaleString("en")} MW`,
-    "width when the models agree / disagree"], [`${B.cov_calm.toFixed(0)}% / ${B.cov_unsettled.toFixed(0)}%`,
-    "coverage when they agree / disagree"]);
-  for (const [v, l] of tiles) { const t = document.createElement("div"); t.className = "tile";
-    t.innerHTML = `<b>${v}</b><span>${l}</span>`; T.appendChild(t); }
+  T.innerHTML = `<p class="sans" style="margin:0">The measured output fell inside the band on <b>${B.coverage.toFixed(0)}%</b> of ${B.hours.toLocaleString("en")} hours; an honest 80% band should be close to 80%. It was ${B.width.toLocaleString("en")} MW wide on average.</p>`;
   const S = B.series, W = 760, H = 280, L = 56, R = 12, top = 12, bot = 30;
   const ymax = Math.max(...S.map(r => Math.max(r.hi, r.a))) * 1.05;
   const x = i => L + i / (S.length - 1) * (W - L - R), y = v => top + (1 - v / ymax) * (H - top - bot);
@@ -309,11 +318,11 @@ function renderBand(B) {
       new Date(r.t.slice(0, 10) + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"})); });
   document.getElementById("bcap").textContent = `The shaded area is the 80% band, the line is the 4-model average it is built around,
     and the dots are the measured output: black inside the band, blue outside. Last seven days of ${B.from} to ${B.to},
-    hourly, total Denmark, in MW.`;
+    hourly, total Denmark, in MW.` + (S.some(r => r.t === "2026-10-16T09") ? " On 16 Oct a short burst of wind more than doubled the output in five hours, from 1,500 to 3,800 MW, and the forecast missed it, so the dots leave the band that morning." : "");
 }
 function renderToday(T) {
   const host = document.getElementById("today"), cap = document.getElementById("todaycap");
-  if (!T || !T.day) { host.innerHTML = "<p class='mute sans'>No measured hour yet for a forecast day; the first hour appears about an hour after it ends.</p>"; return; }
+  if (!T || !T.day) { host.innerHTML = "<p class='mute sans'>No hour of today has been measured yet. The first one appears about an hour after it ends; when today's forecast was issued is at the top of the page.</p>"; return; }
   const S = T.series, W = 760, H = 260, L = 56, R = 12, top = 12, bot = 30;
   const vals = S.flatMap(r => [r.hi, r.p, r.a]).filter(v => v != null), ymax = Math.max(...vals) * 1.08;
   const x = i => L + i / (S.length - 1) * (W - L - R), y = v => top + (1 - v / ymax) * (H - top - bot);
@@ -339,18 +348,32 @@ function renderToday(T) {
     `the dots are Energinet's measured output, total Denmark in MW, added each hour as it is published (black inside the band, blue outside). ` +
     `The ranking covers the measured hours only and changes as the day goes on. The official score for the whole day is computed at 01:30 the next night.`;
 }
-function renderHealth(h) {
-  const n = document.getElementById("health"); if (!h || !h.last_forecast_day) { n.textContent = ""; return; }
-  const fmt = t => new Date(t).toLocaleString("en-GB", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Copenhagen"});
-  const dd = d => new Date(d + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"});
-  // a forecast for tomorrow is due by 12:00 Copenhagen time
-  const now = new Date(), cph = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Copenhagen"}));
-  const due = new Date(cph); due.setDate(due.getDate() + (cph.getHours() >= 12 ? 1 : 0));
-  const dueDay = due.toISOString().slice(0, 10), late = h.last_forecast_day < dueDay;
-  n.innerHTML = `Last forecast: for ${dd(h.last_forecast_day)}, issued ${fmt(h.last_forecast_issued_utc)}. ` +
-    (h.last_scored_day ? `Last day scored: ${dd(h.last_scored_day)}. ` : "No live day scored yet. ") +
-    `Page data built ${fmt(h.generated_utc)} Copenhagen time.` +
-    (late ? ` <span class="warnline">The forecast for ${dd(dueDay)} is not on this page yet; the page updates three times a day.</span>` : "");
+function renderHealth(h, TD) {
+  // top of the page: when the page was updated, and for today and tomorrow each forecast try, the final one, and the score status
+  const n = document.getElementById("health"); if (!h) { n.textContent = ""; return; }
+  const tz = {timeZone: "Europe/Copenhagen"};
+  const hm = t => new Date(t).toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit", ...tz});
+  const full = t => new Date(t).toLocaleString("en-GB", {weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", ...tz});
+  const dd = d => new Date(d + "T12:00Z").toLocaleDateString("en-GB", {weekday: "long", day: "numeric", month: "long"});
+  const iso = t => new Date(t).toLocaleDateString("en-CA", tz);
+  const today = iso(Date.now()), tomorrow = iso(Date.now() + 864e5), next = d => iso(new Date(d + "T12:00Z").getTime() + 864e5);
+  const hourNow = +new Date().toLocaleTimeString("en-GB", {hour: "2-digit", hour12: false, ...tz});
+  const F = h.forecasts || {}, TR = h.tries || {};
+  const panel = (day, label) => {
+    const f = F[day], lines = (TR[day] || []).filter(t => t.result === "waiting")
+      .map(t => `${hm(t.at_utc)}: tried, the DKcast feed was not ready, so it waited for the next try.`);
+    if (f) lines.push(`<b>Issued ${full(f.issued_utc)}. Final: this is the forecast that is scored.</b>` +
+      (f.missing && f.missing.j4catdk ? " J4catDK: no forecast, the DKcast feed was not ready by the last try; it counts as last place." : ""));
+    else if (day === tomorrow && hourNow < 12) lines.push("Not issued yet: tries at 10:30, 11:00 and 11:30, before the market closes at 12:00.");
+    else lines.push(`<span class="warnline">No forecast for this day on the page yet.</span>`);
+    lines.push(h.last_scored_day >= day ? "Scored." : day === today
+      ? "Score: waiting for the weather to happen. A provisional score of the hours so far is below; the final score is computed at 01:30 tonight."
+      : `Score: waiting for the weather to happen; computed at 01:30 on ${dd(next(day)).split(" ").slice(0, 3).join(" ")}.`);
+    return `<div style="flex:1 1 280px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card)"><div style="font-weight:700">${label}, ${dd(day)}</div>${lines.map(l => `<div style="margin-top:4px">${l}</div>`).join("")}</div>`;
+  };
+  const upd = [h.generated_utc, TD && TD.built_utc].filter(Boolean).sort().pop();
+  n.innerHTML = `<div class="mute" style="margin-bottom:6px">Page updated ${full(upd)}, Copenhagen time.</div>` +
+    `<div style="display:flex;flex-wrap:wrap;gap:10px">${panel(today, "Today")}${panel(tomorrow, "Tomorrow")}</div>`;
 }
 Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then(r => r.json()).catch(() => ({})),
     fetch("today.json").then(r => r.json()).catch(() => null)]).then(([D, G, TD]) => {
@@ -358,7 +381,7 @@ Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then
   const srcs = new Set(["backtest", "live"].flatMap(k => D[k] ? D[k].overall.map(r => r.source) : []));
   if (srcs.has("j4catdk")) OURS = "j4catdk";
   renderToday(TD);
-  renderHealth(D.health);
+  renderHealth(D.health, TD);
   renderWeek(D);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
     render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };

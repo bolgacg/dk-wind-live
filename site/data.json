@@ -165,7084 +165,8096 @@
 "source": "j4catdk",
 "acc": 76.17,
 "nmae": 5.85,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "blend",
 "acc": 79.28,
 "nmae": 7.19,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "aifs",
 "acc": 76.96,
 "nmae": 7.25,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "harmonie",
 "acc": 79.81,
 "nmae": 7.54,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "knmi",
 "acc": 79.56,
 "nmae": 8.11,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "energinet",
 "acc": 75.38,
 "nmae": 8.53,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "ifs",
 "acc": 74.96,
 "nmae": 8.85,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "ukmo",
 "acc": 75.74,
 "nmae": 9.21,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "icon",
 "acc": 75.51,
 "nmae": 10.23,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "icon_d2",
 "acc": 71.24,
 "nmae": 10.85,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-19",
 "source": "gfs",
 "acc": 69.18,
 "nmae": 13.13,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "energinet",
 "acc": 84.33,
 "nmae": 4.65,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "icon",
 "acc": 82.53,
 "nmae": 5.69,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "icon_d2",
 "acc": 82.32,
 "nmae": 6.0,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "j4catdk",
 "acc": 82.18,
 "nmae": 6.48,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "blend",
 "acc": 80.38,
 "nmae": 6.72,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "ifs",
 "acc": 77.35,
 "nmae": 6.94,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "ukmo",
 "acc": 81.57,
 "nmae": 7.1,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "knmi",
 "acc": 80.86,
 "nmae": 7.47,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "harmonie",
 "acc": 79.4,
 "nmae": 8.0,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "gfs",
 "acc": 78.27,
 "nmae": 8.47,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-20",
 "source": "aifs",
 "acc": 76.42,
 "nmae": 8.77,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "gfs",
 "acc": 82.91,
 "nmae": 3.95,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "ifs",
 "acc": 83.82,
 "nmae": 4.64,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "blend",
 "acc": 82.55,
 "nmae": 4.8,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "aifs",
 "acc": 82.16,
 "nmae": 4.87,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "ukmo",
 "acc": 80.89,
 "nmae": 5.08,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "j4catdk",
 "acc": 80.38,
 "nmae": 5.34,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "icon",
 "acc": 79.06,
 "nmae": 5.62,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "icon_d2",
 "acc": 78.83,
 "nmae": 5.85,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "energinet",
 "acc": 79.99,
 "nmae": 5.9,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "knmi",
 "acc": 76.55,
 "nmae": 6.33,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-21",
 "source": "harmonie",
 "acc": 72.99,
 "nmae": 7.11,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "aifs",
 "acc": 88.45,
 "nmae": 4.78,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "ifs",
 "acc": 86.21,
 "nmae": 5.7,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "blend",
 "acc": 87.54,
 "nmae": 5.89,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "gfs",
 "acc": 85.46,
 "nmae": 6.38,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "ukmo",
 "acc": 85.83,
 "nmae": 7.0,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "icon_d2",
 "acc": 86.05,
 "nmae": 7.04,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "j4catdk",
 "acc": 83.17,
 "nmae": 7.14,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "icon",
 "acc": 85.73,
 "nmae": 7.23,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "energinet",
 "acc": 83.54,
 "nmae": 8.51,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "harmonie",
 "acc": 83.68,
 "nmae": 8.72,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-22",
 "source": "knmi",
 "acc": 82.92,
 "nmae": 9.15,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "ifs",
 "acc": 75.98,
 "nmae": 3.71,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "blend",
 "acc": 78.97,
 "nmae": 4.27,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "gfs",
 "acc": 74.37,
 "nmae": 4.28,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "j4catdk",
 "acc": 76.11,
 "nmae": 4.38,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "ukmo",
 "acc": 77.12,
 "nmae": 4.68,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "knmi",
 "acc": 77.19,
 "nmae": 5.08,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "aifs",
 "acc": 79.37,
 "nmae": 5.21,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "harmonie",
 "acc": 76.85,
 "nmae": 5.31,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "icon_d2",
 "acc": 70.88,
 "nmae": 5.89,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "icon",
 "acc": 70.77,
 "nmae": 6.61,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-23",
 "source": "energinet",
 "acc": 75.23,
 "nmae": 6.66,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "ifs",
 "acc": 88.33,
 "nmae": 3.64,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "blend",
 "acc": 87.65,
 "nmae": 4.57,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "j4catdk",
 "acc": 85.66,
 "nmae": 4.98,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "knmi",
 "acc": 85.18,
 "nmae": 5.4,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "ukmo",
 "acc": 82.85,
 "nmae": 5.73,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "icon",
 "acc": 85.74,
 "nmae": 5.83,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "icon_d2",
 "acc": 85.06,
 "nmae": 5.93,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "harmonie",
 "acc": 84.4,
 "nmae": 5.99,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "gfs",
 "acc": 85.07,
 "nmae": 6.19,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "energinet",
 "acc": 82.34,
 "nmae": 6.69,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-24",
 "source": "aifs",
 "acc": 82.21,
 "nmae": 7.43,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "energinet",
 "acc": 75.25,
 "nmae": 7.87,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "knmi",
 "acc": 75.1,
 "nmae": 9.1,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "harmonie",
 "acc": 72.16,
 "nmae": 10.22,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "ukmo",
 "acc": 70.5,
 "nmae": 10.71,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "blend",
 "acc": 70.55,
 "nmae": 10.8,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "gfs",
 "acc": 70.77,
 "nmae": 10.87,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "icon_d2",
 "acc": 68.71,
 "nmae": 11.23,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "icon",
 "acc": 68.62,
 "nmae": 11.33,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "aifs",
 "acc": 68.75,
 "nmae": 11.42,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "ifs",
 "acc": 67.88,
 "nmae": 11.78,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-25",
 "source": "j4catdk",
 "acc": 68.87,
 "nmae": 11.81,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "knmi",
 "acc": 66.61,
 "nmae": 5.2,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "j4catdk",
 "acc": 67.17,
 "nmae": 5.29,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "blend",
 "acc": 65.64,
 "nmae": 5.31,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "aifs",
 "acc": 65.02,
 "nmae": 5.34,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "harmonie",
 "acc": 64.04,
 "nmae": 5.69,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "ifs",
 "acc": 62.3,
 "nmae": 5.81,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "energinet",
 "acc": 59.01,
 "nmae": 6.12,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "ukmo",
 "acc": 58.79,
 "nmae": 6.29,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "icon",
 "acc": 57.88,
 "nmae": 6.79,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "icon_d2",
 "acc": 56.31,
 "nmae": 7.16,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-26",
 "source": "gfs",
 "acc": 55.85,
 "nmae": 7.24,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "gfs",
 "acc": 86.9,
 "nmae": 7.12,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "icon_d2",
 "acc": 84.36,
 "nmae": 7.92,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "blend",
 "acc": 85.09,
 "nmae": 7.99,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "knmi",
 "acc": 83.84,
 "nmae": 8.04,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "icon",
 "acc": 83.94,
 "nmae": 8.06,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "harmonie",
 "acc": 84.26,
 "nmae": 8.21,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "j4catdk",
 "acc": 83.41,
 "nmae": 8.27,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "ukmo",
 "acc": 85.87,
 "nmae": 8.85,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "aifs",
 "acc": 84.42,
 "nmae": 9.55,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "energinet",
 "acc": 83.42,
 "nmae": 9.76,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-27",
 "source": "ifs",
 "acc": 82.78,
 "nmae": 10.05,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "icon",
 "acc": 79.02,
 "nmae": 7.76,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "aifs",
 "acc": 78.36,
 "nmae": 7.92,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "icon_d2",
 "acc": 78.16,
 "nmae": 8.2,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "blend",
 "acc": 80.82,
 "nmae": 8.28,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "j4catdk",
 "acc": 81.8,
 "nmae": 8.3,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "ifs",
 "acc": 80.2,
 "nmae": 8.57,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "gfs",
 "acc": 75.52,
 "nmae": 8.78,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "knmi",
 "acc": 73.93,
 "nmae": 11.0,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "ukmo",
 "acc": 72.21,
 "nmae": 11.53,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "harmonie",
 "acc": 73.58,
 "nmae": 11.86,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-28",
 "source": "energinet",
 "acc": 73.15,
 "nmae": 12.25,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "j4catdk",
 "acc": 81.12,
 "nmae": 3.27,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "blend",
 "acc": 82.74,
 "nmae": 3.46,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "aifs",
 "acc": 81.39,
 "nmae": 3.59,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "energinet",
 "acc": 81.56,
 "nmae": 3.8,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "ifs",
 "acc": 79.35,
 "nmae": 4.09,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "icon_d2",
 "acc": 79.48,
 "nmae": 4.37,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "ukmo",
 "acc": 78.51,
 "nmae": 4.54,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "icon",
 "acc": 77.77,
 "nmae": 4.75,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "gfs",
 "acc": 78.59,
 "nmae": 4.79,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "harmonie",
 "acc": 71.51,
 "nmae": 6.99,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-29",
 "source": "knmi",
 "acc": 67.56,
 "nmae": 7.9,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "ukmo",
 "acc": 78.11,
 "nmae": 5.34,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "j4catdk",
 "acc": 76.9,
 "nmae": 6.37,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "energinet",
 "acc": 75.22,
 "nmae": 6.5,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "harmonie",
 "acc": 72.24,
 "nmae": 7.04,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "knmi",
 "acc": 70.51,
 "nmae": 7.14,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "icon_d2",
 "acc": 71.85,
 "nmae": 7.34,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "blend",
 "acc": 72.57,
 "nmae": 7.39,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "aifs",
 "acc": 71.61,
 "nmae": 7.87,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "gfs",
 "acc": 70.26,
 "nmae": 8.09,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "icon",
 "acc": 68.3,
 "nmae": 8.54,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-30",
 "source": "ifs",
 "acc": 66.07,
 "nmae": 9.54,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "energinet",
 "acc": 78.06,
 "nmae": 2.41,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "j4catdk",
 "acc": 75.67,
 "nmae": 2.59,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "aifs",
 "acc": 74.31,
 "nmae": 2.66,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "blend",
 "acc": 78.09,
 "nmae": 2.74,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "knmi",
 "acc": 74.55,
 "nmae": 3.11,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "ukmo",
 "acc": 72.58,
 "nmae": 3.6,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "harmonie",
 "acc": 71.07,
 "nmae": 3.98,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "icon",
 "acc": 69.74,
 "nmae": 4.12,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "ifs",
 "acc": 70.99,
 "nmae": 4.5,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "icon_d2",
 "acc": 66.29,
 "nmae": 5.14,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-07-31",
 "source": "gfs",
 "acc": 64.22,
 "nmae": 5.58,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "energinet",
 "acc": 78.91,
 "nmae": 2.91,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "ukmo",
 "acc": 72.51,
 "nmae": 4.18,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "blend",
 "acc": 73.73,
 "nmae": 4.24,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "icon",
 "acc": 71.72,
 "nmae": 4.27,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "aifs",
 "acc": 71.62,
 "nmae": 4.33,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "knmi",
 "acc": 70.22,
 "nmae": 4.48,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "icon_d2",
 "acc": 69.45,
 "nmae": 4.53,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "j4catdk",
 "acc": 70.77,
 "nmae": 4.66,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "harmonie",
 "acc": 65.96,
 "nmae": 4.86,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "ifs",
 "acc": 68.19,
 "nmae": 5.08,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-01",
 "source": "gfs",
 "acc": 61.35,
 "nmae": 5.71,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "gfs",
 "acc": 75.17,
 "nmae": 3.05,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "harmonie",
 "acc": 75.13,
 "nmae": 3.64,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "aifs",
 "acc": 76.89,
 "nmae": 3.67,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "blend",
 "acc": 74.56,
 "nmae": 4.27,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "j4catdk",
 "acc": 70.71,
 "nmae": 4.52,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "energinet",
 "acc": 74.54,
 "nmae": 4.55,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "knmi",
 "acc": 72.06,
 "nmae": 4.58,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "icon",
 "acc": 69.82,
 "nmae": 5.04,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "ifs",
 "acc": 66.03,
 "nmae": 5.81,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "icon_d2",
 "acc": 62.09,
 "nmae": 6.73,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-02",
 "source": "ukmo",
 "acc": 58.24,
 "nmae": 7.46,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "ifs",
 "acc": 72.61,
 "nmae": 2.03,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "blend",
 "acc": 68.04,
 "nmae": 2.22,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "icon_d2",
 "acc": 68.37,
 "nmae": 2.35,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "icon",
 "acc": 67.1,
 "nmae": 2.42,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "j4catdk",
 "acc": 65.88,
 "nmae": 2.59,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "harmonie",
 "acc": 54.36,
 "nmae": 2.65,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "aifs",
 "acc": 62.65,
 "nmae": 2.78,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "gfs",
 "acc": 61.7,
 "nmae": 3.01,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "knmi",
 "acc": 57.57,
 "nmae": 3.13,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "ukmo",
 "acc": 55.96,
 "nmae": 3.22,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-03",
 "source": "energinet",
 "acc": 58.77,
 "nmae": 3.43,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "knmi",
 "acc": 74.67,
 "nmae": 9.61,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "gfs",
 "acc": 75.66,
 "nmae": 9.63,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "icon_d2",
 "acc": 74.71,
 "nmae": 9.83,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "harmonie",
 "acc": 71.5,
 "nmae": 10.37,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "j4catdk",
 "acc": 72.5,
 "nmae": 10.71,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "aifs",
 "acc": 70.51,
 "nmae": 11.22,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "blend",
 "acc": 69.56,
 "nmae": 11.29,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "energinet",
 "acc": 71.97,
 "nmae": 11.51,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "ukmo",
 "acc": 69.72,
 "nmae": 11.85,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "ifs",
 "acc": 66.9,
 "nmae": 12.42,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-04",
 "source": "icon",
 "acc": 59.42,
 "nmae": 15.69,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "ifs",
 "acc": 78.63,
 "nmae": 8.53,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "aifs",
 "acc": 79.44,
 "nmae": 8.55,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "blend",
 "acc": 77.7,
 "nmae": 9.11,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "icon_d2",
 "acc": 78.6,
 "nmae": 9.26,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "gfs",
 "acc": 77.97,
 "nmae": 9.49,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "j4catdk",
 "acc": 76.89,
 "nmae": 9.55,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "energinet",
 "acc": 75.33,
 "nmae": 9.76,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "icon",
 "acc": 73.76,
 "nmae": 11.15,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "ukmo",
 "acc": 73.89,
 "nmae": 11.89,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "knmi",
 "acc": 72.08,
 "nmae": 12.13,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-05",
 "source": "harmonie",
 "acc": 70.41,
 "nmae": 13.16,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "j4catdk",
 "acc": 82.38,
 "nmae": 5.52,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "ukmo",
 "acc": 82.52,
 "nmae": 7.84,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "aifs",
 "acc": 80.69,
 "nmae": 7.92,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "blend",
 "acc": 80.87,
 "nmae": 8.17,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "harmonie",
 "acc": 79.91,
 "nmae": 8.39,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "icon_d2",
 "acc": 80.69,
 "nmae": 8.48,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "gfs",
 "acc": 80.92,
 "nmae": 9.01,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "icon",
 "acc": 80.62,
 "nmae": 9.13,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "ifs",
 "acc": 78.53,
 "nmae": 9.6,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "knmi",
 "acc": 78.52,
 "nmae": 9.74,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-06",
 "source": "energinet",
 "acc": 83.76,
 "nmae": 9.95,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "ifs",
 "acc": 89.92,
 "nmae": 3.14,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "blend",
 "acc": 88.34,
 "nmae": 4.14,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "aifs",
 "acc": 88.04,
 "nmae": 4.9,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "j4catdk",
 "acc": 88.57,
 "nmae": 5.27,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "icon",
 "acc": 85.58,
 "nmae": 5.66,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "icon_d2",
 "acc": 86.74,
 "nmae": 5.88,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "energinet",
 "acc": 87.09,
 "nmae": 6.0,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "harmonie",
 "acc": 85.06,
 "nmae": 7.1,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "ukmo",
 "acc": 85.63,
 "nmae": 7.26,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "gfs",
 "acc": 85.51,
 "nmae": 7.31,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-07",
 "source": "knmi",
 "acc": 82.74,
 "nmae": 7.45,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "blend",
 "acc": 82.96,
 "nmae": 3.02,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "ifs",
 "acc": 81.96,
 "nmae": 3.43,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "aifs",
 "acc": 79.66,
 "nmae": 3.5,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "icon_d2",
 "acc": 79.76,
 "nmae": 3.82,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "harmonie",
 "acc": 79.95,
 "nmae": 4.05,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "j4catdk",
 "acc": 78.21,
 "nmae": 4.17,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "icon",
 "acc": 79.31,
 "nmae": 4.19,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "energinet",
 "acc": 79.38,
 "nmae": 4.25,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "gfs",
 "acc": 76.2,
 "nmae": 4.47,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "ukmo",
 "acc": 77.56,
 "nmae": 4.64,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-08",
 "source": "knmi",
 "acc": 76.32,
 "nmae": 4.99,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "j4catdk",
 "acc": 76.94,
 "nmae": 3.92,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "ifs",
 "acc": 75.23,
 "nmae": 4.33,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "blend",
 "acc": 77.01,
 "nmae": 4.7,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "knmi",
 "acc": 76.2,
 "nmae": 4.84,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "icon_d2",
 "acc": 73.86,
 "nmae": 5.4,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "aifs",
 "acc": 68.77,
 "nmae": 5.74,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "harmonie",
 "acc": 70.34,
 "nmae": 6.02,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "gfs",
 "acc": 71.63,
 "nmae": 6.08,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "ukmo",
 "acc": 67.53,
 "nmae": 6.24,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "energinet",
 "acc": 67.44,
 "nmae": 6.38,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-09",
 "source": "icon",
 "acc": 65.71,
 "nmae": 7.48,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "blend",
 "acc": 85.13,
 "nmae": 6.06,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "ifs",
 "acc": 83.71,
 "nmae": 6.25,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "harmonie",
 "acc": 84.05,
 "nmae": 6.26,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "icon_d2",
 "acc": 81.36,
 "nmae": 6.9,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "aifs",
 "acc": 82.84,
 "nmae": 7.38,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "icon",
 "acc": 82.44,
 "nmae": 7.52,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "j4catdk",
 "acc": 82.13,
 "nmae": 7.74,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "knmi",
 "acc": 80.77,
 "nmae": 7.91,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "energinet",
 "acc": 81.21,
 "nmae": 8.5,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "ukmo",
 "acc": 79.57,
 "nmae": 9.07,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-10",
 "source": "gfs",
 "acc": 80.76,
 "nmae": 9.11,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "icon_d2",
 "acc": 84.49,
 "nmae": 4.82,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "blend",
 "acc": 83.47,
 "nmae": 4.84,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "j4catdk",
 "acc": 81.74,
 "nmae": 4.97,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "aifs",
 "acc": 83.5,
 "nmae": 5.19,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "icon",
 "acc": 83.58,
 "nmae": 5.27,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "gfs",
 "acc": 82.36,
 "nmae": 5.7,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "energinet",
 "acc": 79.49,
 "nmae": 6.01,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "harmonie",
 "acc": 82.83,
 "nmae": 6.03,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "ifs",
 "acc": 81.09,
 "nmae": 6.17,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "knmi",
 "acc": 80.37,
 "nmae": 6.64,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-11",
 "source": "ukmo",
 "acc": 82.22,
 "nmae": 7.41,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "aifs",
 "acc": 65.72,
 "nmae": 1.23,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "ifs",
 "acc": 64.77,
 "nmae": 1.63,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "icon_d2",
 "acc": 61.78,
 "nmae": 1.66,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "blend",
 "acc": 58.68,
 "nmae": 1.66,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "icon",
 "acc": 55.51,
 "nmae": 1.81,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "j4catdk",
 "acc": 53.38,
 "nmae": 1.9,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "knmi",
 "acc": 46.13,
 "nmae": 2.33,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "harmonie",
 "acc": 38.86,
 "nmae": 2.46,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "ukmo",
 "acc": 35.66,
 "nmae": 2.96,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "energinet",
 "acc": 15.37,
 "nmae": 4.08,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-12",
 "source": "gfs",
 "acc": 12.18,
 "nmae": 4.14,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "icon_d2",
 "acc": 76.67,
 "nmae": 1.08,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "icon",
 "acc": 74.01,
 "nmae": 1.26,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "j4catdk",
 "acc": 73.42,
 "nmae": 1.41,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "blend",
 "acc": 71.23,
 "nmae": 1.46,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "aifs",
 "acc": 67.67,
 "nmae": 1.64,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "ifs",
 "acc": 63.42,
 "nmae": 1.84,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "knmi",
 "acc": 62.55,
 "nmae": 1.87,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "ukmo",
 "acc": 56.11,
 "nmae": 2.22,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "harmonie",
 "acc": 55.75,
 "nmae": 2.38,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "gfs",
 "acc": 50.17,
 "nmae": 2.76,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-13",
 "source": "energinet",
 "acc": -8.14,
 "nmae": 5.94,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "ifs",
 "acc": 79.8,
 "nmae": 3.14,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "j4catdk",
 "acc": 79.3,
 "nmae": 3.48,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "blend",
 "acc": 76.11,
 "nmae": 4.33,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "icon_d2",
 "acc": 76.26,
 "nmae": 4.49,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "aifs",
 "acc": 70.87,
 "nmae": 5.31,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "icon",
 "acc": 70.33,
 "nmae": 5.59,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "knmi",
 "acc": 68.7,
 "nmae": 5.9,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "ukmo",
 "acc": 69.25,
 "nmae": 6.2,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "energinet",
 "acc": 68.89,
 "nmae": 6.28,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "harmonie",
 "acc": 64.08,
 "nmae": 6.87,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-14",
 "source": "gfs",
 "acc": 49.35,
 "nmae": 10.33,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "harmonie",
 "acc": 81.87,
 "nmae": 6.62,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "knmi",
 "acc": 82.28,
 "nmae": 6.9,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "blend",
 "acc": 83.86,
 "nmae": 7.01,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "aifs",
 "acc": 84.05,
 "nmae": 7.38,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "j4catdk",
 "acc": 83.51,
 "nmae": 7.97,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "icon",
 "acc": 80.33,
 "nmae": 8.98,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "ukmo",
 "acc": 80.73,
 "nmae": 9.44,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "ifs",
 "acc": 79.16,
 "nmae": 10.0,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "icon_d2",
 "acc": 76.21,
 "nmae": 10.54,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "energinet",
 "acc": 75.4,
 "nmae": 12.7,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-15",
 "source": "gfs",
 "acc": 73.2,
 "nmae": 13.52,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "energinet",
 "acc": 86.73,
 "nmae": 4.14,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "blend",
 "acc": 86.79,
 "nmae": 4.84,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "aifs",
 "acc": 86.67,
 "nmae": 5.47,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "j4catdk",
 "acc": 86.92,
 "nmae": 5.6,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "ukmo",
 "acc": 87.36,
 "nmae": 5.85,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "harmonie",
 "acc": 84.36,
 "nmae": 6.29,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "ifs",
 "acc": 85.7,
 "nmae": 6.36,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "icon",
 "acc": 83.15,
 "nmae": 6.48,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "knmi",
 "acc": 85.38,
 "nmae": 6.49,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "icon_d2",
 "acc": 81.17,
 "nmae": 7.27,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-16",
 "source": "gfs",
 "acc": 82.23,
 "nmae": 8.03,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "ukmo",
 "acc": 86.15,
 "nmae": 4.12,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "icon",
 "acc": 81.75,
 "nmae": 4.88,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "j4catdk",
 "acc": 85.4,
 "nmae": 5.2,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "blend",
 "acc": 82.8,
 "nmae": 5.29,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "energinet",
 "acc": 83.13,
 "nmae": 5.6,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "icon_d2",
 "acc": 82.89,
 "nmae": 5.64,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "ifs",
 "acc": 82.51,
 "nmae": 5.94,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "aifs",
 "acc": 81.43,
 "nmae": 6.67,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "knmi",
 "acc": 82.2,
 "nmae": 6.67,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "harmonie",
 "acc": 80.37,
 "nmae": 6.87,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-17",
 "source": "gfs",
 "acc": 82.45,
 "nmae": 7.06,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "aifs",
 "acc": 73.84,
 "nmae": 2.29,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "j4catdk",
 "acc": 72.17,
 "nmae": 3.19,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "blend",
 "acc": 71.82,
 "nmae": 3.44,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "ifs",
 "acc": 72.18,
 "nmae": 3.61,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "icon",
 "acc": 68.45,
 "nmae": 4.18,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "gfs",
 "acc": 65.16,
 "nmae": 4.82,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "icon_d2",
 "acc": 63.95,
 "nmae": 4.99,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "harmonie",
 "acc": 55.25,
 "nmae": 5.88,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "ukmo",
 "acc": 55.7,
 "nmae": 5.91,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "knmi",
 "acc": 55.95,
 "nmae": 5.96,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-18",
 "source": "energinet",
 "acc": 54.32,
 "nmae": 5.98,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "blend",
 "acc": 77.72,
 "nmae": 4.78,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "j4catdk",
 "acc": 78.02,
 "nmae": 4.84,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "aifs",
 "acc": 73.82,
 "nmae": 5.83,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "ukmo",
 "acc": 67.07,
 "nmae": 5.91,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "energinet",
 "acc": 67.0,
 "nmae": 6.35,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "gfs",
 "acc": 70.54,
 "nmae": 6.38,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "ifs",
 "acc": 67.98,
 "nmae": 7.32,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "icon",
 "acc": 61.54,
 "nmae": 8.61,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "harmonie",
 "acc": 57.38,
 "nmae": 8.75,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "knmi",
 "acc": 55.59,
 "nmae": 9.78,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-19",
 "source": "icon_d2",
 "acc": 49.12,
 "nmae": 11.43,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "blend",
 "acc": 70.8,
 "nmae": 3.02,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "j4catdk",
 "acc": 69.93,
 "nmae": 3.11,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "icon",
 "acc": 69.51,
 "nmae": 3.2,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "aifs",
 "acc": 68.6,
 "nmae": 3.46,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "icon_d2",
 "acc": 68.52,
 "nmae": 3.47,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "ifs",
 "acc": 69.08,
 "nmae": 3.54,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "energinet",
 "acc": 62.97,
 "nmae": 3.81,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "gfs",
 "acc": 59.48,
 "nmae": 3.83,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "knmi",
 "acc": 60.4,
 "nmae": 4.01,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "harmonie",
 "acc": 58.44,
 "nmae": 4.4,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-20",
 "source": "ukmo",
 "acc": 60.31,
 "nmae": 4.55,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "ifs",
 "acc": 81.6,
 "nmae": 3.19,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "blend",
 "acc": 80.95,
 "nmae": 3.26,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "icon",
 "acc": 79.76,
 "nmae": 3.64,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "aifs",
 "acc": 78.29,
 "nmae": 4.23,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "icon_d2",
 "acc": 80.93,
 "nmae": 4.44,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "j4catdk",
 "acc": 79.7,
 "nmae": 4.66,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "energinet",
 "acc": 79.8,
 "nmae": 4.68,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "gfs",
 "acc": 79.41,
 "nmae": 4.7,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "knmi",
 "acc": 77.46,
 "nmae": 4.91,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "harmonie",
 "acc": 74.63,
 "nmae": 5.31,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-21",
 "source": "ukmo",
 "acc": 75.01,
 "nmae": 6.46,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "blend",
 "acc": 87.74,
 "nmae": 4.03,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "j4catdk",
 "acc": 86.81,
 "nmae": 4.37,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "ifs",
 "acc": 87.43,
 "nmae": 4.49,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "aifs",
 "acc": 85.88,
 "nmae": 4.99,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "knmi",
 "acc": 87.5,
 "nmae": 5.34,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "icon",
 "acc": 84.78,
 "nmae": 5.53,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "harmonie",
 "acc": 86.88,
 "nmae": 5.78,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "ukmo",
 "acc": 88.78,
 "nmae": 5.85,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "gfs",
 "acc": 84.55,
 "nmae": 5.94,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "icon_d2",
 "acc": 82.32,
 "nmae": 6.69,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-22",
 "source": "energinet",
 "acc": 82.9,
 "nmae": 7.03,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "gfs",
 "acc": 84.14,
 "nmae": 5.43,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "ifs",
 "acc": 82.98,
 "nmae": 5.44,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "j4catdk",
 "acc": 82.96,
 "nmae": 5.7,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "energinet",
 "acc": 79.64,
 "nmae": 6.57,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "blend",
 "acc": 83.23,
 "nmae": 6.63,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "aifs",
 "acc": 83.24,
 "nmae": 6.8,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "ukmo",
 "acc": 84.25,
 "nmae": 7.04,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "knmi",
 "acc": 82.39,
 "nmae": 7.21,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "icon",
 "acc": 80.77,
 "nmae": 7.64,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "icon_d2",
 "acc": 79.11,
 "nmae": 7.73,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-23",
 "source": "harmonie",
 "acc": 80.54,
 "nmae": 8.19,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "ifs",
 "acc": 68.36,
 "nmae": 1.84,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "j4catdk",
 "acc": 67.57,
 "nmae": 2.01,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "blend",
 "acc": 70.46,
 "nmae": 2.1,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "aifs",
 "acc": 65.63,
 "nmae": 2.2,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "icon_d2",
 "acc": 71.63,
 "nmae": 2.5,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "harmonie",
 "acc": 68.4,
 "nmae": 2.52,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "knmi",
 "acc": 65.81,
 "nmae": 2.55,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "energinet",
 "acc": 71.16,
 "nmae": 3.03,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "icon",
 "acc": 68.17,
 "nmae": 3.18,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "ukmo",
 "acc": 52.99,
 "nmae": 3.9,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-24",
 "source": "gfs",
 "acc": 56.5,
 "nmae": 4.17,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "aifs",
 "acc": 67.34,
 "nmae": 1.2,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "blend",
 "acc": 70.87,
 "nmae": 1.39,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "ifs",
 "acc": 72.68,
 "nmae": 1.44,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "j4catdk",
 "acc": 65.61,
 "nmae": 1.77,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "harmonie",
 "acc": 65.48,
 "nmae": 1.95,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "knmi",
 "acc": 61.99,
 "nmae": 2.21,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "ukmo",
 "acc": 67.16,
 "nmae": 2.22,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "gfs",
 "acc": 63.14,
 "nmae": 2.23,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "icon",
 "acc": 57.0,
 "nmae": 2.37,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "icon_d2",
 "acc": 53.14,
 "nmae": 2.57,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-25",
 "source": "energinet",
 "acc": 51.11,
 "nmae": 3.41,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "ifs",
 "acc": 85.04,
 "nmae": 2.72,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "blend",
 "acc": 84.26,
 "nmae": 2.9,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "j4catdk",
 "acc": 82.47,
 "nmae": 3.11,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "aifs",
 "acc": 81.57,
 "nmae": 3.96,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "icon_d2",
 "acc": 80.88,
 "nmae": 4.12,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "icon",
 "acc": 79.72,
 "nmae": 4.76,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "energinet",
 "acc": 77.78,
 "nmae": 5.36,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "harmonie",
 "acc": 75.03,
 "nmae": 5.52,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "knmi",
 "acc": 75.31,
 "nmae": 5.58,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "gfs",
 "acc": 72.85,
 "nmae": 6.52,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-26",
 "source": "ukmo",
 "acc": 74.31,
 "nmae": 6.71,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "j4catdk",
 "acc": 87.31,
 "nmae": 4.71,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "icon_d2",
 "acc": 84.46,
 "nmae": 5.47,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "gfs",
 "acc": 82.87,
 "nmae": 6.12,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "blend",
 "acc": 84.75,
 "nmae": 6.3,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "aifs",
 "acc": 84.74,
 "nmae": 6.4,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "icon",
 "acc": 81.73,
 "nmae": 6.41,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "ifs",
 "acc": 86.65,
 "nmae": 6.88,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "knmi",
 "acc": 82.81,
 "nmae": 7.64,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "ukmo",
 "acc": 82.74,
 "nmae": 8.27,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "harmonie",
 "acc": 82.14,
 "nmae": 8.54,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-27",
 "source": "energinet",
 "acc": 83.83,
 "nmae": 9.3,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "icon_d2",
 "acc": 79.78,
 "nmae": 5.03,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "icon",
 "acc": 77.83,
 "nmae": 5.17,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "blend",
 "acc": 79.86,
 "nmae": 5.29,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "aifs",
 "acc": 77.59,
 "nmae": 6.34,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "ifs",
 "acc": 81.79,
 "nmae": 6.61,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "j4catdk",
 "acc": 83.4,
 "nmae": 6.7,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "energinet",
 "acc": 79.52,
 "nmae": 7.45,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "harmonie",
 "acc": 77.61,
 "nmae": 8.27,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "knmi",
 "acc": 74.4,
 "nmae": 8.69,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "gfs",
 "acc": 77.48,
 "nmae": 9.09,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-28",
 "source": "ukmo",
 "acc": 76.13,
 "nmae": 10.25,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "j4catdk",
 "acc": 80.43,
 "nmae": 6.73,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "icon_d2",
 "acc": 79.39,
 "nmae": 7.0,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "blend",
 "acc": 79.18,
 "nmae": 7.03,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "aifs",
 "acc": 78.49,
 "nmae": 7.07,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "knmi",
 "acc": 77.73,
 "nmae": 7.22,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "gfs",
 "acc": 81.06,
 "nmae": 7.65,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "icon",
 "acc": 78.88,
 "nmae": 8.07,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "ifs",
 "acc": 79.21,
 "nmae": 8.63,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "energinet",
 "acc": 79.78,
 "nmae": 8.99,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "harmonie",
 "acc": 75.27,
 "nmae": 9.07,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-29",
 "source": "ukmo",
 "acc": 73.6,
 "nmae": 11.82,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "ifs",
 "acc": 77.77,
 "nmae": 5.55,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "aifs",
 "acc": 76.52,
 "nmae": 6.08,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "blend",
 "acc": 74.54,
 "nmae": 6.8,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "j4catdk",
 "acc": 73.82,
 "nmae": 7.11,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "energinet",
 "acc": 70.13,
 "nmae": 7.73,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "icon",
 "acc": 70.36,
 "nmae": 8.22,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "gfs",
 "acc": 67.97,
 "nmae": 8.25,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "knmi",
 "acc": 68.91,
 "nmae": 8.31,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "ukmo",
 "acc": 71.13,
 "nmae": 8.65,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "icon_d2",
 "acc": 69.38,
 "nmae": 8.73,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-30",
 "source": "harmonie",
 "acc": 64.12,
 "nmae": 10.06,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "aifs",
 "acc": 54.88,
 "nmae": 4.51,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "ukmo",
 "acc": 47.22,
 "nmae": 5.18,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "ifs",
 "acc": 45.68,
 "nmae": 5.42,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "j4catdk",
 "acc": 41.6,
 "nmae": 5.81,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "blend",
 "acc": 33.49,
 "nmae": 6.75,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "icon",
 "acc": 25.53,
 "nmae": 7.5,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "knmi",
 "acc": 14.74,
 "nmae": 8.55,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "harmonie",
 "acc": -8.05,
 "nmae": 11.03,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "icon_d2",
 "acc": -9.78,
 "nmae": 11.23,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "energinet",
 "acc": -36.83,
 "nmae": 14.19,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-08-31",
 "source": "gfs",
 "acc": -51.17,
 "nmae": 15.61,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "ifs",
 "acc": 85.24,
 "nmae": 3.87,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "blend",
 "acc": 83.56,
 "nmae": 4.5,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "j4catdk",
 "acc": 83.72,
 "nmae": 4.65,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "icon",
 "acc": 81.49,
 "nmae": 4.83,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "ukmo",
 "acc": 81.49,
 "nmae": 4.98,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "aifs",
 "acc": 81.69,
 "nmae": 5.48,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "gfs",
 "acc": 79.75,
 "nmae": 5.56,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "harmonie",
 "acc": 76.03,
 "nmae": 5.75,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "knmi",
 "acc": 73.02,
 "nmae": 7.13,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "energinet",
 "acc": 74.58,
 "nmae": 7.52,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-01",
 "source": "icon_d2",
 "acc": 70.56,
 "nmae": 8.11,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "j4catdk",
 "acc": 86.71,
 "nmae": 3.72,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "ifs",
 "acc": 86.51,
 "nmae": 3.92,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "ukmo",
 "acc": 85.8,
 "nmae": 4.41,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "aifs",
 "acc": 83.7,
 "nmae": 4.84,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "blend",
 "acc": 84.63,
 "nmae": 4.88,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "gfs",
 "acc": 82.95,
 "nmae": 5.56,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "energinet",
 "acc": 83.3,
 "nmae": 5.66,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "icon",
 "acc": 80.94,
 "nmae": 5.84,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "icon_d2",
 "acc": 83.28,
 "nmae": 5.91,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "knmi",
 "acc": 81.74,
 "nmae": 6.12,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-02",
 "source": "harmonie",
 "acc": 81.66,
 "nmae": 6.85,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "j4catdk",
 "acc": 79.85,
 "nmae": 8.46,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "ukmo",
 "acc": 78.25,
 "nmae": 9.39,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "blend",
 "acc": 76.92,
 "nmae": 10.16,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "ifs",
 "acc": 74.48,
 "nmae": 10.67,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "harmonie",
 "acc": 75.61,
 "nmae": 10.74,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "icon_d2",
 "acc": 76.05,
 "nmae": 10.85,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "aifs",
 "acc": 73.62,
 "nmae": 12.01,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "energinet",
 "acc": 73.9,
 "nmae": 12.02,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "gfs",
 "acc": 72.59,
 "nmae": 12.2,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "knmi",
 "acc": 70.45,
 "nmae": 12.92,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-03",
 "source": "icon",
 "acc": 70.61,
 "nmae": 13.78,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "knmi",
 "acc": 80.78,
 "nmae": 7.27,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "blend",
 "acc": 83.43,
 "nmae": 7.32,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "j4catdk",
 "acc": 83.71,
 "nmae": 7.43,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "ifs",
 "acc": 83.34,
 "nmae": 7.48,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "gfs",
 "acc": 81.04,
 "nmae": 8.14,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "harmonie",
 "acc": 79.66,
 "nmae": 8.38,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "aifs",
 "acc": 81.64,
 "nmae": 8.62,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "icon",
 "acc": 76.31,
 "nmae": 10.53,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "ukmo",
 "acc": 77.12,
 "nmae": 10.56,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "icon_d2",
 "acc": 75.9,
 "nmae": 10.69,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-04",
 "source": "energinet",
 "acc": 71.59,
 "nmae": 12.46,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "aifs",
 "acc": 87.46,
 "nmae": 9.67,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "gfs",
 "acc": 86.28,
 "nmae": 10.02,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "ifs",
 "acc": 86.63,
 "nmae": 10.43,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "icon_d2",
 "acc": 86.16,
 "nmae": 10.45,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "blend",
 "acc": 86.39,
 "nmae": 10.61,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "icon",
 "acc": 85.17,
 "nmae": 11.37,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "knmi",
 "acc": 84.57,
 "nmae": 11.37,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "harmonie",
 "acc": 83.8,
 "nmae": 11.56,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "j4catdk",
 "acc": 83.68,
 "nmae": 11.97,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "ukmo",
 "acc": 83.85,
 "nmae": 12.29,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-05",
 "source": "energinet",
 "acc": 82.45,
 "nmae": 13.05,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "gfs",
 "acc": 87.43,
 "nmae": 6.1,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "harmonie",
 "acc": 86.01,
 "nmae": 6.41,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "aifs",
 "acc": 84.83,
 "nmae": 6.6,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "knmi",
 "acc": 85.62,
 "nmae": 6.75,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "blend",
 "acc": 85.97,
 "nmae": 6.89,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "j4catdk",
 "acc": 83.95,
 "nmae": 7.05,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "icon",
 "acc": 84.63,
 "nmae": 7.37,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "icon_d2",
 "acc": 83.93,
 "nmae": 7.68,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "ifs",
 "acc": 83.04,
 "nmae": 8.42,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "ukmo",
 "acc": 81.73,
 "nmae": 8.76,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-06",
 "source": "energinet",
 "acc": 79.01,
 "nmae": 9.51,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "energinet",
 "acc": 82.32,
 "nmae": 6.35,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "harmonie",
 "acc": 83.82,
 "nmae": 7.02,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "aifs",
 "acc": 80.1,
 "nmae": 7.39,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "j4catdk",
 "acc": 83.11,
 "nmae": 7.56,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "knmi",
 "acc": 82.14,
 "nmae": 7.68,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "blend",
 "acc": 81.6,
 "nmae": 8.34,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "ifs",
 "acc": 81.45,
 "nmae": 8.5,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "gfs",
 "acc": 79.25,
 "nmae": 9.19,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "ukmo",
 "acc": 77.6,
 "nmae": 9.55,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "icon_d2",
 "acc": 76.95,
 "nmae": 10.43,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-07",
 "source": "icon",
 "acc": 72.06,
 "nmae": 12.99,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "j4catdk",
 "acc": 81.86,
 "nmae": 4.35,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "ifs",
 "acc": 77.68,
 "nmae": 5.71,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "blend",
 "acc": 75.17,
 "nmae": 6.73,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "aifs",
 "acc": 72.29,
 "nmae": 7.76,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "icon",
 "acc": 68.89,
 "nmae": 8.18,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "icon_d2",
 "acc": 66.46,
 "nmae": 8.68,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "energinet",
 "acc": 69.7,
 "nmae": 9.05,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "harmonie",
 "acc": 69.06,
 "nmae": 9.12,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "gfs",
 "acc": 66.96,
 "nmae": 9.35,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "knmi",
 "acc": 66.02,
 "nmae": 10.01,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-08",
 "source": "ukmo",
 "acc": 66.66,
 "nmae": 10.76,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "ifs",
 "acc": 77.57,
 "nmae": 8.52,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "aifs",
 "acc": 77.89,
 "nmae": 8.61,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "blend",
 "acc": 77.44,
 "nmae": 8.67,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "icon_d2",
 "acc": 76.53,
 "nmae": 8.84,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "ukmo",
 "acc": 76.09,
 "nmae": 9.03,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "j4catdk",
 "acc": 75.7,
 "nmae": 9.21,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "knmi",
 "acc": 72.95,
 "nmae": 10.44,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "icon",
 "acc": 72.08,
 "nmae": 10.55,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "harmonie",
 "acc": 72.16,
 "nmae": 10.56,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "energinet",
 "acc": 70.64,
 "nmae": 11.18,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-09",
 "source": "gfs",
 "acc": 63.05,
 "nmae": 14.42,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "j4catdk",
 "acc": 88.86,
 "nmae": 3.6,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "blend",
 "acc": 85.52,
 "nmae": 4.27,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "ifs",
 "acc": 84.42,
 "nmae": 4.28,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "harmonie",
 "acc": 85.31,
 "nmae": 4.97,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "icon",
 "acc": 82.23,
 "nmae": 5.26,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "aifs",
 "acc": 84.09,
 "nmae": 5.36,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "knmi",
 "acc": 84.73,
 "nmae": 5.43,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "gfs",
 "acc": 83.66,
 "nmae": 5.49,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "icon_d2",
 "acc": 81.16,
 "nmae": 5.58,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "ukmo",
 "acc": 84.25,
 "nmae": 5.67,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-10",
 "source": "energinet",
 "acc": 78.29,
 "nmae": 5.93,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "energinet",
 "acc": 84.44,
 "nmae": 3.58,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "gfs",
 "acc": 84.17,
 "nmae": 3.96,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "j4catdk",
 "acc": 85.17,
 "nmae": 4.04,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "aifs",
 "acc": 82.2,
 "nmae": 4.25,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "blend",
 "acc": 83.01,
 "nmae": 4.44,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "ifs",
 "acc": 83.37,
 "nmae": 4.47,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "icon_d2",
 "acc": 80.94,
 "nmae": 4.83,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "ukmo",
 "acc": 83.1,
 "nmae": 5.25,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "harmonie",
 "acc": 79.4,
 "nmae": 5.84,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "knmi",
 "acc": 78.03,
 "nmae": 6.04,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-11",
 "source": "icon",
 "acc": 77.63,
 "nmae": 6.45,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "aifs",
 "acc": 82.93,
 "nmae": 3.35,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "ifs",
 "acc": 83.09,
 "nmae": 3.58,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "j4catdk",
 "acc": 82.18,
 "nmae": 3.89,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "gfs",
 "acc": 76.24,
 "nmae": 4.64,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "blend",
 "acc": 78.9,
 "nmae": 4.8,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "ukmo",
 "acc": 77.19,
 "nmae": 5.5,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "knmi",
 "acc": 72.78,
 "nmae": 6.54,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "energinet",
 "acc": 72.47,
 "nmae": 7.44,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "icon",
 "acc": 68.87,
 "nmae": 7.58,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "harmonie",
 "acc": 70.62,
 "nmae": 7.62,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-12",
 "source": "icon_d2",
 "acc": 68.92,
 "nmae": 8.1,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "harmonie",
 "acc": 78.77,
 "nmae": 6.33,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "blend",
 "acc": 76.51,
 "nmae": 6.71,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "icon_d2",
 "acc": 75.32,
 "nmae": 6.72,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "ifs",
 "acc": 75.92,
 "nmae": 6.95,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "energinet",
 "acc": 76.35,
 "nmae": 7.2,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "icon",
 "acc": 73.32,
 "nmae": 7.28,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "ukmo",
 "acc": 78.19,
 "nmae": 7.33,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "gfs",
 "acc": 76.9,
 "nmae": 7.57,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "knmi",
 "acc": 75.46,
 "nmae": 8.14,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "aifs",
 "acc": 72.98,
 "nmae": 8.37,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-13",
 "source": "j4catdk",
 "acc": 73.56,
 "nmae": 8.82,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "energinet",
 "acc": 78.3,
 "nmae": 3.0,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "ifs",
 "acc": 80.3,
 "nmae": 3.29,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "aifs",
 "acc": 77.91,
 "nmae": 3.44,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "j4catdk",
 "acc": 81.76,
 "nmae": 3.45,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "gfs",
 "acc": 81.01,
 "nmae": 3.5,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "blend",
 "acc": 78.9,
 "nmae": 3.69,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "icon",
 "acc": 74.26,
 "nmae": 5.02,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "ukmo",
 "acc": 73.58,
 "nmae": 5.2,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "icon_d2",
 "acc": 71.45,
 "nmae": 5.45,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "knmi",
 "acc": 72.58,
 "nmae": 5.81,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-14",
 "source": "harmonie",
 "acc": 71.62,
 "nmae": 5.85,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "aifs",
 "acc": 81.72,
 "nmae": 6.52,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "j4catdk",
 "acc": 82.89,
 "nmae": 7.43,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "icon_d2",
 "acc": 79.72,
 "nmae": 7.67,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "blend",
 "acc": 80.96,
 "nmae": 8.06,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "icon",
 "acc": 77.98,
 "nmae": 9.22,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "ifs",
 "acc": 79.05,
 "nmae": 9.77,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "gfs",
 "acc": 79.69,
 "nmae": 9.97,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "harmonie",
 "acc": 77.59,
 "nmae": 10.22,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "energinet",
 "acc": 78.05,
 "nmae": 11.04,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "knmi",
 "acc": 76.73,
 "nmae": 11.11,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-15",
 "source": "ukmo",
 "acc": 72.42,
 "nmae": 14.36,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "ukmo",
 "acc": 86.12,
 "nmae": 7.81,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "aifs",
 "acc": 82.71,
 "nmae": 9.43,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "knmi",
 "acc": 80.74,
 "nmae": 10.24,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "harmonie",
 "acc": 80.19,
 "nmae": 10.38,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "j4catdk",
 "acc": 81.31,
 "nmae": 10.6,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "icon_d2",
 "acc": 79.35,
 "nmae": 10.83,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "blend",
 "acc": 80.1,
 "nmae": 10.92,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "ifs",
 "acc": 79.23,
 "nmae": 11.78,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "energinet",
 "acc": 78.31,
 "nmae": 12.38,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "gfs",
 "acc": 76.49,
 "nmae": 12.91,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-16",
 "source": "icon",
 "acc": 74.67,
 "nmae": 14.26,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "ukmo",
 "acc": 87.19,
 "nmae": 5.59,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "gfs",
 "acc": 82.27,
 "nmae": 5.99,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "icon_d2",
 "acc": 80.9,
 "nmae": 6.3,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "j4catdk",
 "acc": 86.34,
 "nmae": 6.42,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "blend",
 "acc": 82.12,
 "nmae": 6.99,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "harmonie",
 "acc": 80.04,
 "nmae": 7.13,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "aifs",
 "acc": 82.57,
 "nmae": 7.14,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "knmi",
 "acc": 79.66,
 "nmae": 7.19,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "energinet",
 "acc": 82.39,
 "nmae": 7.42,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "icon",
 "acc": 78.04,
 "nmae": 7.44,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-17",
 "source": "ifs",
 "acc": 82.17,
 "nmae": 8.02,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "ukmo",
 "acc": 86.53,
 "nmae": 5.97,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "energinet",
 "acc": 86.17,
 "nmae": 6.56,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "gfs",
 "acc": 84.04,
 "nmae": 7.16,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "knmi",
 "acc": 85.92,
 "nmae": 7.21,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "ifs",
 "acc": 87.93,
 "nmae": 7.61,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "aifs",
 "acc": 86.54,
 "nmae": 7.68,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "blend",
 "acc": 86.33,
 "nmae": 7.82,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "harmonie",
 "acc": 85.52,
 "nmae": 8.07,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "j4catdk",
 "acc": 86.77,
 "nmae": 8.41,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "icon",
 "acc": 82.2,
 "nmae": 9.09,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-18",
 "source": "icon_d2",
 "acc": 82.77,
 "nmae": 10.0,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "j4catdk",
 "acc": 86.2,
 "nmae": 7.25,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "ifs",
 "acc": 84.74,
 "nmae": 8.53,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "aifs",
 "acc": 82.25,
 "nmae": 9.2,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "blend",
 "acc": 84.29,
 "nmae": 9.73,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "harmonie",
 "acc": 83.23,
 "nmae": 10.58,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "ukmo",
 "acc": 83.1,
 "nmae": 10.58,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "icon_d2",
 "acc": 82.17,
 "nmae": 10.78,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "gfs",
 "acc": 82.71,
 "nmae": 10.9,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "icon",
 "acc": 81.29,
 "nmae": 11.69,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "energinet",
 "acc": 79.52,
 "nmae": 11.72,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-19",
 "source": "knmi",
 "acc": 81.02,
 "nmae": 12.02,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "j4catdk",
 "acc": 84.77,
 "nmae": 8.18,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "aifs",
 "acc": 82.46,
 "nmae": 12.02,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "gfs",
 "acc": 81.77,
 "nmae": 12.14,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "ifs",
 "acc": 82.12,
 "nmae": 12.44,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "energinet",
 "acc": 80.74,
 "nmae": 12.48,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "blend",
 "acc": 81.32,
 "nmae": 12.56,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "ukmo",
 "acc": 82.86,
 "nmae": 12.56,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "knmi",
 "acc": 79.65,
 "nmae": 13.86,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "harmonie",
 "acc": 79.86,
 "nmae": 14.01,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "icon",
 "acc": 79.44,
 "nmae": 14.05,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-20",
 "source": "icon_d2",
 "acc": 77.88,
 "nmae": 14.7,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "ukmo",
 "acc": 89.79,
 "nmae": 4.88,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "aifs",
 "acc": 90.3,
 "nmae": 5.2,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "j4catdk",
 "acc": 89.17,
 "nmae": 6.1,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "blend",
 "acc": 89.81,
 "nmae": 6.68,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "ifs",
 "acc": 89.07,
 "nmae": 6.72,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "energinet",
 "acc": 89.19,
 "nmae": 6.79,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "icon_d2",
 "acc": 87.47,
 "nmae": 7.29,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "harmonie",
 "acc": 89.31,
 "nmae": 7.41,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "knmi",
 "acc": 87.7,
 "nmae": 7.67,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "icon",
 "acc": 86.93,
 "nmae": 8.11,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-21",
 "source": "gfs",
 "acc": 86.88,
 "nmae": 9.62,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "j4catdk",
 "acc": 72.16,
 "nmae": 1.8,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "aifs",
 "acc": 70.37,
 "nmae": 1.86,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "blend",
 "acc": 72.28,
 "nmae": 1.88,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "ifs",
 "acc": 71.3,
 "nmae": 2.16,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "icon_d2",
 "acc": 67.22,
 "nmae": 2.41,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "icon",
 "acc": 63.86,
 "nmae": 2.54,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "harmonie",
 "acc": 63.39,
 "nmae": 2.67,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "gfs",
 "acc": 65.01,
 "nmae": 2.69,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "knmi",
 "acc": 60.04,
 "nmae": 2.72,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "ukmo",
 "acc": 57.24,
 "nmae": 3.21,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-22",
 "source": "energinet",
 "acc": 37.37,
 "nmae": 4.69,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "icon_d2",
 "acc": 74.54,
 "nmae": 3.48,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "aifs",
 "acc": 75.27,
 "nmae": 3.5,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "ifs",
 "acc": 77.13,
 "nmae": 3.6,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "blend",
 "acc": 73.24,
 "nmae": 3.72,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "j4catdk",
 "acc": 76.67,
 "nmae": 3.73,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "energinet",
 "acc": 74.27,
 "nmae": 3.74,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "icon",
 "acc": 67.95,
 "nmae": 4.64,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "gfs",
 "acc": 70.86,
 "nmae": 4.93,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "knmi",
 "acc": 58.84,
 "nmae": 7.1,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "ukmo",
 "acc": 58.36,
 "nmae": 7.41,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-23",
 "source": "harmonie",
 "acc": 57.68,
 "nmae": 7.59,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "j4catdk",
 "acc": 79.33,
 "nmae": 4.55,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "ifs",
 "acc": 78.18,
 "nmae": 4.75,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "energinet",
 "acc": 78.12,
 "nmae": 5.07,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "aifs",
 "acc": 79.51,
 "nmae": 5.88,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "blend",
 "acc": 74.74,
 "nmae": 6.15,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "gfs",
 "acc": 71.41,
 "nmae": 7.17,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "icon_d2",
 "acc": 70.19,
 "nmae": 7.8,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "ukmo",
 "acc": 75.61,
 "nmae": 8.25,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "icon",
 "acc": 68.46,
 "nmae": 9.3,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "knmi",
 "acc": 61.89,
 "nmae": 12.46,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-24",
 "source": "harmonie",
 "acc": 59.52,
 "nmae": 13.29,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "energinet",
 "acc": 80.83,
 "nmae": 2.83,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "blend",
 "acc": 79.41,
 "nmae": 3.39,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "ifs",
 "acc": 80.23,
 "nmae": 3.7,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "j4catdk",
 "acc": 80.66,
 "nmae": 3.81,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "ukmo",
 "acc": 79.57,
 "nmae": 3.84,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "aifs",
 "acc": 78.51,
 "nmae": 4.2,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "icon",
 "acc": 73.26,
 "nmae": 4.39,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "icon_d2",
 "acc": 75.09,
 "nmae": 4.44,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "harmonie",
 "acc": 75.27,
 "nmae": 4.86,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "gfs",
 "acc": 74.63,
 "nmae": 5.1,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-25",
 "source": "knmi",
 "acc": 72.89,
 "nmae": 5.56,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "ifs",
 "acc": 79.09,
 "nmae": 3.41,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "energinet",
 "acc": 81.14,
 "nmae": 3.79,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "blend",
 "acc": 76.75,
 "nmae": 3.89,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "knmi",
 "acc": 77.27,
 "nmae": 4.15,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "harmonie",
 "acc": 76.29,
 "nmae": 4.29,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "j4catdk",
 "acc": 77.11,
 "nmae": 4.54,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "gfs",
 "acc": 76.47,
 "nmae": 4.84,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "aifs",
 "acc": 74.4,
 "nmae": 5.15,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "icon_d2",
 "acc": 68.71,
 "nmae": 5.36,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "icon",
 "acc": 66.35,
 "nmae": 5.51,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-26",
 "source": "ukmo",
 "acc": 72.6,
 "nmae": 6.56,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "j4catdk",
 "acc": 88.03,
 "nmae": 2.62,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "blend",
 "acc": 87.63,
 "nmae": 3.48,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "icon_d2",
 "acc": 86.27,
 "nmae": 3.57,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "ifs",
 "acc": 88.37,
 "nmae": 3.61,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "harmonie",
 "acc": 85.89,
 "nmae": 4.37,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "aifs",
 "acc": 83.59,
 "nmae": 4.67,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "icon",
 "acc": 84.41,
 "nmae": 4.88,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "knmi",
 "acc": 83.23,
 "nmae": 5.01,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "gfs",
 "acc": 86.35,
 "nmae": 5.04,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "ukmo",
 "acc": 84.43,
 "nmae": 5.06,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-27",
 "source": "energinet",
 "acc": 82.01,
 "nmae": 5.46,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "gfs",
 "acc": 82.19,
 "nmae": 3.63,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "icon_d2",
 "acc": 75.7,
 "nmae": 3.95,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "j4catdk",
 "acc": 81.17,
 "nmae": 4.03,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "icon",
 "acc": 70.85,
 "nmae": 5.18,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "blend",
 "acc": 74.74,
 "nmae": 5.19,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "ifs",
 "acc": 73.78,
 "nmae": 5.44,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "aifs",
 "acc": 72.12,
 "nmae": 5.77,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "knmi",
 "acc": 71.89,
 "nmae": 5.97,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "harmonie",
 "acc": 71.13,
 "nmae": 6.12,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "ukmo",
 "acc": 65.85,
 "nmae": 7.18,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-28",
 "source": "energinet",
 "acc": 62.39,
 "nmae": 7.81,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "j4catdk",
 "acc": 83.3,
 "nmae": 4.1,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "blend",
 "acc": 80.32,
 "nmae": 4.17,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "gfs",
 "acc": 79.31,
 "nmae": 4.7,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "aifs",
 "acc": 77.06,
 "nmae": 4.75,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "ifs",
 "acc": 82.16,
 "nmae": 4.76,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "icon_d2",
 "acc": 77.4,
 "nmae": 5.3,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "icon",
 "acc": 74.93,
 "nmae": 5.49,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "energinet",
 "acc": 78.36,
 "nmae": 5.52,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "knmi",
 "acc": 76.36,
 "nmae": 6.1,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "harmonie",
 "acc": 75.63,
 "nmae": 6.65,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-29",
 "source": "ukmo",
 "acc": 73.23,
 "nmae": 7.55,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "j4catdk",
 "acc": 93.38,
 "nmae": 3.62,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "blend",
 "acc": 87.59,
 "nmae": 4.37,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "icon_d2",
 "acc": 87.95,
 "nmae": 4.84,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "icon",
 "acc": 83.74,
 "nmae": 5.34,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "aifs",
 "acc": 83.09,
 "nmae": 5.41,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "ifs",
 "acc": 89.38,
 "nmae": 5.92,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "gfs",
 "acc": 89.54,
 "nmae": 6.25,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "harmonie",
 "acc": 88.44,
 "nmae": 6.3,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "knmi",
 "acc": 87.82,
 "nmae": 6.85,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "energinet",
 "acc": 85.24,
 "nmae": 9.39,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-09-30",
 "source": "ukmo",
 "acc": 83.48,
 "nmae": 11.56,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "j4catdk",
 "acc": 89.5,
 "nmae": 4.56,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "blend",
 "acc": 84.19,
 "nmae": 5.47,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "harmonie",
 "acc": 82.89,
 "nmae": 5.82,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "energinet",
 "acc": 82.16,
 "nmae": 5.89,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "icon",
 "acc": 82.57,
 "nmae": 6.13,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "aifs",
 "acc": 82.43,
 "nmae": 6.17,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "knmi",
 "acc": 80.77,
 "nmae": 6.62,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "icon_d2",
 "acc": 81.99,
 "nmae": 6.71,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "ifs",
 "acc": 83.95,
 "nmae": 6.87,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "gfs",
 "acc": 81.08,
 "nmae": 7.83,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-01",
 "source": "ukmo",
 "acc": 75.33,
 "nmae": 12.24,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "blend",
 "acc": 69.01,
 "nmae": 2.79,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "ifs",
 "acc": 67.4,
 "nmae": 3.01,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "aifs",
 "acc": 66.67,
 "nmae": 3.27,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "j4catdk",
 "acc": 71.85,
 "nmae": 3.3,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "ukmo",
 "acc": 69.62,
 "nmae": 3.69,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "knmi",
 "acc": 67.49,
 "nmae": 3.73,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "harmonie",
 "acc": 65.05,
 "nmae": 3.97,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "icon_d2",
 "acc": 59.54,
 "nmae": 4.04,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "energinet",
 "acc": 67.81,
 "nmae": 4.11,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "gfs",
 "acc": 68.72,
 "nmae": 4.17,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-02",
 "source": "icon",
 "acc": 54.44,
 "nmae": 5.04,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "j4catdk",
 "acc": 85.27,
 "nmae": 3.82,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "ukmo",
 "acc": 82.78,
 "nmae": 5.03,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "ifs",
 "acc": 81.21,
 "nmae": 5.06,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "aifs",
 "acc": 79.6,
 "nmae": 5.93,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "blend",
 "acc": 80.35,
 "nmae": 6.03,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "harmonie",
 "acc": 80.36,
 "nmae": 6.51,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "knmi",
 "acc": 78.58,
 "nmae": 7.15,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "energinet",
 "acc": 78.13,
 "nmae": 7.43,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "gfs",
 "acc": 73.7,
 "nmae": 8.19,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "icon_d2",
 "acc": 72.65,
 "nmae": 8.24,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-03",
 "source": "icon",
 "acc": 70.92,
 "nmae": 9.29,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "ifs",
 "acc": 83.41,
 "nmae": 4.25,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "gfs",
 "acc": 78.27,
 "nmae": 4.48,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "blend",
 "acc": 79.01,
 "nmae": 5.38,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "aifs",
 "acc": 78.69,
 "nmae": 5.46,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "harmonie",
 "acc": 76.58,
 "nmae": 5.56,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "energinet",
 "acc": 77.8,
 "nmae": 5.91,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "knmi",
 "acc": 75.81,
 "nmae": 6.18,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "j4catdk",
 "acc": 76.26,
 "nmae": 6.55,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "ukmo",
 "acc": 76.22,
 "nmae": 6.69,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "icon",
 "acc": 72.89,
 "nmae": 7.08,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-04",
 "source": "icon_d2",
 "acc": 70.33,
 "nmae": 7.49,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "j4catdk",
 "acc": 91.93,
 "nmae": 3.79,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "ifs",
 "acc": 91.05,
 "nmae": 5.18,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "harmonie",
 "acc": 89.6,
 "nmae": 6.6,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "icon_d2",
 "acc": 89.41,
 "nmae": 6.9,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "blend",
 "acc": 89.6,
 "nmae": 7.11,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "gfs",
 "acc": 89.02,
 "nmae": 7.43,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "knmi",
 "acc": 88.37,
 "nmae": 7.7,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "ukmo",
 "acc": 88.09,
 "nmae": 8.21,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "energinet",
 "acc": 86.92,
 "nmae": 9.39,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "aifs",
 "acc": 86.83,
 "nmae": 9.53,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-05",
 "source": "icon",
 "acc": 86.0,
 "nmae": 9.94,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "aifs",
 "acc": 85.24,
 "nmae": 1.61,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "j4catdk",
 "acc": 84.92,
 "nmae": 2.23,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "blend",
 "acc": 86.17,
 "nmae": 2.68,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "icon",
 "acc": 82.93,
 "nmae": 2.96,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "gfs",
 "acc": 84.71,
 "nmae": 3.02,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "ifs",
 "acc": 83.07,
 "nmae": 3.26,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "icon_d2",
 "acc": 82.0,
 "nmae": 3.76,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "energinet",
 "acc": 78.86,
 "nmae": 5.1,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "harmonie",
 "acc": 74.27,
 "nmae": 6.19,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "knmi",
 "acc": 74.03,
 "nmae": 6.19,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-06",
 "source": "ukmo",
 "acc": 72.44,
 "nmae": 6.66,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "j4catdk",
 "acc": 74.48,
 "nmae": 3.64,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "blend",
 "acc": 69.56,
 "nmae": 3.83,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "ifs",
 "acc": 68.73,
 "nmae": 4.53,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "aifs",
 "acc": 67.87,
 "nmae": 4.6,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "gfs",
 "acc": 67.81,
 "nmae": 4.64,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "icon",
 "acc": 62.66,
 "nmae": 4.87,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "ukmo",
 "acc": 62.34,
 "nmae": 5.39,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "energinet",
 "acc": 60.57,
 "nmae": 5.48,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "harmonie",
 "acc": 56.53,
 "nmae": 5.5,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "icon_d2",
 "acc": 58.45,
 "nmae": 6.06,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-07",
 "source": "knmi",
 "acc": 54.47,
 "nmae": 6.06,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "j4catdk",
 "acc": 84.88,
 "nmae": 8.33,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "icon_d2",
 "acc": 82.98,
 "nmae": 8.59,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "icon",
 "acc": 83.47,
 "nmae": 9.42,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "aifs",
 "acc": 82.34,
 "nmae": 9.44,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "gfs",
 "acc": 82.85,
 "nmae": 9.58,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "blend",
 "acc": 83.09,
 "nmae": 9.75,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "energinet",
 "acc": 82.53,
 "nmae": 10.05,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "ifs",
 "acc": 81.37,
 "nmae": 10.62,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "knmi",
 "acc": 77.94,
 "nmae": 11.96,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "harmonie",
 "acc": 77.2,
 "nmae": 12.24,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-08",
 "source": "ukmo",
 "acc": 71.8,
 "nmae": 15.7,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "j4catdk",
 "acc": 89.38,
 "nmae": 4.38,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "aifs",
 "acc": 87.77,
 "nmae": 5.41,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "blend",
 "acc": 87.49,
 "nmae": 5.48,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "ifs",
 "acc": 85.91,
 "nmae": 6.48,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "icon",
 "acc": 85.05,
 "nmae": 6.48,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "icon_d2",
 "acc": 84.97,
 "nmae": 7.04,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "knmi",
 "acc": 84.36,
 "nmae": 7.19,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "harmonie",
 "acc": 83.45,
 "nmae": 7.32,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "gfs",
 "acc": 83.67,
 "nmae": 7.43,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "ukmo",
 "acc": 84.28,
 "nmae": 7.46,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-09",
 "source": "energinet",
 "acc": 83.25,
 "nmae": 7.92,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "j4catdk",
 "acc": 88.16,
 "nmae": 4.29,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "blend",
 "acc": 86.03,
 "nmae": 4.61,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "knmi",
 "acc": 82.13,
 "nmae": 4.97,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "ifs",
 "acc": 85.99,
 "nmae": 5.05,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "icon",
 "acc": 84.11,
 "nmae": 5.41,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "harmonie",
 "acc": 80.3,
 "nmae": 5.8,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "aifs",
 "acc": 83.77,
 "nmae": 6.23,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "icon_d2",
 "acc": 82.13,
 "nmae": 6.86,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "energinet",
 "acc": 79.0,
 "nmae": 7.79,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "ukmo",
 "acc": 79.65,
 "nmae": 8.5,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-10",
 "source": "gfs",
 "acc": 70.82,
 "nmae": 12.08,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "aifs",
 "acc": 79.19,
 "nmae": 4.64,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "blend",
 "acc": 77.88,
 "nmae": 4.83,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "j4catdk",
 "acc": 78.31,
 "nmae": 4.9,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "icon_d2",
 "acc": 77.16,
 "nmae": 5.12,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "icon",
 "acc": 75.4,
 "nmae": 5.78,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "ifs",
 "acc": 74.14,
 "nmae": 5.79,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "harmonie",
 "acc": 71.12,
 "nmae": 5.93,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "knmi",
 "acc": 70.97,
 "nmae": 5.94,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "ukmo",
 "acc": 72.77,
 "nmae": 6.26,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "energinet",
 "acc": 66.07,
 "nmae": 8.53,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-11",
 "source": "gfs",
 "acc": 64.05,
 "nmae": 8.86,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "ukmo",
 "acc": 80.96,
 "nmae": 3.26,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "icon_d2",
 "acc": 74.81,
 "nmae": 3.93,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "icon",
 "acc": 70.97,
 "nmae": 4.58,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "j4catdk",
 "acc": 73.46,
 "nmae": 4.63,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "blend",
 "acc": 71.24,
 "nmae": 4.75,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "aifs",
 "acc": 70.24,
 "nmae": 5.21,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "harmonie",
 "acc": 68.51,
 "nmae": 5.25,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "ifs",
 "acc": 67.87,
 "nmae": 5.53,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "knmi",
 "acc": 65.89,
 "nmae": 5.59,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "gfs",
 "acc": 65.42,
 "nmae": 6.19,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-12",
 "source": "energinet",
 "acc": 65.28,
 "nmae": 6.3,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "icon",
 "acc": 91.54,
 "nmae": 3.89,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "j4catdk",
 "acc": 90.9,
 "nmae": 4.18,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "blend",
 "acc": 92.08,
 "nmae": 4.31,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "ifs",
 "acc": 90.89,
 "nmae": 4.34,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "ukmo",
 "acc": 91.71,
 "nmae": 4.56,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "icon_d2",
 "acc": 90.46,
 "nmae": 5.17,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "energinet",
 "acc": 90.39,
 "nmae": 5.2,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "harmonie",
 "acc": 89.66,
 "nmae": 5.88,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "knmi",
 "acc": 89.17,
 "nmae": 6.24,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "gfs",
 "acc": 88.21,
 "nmae": 6.69,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-13",
 "source": "aifs",
 "acc": 87.65,
 "nmae": 7.65,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "j4catdk",
 "acc": 89.94,
 "nmae": 4.67,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "ukmo",
 "acc": 88.91,
 "nmae": 6.03,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "gfs",
 "acc": 88.75,
 "nmae": 6.04,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "harmonie",
 "acc": 88.02,
 "nmae": 6.57,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "knmi",
 "acc": 87.64,
 "nmae": 6.81,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "blend",
 "acc": 88.39,
 "nmae": 7.04,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "icon",
 "acc": 87.58,
 "nmae": 7.16,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "icon_d2",
 "acc": 87.6,
 "nmae": 7.53,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "energinet",
 "acc": 87.32,
 "nmae": 7.72,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "ifs",
 "acc": 86.45,
 "nmae": 8.13,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-14",
 "source": "aifs",
 "acc": 85.14,
 "nmae": 8.59,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "blend",
 "acc": 92.67,
 "nmae": 3.28,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "gfs",
 "acc": 92.86,
 "nmae": 3.44,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "j4catdk",
 "acc": 92.13,
 "nmae": 3.65,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "aifs",
 "acc": 92.0,
 "nmae": 3.85,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "ifs",
 "acc": 91.66,
 "nmae": 3.97,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "knmi",
 "acc": 91.23,
 "nmae": 4.45,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "icon",
 "acc": 89.77,
 "nmae": 5.02,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "icon_d2",
 "acc": 90.0,
 "nmae": 5.26,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "harmonie",
 "acc": 89.53,
 "nmae": 5.3,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "ukmo",
 "acc": 89.86,
 "nmae": 5.75,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-15",
 "source": "energinet",
 "acc": 87.14,
 "nmae": 7.2,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "ifs",
 "acc": 69.25,
 "nmae": 8.12,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "energinet",
 "acc": 71.86,
 "nmae": 8.44,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "aifs",
 "acc": 65.79,
 "nmae": 10.36,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "blend",
 "acc": 63.34,
 "nmae": 10.72,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "j4catdk",
 "acc": 64.5,
 "nmae": 10.74,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "gfs",
 "acc": 60.82,
 "nmae": 11.17,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "ukmo",
 "acc": 63.98,
 "nmae": 11.51,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "harmonie",
 "acc": 48.83,
 "nmae": 16.07,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "knmi",
 "acc": 47.96,
 "nmae": 16.5,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "icon",
 "acc": 44.26,
 "nmae": 17.69,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-16",
 "source": "icon_d2",
 "acc": 43.67,
 "nmae": 17.78,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "j4catdk",
 "acc": 87.38,
 "nmae": 6.4,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "energinet",
 "acc": 84.99,
 "nmae": 6.6,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "aifs",
 "acc": 85.58,
 "nmae": 6.9,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "ifs",
 "acc": 83.89,
 "nmae": 7.76,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "icon_d2",
 "acc": 83.21,
 "nmae": 7.96,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "blend",
 "acc": 82.7,
 "nmae": 8.36,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "icon",
 "acc": 78.84,
 "nmae": 10.04,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "ukmo",
 "acc": 79.42,
 "nmae": 10.97,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "knmi",
 "acc": 77.84,
 "nmae": 12.43,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "gfs",
 "acc": 76.79,
 "nmae": 12.45,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-17",
 "source": "harmonie",
 "acc": 75.23,
 "nmae": 13.82,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "energinet",
 "acc": 89.17,
 "nmae": 4.01,
-"rank": 1
+"rank": 1,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "blend",
 "acc": 89.3,
 "nmae": 4.05,
-"rank": 2
+"rank": 2,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "ifs",
 "acc": 88.29,
 "nmae": 4.18,
-"rank": 3
+"rank": 3,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "j4catdk",
 "acc": 90.54,
 "nmae": 4.26,
-"rank": 4
+"rank": 4,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "aifs",
 "acc": 88.5,
 "nmae": 4.84,
-"rank": 5
+"rank": 5,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "icon",
 "acc": 87.68,
 "nmae": 5.06,
-"rank": 6
+"rank": 6,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "icon_d2",
 "acc": 87.2,
 "nmae": 5.55,
-"rank": 7
+"rank": 7,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "harmonie",
 "acc": 86.92,
 "nmae": 5.57,
-"rank": 8
+"rank": 8,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "gfs",
 "acc": 86.41,
 "nmae": 6.37,
-"rank": 9
+"rank": 9,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "knmi",
 "acc": 85.49,
 "nmae": 6.55,
-"rank": 10
+"rank": 10,
+"no_forecast": false
 },
 {
 "day": "2026-10-18",
 "source": "ukmo",
 "acc": 85.24,
 "nmae": 6.68,
-"rank": 11
+"rank": 11,
+"no_forecast": false
 }
 ]
 },
@@ -8445,9 +9457,17 @@
 }
 },
 "health": {
-"generated_utc": "2026-10-29T20:21Z",
+"generated_utc": "2026-10-30T07:50Z",
 "last_forecast_day": "2026-10-30",
 "last_forecast_issued_utc": "2026-10-28T22:16:00Z",
-"last_forecast_missing": {}
+"last_forecast_missing": {},
+"forecasts": {
+"2026-10-30": {
+"issued_utc": "2026-10-28T22:16:00Z",
+"j4_variant": null,
+"missing": {}
+}
+},
+"tries": {}
 }
 }
