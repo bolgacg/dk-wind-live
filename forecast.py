@@ -120,9 +120,10 @@ def j4_forecast(frames, hours, cap_now, day, use_dk=True):
     # curtailment stage: day-ahead prices for the day before the target day are known at 10:30 that day
     p0 = hours[0] - pd.Timedelta(days=2)
     S = joint.stage2_inputs(cf, cf.index, day_ahead_prices(p0, hours[-1] - pd.Timedelta(hours=23)))[meta["stage2_features"]]
+    # as the frozen test (studies/e3_test.py): predict on every hour, LightGBM treats a missing price as missing; the
+    # day after a clock change has no "yesterday's minimum" (25 or 23 hour day), and dropping those rows emptied the day
     for z in meta["offshore_stage2"]:
-        ok = S.notna().all(axis=1)
-        adj = pd.Series(lgb.Booster(model_file=str(mdir / f"stage2_{z}.txt")).predict(S[ok]), index=S.index[ok])
+        adj = pd.Series(lgb.Booster(model_file=str(mdir / f"stage2_{z}.txt")).predict(S), index=S.index)
         cf[z] = (cf[z] + adj.reindex(cf.index).fillna(0)).clip(0, None)
     return {z: cf[z] * cap_now[z] for z in ZONES}
 
