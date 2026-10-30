@@ -162,14 +162,14 @@ function render(d) {
     `${d.from} to ${d.to}, ${d.days} days, ${o.length} sources compared.`;
   const less = v => v == null ? "n/a" : `${Math.abs(v).toFixed(1)}% ${v >= 0 ? "less" : "more"}`;
   document.getElementById("lede").textContent = ours ?
-    `Over these ${d.days} days ${ours ? ours.name : ""} had an error of ${ours.nmae.toFixed(2)}% of installed capacity, ` +
+    `${d.days < 200 ? (d.from < "2026-10-31" ? "In the backtest, " : "In the live days, ") : ""}over these ${d.days} days ${ours ? ours.name : ""} had an error of ${ours.nmae.toFixed(2)}% of installed capacity, ` +
     `ranked ${rank === 1 ? "first" : "number " + rank} of ${o.length}: ${less(ours.skill_ifs)} error than ECMWF IFS ` +
     `and ${less(ours.skill_energinet)} than Energinet's own day-ahead forecast.` : "No scored days yet.";
   const T = document.getElementById("tiles"); T.innerHTML = "";
   const tiles = ours ? [[`${ours.nmae_DK1.toFixed(2)}% / ${ours.nmae_DK2.toFixed(2)}%`, "error in DK1 / DK2, % of installed capacity (MAE, day-ahead)", "nmae"],
       [ours.skill_ifs == null ? "n/a" : ours.skill_ifs.toFixed(1) + "%", "skill against ECMWF IFS (1 minus my error over its error)", "skill"],
       [ours.skill_energinet == null ? "n/a" : ours.skill_energinet.toFixed(1) + "%", "skill against Energinet's day-ahead forecast", "skill"],
-      [ours.imb_eur_mwh == null ? "n/a" : "€" + ours.imb_eur_mwh.toFixed(2), `imbalance cost per MWh produced${en && en.imb_eur_mwh != null ? `, against €${en.imb_eur_mwh.toFixed(2)} for Energinet's forecast` : ""}`, "imbalance"]] : [];
+      [ours.imb_eur_mwh == null ? "n/a" : "€" + ours.imb_eur_mwh.toFixed(2), `imbalance cost per MWh produced${en && en.imb_eur_mwh != null ? `, ${ours.imb_eur_mwh <= en.imb_eur_mwh ? "lower" : "higher"} than €${en.imb_eur_mwh.toFixed(2)} for Energinet's forecast${d.days < 200 ? " (in the 2026 test: €3.01 against €3.33)" : ""}` : ""}`, "imbalance"]] : [];
   for (const [v, l, k] of tiles) {
     const t = document.createElement("div"); t.className = "tile"; t.innerHTML = `<b>${v}</b><span>${l}</span>`;
     if (GLOSS[k]) { t.dataset.tip = GLOSS[k].text; t.classList.add("tip"); t.tabIndex = 0; }
@@ -499,7 +499,7 @@ Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then
     render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
   const hasLive = D.live && D.live.days > 0;
   document.getElementById("t-live").disabled = !hasLive;
-  if (!hasLive) document.getElementById("t-live").textContent = "Live: first scores from 31 Oct";
+  if (!hasLive) { const b = document.getElementById("t-live"); b.textContent = "Live: first day scored 1 Nov, 01:30"; b.style.cssText += ";border-style:dashed;cursor:default;opacity:1;color:#6b6a65"; }
   document.getElementById("t-live").onclick = () => hasLive && pick("live");
   document.getElementById("t-backtest").onclick = () => pick("backtest");
   pick(hasLive ? "live" : "backtest");
