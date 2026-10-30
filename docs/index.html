@@ -60,8 +60,13 @@ description.</p>
 </div>
 <p class="mute sans" id="period" style="font-size:.9rem;margin-top:10px"></p>
 
-<div class="tiles" id="tiles"></div>
-<p class="mute sans" id="second" style="font-size:.88rem;margin-top:-8px"></p>
+
+<h2 id="weekh">Who came first each day</h2>
+<figure>
+  <div id="week"></div>
+  <div id="weektab" class="sans" style="font-size:.9rem;margin-top:8px"></div>
+  <figcaption id="weekcap"></figcaption>
+</figure>
 
 <h2>Forecast against what happened: the last week, today and tomorrow</h2>
 <figure>
@@ -165,7 +170,7 @@ function render(d) {
     `${d.days < 200 ? (d.from < "2026-10-31" ? "In the backtest, " : "In the live days, ") : ""}over these ${d.days} days ${ours ? ours.name : ""} had an error of ${ours.nmae.toFixed(2)}% of installed capacity, ` +
     `ranked ${rank === 1 ? "first" : "number " + rank} of ${o.length}: ${less(ours.skill_ifs)} error than ECMWF IFS ` +
     `and ${less(ours.skill_energinet)} than Energinet's own day-ahead forecast.` : "No scored days yet.";
-  const T = document.getElementById("tiles"); T.innerHTML = "";
+  const T = document.createElement("div");
   const tiles = ours ? [[`${ours.nmae_DK1.toFixed(2)}% / ${ours.nmae_DK2.toFixed(2)}%`, "error in DK1 / DK2, % of installed capacity (MAE, day-ahead)", "nmae"],
       [ours.skill_ifs == null ? "n/a" : ours.skill_ifs.toFixed(1) + "%", "skill against ECMWF IFS (1 minus my error over its error)", "skill"],
       [ours.skill_energinet == null ? "n/a" : ours.skill_energinet.toFixed(1) + "%", "skill against Energinet's day-ahead forecast", "skill"],
@@ -175,8 +180,8 @@ function render(d) {
     if (GLOSS[k]) { t.dataset.tip = GLOSS[k].text; t.classList.add("tip"); t.tabIndex = 0; }
     T.appendChild(t);
   }
-  document.getElementById("second").textContent = ours ? `Also: accuracy ${ours.acc.toFixed(1)}% (100% minus total error over total output` +
-    `${en ? `; Energinet ${en.acc.toFixed(1)}%` : ""}); smallest error of all sources on ${ours.wins} of ${d.days} days.` : "";
+  void (ours ? `Also: accuracy ${ours.acc.toFixed(1)}% (100% minus total error over total output` +
+    `${en ? `; Energinet ${en.acc.toFixed(1)}%` : ""}); smallest error of all sources on ${ours.wins} of ${d.days} days.` : "");
   // dot plot
   const W = 760, L = 210, R = 60, rowH = 30, H = o.length * rowH + 40;
   const lo = Math.max(0, Math.floor(Math.min(...o.map(r => r.nmae)) - 0.5)), hi = Math.ceil(Math.max(...o.map(r => r.nmae)) + 0.5);
@@ -234,69 +239,52 @@ function render(d) {
     `a grey bar is a day another source did better. ` + (o[0].source === OURS ? `The best other source changes from day to day; over the whole period none of them beats ${nm}. ` : "") + `Hover a bar for the numbers.`;
 }
 function renderWeek(D) {
-  // the last seven test days drawn muted, then the live days in full colour, with empty slots for live days still to come
+  // live days only; until the first live day is scored, the last backtest week is shown and labelled as such
+  // the live week starts 31 Oct: the 30 Oct forecast was issued before the full field of models and the band existed
+  const liveRows = D.live ? D.live.daily.filter(r => r.day >= "2026-10-31").map(r => ({...r, kind: "live"})) : [];
+  const all = liveRows.length ? liveRows : (D.backtest ? D.backtest.daily.map(r => ({...r, kind: "backtest"})) : []);
+  if (!all.length) { document.getElementById("week").innerHTML = ""; return; }
+  const days = [...new Set(all.map(r => r.day))].sort().slice(-7);
+  const rows = all.filter(r => days.includes(r.day));
+  const kindOf = d => rows.find(r => r.day === d).kind;
   const name = {}; for (const k of ["backtest", "live"]) if (D[k]) D[k].overall.forEach(o => name[o.source] = o.name);
-  const short = src => (name[src] || src).replace(" (my own model)", "").replace(" (bias-corrected)", "");
-  const live = D.live ? D.live.daily.filter(r => r.day >= "2026-10-31").map(r => ({...r, kind: "live"})) : [];
-  const liveDays = [...new Set(live.map(r => r.day))].sort().slice(-7);
-  const past = D.backtest && liveDays.length < 7 ? D.backtest.daily.map(r => ({...r, kind: "test"})) : [];
-  const pastDays = [...new Set(past.map(r => r.day))].sort().slice(-7);
-  const rows = [...past.filter(r => pastDays.includes(r.day)), ...live.filter(r => liveDays.includes(r.day))];
-  const future = [], nx = new Date((liveDays[liveDays.length - 1] || "2026-10-30") + "T12:00Z");
-  while (liveDays.length + future.length < 7) { nx.setUTCDate(nx.getUTCDate() + 1); future.push(nx.toISOString().slice(0, 10)); }
-  const slots = [...pastDays.map(d => [d, "test"]), ...liveDays.map(d => [d, "live"]), ...future.map(d => [d, "next"])];
-  const n = Math.max(...rows.map(r => r.rank)), W = 760, L = 30, R = 96, top = 16, bot = 44, step = 24;
-  const H = top + bot + (n - 1) * step + 10, x = i => L + 14 + i / (slots.length - 1) * (W - L - R - 14), y = r => top + (r - 1) * step;
+  const stats = Object.entries(rows.reduce((a, r) => ((a[r.source] = a[r.source] || []).push(r.rank), a), {}))
+    .map(([src, rk]) => ({src, mean: rk.reduce((x, y) => x + y, 0) / rk.length, first: rk.filter(v => v === 1).length,
+      worst: Math.max(...rk), n: rk.length})).sort((a, b) => a.mean - b.mean);
+  const best = stats.find(s => s.src !== OURS);
+  const col = src => src === OURS ? "#c2410c" : src === best.src ? "#0f766e" : "#c9c6bd";
+  const n = Math.max(...rows.map(r => r.rank)), W = 760, L = 30, R = 190, top = 16, bot = 44;
+  const H = top + bot + n * 26, x = i => days.length < 2 ? (W - R + L) / 2 : L + 20 + i / (days.length - 1) * (W - L - R - 20), y = r => top + (r - 1) * 26;
   const s = svg(document.getElementById("week"), W, H);
-  const first = slots.findIndex(z => z[1] !== "test");
-  if (first > 0) {
-    const xb = (x(first - 1) + x(first)) / 2;
-    el("rect", {x: xb, y: top - 12, width: W - R - xb + 12, height: H - bot - top + 18, fill: "#fbf3ea"}, s);
-    el("line", {x1: xb, x2: xb, y1: top - 12, y2: H - bot + 6, stroke: "#c2410c", "stroke-dasharray": "3 3"}, s);
-  }
   for (let r = 1; r <= n; r++) el("text", {x: L - 6, y: y(r) + 4, "text-anchor": "end", "font-size": 11, fill: "#6b6a65"}, s, r);
-  slots.forEach(([d, k], i) => {
-    if (k === "next") el("line", {x1: x(i), x2: x(i), y1: top - 6, y2: y(n) + 6, stroke: "#e4d5c3", "stroke-dasharray": "2 4"}, s);
-    el("text", {x: x(i), y: H - 22, "text-anchor": "middle", "font-size": 11, fill: k === "test" ? "#9a978f" : "#1d1d1b"}, s,
+  days.forEach((d, i) => {
+    el("text", {x: x(i), y: H - 22, "text-anchor": "middle", "font-size": 11, fill: "#1d1d1b"}, s,
       new Date(d + "T12:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "short"}));
-    el("text", {x: x(i), y: H - 8, "text-anchor": "middle", "font-size": 10, fill: k === "test" ? "#9a978f" : "#c2410c"}, s,
-      k === "test" ? "test" : k === "live" ? "live" : "to come");
+    el("text", {x: x(i), y: H - 8, "text-anchor": "middle", "font-size": 10, fill: kindOf(d) === "live" ? "#c2410c" : "#6b6a65"}, s, kindOf(d));
   });
-  const col = src => src === OURS ? "#c2410c" : src === "energinet" ? "#1e40af" : "#c9c6bd";
-  const srcs = [...new Set(rows.map(r => r.source))].sort((a, b) => (a === OURS) - (b === OURS) || (a === "energinet") - (b === "energinet"));
-  for (const src of srcs) for (const kind of ["test", "live"]) {
-    const hi = src === OURS || src === "energinet";
-    const pts = slots.map(([d, k], i) => { if (k !== kind) return null;
-      const r = rows.find(q => q.day === d && q.source === src); return r ? [x(i), y(r.rank), r] : null; }).filter(Boolean);
-    if (!pts.length) continue;
-    const g = el("g", {opacity: kind === "test" ? .35 : 1}, s);
-    el("path", {d: "M" + pts.map(p => p[0] + "," + p[1]).join("L"), fill: "none", stroke: col(src), "stroke-width": hi ? 3 : 1.4}, g);
+  const order = stats.map(s => s.src).reverse().sort((a, b) => (a === OURS) - (b === OURS) || (a === best.src) - (b === best.src));
+  for (const src of order) {
+    const pts = days.map((d, i) => { const r = rows.find(q => q.day === d && q.source === src); return r ? [x(i), y(r.rank), r] : null; }).filter(Boolean);
+    const hi = src === OURS || src === best.src;
+    el("path", {d: "M" + pts.map(p => p[0] + "," + p[1]).join("L"), fill: "none", stroke: col(src), "stroke-width": hi ? 3 : 1.4}, s);
     pts.forEach(p => { const miss = p[2].no_forecast;
-      const c = el("circle", {cx: p[0], cy: p[1], r: hi ? 4.5 : 2.5, fill: miss ? "#fff" : col(src), stroke: col(src), "stroke-width": miss ? 2 : 0}, g);
-      el("title", {}, c, miss ? `${p[2].day}: no forecast, DKcast feed not ready. Counted as last place.`
-        : `${short(src)}, ${p[2].day}: rank ${p[2].rank} of ${n}, error ${p[2].nmae.toFixed(2)}% of capacity`); });
+      const c = el("circle", {cx: p[0], cy: p[1], r: hi ? 4.5 : 2.5, fill: miss ? "#fff" : col(src), stroke: col(src), "stroke-width": miss ? 2 : 0}, s);
+      if (miss) el("title", {}, c, "No forecast: DKcast feed not ready. Counted as last place."); });
+    if (hi) { const last = pts[pts.length - 1];
+      const other = rows.find(q => q.day === days[days.length - 1] && q.source === (src === OURS ? best.src : OURS));
+      const clash = other && Math.abs(y(other.rank) - last[1]) < 16, dy = clash ? (src === OURS ? -8 : 8) : 0;
+      tip(el("text", {x: last[0] + 12, y: last[1] + 4 + dy, "font-size": 13, "font-weight": 700, fill: col(src)}, s, (name[src] || src).replace(" (bias-corrected)", "")), src); }
   }
-  // names at the newest point of the two lines that matter
-  const lastPt = src => { for (let i = slots.length - 1; i >= 0; i--) { const r = rows.find(q => q.day === slots[i][0] && q.source === src); if (r) return [i, r]; } return null; };
-  const a = lastPt(OURS), b = lastPt("energinet");
-  const clash = a && b && a[0] === b[0] && Math.abs(a[1].rank - b[1].rank) * step < 16;
-  for (const [src, p] of [[OURS, a], ["energinet", b]]) if (p) tip(el("text", {x: x(p[0]) + 12, y: y(p[1].rank) + 4 + (clash ? (src === OURS ? -8 : 8) : 0),
-    "font-size": 13, "font-weight": 700, fill: col(src)}, s, short(src)), src);
-  const base = liveDays.length ? rows.filter(r => r.kind === "live") : rows;
-  const stats = Object.entries(base.reduce((m, r) => ((m[r.source] = m[r.source] || []).push(r.rank), m), {}))
-    .map(([src, rk]) => ({src, mean: rk.reduce((p, q) => p + q, 0) / rk.length, first: rk.filter(v => v === 1).length,
-      worst: Math.max(...rk), n: rk.length})).sort((p, q) => p.mean - q.mean);
-  const td = "padding:4px 8px;text-align:right";
-  document.getElementById("weektab").innerHTML = `<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Source (${liveDays.length ? "live days" : "test days shown"})</th><th style='${td}'>Average rank</th><th style='${td}'>Days with the smallest error</th><th style='${td}'>Worst day</th></tr>` +
-    stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === OURS ? "font-weight:700;color:#c2410c" : st.src === "energinet" ? "color:#1e40af" : ""}"><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(st.src) || "").replace(/"/g, "&quot;")}">${name[st.src] || st.src}</span></td><td style="${td}">${st.mean.toFixed(1)}</td><td style="${td}">${st.first} of ${st.n}</td><td style="${td}">${st.worst}</td></tr>`).join("") + "</table>";
-  const nl = liveDays.length;
-  document.getElementById("weekcap").textContent = `Daily rank of each source, 1 = smallest error of ${n}, by error as a % of installed capacity. ` +
-    `Orange is ${short(OURS)}, blue is Energinet's own forecast, grey are the other sources. ` +
-    (pastDays.length ? `Muted, on the left: the last ${pastDays.length} days of the test, forecasts from the same model run on past weather forecasts, not live. ` : "") +
-    `On the right: the live days, each forecast committed before 12:00 the day before, ${nl ? `${nl} scored so far` : "the first scored at 01:30 on 1 Nov"}; ` +
-    `the empty slots fill in as each day is scored at 01:30 the night after.` +
-    (rows.some(r => r.no_forecast) ? " A hollow point is a day with no forecast because the DKcast feed was not ready; it counts as last place." : "");
-  document.getElementById("weekh").textContent = nl >= 7 ? "The last seven live days, ranked" : "Rank, day by day: the last test week, then the live week";
+  const tb = document.getElementById("weektab");
+  tb.innerHTML = "<table style='border-collapse:collapse;width:100%'><tr style='color:#6b6a65;text-align:left'><th style='padding:4px 8px'>Source</th><th style='padding:4px 8px;text-align:right'>Average rank</th><th style='padding:4px 8px;text-align:right'>Days in first place</th><th style='padding:4px 8px;text-align:right'>Worst day</th></tr>" +
+    stats.map(st => `<tr style="border-top:1px solid #eee;${st.src === OURS ? "font-weight:700;color:#c2410c" : st.src === best.src ? "font-weight:700;color:#0f766e" : ""}"><td style="padding:4px 8px"><span class="tip" tabindex="0" data-tip="${(tipText(st.src) || "").replace(/"/g, "&quot;")}">${name[st.src] || st.src}</span></td><td style="padding:4px 8px;text-align:right">${st.mean.toFixed(1)}</td><td style="padding:4px 8px;text-align:right">${st.first} of ${st.n}</td><td style="padding:4px 8px;text-align:right">${st.worst}</td></tr>`).join("") + "</table>";
+  const b = stats.find(s => s.src === OURS), nl = days.filter(d => kindOf(d) === "live").length;
+  document.getElementById("weekcap").textContent = `Daily rank of each source by error as a % of capacity, 1 = smallest error of ${n}. ` +
+    `Orange is ${name[OURS] || OURS}; teal is the best other source over these days (${name[best.src] || best.src}); grey are the rest. ` +
+    (nl ? `${nl} live day${nl === 1 ? "" : "s"} shown, each forecast committed before its day began. ` : "The last seven days of the backtest, until the first live day is scored at 01:30 on 1 Nov. ") +
+    (rows.some(r => r.no_forecast) ? "A hollow point is a day with no forecast because the DKcast feed was not ready; it counts as last place, with that day's worst error. " : "") +
+    `Over these days ${name[OURS] || OURS} averaged rank ${b.mean.toFixed(1)}, first on ${b.first} of ${b.n} days.`;
+  document.getElementById("weekh").textContent = !nl ? "Who came first each day: the last week of the backtest" : nl < 7 ? `Who came first each day: the live days so far (${nl} of 7)` : "Who came first each day: the last seven live days";
 }
 function renderBand(B) {
   const T = document.getElementById("btiles"), host = document.getElementById("band");
@@ -494,6 +482,7 @@ Promise.all([fetch("data.json").then(r => r.json()), fetch("glossary.json").then
   const srcs = new Set(["backtest", "live"].flatMap(k => D[k] ? D[k].overall.map(r => r.source) : []));
   if (srcs.has("j4catdk")) OURS = "j4catdk";
   renderTimeline(TL);
+  renderWeek(D);
   renderHealth(D.health, TD);
   const pick = k => { for (const b of ["live", "backtest"]) document.getElementById("t-" + b).setAttribute("aria-pressed", b === k);
     render(D[k]); renderBand((D.band || {})[k] || (D.band || {}).backtest); };
