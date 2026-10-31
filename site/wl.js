@@ -84,7 +84,7 @@ function timeline(host) {
     const e = d.err || {};
     if (e.j4catdk != null && e.energinet != null) { const win = e.j4catdk <= e.energinet, c = win ? th.ours : th.en;
       el("rect", {x: xa + 3, y: 0, width: xb - xa - 6, height: 3, rx: 1.5, fill: c}, s);
-      el("text", {x: mid, y: 17, "text-anchor": "middle", "font-size": 11, "font-weight": 600, fill: c}, s, (win ? "J4catDK" : "Energinet") + " ✓");
+      el("text", {x: mid, y: 17, "text-anchor": "middle", "font-size": 11, "font-weight": 600, fill: c}, s, (win ? "J4catDK" : "Energinet") + (d.complete ? " \u2713" : " \u25cc"));  // dotted circle: day still running, so only the current leader
       const t = el("text", {x: mid, y: 30, "text-anchor": "middle", "font-size": 10.5, fill: th.mute}, s);
       el("tspan", {fill: th.ours, "font-weight": win ? 600 : 400}, t, e.j4catdk.toFixed(1)); el("tspan", {}, t, " vs "); el("tspan", {fill: th.en, "font-weight": win ? 400 : 600}, t, e.energinet.toFixed(1) + "%");
     } else el("text", {x: mid, y: 20, "text-anchor": "middle", "font-size": 10, fill: th.faint}, s, `scored ${dS(next(d.day))}`); });
