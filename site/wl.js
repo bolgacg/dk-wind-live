@@ -26,20 +26,25 @@ function tip(e, html) {
   tipEl.style.top = (e.clientY + 16 + tipEl.offsetHeight > innerHeight ? e.clientY - tipEl.offsetHeight - 10 : e.clientY + 16) + "px";
 }
 const untip = () => tipEl && (tipEl.style.display = "none");
-const nm = (names, k) => (names[k] || k).replace(" (my own model)", "").replace(", corrected at each station", "").replace(" (bias-corrected)", "").replace(" (AI)", " AI");
+const nm = (names, k) => (names[k] || k).replace(" (my own model)", "").replace(", corrected at each station", "").replace(" (bias-corrected)", " (60-day rescaling)").replace(" (AI)", " AI");
 const word = n => ["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve"][n] || String(n);
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 // ---------- data ----------
 async function load() {
   const j = u => fetch(u, {cache: "no-store"}).then(r => r.ok ? r.json() : null).catch(() => null);
-  const [Dd, TL, SM, TD, WX, RK, RM, WT, FW] = await Promise.all(["data.json", "timeline.json", "summary.json", "today.json", "weather.json", "data_alt/wx_ranks.json", "data_alt/wx_ranks_more.json", "data_alt/wx_timeline.json"].map(j).concat([j("https://bolgacg.github.io/dk-forecast/data/weather.json")]));
-  Object.assign(D, {D: Dd, TL, SM, TD, WX, RK, RM, WT, FW});
+  const [Dd, TL, SM, TD, WX, RK, RM, WT, MJ, FW] = await Promise.all(["data.json", "timeline.json", "summary.json", "today.json", "weather.json", "data_alt/wx_ranks.json", "data_alt/wx_ranks_more.json", "data_alt/wx_timeline.json", "data_alt/models.json"].map(j).concat([j("https://bolgacg.github.io/dk-forecast/data/weather.json")]));
+  Object.assign(D, {D: Dd, TL, SM, TD, WX, RK, RM, WT, MJ, FW});
   return kpis();
 }
 function wxScores() {
   const V = [["wind", "Wind"], ["temp", "Temperature"], ["sun", "Sunshine"], ["rain", "Rain"]];
   return V.map(([k, label], i) => {
+    const R = D.MJ && D.MJ.wx_rmse && D.MJ.wx_rmse[k];
+    if (R) {  // the toughest fair competition: every public model in its best treatment on the 2026 test, plus two averages
+      const pub = Object.entries(R.models).map(([m, r]) => ({name: `${D.MJ.names[m] || m} (${r.label})`, key: m, val: r.test_corrected}))
+        .concat(Object.entries(R.ensembles || {}).map(([n, v]) => ({name: n.replace("models", "public models"), val: v}))).sort((a, b) => a.val - b.val);
+      return {k, label, unit: k == "rain" ? "Brier" : {wind: "m/s", temp: "\u00b0C", sun: "min/h"}[k], me: R.dkcast_test, best: pub[0], pub}; }
     if (D.FW && D.FW[k]) { const d = D.FW[k], me = d.rows.find(r => r.name == "DKcast"), pub = d.rows.filter(r => r.name != "DKcast").sort((a, b) => a.val - b.val);
       return {k, label, unit: d.unit, me: me.val, best: pub[0], pub}; }
     const w = D.WX && D.WX.vars[i]; if (!w) return null; const br = w.metric.startsWith("Brier");
@@ -58,7 +63,8 @@ function kpis() {
     testPeriod: T.period, testDays: T.days, testHours: T.hours.toLocaleString("en"),
     tMine: f2(T.nmae_pct.j4catdk), tEn: f2(T.nmae_pct.energinet), tIfs: f2(T.nmae_pct.ifs),
     skillEn: f1(T.skill_vs_energinet_pct), skillEnLo: f1(T.skill_vs_energinet_ci95[0]), skillEnHi: f1(T.skill_vs_energinet_ci95[1]),
-    daysBetter: T.days_better_than_energinet_pct, imbMine: f2(T.imbalance_eur_mwh.j4catdk), imbEn: f2(T.imbalance_eur_mwh.energinet),
+    daysBetter: T.days_better_than_energinet_pct, skillEnT: D.MJ && D.MJ.energinet ? D.MJ.energinet.toughest.toFixed(1) : f1(T.skill_vs_energinet_pct), skillEnRaw: D.MJ && D.MJ.energinet ? D.MJ.energinet.raw.toFixed(1) : "",
+    tEnT: (T.nmae_pct.j4catdk / (1 - (D.MJ && D.MJ.energinet ? D.MJ.energinet.toughest : T.skill_vs_energinet_pct) / 100)).toFixed(2), imbMine: f2(T.imbalance_eur_mwh.j4catdk), imbEn: f2(T.imbalance_eur_mwh.energinet),
     today, tom, todayLabel: dW(today), tomLabel: dW(tom), tomShort: dS(tom),
     todayIssued: F[today] ? `${dW(isoCph(F[today].issued_utc))}, ${hm(F[today].issued_utc)}` : null,
     tomIssued: F[tom] ? hm(F[tom].issued_utc) : null,
@@ -120,8 +126,64 @@ function timeline(host) {
     mineName: "J4catDK", rivName: "Energinet", rivCol: th.en, rivTip: "#5eead4", ticks: ticksFor([0, mx], 1000, true), tickFmt: v => v ? (v / 1000) + "k" : "0", unit: "MW",
     val: v => v.toLocaleString("en") + " MW", chip: v => v.toFixed(1), chipUnit: "%"});
 }
+// ---------- model cards: every model name is underlined; hover shows who made it, what it is, and how it scores ----------
+const CORR = / \((uncorrected|straight-line correction|zero-preserving correction|quantile mapped|boosted correction)\)$/;
+const M = (spec, text, cls) => `<span data-model="${spec}"${cls ? ` class="${cls}"` : ""}>${text}</span>`;
+const WXU = {wind: "m/s", temp: "°C", sun: "min of sun per hour", rain: ""}, WXN = {wind: "wind", temp: "temperature", sun: "sunshine", rain: "rain"};
+const INFO = {
+  dkcast: ["DKcast", "my own weather model", "A neural network per variable that reads every public model's forecast at once at each DMI station, plus a regional summary, and is trained on what the station measured. It gives a range as well as a single number. Trained on March to December 2025."],
+  ecmwf_ifs025: ["ECMWF IFS", "European Centre for Medium-Range Weather Forecasts", "Europe's main physics-based global model, the reference most weather desks start from. Open data on a 0.25° grid (about 25 km)."],
+  ecmwf_aifs025_single: ["ECMWF AIFS", "European Centre for Medium-Range Weather Forecasts", "ECMWF's machine-learning global model, trained on decades of past weather. 0.25° grid."],
+  icon_eu: ["DWD ICON-EU", "Deutscher Wetterdienst (German weather service)", "Physics model for Europe, about 7 km."],
+  icon_d2: ["DWD ICON-D2", "Deutscher Wetterdienst (German weather service)", "High-resolution physics model for Germany and Denmark, about 2 km, short range."],
+  dmi_harmonie_arome_europe: ["DMI HARMONIE", "Danish Meteorological Institute", "Denmark's own high-resolution HARMONIE-AROME model, about 2 km."],
+  knmi_harmonie_arome_europe: ["KNMI HARMONIE", "KNMI (Dutch weather service)", "The Dutch HARMONIE-AROME model run over Europe."],
+  gfs_global: ["NOAA GFS", "NOAA (US weather service)", "The US global physics model, 0.25° grid."],
+  ukmo_global_deterministic_10km: ["UK Met Office", "Met Office (UK weather service)", "The UK's global physics model, 10 km."],
+  metno_nordic: ["MET Norway Nordic", "Norwegian Meteorological Institute", "The 1 km Nordic forecast behind yr.no, already corrected with station and amateur observations."],
+  gem_global: ["Canada GEM", "Environment and Climate Change Canada", "Canada's global physics model."],
+  public_avg: ["Average of all public models", "built by me from the public models", "Every public model in the ranking, each in its best version (as issued or corrected, whichever scored best for it on the 2026 test), averaged hour by hour at each station. Averaging cancels much of each model's own error, so this is the toughest single competitor."]
+};
+const EN2WX = {ifs: "ecmwf_ifs025", aifs: "ecmwf_aifs025_single", harmonie: "dmi_harmonie_arome_europe", icon: "icon_eu", gfs: "gfs_global",
+  knmi: "knmi_harmonie_arome_europe", icon_d2: "icon_d2", ukmo: "ukmo_global_deterministic_10km"};
+const wxScore = (v, x) => v == "rain" ? x.toFixed(4) : x.toFixed(v == "sun" ? 2 : 3) + " " + WXU[v];
+function card(spec) {
+  const [kind, key, v] = spec.split(":"), MJ = D.MJ || {}, line = t => `<div style="margin-top:6px">${t}</div>`;
+  if (kind == "wx") {
+    const I = INFO[key]; if (!I) return esc(key);
+    let h = `<b>${I[0]}</b><div style="opacity:.75">${I[1]}</div>${line(I[2])}`;
+    const vars = v ? [v] : ["wind", "temp", "sun", "rain"], W = MJ.wx || {};
+    const rows = vars.map(q => { const S = W[q]; if (!S) return "";
+      if (key == "dkcast") return `${WXN[q]}: ${wxScore(q, S.dkcast_test)}`;
+      if (key == "public_avg") { const e = S.ensembles && S.ensembles["average of corrected models"]; return e != null ? `${WXN[q]}: ${wxScore(q, e)}` : ""; }
+      const m = S.models && S.models[key]; if (!m) return "";
+      const nmv = {raw: "as issued", linear: "straight line", zero: "zero-preserving", quantile: "quantile mapped", boosted: "boosted"};
+      const f = x => q == "rain" ? x.toFixed(4) : x.toFixed(q == "sun" ? 2 : 3);
+      return `${WXN[q]}${WXU[q] ? " (" + WXU[q] + ")" : ""}: ` + Object.entries(m.test || {raw: m.test_raw}).map(([t, x]) => t == m.choice ? `<b>${nmv[t]} ${f(x)}</b>` : `${nmv[t]} ${f(x)}`).join(" \u00b7 "); }).filter(Boolean);
+    if (rows.length) h += line(`<span style="opacity:.75">2026 test (1 Jan to 18 Oct), ${v == "rain" ? "Brier score" : v ? "mean absolute error" : "mean absolute error, Brier for rain"}:</span><br>${rows.join("<br>")}`);
+    if (key != "dkcast" && key != "public_avg" && rows.length) h += line(`<span style="opacity:.75">Every version is fitted on 2025 only. The page uses the one in bold: whichever scored best for this model on the 2026 test, hindsight that favours it, never DKcast.</span>`);
+    return h;
+  }
+  const bt = D.D && D.D.backtest, o = bt && bt.overall.find(r => r.source == key), bts = o ? line(`<span style="opacity:.75">Backtest ${dS(bt.from)} to ${dS(bt.to)}:</span> ${o.nmae.toFixed(2)}% of capacity, first on ${o.wins} of ${bt.days} days.`) : "";
+  if (key == "j4catdk" || key == "j4cat") {
+    const T = D.SM && D.SM.test_2026;
+    return `<b>${key == "j4cat" ? "J4cat" : "J4catDK"}</b><div style="opacity:.75">my own wind power model</div>${line("J for joint: one model, not several averaged. 4: four weather models (ECMWF IFS and AIFS, DMI HARMONIE, DWD ICON-EU). cat: their winds go in side by side, so it learns which to trust where." + (key == "j4catdk" ? " DK: DKcast's corrected winds at 22 Danish stations. A second stage learns how much offshore output is switched off at low prices." : " This version runs without DKcast."))}${line("Gradient boosting per zone, trained 18 Feb to 31 Dec 2025.")}${T && key == "j4catdk" ? line(`<span style="opacity:.75">Frozen 2026 test:</span> ${T.nmae_pct.j4catdk.toFixed(2)}% of capacity.`) : ""}${bts}`;
+  }
+  if (key == "energinet") {
+    const E = MJ.energinet;
+    return `<b>Energinet</b><div style="opacity:.75">Denmark's grid operator</div>${line("Its own day-ahead wind forecast for each zone, published before the 12:00 auction. Shown rescaled per zone by its actual-to-forecast ratio over the previous 60 days, because its DK1 offshore forecast covers only part of the fleet.")}` +
+      (E ? line(`<span style="opacity:.75">J4catDK's lead on the 2026 test, by how Energinet is adjusted:</span><br>as shown (60-day rescaling) ${E.published}% less error<br>uncorrected ${E.raw}% less<br>adjusted the way 2025 would have chosen ${E.fair}% less<br>toughest version found, quantile mapped (picked with hindsight) ${E.toughest}% less`) : "") + bts;
+  }
+  if (key == "blend") return `<b>4-model average</b><div style="opacity:.75">built by me</div>${line("My power forecasts from ECMWF IFS, ECMWF AIFS, DMI HARMONIE and DWD ICON-EU, averaged hour by hour. The plain way to combine models, kept as a baseline.")}${bts}`;
+  const wk = EN2WX[key], I = INFO[wk];
+  if (!I) return esc(key);
+  return `<b>${I[0]}, as a power forecast</b><div style="opacity:.75">weather model by ${I[1]}; power model by me</div>${line(I[2])}${line("Turned into wind power with my own gradient-boosting mapping per zone, trained on 2025 for each weather model the same way, so the power scores compare the weather models fairly.")}${bts}`;
+}
+document.addEventListener("pointerover", e => { const n = e.target.closest && e.target.closest("[data-model]"); if (n) tip(e, card(n.dataset.model || n.getAttribute("data-model"))); });
+document.addEventListener("pointermove", e => { const n = e.target.closest && e.target.closest("[data-model]"); if (n) tip(e, card(n.dataset.model || n.getAttribute("data-model"))); });
+document.addEventListener("pointerout", e => { const n = e.target.closest && e.target.closest("[data-model]"); if (n) untip(); });
 const RIV = "#8b8778";  // the rival on the weather timeline: grey, because measured is black
-const SHORT = {ecmwf_ifs025: "IFS", ecmwf_aifs025_single: "AIFS", icon_eu: "ICON-EU", icon_d2: "ICON-D2", dmi_harmonie_arome_europe: "DMI",
+const SHORT = {public_avg: "Field avg", ecmwf_ifs025: "IFS", ecmwf_aifs025_single: "AIFS", icon_eu: "ICON-EU", icon_d2: "ICON-D2", dmi_harmonie_arome_europe: "DMI",
   knmi_harmonie_arome_europe: "KNMI", gfs_global: "GFS", ukmo_global_deterministic_10km: "UK Met", metno_nordic: "MET Nor", gem_global: "GEM"};
 function wxTimeline(host, a) {
   const T = D.WT && D.WT.vars[a.var]; if (!T) { host.innerHTML = `<p style="font:13px ${th.font};color:${th.mute};padding:24px;text-align:center">Not available yet.</p>`; return; }
@@ -135,8 +197,8 @@ function wxTimeline(host, a) {
     val: rain ? x => Math.round(100 * x) + "%" : val, chip: rain ? x => x.toFixed(3) : x => x.toFixed(v == "sun" ? 1 : 2), chipUnit: {wind: "", temp: "°", sun: "", rain: ""}[v], bars: rain});
   const done = T.days[pl].filter(d => d.complete && d.err && d.err.d != null), wins = done.filter(d => d.err.d <= d.err.r).length, P = T.places[pl];
   const where = pl == "national" ? `averaged over DKcast's ${P.stations} stations` : `at ${P.station_name}`;
-  const intro = document.getElementById("wxtl-intro"); if (intro) intro.textContent = `DKcast had the smaller error on ${wins} of the ${done.length} complete days shown, ${where}, against ${T.rival_name}, the best public model in the leaderboard above. ${rain ? "Grey bars are the measured share of wet hours, the lines each forecast's chance of rain" : "The shaded gap is DKcast's miss"}; above each day: who won, then the two errors (${rain ? "Brier score" : "average miss in " + T.unit}).`;
-  const lg = document.getElementById("wxtl-riv"); if (lg) lg.textContent = T.rival_name;
+  const intro = document.getElementById("wxtl-intro"); if (intro) intro.textContent = `DKcast had the smaller error on ${wins} of the ${done.length} complete days shown, ${where}, against ${T.rival == "public_avg" ? "the average of all public models, each in its best version" : T.rival_name}, the toughest rival in the leaderboard above. ${rain ? "Grey bars are the measured share of wet hours, the lines each forecast's chance of rain" : "The shaded gap is DKcast's miss"}; above each day: who won, then the two errors (${rain ? "Brier score" : "average miss in " + T.unit}).`;
+  const lg = document.getElementById("wxtl-riv"); if (lg) { lg.textContent = T.rival_name; lg.dataset.model = `wx:${T.rival}:${v}`; }
   const ms = document.getElementById("wxtl-meas"); if (ms) ms.innerHTML = rain ? `<span class="sw" style="width:10px;height:10px;background:${th.ink};opacity:.25"></span>Measured, share of wet hours` : `${sw(th.ink, 2)}Measured`;
   const mm = document.getElementById("wxtl-miss"); if (mm) mm.hidden = rain;
   document.querySelectorAll("#pane-weather .places button").forEach(b => { if (b.dataset.place == "aarhus") b.textContent = v == "wind" ? "Århus Lufthavn (Aarhus)" : "Ødum (Aarhus)"; });
@@ -154,7 +216,7 @@ function league(host) {
   for (let v = lo; v <= hi; v++) { el("line", {x1: x(v), x2: x(v), y1: top - 4, y2: H - 16, stroke: th.grid}, s); el("text", {x: x(v), y: H - 3, "text-anchor": "middle", "font-size": 10.5, fill: th.mute}, s, v + "%"); }
   o.forEach((r, i) => { const y = top + i * rowH + rowH / 2, me = r.source == "j4catdk", en = r.source == "energinet", fx = isIfs(r.source), c = me ? th.ours : en ? th.en : fx ? th.ifs : th.faint;
     if (me) el("rect", {x: 0, y: y - rowH / 2 + 2, width: W, height: rowH - 4, fill: th.tint, rx: 4}, s);
-    el("text", {x: L - 14, y: y + 4, "text-anchor": "end", "font-size": 12.5, "font-weight": me || en || fx ? 600 : 400, fill: me ? th.ours : en ? th.en : fx ? th.ifs : th.ink}, s, me ? "J4catDK (mine)" : nm(D.TL.names, r.source));
+    el("text", {x: L - 14, y: y + 4, "text-anchor": "end", "font-size": 12.5, "font-weight": me || en || fx ? 600 : 400, fill: me ? th.ours : en ? th.en : fx ? th.ifs : th.ink}, s, me ? "J4catDK (mine)" : nm(D.TL.names, r.source)).setAttribute("data-model", "en:" + r.source);
     el("line", {x1: L, x2: x(r.nmae), y1: y, y2: y, stroke: th.line}, s);
     const dot = el("circle", {cx: x(r.nmae), cy: y, r: me ? 6 : 4.5, fill: c}, s);
     dot.addEventListener("pointermove", e => tip(e, `<b>${nm(D.TL.names, r.source)}</b><br>${r.nmae.toFixed(2)}% of capacity<br><span style="opacity:.75">DK1 ${r.nmae_DK1.toFixed(2)}% · DK2 ${r.nmae_DK2.toFixed(2)}%</span>`)); dot.addEventListener("pointerleave", untip);
@@ -217,13 +279,13 @@ function rankWin(a) {
   const at = (d, k) => rows.find(r => r.day == d && r.source == k), has = d => rows.some(r => r.day == d);
   const srcs = [...new Set(rows.map(r => r.source))].map(k => { const rk = rows.filter(r => r.source == k).map(r => r.rank); return {k, avg: rk.reduce((p, q) => p + q, 0) / rk.length}; }).sort((p, q) => p.avg - q.avg);
   const rival = a.src == "wx" ? srcs.find(q => q.k != ours).k : "energinet", li = all.findIndex(d => d >= liveFrom);
-  return {errCol, stand: rows.some(r => r.stand), all, rows, at, has, srcs, names, ours, rival, fmt, repLabel, liveFrom, li, gapFrom, liveRows: rows.some(r => r.day >= liveFrom), n: Math.max(...rows.map(r => r.rank)), wx: a.src == "wx"};
+  return {var: a.var || "wind", errCol, stand: rows.some(r => r.stand), all, rows, at, has, srcs, names, ours, rival, fmt, repLabel, liveFrom, li, gapFrom, liveRows: rows.some(r => r.day >= liveFrom), n: Math.max(...rows.map(r => r.rank)), wx: a.src == "wx"};
 }
 function bump(host, a) {
   const R0 = rankWin(a); if (!R0) { host.innerHTML = `<p style="font:13px ${th.font};color:${th.mute};padding:24px;text-align:center">Scores not available yet.</p>`; return; }
   const {all, n, srcs, ours, rival, li} = R0, W = 760, L = 44, R = 112, top = 34, step = R0.wx ? 18 : 21, H = top + (n - 1) * step + 30;
   const x = i => L + 20 + i * (W - L - R - 40) / Math.max(1, all.length - 1), y = r => top + (r - 1) * step, s = svg(host, W, H);
-  const short = k => k == "energinet" ? "Energinet" : nm(R0.names, k);
+  const short = k => k == "energinet" ? "Energinet" : k == "public_avg" ? "Public average" : nm(R0.names, k).replace(CORR, "");
   const col = k => k == ours ? th.ours : k == "energinet" ? th.en : isIfs(k) ? th.ifs : k == rival ? th.alt : "#dcd8cf", xEnd = x(all.length - 1) + 20;
   el("rect", {x: L, y: y(1) - step / 2, width: xEnd - L, height: step * 3, fill: th.tint, rx: 4}, s);
   for (let r = 1; r <= n; r++) el("text", {x: L - 8, y: y(r) + 3.5, "text-anchor": "end", "font-size": 10.5, fill: r == 1 ? th.ink : th.faint, "font-weight": r == 1 ? 600 : 400}, s, ord(r));
@@ -254,7 +316,7 @@ function bump(host, a) {
   }
   ends.sort((p, q) => p.y - q.y); for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
   ends.forEach(e => { if (e.x < xEnd - 8) el("path", {d: `M${e.x + 6},${e.y0}L${xEnd + 2},${e.y}`, stroke: col(e.k), "stroke-width": 1, "stroke-dasharray": "2 2", fill: "none"}, s);
-    el("text", {x: xEnd + 6, y: e.y + 4, "font-size": 12, "font-weight": 600, fill: col(e.k), "paint-order": "stroke", stroke: th.live, "stroke-width": 3}, s, short(e.k)); });
+    el("text", {x: xEnd + 6, y: e.y + 4, "font-size": 12, "font-weight": 600, fill: col(e.k), "paint-order": "stroke", stroke: th.live, "stroke-width": 3, "text-decoration": "underline", style: "cursor:help", "data-model": R0.wx ? `wx:${e.k}:${R0.var}` : `en:${e.k}`}, s, short(e.k)); });
 }
 function rankTable(host, a) {
   const R0 = rankWin(a); if (!R0) { host.innerHTML = ""; return; }
@@ -266,7 +328,7 @@ function rankTable(host, a) {
   <div style="padding:10px 14px">Source</div><div style="padding:10px 14px;text-align:right">Average rank</div><div style="padding:10px 14px;text-align:right">Average error<br><span style="font-weight:400">${R0.errCol[0]}</span></div><div style="padding:10px 14px;text-align:right">Days in first place</div><div style="padding:10px 14px;text-align:right">Worst day</div></div>` +
   rows.map(r => { const me = r.k == R0.ours, rv = r.k == R0.rival, c = me ? th.ours : r.k == "energinet" ? th.en : isIfs(r.k) ? th.ifs : th.ink, w = me || rv || r.k == "energinet" || isIfs(r.k) ? 600 : 400;
     return `<div style="${grid};color:${c};font-weight:${w};${me ? "background:" + th.tint : ""}">
-    <div style="${cell}">${esc((R0.names[r.k] || r.k).replace(" (my own model)", "").replace(", corrected at each station", ""))}</div>
+    <div style="${cell}"><span data-model="${R0.wx ? "wx:" + r.k + ":" + R0.var : "en:" + r.k}">${esc((R0.names[r.k] || r.k).replace(" (my own model)", "").replace(", corrected at each station", "").replace(" (bias-corrected)", " (60-day rescaling)"))}</span></div>
     <div style="${cell};text-align:right">${r.avg.toFixed(1)}</div><div style="${cell};text-align:right">${r.err == null ? "" : R0.errCol[1](r.err)}</div><div style="${cell};text-align:right">${r.first} of ${N}</div><div style="${cell};text-align:right">${r.worst}</div></div>`; }).join("") + `</div></div>
   <div style="font:12px ${th.font};color:${th.mute};margin-top:8px">Over the ${N} scored day${N == 1 ? "" : "s"} in the chart above, ${dS(days[0])} to ${dS(days[N - 1])}. Updates each night with the chart.${R0.stand ? ` <b style="color:${th.ours}">Stand-in data for days without scores yet; real scores replace it as they arrive.</b>` : ""}</div>`;
 }
@@ -284,12 +346,12 @@ function energyHtml(k) {
   const nDone = st.filter(Boolean).length;
   const step = (i, t, h, sub) => `<div class="step"><div class="dot ${cls(i)}"></div><div class="step-t ${cls(i)}">${t}</div><div class="step-h">${h}</div><div class="step-s">${sub}</div></div>`;
   return `
-<p class="lede">Every morning before the 12:00 day-ahead auction, I publish an hourly forecast of tomorrow's Danish wind power from my model, ${T("J for joint: one model instead of several averaged. 4 for its four weather models. cat for concatenated: their winds go in side by side, so it learns which model to trust where. DK for DKcast, my weather model's corrected winds at Danish stations.", "J4catDK", "term-ours")}. Once the day has blown, it is scored against what was measured, against ${T("The Danish grid operator's own day-ahead wind forecast, rescaled by its actual-to-forecast ratio over the previous 60 days, because its DK1 offshore forecast covers only part of the fleet.", "Energinet's own forecast")}, and against ${word(others)} forecasts built from public weather models.</p>
+<p class="lede">Every morning before the 12:00 day-ahead auction, I publish an hourly forecast of tomorrow's Danish wind power from my model, ${M("en:j4catdk", "J4catDK", "term-ours")}. Once the day has blown, it is scored against what was measured, against ${M("en:energinet", "Energinet's own forecast")}, and against ${word(others)} forecasts built from public weather models.</p>
 <div class="kpis">
-  <div class="kpi"><div class="kpi-l">Against Energinet</div>${T(`Skill score: 1 minus my error over Energinet's, on the same hours. 95% confidence interval ${k.skillEnLo}% to ${k.skillEnHi}%.`, k.skillEn + "%", "kpi-n ours")}<div class="kpi-w">less error</div><div class="kpi-x">My average miss was ${k.tMine}% of capacity; Energinet's was ${k.tEn}%.</div></div>
-  <div class="kpi"><div class="kpi-l">Day by day</div>${T(`Each day is scored on its 24 hourly errors. On ${k.daysBetter}% of the ${k.testDays} test days, my day's error was smaller than Energinet's.`, k.daysBetter + "%", "kpi-n")}<div class="kpi-w">of days ahead</div><div class="kpi-x">Roughly three days in four, my forecast beat Energinet's.</div></div>
-  <div class="kpi"><div class="kpi-l">Average error</div>${T(`The wind industry's standard day-ahead measure: mean absolute error of each area's hourly total (DK1, DK2) as a % of installed capacity. Lower is better. ECMWF IFS: ${k.tIfs}%. Energinet: ${k.tEn}%.`, k.tMine + "%", "kpi-n")}<div class="kpi-w">of installed capacity</div><div class="kpi-x">The wind industry's yardstick. Lower is better.</div></div>
-  <div class="kpi"><div class="kpi-l">Imbalance cost</div>${T("What the forecast's errors would cost a wind producer that sells its forecast day-ahead: each hour's error settled at the difference between the day-ahead and imbalance price, per MWh produced. A perfect forecast costs nothing.", "€" + k.imbMine, "kpi-n")}<div class="kpi-w">per MWh produced</div><div class="kpi-x">What the misses would cost a trader. Energinet: €${k.imbEn}.</div></div>
+  <div class="kpi"><div class="kpi-l">Against Energinet</div>${T(`1 minus my error over Energinet's, on the same hours, against the toughest version of Energinet's forecast I found: quantile mapped per zone on 2025, picked with hindsight on 2026. Against the 60-day rescaled version used in the charts below it is ${k.skillEn}%; against Energinet as issued, ${k.skillEnRaw}%. Hover Energinet anywhere for all versions.`, k.skillEnT + "%", "kpi-n ours")}<div class="kpi-w">less error</div><div class="kpi-x">My average miss was ${k.tMine}% of capacity; ${M("en:energinet", "Energinet (quantile mapped)")}'s was ${k.tEnT}%.</div></div>
+  <div class="kpi"><div class="kpi-l">Day by day</div>${T(`Each day is scored on its 24 hourly errors. On ${k.daysBetter}% of the ${k.testDays} test days, my day's error was smaller than Energinet's (60-day rescaling).`, k.daysBetter + "%", "kpi-n")}<div class="kpi-w">of days ahead</div><div class="kpi-x">Roughly three days in four, my forecast beat Energinet's.</div></div>
+  <div class="kpi"><div class="kpi-l">Average error</div>${T(`The wind industry's standard day-ahead measure: mean absolute error of each area's hourly total (DK1, DK2) as a % of installed capacity. Lower is better. ECMWF IFS: ${k.tIfs}%. Energinet (60-day rescaling): ${k.tEn}%; (quantile mapped): ${k.tEnT}%.`, k.tMine + "%", "kpi-n")}<div class="kpi-w">of installed capacity</div><div class="kpi-x">The wind industry's yardstick. Lower is better.</div></div>
+  <div class="kpi"><div class="kpi-l">Imbalance cost</div>${T("What the forecast's errors would cost a wind producer that sells its forecast day-ahead: each hour's error settled at the difference between the day-ahead and imbalance price, per MWh produced. A perfect forecast costs nothing.", "€" + k.imbMine, "kpi-n")}<div class="kpi-w">per MWh produced</div><div class="kpi-x">What the misses would cost a trader. Energinet (60-day rescaling): €${k.imbEn}.</div></div>
 </div>
 <p class="note">Trained on 18 Feb to 31 Dec 2025. All four numbers come from one ${T(`One run of a script fixed before it ran, on ${k.testHours} hours none of the models saw in training.`, "frozen test")} on 2026 data the model never saw: ${k.testPeriod}, ${k.testDays} days, ${k.testHours} hours.</p>
 
@@ -309,7 +371,7 @@ function energyHtml(k) {
 <p class="intro">All ${k.btN} forecasts ranked by that day's error. The days before 31 Oct are ${T("Every source run on the weather forecasts as they stood the day before, exactly as the morning run would have. My model was trained only on data up to 18 Oct.", "replayed")}; from 31 Oct each new day is live and joins the chart at 01:30 the night after.</p>
 <div class="card">
   <div class="chart" data-chart="bump"></div>
-  <div class="legend"><span>${sw(th.ours, 3)}J4catDK</span><span>${sw(th.en, 2)}Energinet</span><span>${sw(th.ifs, 2)}ECMWF IFS</span><span>${sw("#b9b6ad", 1)}The other ${word(grey)} forecasts</span><span class="hint">Hover a grey line to name it</span></div>
+  <div class="legend"><span>${sw(th.ours, 3)}${M("en:j4catdk", "J4catDK")}</span><span>${sw(th.en, 2)}${M("en:energinet", "Energinet (60-day rescaling)")}</span><span>${sw(th.ifs, 2)}${M("en:ifs", "ECMWF IFS")}</span><span>${sw("#b9b6ad", 1)}The other ${word(grey)} forecasts</span><span class="hint">Hover a grey line to name it</span></div>
   <div data-chart="ranktable"></div>
 </div>
 
@@ -317,14 +379,14 @@ function energyHtml(k) {
 <p class="intro">J4catDK had the smaller error on ${k.wkWins} of the ${k.wkN} complete days shown. The shaded gap is my miss; above each day: who won, then my error vs Energinet's, in % of capacity.</p>
 <div class="card">
   <div class="chart" data-chart="timeline"></div>
-  <div class="legend"><span>${sw(th.ink, 2)}Measured</span><span>${sw(th.ours, 2)}J4catDK</span><span>${sw(th.en, 2)}Energinet</span><span><span class="sw" style="width:14px;height:10px;background:${th.ours};opacity:.18"></span>My miss</span><span class="hint">Hover for any hour</span></div>
+  <div class="legend"><span>${sw(th.ink, 2)}Measured</span><span>${sw(th.ours, 2)}${M("en:j4catdk", "J4catDK")}</span><span>${sw(th.en, 2)}${M("en:energinet", "Energinet (60-day rescaling)")}</span><span><span class="sw" style="width:14px;height:10px;background:${th.ours};opacity:.18"></span>My miss</span><span class="hint">Hover for any hour</span></div>
 </div>
 
 <h2>Over ${k.btDays} days, the smallest average error of ${k.btN}</h2>
 <p class="intro">${T(`Every source run as it would have been live, on ${k.btFrom} to ${k.btTo} 2026: months none of the power models saw in training.`, "Backtest")}, ${k.btFrom} to ${k.btTo} 2026. First on only ${k.bWinMine} days: on most days a different source wins, but none is as steady.</p>
 <div class="card" style="padding:20px"><div class="chart" data-chart="league"></div></div>
 <div class="score">
-  <div class="r h"><div>${k.btDays} days, ${k.btN} sources</div><div class="num" style="color:var(--ours);font-weight:600;background:var(--tint2)">J4catDK</div><div class="num" style="font-weight:600;color:var(--ifs)">ECMWF IFS</div><div class="num" style="font-weight:600;color:var(--en)">Energinet</div></div>
+  <div class="r h"><div>${k.btDays} days, ${k.btN} sources</div><div class="num" style="color:var(--ours);font-weight:600;background:var(--tint2)">${M("en:j4catdk", "J4catDK")}</div><div class="num" style="font-weight:600;color:var(--ifs)">${M("en:ifs", "ECMWF IFS")}</div><div class="num" style="font-weight:600;color:var(--en)">${M("en:energinet", "Energinet")}</div></div>
   <div class="r"><div>${T("Mean absolute error of each area's hourly total as a % of installed capacity. Capacity is estimated as the 99.5th percentile of the previous 60 days' hourly output.", "Error, % of capacity", "lab")}<div class="sub">Wind industry · lower is better</div></div>
     <div class="num me${b(me.nmae, errBest)}" data-tip="DK1 (west) ${f2(me.nmae_DK1)}% · DK2 (east) ${f2(me.nmae_DK2)}%">${f2(me.nmae)}</div><div class="num${b(ifs.nmae, errBest)}" data-tip="DK1 ${f2(ifs.nmae_DK1)}% · DK2 ${f2(ifs.nmae_DK2)}%">${f2(ifs.nmae)}</div><div class="num${b(en.nmae, errBest)}" data-tip="DK1 ${f2(en.nmae_DK1)}% · DK2 ${f2(en.nmae_DK2)}%">${f2(en.nmae)}</div></div>
   <div class="r"><div>${T("1 minus my error divided by ECMWF IFS's error, on the same hours. +10% means 10% less error than IFS; negative means worse.", "Skill against ECMWF IFS", "lab")}<div class="sub">Meteorology · higher is better</div></div>
@@ -336,26 +398,26 @@ function energyHtml(k) {
 
 <h2 style="margin-bottom:12px">Method</h2>
 <div class="method">
-  <p><b>J4catDK</b> reads four weather models (ECMWF IFS and AIFS, DMI HARMONIE, DWD ICON-EU) side by side at 34 wind-farm sites, plus ${T("My own weather model: it corrects the public models' wind forecasts against what DMI's station anemometers actually measured.", "DKcast")}'s corrected winds at 22 stations. A second stage learns how much offshore output is curtailed when prices are low.</p>
+  <p><b>${M("en:j4catdk", "J4catDK")}</b> reads four weather models (${M("wx:ecmwf_ifs025", "ECMWF IFS")} and ${M("wx:ecmwf_aifs025_single", "AIFS")}, ${M("wx:dmi_harmonie_arome_europe", "DMI HARMONIE")}, ${M("wx:icon_eu", "DWD ICON-EU")}) side by side at 34 wind-farm sites, plus ${M("wx:dkcast", "DKcast")}'s corrected winds at 22 stations. A second stage learns how much offshore output is curtailed when prices are low.</p>
   <p>Every model was trained on forecasts as they stood a day earlier, so the lead time matches a real day-ahead decision. Results are on three scales: error as % of capacity (industry), skill against ECMWF IFS (meteorology) and imbalance cost per MWh (trading).</p>
 </div>`;
 }
 function weatherHtml(k, v) {
   const pills = [["wind", "Wind"], ["temp", "Temperature"], ["sun", "Sunshine"], ["rain", "Rain"]].map(([id, l]) => `<button data-var="${id}" aria-pressed="${id == v}">${l}</button>`).join("");
-  const bn = n => n == "Average of all models" ? "the average of all models" : n;
+  const bn = n => n == "average of corrected public models" ? "the average of all public models, each in its best version" : n == "average of raw public models" ? "the plain average of all public models" : n;
   return `
-<p class="lede">The power forecast stands on my own weather forecast, ${T("My own weather model: it corrects the public models' forecasts against what DMI's stations actually measured, and gives a range as well as a single number.", "DKcast", "term-ours")}. On 2026 data it never saw, at Danish weather stations, it beat the best public forecast for every kind of weather.</p>
+<p class="lede">The power forecast stands on my own weather forecast, ${M("wx:dkcast", "DKcast", "term-ours")}. On 2026 data it never saw, at Danish weather stations, it beat the best public forecast for every kind of weather.</p>
 <div class="kpis">${k.wx.map(w => `
   <div class="kpi"><div class="kpi-l">${w.label}</div>${T(`DKcast ${w.me} against ${w.best} for the best public forecast (${w.bestName}), ${w.unit}.`, w.lead + "%", "kpi-n ours")}<div class="kpi-w">${w.rain ? "better at calling rain or no rain" : "less error"}</div><div class="kpi-x">${w.me} vs ${w.best} ${w.rain ? "Brier" : w.unitShort} for ${esc(bn(w.bestName))}.</div></div>`).join("")}
 </div>
-<p class="note">Trained on 1 Mar to 31 Dec 2025, then tested once on 1 Jan to 18 Oct 2026, which it never saw: wind at 33 DMI stations (6,983 hours), temperature at 20 (6,984 hours), sunshine at 19 (6,113 daylight hours) and rain at 20 (6,941 hours). Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}); the public models are each corrected at every station, so the comparison is fair to them.</p>
+<p class="note">Trained on 1 Mar to 31 Dec 2025, then tested once on 1 Jan to 18 Oct 2026, which it never saw: wind at 33 DMI stations (6,983 hours), temperature at 20 (6,984 hours), sunshine at 19 (6,113 daylight hours) and rain at 20 (6,941 hours). Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}). Each public model is shown in whichever version scored best for it on this test: as issued, or with a straight-line, zero-preserving, quantile-mapped or boosted correction per station fitted on 2025. That hindsight favours the public models, never DKcast, so these leads are a lower bound. Hover a model name for its scores.</p>
 
 <h2>Who came first each day</h2>
 <p class="intro" style="margin-bottom:16px">Every model ranked by its error at the DMI stations that day. The days before 31 Oct are ${T("DKcast refitted on data up to 18 Oct only and run on the public forecasts as they stood the day before, exactly as the morning run would have.", "replayed")}; from 31 Oct each new day is live and joins the next morning.</p>
 <div class="card" style="padding:16px 20px 14px">
   <div class="pills" role="group" aria-label="Weather variable">${pills}</div>
   <div class="chart" data-chart="bump" data-src="wx" data-var="${v}"></div>
-  <div class="legend"><span>${sw(th.ours, 3)}DKcast</span><span>${sw(th.ink, 2)}Best public model in the window</span><span>${sw(th.ifs, 2)}ECMWF IFS</span><span>${sw("#b9b6ad", 1)}Other public models</span><span class="hint">Hover a grey line to name it</span></div>
+  <div class="legend"><span>${sw(th.ours, 3)}${M("wx:dkcast:" + v, "DKcast")}</span><span>${sw(th.ink, 2)}Toughest rival in the window</span><span>${sw(th.ifs, 2)}${M("wx:ecmwf_ifs025:" + v, "ECMWF IFS")}</span><span>${sw("#b9b6ad", 1)}Other public models</span><span class="hint">Hover a grey line to name it</span></div>
   <div data-chart="ranktable" data-src="wx" data-var="${v}"></div>
 </div>
 
@@ -364,14 +426,14 @@ function weatherHtml(k, v) {
 <div class="card">
   <div class="pills places" role="group" aria-label="Place">${[["national", "National average"], ["odense", "Årslev (Odense)"], ["aarhus", v == "wind" ? "Århus Lufthavn (Aarhus)" : "Ødum (Aarhus)"]].map(([id, l]) => `<button data-place="${id}" aria-pressed="${id == state.wxPlace}">${l}</button>`).join("")}</div>
   <div class="chart" data-chart="wxtimeline" data-src="wx" data-var="${v}" data-place="${state.wxPlace}"></div>
-  <div class="legend"><span id="wxtl-meas">${sw(th.ink, 2)}Measured</span><span>${sw(th.ours, 2)}DKcast</span><span>${sw(RIV, 2)}<span id="wxtl-riv"></span></span><span id="wxtl-miss"><span class="sw" style="width:14px;height:10px;background:${th.ours};opacity:.18"></span>DKcast's miss</span><span class="hint">Hover for any hour</span></div>
+  <div class="legend"><span id="wxtl-meas">${sw(th.ink, 2)}Measured</span><span>${sw(th.ours, 2)}${M("wx:dkcast:" + v, "DKcast")}</span><span>${sw(RIV, 2)}<span id="wxtl-riv"></span></span><span id="wxtl-miss"><span class="sw" style="width:14px;height:10px;background:${th.ours};opacity:.18"></span>DKcast's miss</span><span class="hint">Hover for any hour</span></div>
 </div>
 
 <h2>Against every public model, all of the 2026 test</h2>
-<p class="intro">The dashed line is the best public forecast for each kind of weather, set to 100%. Left of it is less error. DKcast was trained on 1 Mar to 31 Dec 2025, and each public model got its own correction per station fitted on the same months; all of them were then scored once on 1 Jan to 18 Oct 2026, which none of them saw in training.</p>
+<p class="intro">The dashed line is the best public forecast for each kind of weather, set to 100%. Left of it is less error. DKcast was trained on 1 Mar to 31 Dec 2025. Every public model was corrected per station on the same months in five ways, and is shown in whichever of them (or as issued) scored best for it on 1 Jan to 18 Oct 2026, the test none of the corrections or DKcast saw in training. Two averages of all the public models are in the field too.</p>
 <div class="card">
   <div class="chart" data-chart="wxrel"></div>
-  <div class="legend"><span><span class="sw" style="width:10px;height:10px;border-radius:50%;background:${th.ours}"></span>DKcast</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.ifs}"></span>ECMWF IFS</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.other}"></span>Other public models</span></div>
+  <div class="legend"><span><span class="sw" style="width:10px;height:10px;border-radius:50%;background:${th.ours}"></span>${M("wx:dkcast", "DKcast")}</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.ifs}"></span>${M("wx:ecmwf_ifs025", "ECMWF IFS")}</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.other}"></span>Other public models</span></div>
 </div>`;
 }
 
