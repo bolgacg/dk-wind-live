@@ -19,11 +19,13 @@ const D = {};
 function el(tag, a, p, t) { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (t !== undefined) e.textContent = t; if (p) p.appendChild(e); return e; }
 function svg(host, w, h) { host.innerHTML = ""; return el("svg", {viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img", style: `display:block;font-family:${th.font}`}, host); }
 let tipEl;
-function tip(e, html) {
-  if (!tipEl) { tipEl = document.createElement("div"); tipEl.style.cssText = `position:fixed;z-index:999;pointer-events:none;padding:8px 10px;border-radius:6px;color:#fff;background:${th.tipBg};font:12.5px/1.45 ${th.font};max-width:280px;box-shadow:0 6px 20px rgba(0,0,0,.18);display:none;font-variant-numeric:tabular-nums`; document.body.appendChild(tipEl); }
+function tip(e, html) {  // one standard box: fixed width, light grey, flips to the other side of the pointer near an edge
+  if (!tipEl) { tipEl = document.createElement("div"); tipEl.style.cssText = `position:fixed;z-index:999;pointer-events:none;box-sizing:border-box;width:min(300px,calc(100vw - 16px));padding:11px 13px;border-radius:8px;background:#f4f3ef;color:#1d1d1b;border:1px solid #d9d5cb;box-shadow:0 4px 16px rgba(0,0,0,.10);font:13px/1.5 ${th.font};display:none;font-variant-numeric:tabular-nums`; document.body.appendChild(tipEl); }
   tipEl.innerHTML = html; tipEl.style.display = "block";
-  tipEl.style.left = Math.max(8, Math.min(e.clientX + 14, innerWidth - tipEl.offsetWidth - 8)) + "px";
-  tipEl.style.top = (e.clientY + 16 + tipEl.offsetHeight > innerHeight ? e.clientY - tipEl.offsetHeight - 10 : e.clientY + 16) + "px";
+  const w = tipEl.offsetWidth, h = tipEl.offsetHeight;
+  let x = e.clientX + 16; if (x + w > innerWidth - 8) x = e.clientX - 16 - w;
+  let y = e.clientY + 16; if (y + h > innerHeight - 8) y = e.clientY - 16 - h;
+  tipEl.style.left = Math.max(8, x) + "px"; tipEl.style.top = Math.max(8, y) + "px";
 }
 const untip = () => tipEl && (tipEl.style.display = "none");
 const nm = (names, k) => (names[k] || k).replace(" (my own model)", "").replace(", corrected at each station", "").replace(" (bias-corrected)", " (60-day rescaling)").replace(" (AI)", " AI");
@@ -114,7 +116,7 @@ function tlChart(host, c) {
     cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.setAttribute("opacity", .6);
     ["a", "mine", "riv"].forEach((k, q) => { if (r[k] == null) dots[q].setAttribute("opacity", 0); else { dots[q].setAttribute("cx", X(i)); dots[q].setAttribute("cy", Y(r[k])); dots[q].setAttribute("opacity", 1); } });
     const t = new Date(r.t + ":00Z"), f = (v, none) => v == null ? none : c.val(v);
-    tip(ev, `<b>${dW(isoCph(t))}, ${hm(t)}</b><br>Measured ${f(r.a, "not measured yet")}<br><span style="color:#fdba74">${esc(c.mineName)} ${f(r.mine, "no forecast")}</span><br><span style="color:${c.rivTip}">${esc(c.rivLong || c.rivName)} ${f(r.riv, "no forecast")}</span>` + (r.a != null && r.mine != null ? `<br><span style="opacity:.7">${esc(c.mineName)} miss ${c.val(Math.abs(r.mine - r.a))}</span>` : "")); };
+    tip(ev, `<b>${dW(isoCph(t))}, ${hm(t)}</b><br>Measured ${f(r.a, "not measured yet")}<br><span style="color:${th.ours}">${esc(c.mineName)} ${f(r.mine, "no forecast")}</span><br><span style="color:${c.rivTip}">${esc(c.rivLong || c.rivName)} ${f(r.riv, "no forecast")}</span>` + (r.a != null && r.mine != null ? `<br><span style="opacity:.7">${esc(c.mineName)} miss ${c.val(Math.abs(r.mine - r.a))}</span>` : "")); };
   pad.addEventListener("pointermove", mv); pad.addEventListener("pointerleave", () => { cross.setAttribute("opacity", 0); dots.forEach(q => q.setAttribute("opacity", 0)); untip(); });
 }
 const ticksFor = (vals, step, floor0) => { const v = vals.filter(x => x != null); let lo = floor0 ? 0 : Math.floor(Math.min(...v) / step) * step, hi = Math.ceil(Math.max(...v) / step) * step;
@@ -123,7 +125,7 @@ function timeline(host) {
   const TL = D.TL, S = TL.series.map(r => ({t: r.t, a: r.a, mine: r.j, riv: r.e}));
   const mx = Math.ceil(Math.max(...S.flatMap(r => [r.a, r.mine, r.riv]).filter(v => v != null)) / 1000) * 1000;
   tlChart(host, {S, days: TL.days.map(d => ({...d, err: d.err ? {mine: d.err.j4catdk, riv: d.err.energinet} : {}})), today: TL.today, now: TL.now_utc,
-    mineName: "J4catDK", rivName: "Energinet", rivCol: th.en, rivTip: "#5eead4", ticks: ticksFor([0, mx], 1000, true), tickFmt: v => v ? (v / 1000) + "k" : "0", unit: "MW",
+    mineName: "J4catDK", rivName: "Energinet", rivCol: th.en, rivTip: th.en, ticks: ticksFor([0, mx], 1000, true), tickFmt: v => v ? (v / 1000) + "k" : "0", unit: "MW",
     val: v => v.toLocaleString("en") + " MW", chip: v => v.toFixed(1), chipUnit: "%"});
 }
 // ---------- model cards: every model name is underlined; hover shows who made it, what it is, and how it scores ----------
@@ -147,37 +149,43 @@ const INFO = {
 const EN2WX = {ifs: "ecmwf_ifs025", aifs: "ecmwf_aifs025_single", harmonie: "dmi_harmonie_arome_europe", icon: "icon_eu", gfs: "gfs_global",
   knmi: "knmi_harmonie_arome_europe", icon_d2: "icon_d2", ukmo: "ukmo_global_deterministic_10km"};
 const wxScore = (v, x) => v == "rain" ? x.toFixed(4) : x.toFixed(v == "sun" ? 2 : 3) + " " + WXU[v];
+const NMV = {raw: "as issued", linear: "straight-line correction", zero: "zero-preserving correction", quantile: "quantile mapped", boosted: "boosted correction"};
+const sec = (title, body) => `<div style="margin-top:9px;padding-top:8px;border-top:1px solid #e2ded4"><div style="font-size:11.5px;font-weight:600;color:#6b6a65;margin-bottom:3px">${title}</div>${body}</div>`;
+const trow = (l, r, bold) => `<div style="display:flex;justify-content:space-between;gap:12px;${bold ? "font-weight:600" : ""}"><span>${l}</span><span>${r}</span></div>`;
+const head = (name, who) => `<div style="font-weight:600;font-size:14px">${name}</div><div style="color:#6b6a65;font-size:12px">${who}</div>`;
 function card(spec) {
-  const [kind, key, v] = spec.split(":"), MJ = D.MJ || {}, line = t => `<div style="margin-top:6px">${t}</div>`;
+  const [kind, key, v] = spec.split(":"), MJ = D.MJ || {}, W = MJ.wx || {};
+  const f = (q, x) => q == "rain" ? x.toFixed(4) : x.toFixed(q == "sun" ? 2 : 3), unit = q => q == "rain" ? "Brier score" : "mean absolute error, " + WXU[q];
   if (kind == "wx") {
     const I = INFO[key]; if (!I) return esc(key);
-    let h = `<b>${I[0]}</b><div style="opacity:.75">${I[1]}</div>${line(I[2])}`;
-    const vars = v ? [v] : ["wind", "temp", "sun", "rain"], W = MJ.wx || {};
-    const rows = vars.map(q => { const S = W[q]; if (!S) return "";
-      if (key == "dkcast") return `${WXN[q]}: ${wxScore(q, S.dkcast_test)}`;
-      if (key == "public_avg") { const e = S.ensembles && S.ensembles["average of corrected models"]; return e != null ? `${WXN[q]}: ${wxScore(q, e)}` : ""; }
-      const m = S.models && S.models[key]; if (!m) return "";
-      const nmv = {raw: "as issued", linear: "straight line", zero: "zero-preserving", quantile: "quantile mapped", boosted: "boosted"};
-      const f = x => q == "rain" ? x.toFixed(4) : x.toFixed(q == "sun" ? 2 : 3);
-      return `${WXN[q]}${WXU[q] ? " (" + WXU[q] + ")" : ""}: ` + Object.entries(m.test || {raw: m.test_raw}).map(([t, x]) => t == m.choice ? `<b>${nmv[t]} ${f(x)}</b>` : `${nmv[t]} ${f(x)}`).join(" \u00b7 "); }).filter(Boolean);
-    if (rows.length) h += line(`<span style="opacity:.75">2026 test (1 Jan to 18 Oct), ${v == "rain" ? "Brier score" : v ? "mean absolute error" : "mean absolute error, Brier for rain"}:</span><br>${rows.join("<br>")}`);
-    if (key != "dkcast" && key != "public_avg" && rows.length) h += line(`<span style="opacity:.75">Every version is fitted on 2025 only. The page uses the one in bold: whichever scored best for this model on the 2026 test, hindsight that favours it, never DKcast.</span>`);
-    return h;
+    let h = head(I[0], I[1]) + `<div style="margin-top:6px">${I[2]}</div>`;
+    if (key == "dkcast" || key == "public_avg") {
+      const rows = (v ? [v] : ["wind", "temp", "sun", "rain"]).map(q => { const S = W[q]; if (!S) return "";
+        const x = key == "dkcast" ? S.dkcast_test : S.ensembles && S.ensembles["average of corrected models"]; return x == null ? "" : trow(WXN[q], f(q, x) + (q == "rain" ? " Brier" : " " + WXU[q].replace("min of sun per hour", "min/h"))); }).join("");
+      if (rows) h += sec("2026 test, 1 Jan to 18 Oct, mean absolute error", rows);
+      return h;
+    }
+    if (v) { const m = W[v] && W[v].models && W[v].models[key];
+      if (m) h += sec(`2026 test, ${unit(v)}`, Object.entries(m.test || {raw: m.test_raw}).map(([t, x]) => trow(NMV[t] + (t == m.choice ? " (used)" : ""), f(v, x), t == m.choice)).join(""));
+    } else { const rows = ["wind", "temp", "sun", "rain"].map(q => { const m = W[q] && W[q].models && W[q].models[key]; return m ? trow(`${WXN[q]}: ${NMV[m.choice]}`, f(q, m.test_corrected)) : ""; }).join("");
+      if (rows) h += sec("Version used and its 2026 test score", rows); }
+    return h + `<div style="margin-top:8px;font-size:12px;color:#6b6a65">Every version is fitted on 2025 only. The page uses whichever scored best for this model on the 2026 test, hindsight that favours it, never DKcast.</div>`;
   }
-  const bt = D.D && D.D.backtest, o = bt && bt.overall.find(r => r.source == key), bts = o ? line(`<span style="opacity:.75">Backtest ${dS(bt.from)} to ${dS(bt.to)}:</span> ${o.nmae.toFixed(2)}% of capacity, first on ${o.wins} of ${bt.days} days.`) : "";
+  const bt = D.D && D.D.backtest, o = bt && bt.overall.find(r => r.source == key);
+  const bts = o ? sec(`Backtest ${dS(bt.from)} to ${dS(bt.to)}`, trow("error, % of capacity", o.nmae.toFixed(2) + "%") + trow("days in first place", `${o.wins} of ${bt.days}`)) : "";
   if (key == "j4catdk" || key == "j4cat") {
     const T = D.SM && D.SM.test_2026;
-    return `<b>${key == "j4cat" ? "J4cat" : "J4catDK"}</b><div style="opacity:.75">my own wind power model</div>${line("J for joint: one model, not several averaged. 4: four weather models (ECMWF IFS and AIFS, DMI HARMONIE, DWD ICON-EU). cat: their winds go in side by side, so it learns which to trust where." + (key == "j4catdk" ? " DK: DKcast's corrected winds at 22 Danish stations. A second stage learns how much offshore output is switched off at low prices." : " This version runs without DKcast."))}${line("Gradient boosting per zone, trained 18 Feb to 31 Dec 2025.")}${T && key == "j4catdk" ? line(`<span style="opacity:.75">Frozen 2026 test:</span> ${T.nmae_pct.j4catdk.toFixed(2)}% of capacity.`) : ""}${bts}`;
+    return head(key == "j4cat" ? "J4cat" : "J4catDK", "my own wind power model") + `<div style="margin-top:6px">One model reading four weather models side by side (ECMWF IFS and AIFS, DMI HARMONIE, DWD ICON-EU), so it learns which to trust where.${key == "j4catdk" ? " Also DKcast's corrected winds at 22 stations, and a second stage for offshore output switched off at low prices." : " This version runs without DKcast."} Gradient boosting per zone, trained 18 Feb to 31 Dec 2025.</div>` +
+      (T && key == "j4catdk" ? sec("Frozen 2026 test", trow("error, % of capacity", T.nmae_pct.j4catdk.toFixed(2) + "%")) : "") + bts;
   }
   if (key == "energinet") {
     const E = MJ.energinet;
-    return `<b>Energinet</b><div style="opacity:.75">Denmark's grid operator</div>${line("Its own day-ahead wind forecast for each zone, published before the 12:00 auction. Shown rescaled per zone by its actual-to-forecast ratio over the previous 60 days, because its DK1 offshore forecast covers only part of the fleet.")}` +
-      (E ? line(`<span style="opacity:.75">J4catDK's lead on the 2026 test, by how Energinet is adjusted:</span><br>as shown (60-day rescaling) ${E.published}% less error<br>uncorrected ${E.raw}% less<br>adjusted the way 2025 would have chosen ${E.fair}% less<br>toughest version found, quantile mapped (picked with hindsight) ${E.toughest}% less`) : "") + bts;
+    return head("Energinet", "Denmark's grid operator") + `<div style="margin-top:6px">Its own day-ahead wind forecast per zone, published before the 12:00 auction. The charts use it rescaled per zone by its actual-to-forecast ratio over the previous 60 days, because its DK1 offshore forecast covers only part of the fleet.</div>` +
+      (E ? sec("J4catDK's lead on the 2026 test, by version of Energinet", trow("60-day rescaling (charts)", E.published + "%") + trow("as issued", E.raw + "%") + trow("as 2025 would have chosen", E.fair + "%") + trow("quantile mapped (toughest)", E.toughest + "%", true)) : "") + bts;
   }
-  if (key == "blend") return `<b>4-model average</b><div style="opacity:.75">built by me</div>${line("My power forecasts from ECMWF IFS, ECMWF AIFS, DMI HARMONIE and DWD ICON-EU, averaged hour by hour. The plain way to combine models, kept as a baseline.")}${bts}`;
-  const wk = EN2WX[key], I = INFO[wk];
-  if (!I) return esc(key);
-  return `<b>${I[0]}, as a power forecast</b><div style="opacity:.75">weather model by ${I[1]}; power model by me</div>${line(I[2])}${line("Turned into wind power with my own gradient-boosting mapping per zone, trained on 2025 for each weather model the same way, so the power scores compare the weather models fairly.")}${bts}`;
+  if (key == "blend") return head("4-model average", "built by me") + `<div style="margin-top:6px">My power forecasts from ECMWF IFS, ECMWF AIFS, DMI HARMONIE and DWD ICON-EU, averaged hour by hour. The plain way to combine models, kept as a baseline.</div>` + bts;
+  const wk = EN2WX[key], I = INFO[wk]; if (!I) return esc(key);
+  return head(I[0] + ", as a power forecast", "weather by " + I[1] + "; power model by me") + `<div style="margin-top:6px">${I[2]} Turned into wind power with my own gradient-boosting mapping per zone, trained on 2025 the same way for every weather model, so the power scores compare the weather models fairly.</div>` + bts;
 }
 document.addEventListener("pointerover", e => { const n = e.target.closest && e.target.closest("[data-model]"); if (n) tip(e, card(n.dataset.model || n.getAttribute("data-model"))); });
 document.addEventListener("pointermove", e => { const n = e.target.closest && e.target.closest("[data-model]"); if (n) tip(e, card(n.dataset.model || n.getAttribute("data-model"))); });
@@ -192,7 +200,7 @@ function wxTimeline(host, a) {
   const ticks = rain ? [0, .25, .5, .75, 1] : v == "sun" ? [0, 15, 30, 45, 60] : v == "wind" ? ticksFor(vals, 2, true) : ticksFor(vals, Math.max(...vals.filter(x => x != null)) - Math.min(...vals.filter(x => x != null)) > 12 ? 4 : 2, false);
   const val = {wind: x => x.toFixed(1) + " m/s", temp: x => x.toFixed(1) + " °C", sun: x => x.toFixed(0) + " min of sun", rain: x => Math.round(100 * x) + "% chance of rain"}[v];
   tlChart(host, {S, days: T.days[pl].map(d => ({...d, err: d.err && d.err.d != null ? {mine: d.err.d, riv: d.err.r} : {}})), today: D.WT.today, now: D.WT.now_utc,
-    mineName: "DKcast", rivName: SHORT[T.rival] || T.rival_name, rivLong: T.rival_name, rivCol: RIV, rivTip: "#d6d3cc", ticks,
+    mineName: "DKcast", rivName: SHORT[T.rival] || T.rival_name, rivLong: T.rival_name, rivCol: RIV, rivTip: "#57534e", ticks,
     tickFmt: rain ? x => Math.round(100 * x) + "%" : x => String(x), unit: {wind: "m/s", temp: "°C", sun: "min/h", rain: "rain"}[v],
     val: rain ? x => Math.round(100 * x) + "%" : val, chip: rain ? x => x.toFixed(3) : x => x.toFixed(v == "sun" ? 1 : 2), chipUnit: {wind: "", temp: "°", sun: "", rain: ""}[v], bars: rain});
   const done = T.days[pl].filter(d => d.complete && d.err && d.err.d != null), wins = done.filter(d => d.err.d <= d.err.r).length, P = T.places[pl];
@@ -322,15 +330,16 @@ function rankTable(host, a) {
   const R0 = rankWin(a); if (!R0) { host.innerHTML = ""; return; }
   const days = R0.all.filter(R0.has), N = days.length;
   const rows = R0.srcs.map(q => { const rk = R0.rows.filter(r => r.source == q.k).map(r => r.rank); const er = R0.rows.filter(r => r.source == q.k && r.err != null).map(r => r.err); return {k: q.k, avg: q.avg, err: er.length ? er.reduce((p, v) => p + v, 0) / er.length : null, first: rk.filter(v => v == 1).length, worst: Math.max(...rk)}; });
+  const labs = new Set(rows.map(r => ((R0.names[r.k] || "").match(CORR) || [])[1]).filter(Boolean)), same = labs.size == 1 ? [...labs][0] : null;
   const cell = "padding:10px 14px;border-top:1px solid " + th.grid, grid = "display:grid;grid-template-columns:minmax(0,2fr) repeat(4,minmax(0,1fr))";
   host.innerHTML = `<div style="overflow-x:auto;margin-top:16px"><div style="font:13.5px/1.3 ${th.font};color:${th.ink};border:1px solid ${th.line};border-radius:8px;overflow:hidden;min-width:580px">
   <div style="${grid};font-size:12px;font-weight:600;color:${th.mute};background:#faf9f6">
   <div style="padding:10px 14px">Source</div><div style="padding:10px 14px;text-align:right">Average rank</div><div style="padding:10px 14px;text-align:right">Average error<br><span style="font-weight:400">${R0.errCol[0]}</span></div><div style="padding:10px 14px;text-align:right">Days in first place</div><div style="padding:10px 14px;text-align:right">Worst day</div></div>` +
   rows.map(r => { const me = r.k == R0.ours, rv = r.k == R0.rival, c = me ? th.ours : r.k == "energinet" ? th.en : isIfs(r.k) ? th.ifs : th.ink, w = me || rv || r.k == "energinet" || isIfs(r.k) ? 600 : 400;
     return `<div style="${grid};color:${c};font-weight:${w};${me ? "background:" + th.tint : ""}">
-    <div style="${cell}"><span data-model="${R0.wx ? "wx:" + r.k + ":" + R0.var : "en:" + r.k}">${esc((R0.names[r.k] || r.k).replace(" (my own model)", "").replace(", corrected at each station", "").replace(" (bias-corrected)", " (60-day rescaling)"))}</span></div>
+    <div style="${cell}"><span data-model="${R0.wx ? "wx:" + r.k + ":" + R0.var : "en:" + r.k}">${esc((R0.names[r.k] || r.k).replace(" (my own model)", "").replace(", corrected at each station", "").replace(" (bias-corrected)", " (60-day rescaling)").replace(same ? CORR : /$^/, ""))}</span></div>
     <div style="${cell};text-align:right">${r.avg.toFixed(1)}</div><div style="${cell};text-align:right">${r.err == null ? "" : R0.errCol[1](r.err)}</div><div style="${cell};text-align:right">${r.first} of ${N}</div><div style="${cell};text-align:right">${r.worst}</div></div>`; }).join("") + `</div></div>
-  <div style="font:12px ${th.font};color:${th.mute};margin-top:8px">Over the ${N} scored day${N == 1 ? "" : "s"} in the chart above, ${dS(days[0])} to ${dS(days[N - 1])}. Updates each night with the chart.${R0.stand ? ` <b style="color:${th.ours}">Stand-in data for days without scores yet; real scores replace it as they arrive.</b>` : ""}</div>`;
+  <div style="font:12px ${th.font};color:${th.mute};margin-top:8px">Over the ${N} scored day${N == 1 ? "" : "s"} in the chart above, ${dS(days[0])} to ${dS(days[N - 1])}. Updates each night with the chart.${same ? ` Every public model here uses its ${same}; hover a name for all its versions.` : ""}${R0.stand ? ` <b style="color:${th.ours}">Stand-in data for days without scores yet; real scores replace it as they arrive.</b>` : ""}</div>`;
 }
 
 // ---------- the two tabs ----------
