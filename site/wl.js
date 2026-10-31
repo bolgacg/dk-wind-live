@@ -33,8 +33,8 @@ const esc = s => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replac
 // ---------- data ----------
 async function load() {
   const j = u => fetch(u, {cache: "no-store"}).then(r => r.ok ? r.json() : null).catch(() => null);
-  const [Dd, TL, SM, TD, WX, RK, RM, FW] = await Promise.all(["data.json", "timeline.json", "summary.json", "today.json", "weather.json", "data_alt/wx_ranks.json", "data_alt/wx_ranks_more.json"].map(j).concat([j("https://bolgacg.github.io/dk-forecast/data/weather.json")]));
-  Object.assign(D, {D: Dd, TL, SM, TD, WX, RK, RM, FW});
+  const [Dd, TL, SM, TD, WX, RK, RM, WT, FW] = await Promise.all(["data.json", "timeline.json", "summary.json", "today.json", "weather.json", "data_alt/wx_ranks.json", "data_alt/wx_ranks_more.json", "data_alt/wx_timeline.json"].map(j).concat([j("https://bolgacg.github.io/dk-forecast/data/weather.json")]));
+  Object.assign(D, {D: Dd, TL, SM, TD, WX, RK, RM, WT, FW});
   return kpis();
 }
 function wxScores() {
@@ -71,42 +71,75 @@ function kpis() {
   };
 }
 
-// ---------- timeline: measured vs mine vs Energinet ----------
-function timeline(host) {
-  const TL = D.TL, S = TL.series, n = S.length, W = 760, L = 46, R = 6, top = 36, H = 330, bot = 26, bw = (W - L - R) / n;
-  const X = i => L + (i + .5) * bw, mx = Math.ceil(Math.max(...S.flatMap(r => [r.a, r.j, r.e]).filter(v => v != null)) / 1000) * 1000, Y = v => top + (1 - v / mx) * (H - top - bot);
+// ---------- timeline: measured vs mine vs the rival, hour by hour (Energy and Meteorology) ----------
+// c: {S (rows {t, a, mine, riv}), days ({day, complete, err: {mine, riv}}), today, now, mineName, rivName, rivCol, rivTip,
+//     ticks ([values]), tickFmt, unit, val (tooltip value), chip (error value), chipUnit}
+function tlChart(host, c) {
+  const S = c.S, n = S.length, W = 760, L = 46, R = 6, top = 36, H = 330, bot = 26, bw = (W - L - R) / n;
+  const lo = c.ticks[0], hi = c.ticks[c.ticks.length - 1], X = i => L + (i + .5) * bw, Y = v => top + (1 - (v - lo) / (hi - lo)) * (H - top - bot);
   const s = svg(host, W, H);
-  const days = TL.days.map(d => { const ix = []; S.forEach((r, i) => { if (isoCph(r.t + ":00Z") == d.day) ix.push(i); }); return ix.length ? {...d, a: ix[0], b: ix[ix.length - 1]} : null; }).filter(Boolean);
-  days.forEach((d, k) => { const xa = L + d.a * bw, xb = L + (d.b + 1) * bw, mid = (xa + xb) / 2, fut = d.day >= TL.today;
-    if (fut) el("rect", {x: xa, y: 0, width: xb - xa, height: H - bot, fill: d.day == TL.today ? th.tint : th.live}, s);
+  const days = c.days.map(d => { const ix = []; S.forEach((r, i) => { if (isoCph(r.t + ":00Z") == d.day) ix.push(i); }); return ix.length ? {...d, a: ix[0], b: ix[ix.length - 1]} : null; }).filter(Boolean);
+  days.forEach((d, k) => { const xa = L + d.a * bw, xb = L + (d.b + 1) * bw, mid = (xa + xb) / 2, fut = d.day >= c.today;
+    if (fut) el("rect", {x: xa, y: 0, width: xb - xa, height: H - bot, fill: d.day == c.today ? th.tint : th.live}, s);
     if (k) el("line", {x1: xa, x2: xa, y1: 0, y2: H - bot, stroke: th.line}, s);
-    el("text", {x: mid, y: H - 8, "text-anchor": "middle", "font-size": 11, fill: fut ? th.ink : th.mute, "font-weight": fut ? 600 : 400}, s, d.day == TL.today ? "Today" : d.day > TL.today ? "Tomorrow" : dS(d.day));
+    el("text", {x: mid, y: H - 8, "text-anchor": "middle", "font-size": 11, fill: fut ? th.ink : th.mute, "font-weight": fut ? 600 : 400}, s, d.day == c.today ? "Today" : d.day > c.today ? "Tomorrow" : dS(d.day));
     const e = d.err || {};
-    if (e.j4catdk != null && e.energinet != null) { const win = e.j4catdk <= e.energinet, c = win ? th.ours : th.en;
-      el("rect", {x: xa + 3, y: 0, width: xb - xa - 6, height: 3, rx: 1.5, fill: c}, s);
-      el("text", {x: mid, y: 17, "text-anchor": "middle", "font-size": 11, "font-weight": 600, fill: c}, s, (win ? "J4catDK" : "Energinet") + (d.complete ? " \u2713" : " \u25cc"));  // dotted circle: day still running, so only the current leader
+    if (e.mine != null && e.riv != null) { const win = e.mine <= e.riv, col = win ? th.ours : c.rivCol;
+      el("rect", {x: xa + 3, y: 0, width: xb - xa - 6, height: 3, rx: 1.5, fill: col}, s);
+      el("text", {x: mid, y: 17, "text-anchor": "middle", "font-size": 11, "font-weight": 600, fill: col}, s, (win ? c.mineName : c.rivName) + (d.complete ? " ✓" : " ◌"));  // dotted circle: day still running, so only the current leader
       const t = el("text", {x: mid, y: 30, "text-anchor": "middle", "font-size": 10.5, fill: th.mute}, s);
-      el("tspan", {fill: th.ours, "font-weight": win ? 600 : 400}, t, e.j4catdk.toFixed(1)); el("tspan", {}, t, " vs "); el("tspan", {fill: th.en, "font-weight": win ? 400 : 600}, t, e.energinet.toFixed(1) + "%");
+      el("tspan", {fill: th.ours, "font-weight": win ? 600 : 400}, t, c.chip(e.mine)); el("tspan", {}, t, " vs "); el("tspan", {fill: c.rivCol, "font-weight": win ? 400 : 600}, t, c.chip(e.riv) + c.chipUnit);
     } else el("text", {x: mid, y: 20, "text-anchor": "middle", "font-size": 10, fill: th.faint}, s, `scored ${dS(next(d.day))}`); });
-  for (let v = 0; v <= mx; v += 1000) { el("line", {x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: v ? th.grid : th.line}, s);
-    el("text", {x: L - 8, y: Y(v) + 3.5, "text-anchor": "end", "font-size": 10.5, fill: th.mute}, s, v ? (v / 1000) + "k" : "0"); }
-  el("text", {x: L - 8, y: Y(mx) - 14, "text-anchor": "end", "font-size": 10, fill: th.faint}, s, "MW");
-  let seg = []; const flush = () => { if (seg.length > 1) el("path", {d: "M" + seg.map(([i, r]) => `${X(i)},${Y(r.j)}`).join("L") + "L" + seg.slice().reverse().map(([i, r]) => `${X(i)},${Y(r.a)}`).join("L") + "Z", fill: th.ours, opacity: .14}, s); seg = []; };
-  S.forEach((r, i) => { if (r.a != null && r.j != null) seg.push([i, r]); else flush(); }); flush();
-  const line = (k, c, w) => { let d = "", pen = false; S.forEach((r, i) => { if (r[k] == null) { pen = false; return; } d += (pen ? "L" : "M") + X(i).toFixed(1) + "," + Y(r[k]).toFixed(1); pen = true; });
-    el("path", {d, fill: "none", stroke: c, "stroke-width": w, "stroke-linejoin": "round", "stroke-linecap": "round"}, s); };
-  line("e", th.en, 1.5); line("j", th.ours, 2.2); line("a", th.ink, 2);
-  const ni = S.findIndex(r => r.a == null && r.t >= TL.now_utc.slice(0, 13)), nx = ni < 0 ? null : L + ni * bw;
+  c.ticks.forEach(v => { el("line", {x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: v == lo ? th.line : th.grid}, s);
+    el("text", {x: L - 8, y: Y(v) + 3.5, "text-anchor": "end", "font-size": 10.5, fill: th.mute}, s, c.tickFmt(v)); });
+  el("text", {x: L - 8, y: Y(hi) - 14, "text-anchor": "end", "font-size": 10, fill: th.faint}, s, c.unit);
+  let seg = []; const flush = () => { if (seg.length > 1) el("path", {d: "M" + seg.map(([i, r]) => `${X(i)},${Y(r.mine)}`).join("L") + "L" + seg.slice().reverse().map(([i, r]) => `${X(i)},${Y(r.a)}`).join("L") + "Z", fill: th.ours, opacity: .14}, s); seg = []; };
+  if (c.bars) S.forEach((r, i) => { if (r.a) el("rect", {x: X(i) - bw / 2, y: Y(r.a), width: bw, height: Y(lo) - Y(r.a), fill: th.ink, opacity: .14}, s); });  // rain: measured wet share as bars
+  else S.forEach((r, i) => { if (r.a != null && r.mine != null) seg.push([i, r]); else flush(); }); flush();
+  const line = (k, col, w) => { let d = "", pen = false; S.forEach((r, i) => { if (r[k] == null) { pen = false; return; } d += (pen ? "L" : "M") + X(i).toFixed(1) + "," + Y(r[k]).toFixed(1); pen = true; });
+    el("path", {d, fill: "none", stroke: col, "stroke-width": w, "stroke-linejoin": "round", "stroke-linecap": "round"}, s); };
+  line("riv", c.rivCol, 1.5); line("mine", th.ours, 2.2); if (!c.bars) line("a", th.ink, 2);
+  const ni = S.findIndex(r => r.a == null && r.t >= c.now.slice(0, 13)), nx = ni < 0 ? null : L + ni * bw;
   if (nx) { el("line", {x1: nx, x2: nx, y1: top, y2: H - bot, stroke: th.ink, "stroke-dasharray": "2 3"}, s);
     el("text", {x: nx + 4, y: top + 10, "font-size": 10.5, fill: th.ink, "font-weight": 600}, s, "now"); }
-  const cross = el("line", {y1: top, y2: H - bot, stroke: th.mute, opacity: 0}, s), dots = ["a", "j", "e"].map((k, q) => el("circle", {r: 3.5, fill: [th.ink, th.ours, th.en][q], stroke: "#fff", "stroke-width": 1.5, opacity: 0}, s));
-  const pad = el("rect", {x: L, y: top, width: W - L - R, height: H - top - bot, fill: "transparent", style: "cursor:crosshair"}, s), fm = v => v == null ? "not measured yet" : v.toLocaleString("en") + " MW";
+  const cross = el("line", {y1: top, y2: H - bot, stroke: th.mute, opacity: 0}, s), dots = ["a", "mine", "riv"].map((k, q) => el("circle", {r: 3.5, fill: [th.ink, th.ours, c.rivCol][q], stroke: "#fff", "stroke-width": 1.5, opacity: 0}, s));
+  const pad = el("rect", {x: L, y: top, width: W - L - R, height: H - top - bot, fill: "transparent", style: "cursor:crosshair"}, s);
   const mv = ev => { const b = s.getBoundingClientRect(), px = (ev.clientX - b.left) * W / b.width, i = Math.max(0, Math.min(n - 1, Math.floor((px - L) / bw))), r = S[i];
     cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.setAttribute("opacity", .6);
-    ["a", "j", "e"].forEach((k, q) => { if (r[k] == null) dots[q].setAttribute("opacity", 0); else { dots[q].setAttribute("cx", X(i)); dots[q].setAttribute("cy", Y(r[k])); dots[q].setAttribute("opacity", 1); } });
-    const t = new Date(r.t + ":00Z"), f = v => v == null ? "no forecast" : v.toLocaleString("en") + " MW";
-    tip(ev, `<b>${dW(isoCph(t))}, ${hm(t)}</b><br>Measured ${fm(r.a)}<br><span style="color:#fdba74">J4catDK ${f(r.j)}</span><br><span style="color:#5eead4">Energinet ${f(r.e)}</span>` + (r.a != null && r.j != null ? `<br><span style="opacity:.7">J4catDK miss ${Math.abs(r.j - r.a).toLocaleString("en")} MW</span>` : "")); };
-  pad.addEventListener("pointermove", mv); pad.addEventListener("pointerleave", () => { cross.setAttribute("opacity", 0); dots.forEach(c => c.setAttribute("opacity", 0)); untip(); });
+    ["a", "mine", "riv"].forEach((k, q) => { if (r[k] == null) dots[q].setAttribute("opacity", 0); else { dots[q].setAttribute("cx", X(i)); dots[q].setAttribute("cy", Y(r[k])); dots[q].setAttribute("opacity", 1); } });
+    const t = new Date(r.t + ":00Z"), f = (v, none) => v == null ? none : c.val(v);
+    tip(ev, `<b>${dW(isoCph(t))}, ${hm(t)}</b><br>Measured ${f(r.a, "not measured yet")}<br><span style="color:#fdba74">${esc(c.mineName)} ${f(r.mine, "no forecast")}</span><br><span style="color:${c.rivTip}">${esc(c.rivLong || c.rivName)} ${f(r.riv, "no forecast")}</span>` + (r.a != null && r.mine != null ? `<br><span style="opacity:.7">${esc(c.mineName)} miss ${c.val(Math.abs(r.mine - r.a))}</span>` : "")); };
+  pad.addEventListener("pointermove", mv); pad.addEventListener("pointerleave", () => { cross.setAttribute("opacity", 0); dots.forEach(q => q.setAttribute("opacity", 0)); untip(); });
+}
+const ticksFor = (vals, step, floor0) => { const v = vals.filter(x => x != null); let lo = floor0 ? 0 : Math.floor(Math.min(...v) / step) * step, hi = Math.ceil(Math.max(...v) / step) * step;
+  if (hi == lo) hi = lo + step; const t = []; for (let x = lo; x <= hi + 1e-9; x += step) t.push(+x.toFixed(6)); return t; };
+function timeline(host) {
+  const TL = D.TL, S = TL.series.map(r => ({t: r.t, a: r.a, mine: r.j, riv: r.e}));
+  const mx = Math.ceil(Math.max(...S.flatMap(r => [r.a, r.mine, r.riv]).filter(v => v != null)) / 1000) * 1000;
+  tlChart(host, {S, days: TL.days.map(d => ({...d, err: d.err ? {mine: d.err.j4catdk, riv: d.err.energinet} : {}})), today: TL.today, now: TL.now_utc,
+    mineName: "J4catDK", rivName: "Energinet", rivCol: th.en, rivTip: "#5eead4", ticks: ticksFor([0, mx], 1000, true), tickFmt: v => v ? (v / 1000) + "k" : "0", unit: "MW",
+    val: v => v.toLocaleString("en") + " MW", chip: v => v.toFixed(1), chipUnit: "%"});
+}
+const RIV = "#8b8778";  // the rival on the weather timeline: grey, because measured is black
+const SHORT = {ecmwf_ifs025: "IFS", ecmwf_aifs025_single: "AIFS", icon_eu: "ICON-EU", icon_d2: "ICON-D2", dmi_harmonie_arome_europe: "DMI",
+  knmi_harmonie_arome_europe: "KNMI", gfs_global: "GFS", ukmo_global_deterministic_10km: "UK Met", metno_nordic: "MET Nor", gem_global: "GEM"};
+function wxTimeline(host, a) {
+  const T = D.WT && D.WT.vars[a.var]; if (!T) { host.innerHTML = `<p style="font:13px ${th.font};color:${th.mute};padding:24px;text-align:center">Not available yet.</p>`; return; }
+  const v = a.var, pl = a.place || "national", rain = v == "rain", S = T.series[pl].map(r => ({t: r.t, a: r.a, mine: r.d, riv: r.r}));
+  const vals = S.flatMap(r => [r.a, r.mine, r.riv]);
+  const ticks = rain ? [0, .25, .5, .75, 1] : v == "sun" ? [0, 15, 30, 45, 60] : v == "wind" ? ticksFor(vals, 2, true) : ticksFor(vals, Math.max(...vals.filter(x => x != null)) - Math.min(...vals.filter(x => x != null)) > 12 ? 4 : 2, false);
+  const val = {wind: x => x.toFixed(1) + " m/s", temp: x => x.toFixed(1) + " °C", sun: x => x.toFixed(0) + " min of sun", rain: x => Math.round(100 * x) + "% chance of rain"}[v];
+  tlChart(host, {S, days: T.days[pl].map(d => ({...d, err: d.err && d.err.d != null ? {mine: d.err.d, riv: d.err.r} : {}})), today: D.WT.today, now: D.WT.now_utc,
+    mineName: "DKcast", rivName: SHORT[T.rival] || T.rival_name, rivLong: T.rival_name, rivCol: RIV, rivTip: "#d6d3cc", ticks,
+    tickFmt: rain ? x => Math.round(100 * x) + "%" : x => String(x), unit: {wind: "m/s", temp: "°C", sun: "min/h", rain: "rain"}[v],
+    val: rain ? x => Math.round(100 * x) + "%" : val, chip: rain ? x => x.toFixed(3) : x => x.toFixed(v == "sun" ? 1 : 2), chipUnit: {wind: "", temp: "°", sun: "", rain: ""}[v], bars: rain});
+  const done = T.days[pl].filter(d => d.complete && d.err && d.err.d != null), wins = done.filter(d => d.err.d <= d.err.r).length, P = T.places[pl];
+  const where = pl == "national" ? `averaged over DKcast's ${P.stations} stations` : `at ${P.station_name}`;
+  const intro = document.getElementById("wxtl-intro"); if (intro) intro.textContent = `DKcast had the smaller error on ${wins} of the ${done.length} complete days shown, ${where}, against ${T.rival_name}, the best public model in the leaderboard above. ${rain ? "Grey bars are the measured share of wet hours, the lines each forecast's chance of rain" : "The shaded gap is DKcast's miss"}; above each day: who won, then the two errors (${rain ? "Brier score" : "average miss in " + T.unit}).`;
+  const lg = document.getElementById("wxtl-riv"); if (lg) lg.textContent = T.rival_name;
+  const ms = document.getElementById("wxtl-meas"); if (ms) ms.innerHTML = rain ? `<span class="sw" style="width:10px;height:10px;background:${th.ink};opacity:.25"></span>Measured, share of wet hours` : `${sw(th.ink, 2)}Measured`;
+  const mm = document.getElementById("wxtl-miss"); if (mm) mm.hidden = rain;
+  document.querySelectorAll("#pane-weather .places button").forEach(b => { if (b.dataset.place == "aarhus") b.textContent = v == "wind" ? "Århus Lufthavn (Aarhus)" : "Ødum (Aarhus)"; });
 }
 
 // ---------- league: average error + days in first place ----------
@@ -315,7 +348,7 @@ function weatherHtml(k, v) {
 <div class="kpis">${k.wx.map(w => `
   <div class="kpi"><div class="kpi-l">${w.label}</div>${T(`DKcast ${w.me} against ${w.best} for the best public forecast (${w.bestName}), ${w.unit}.`, w.lead + "%", "kpi-n ours")}<div class="kpi-w">${w.rain ? "better at calling rain or no rain" : "less error"}</div><div class="kpi-x">${w.me} vs ${w.best} ${w.rain ? "Brier" : w.unitShort} for ${esc(bn(w.bestName))}.</div></div>`).join("")}
 </div>
-<p class="note">Trained on 1 Mar to 31 Dec 2025, then tested once on 1 Jan to 18 Oct 2026, which it never saw: about 7,000 hours at 33 DMI stations for wind and about 20 for the rest. Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}); the public models are each corrected at every station, so the comparison is fair to them.</p>
+<p class="note">Trained on 1 Mar to 31 Dec 2025, then tested once on 1 Jan to 18 Oct 2026, which it never saw: wind at 33 DMI stations (6,983 hours), temperature at 20 (6,984 hours), sunshine at 19 (6,113 daylight hours) and rain at 20 (6,941 hours). Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}); the public models are each corrected at every station, so the comparison is fair to them.</p>
 
 <h2>Who came first each day</h2>
 <p class="intro" style="margin-bottom:16px">Every model ranked by its error at the DMI stations that day. The days before 31 Oct are ${T("DKcast refitted on data up to 18 Oct only and run on the public forecasts as they stood the day before, exactly as the morning run would have.", "replayed")}; from 31 Oct each new day is live and joins the next morning.</p>
@@ -326,6 +359,14 @@ function weatherHtml(k, v) {
   <div data-chart="ranktable" data-src="wx" data-var="${v}"></div>
 </div>
 
+<h2>The last week, hour by hour</h2>
+<p class="intro" id="wxtl-intro"></p>
+<div class="card">
+  <div class="pills places" role="group" aria-label="Place">${[["national", "National average"], ["odense", "Årslev (Odense)"], ["aarhus", v == "wind" ? "Århus Lufthavn (Aarhus)" : "Ødum (Aarhus)"]].map(([id, l]) => `<button data-place="${id}" aria-pressed="${id == state.wxPlace}">${l}</button>`).join("")}</div>
+  <div class="chart" data-chart="wxtimeline" data-src="wx" data-var="${v}" data-place="${state.wxPlace}"></div>
+  <div class="legend"><span id="wxtl-meas">${sw(th.ink, 2)}Measured</span><span>${sw(th.ours, 2)}DKcast</span><span>${sw(RIV, 2)}<span id="wxtl-riv"></span></span><span id="wxtl-miss"><span class="sw" style="width:14px;height:10px;background:${th.ours};opacity:.18"></span>DKcast's miss</span><span class="hint">Hover for any hour</span></div>
+</div>
+
 <h2>Against every public model, all of the 2026 test</h2>
 <p class="intro">The dashed line is the best public forecast for each kind of weather, set to 100%. Left of it is less error.</p>
 <div class="card">
@@ -334,9 +375,9 @@ function weatherHtml(k, v) {
 </div>`;
 }
 
-const CH = {bump: (h, a) => bump(h, a), ranktable: (h, a) => rankTable(h, a), timeline, league, wxrel: wxRel};
+const CH = {bump: (h, a) => bump(h, a), ranktable: (h, a) => rankTable(h, a), timeline, wxtimeline: wxTimeline, league, wxrel: wxRel};
 function charts(root) { root.querySelectorAll("[data-chart]").forEach(h => { try { CH[h.dataset.chart](h, h.dataset); } catch (e) { console.warn("chart", h.dataset.chart, e); } }); }
-const state = {k: null, mode: "weather", wxVar: "wind"};
+const state = {k: null, mode: "weather", wxVar: "wind", wxPlace: "national"};
 try { const m = new URLSearchParams(location.search).get("tab") || sessionStorage.getItem("wl-tab"); if (m == "energy" || m == "weather") state.mode = m; } catch (e) {}
 function render() {
   const k = state.k; if (!k) return;
@@ -352,8 +393,11 @@ function setMode(m) {
 }
 document.addEventListener("click", e => {
   const t = e.target.closest(".tabs button"); if (t) { setMode(t.dataset.mode); untip(); return; }
-  const p = e.target.closest(".pills button"); if (p) { state.wxVar = p.dataset.var; const pw = document.getElementById("pane-weather");
-    pw.querySelectorAll(".pills button").forEach(b => b.setAttribute("aria-pressed", String(b == p)));
+  const q = e.target.closest(".places button"); if (q) { state.wxPlace = q.dataset.place;
+    document.querySelectorAll("#pane-weather .places button").forEach(b => b.setAttribute("aria-pressed", String(b == q)));
+    document.querySelectorAll("#pane-weather [data-chart=wxtimeline]").forEach(h => { h.dataset.place = state.wxPlace; CH.wxtimeline(h, h.dataset); }); return; }
+  const p = e.target.closest(".pills:not(.places) button"); if (p) { state.wxVar = p.dataset.var; const pw = document.getElementById("pane-weather");
+    pw.querySelectorAll(".pills:not(.places) button").forEach(b => b.setAttribute("aria-pressed", String(b == p)));
     pw.querySelectorAll("[data-src=wx]").forEach(h => { h.dataset.var = state.wxVar; CH[h.dataset.chart](h, h.dataset); }); }
 });
 // tooltips for HTML terms and numbers
