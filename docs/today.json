@@ -1,93 +1,93 @@
 {
-"built_utc": "2026-10-31T00:08Z",
+"built_utc": "2026-10-31T01:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-10-31",
-"hours_measured": 1,
+"hours_measured": 2,
 "hours_total": 24,
-"through_utc": "2026-10-31T00:00Z",
+"through_utc": "2026-10-31T01:00Z",
 "ranking": [
-{
-"source": "icon",
-"name": "DWD ICON-EU",
-"nmae": 0.4,
-"acc": 69.82,
-"rank": 1
-},
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 0.54,
-"acc": 73.51,
-"rank": 2
+"nmae": 0.52,
+"acc": 72.89,
+"rank": 1
 },
 {
 "source": "blend",
 "name": "4-model average",
-"nmae": 0.84,
-"acc": 70.69,
+"nmae": 0.79,
+"acc": 69.18,
+"rank": 2
+},
+{
+"source": "icon",
+"name": "DWD ICON-EU",
+"nmae": 0.95,
+"acc": 68.07,
 "rank": 3
-},
-{
-"source": "gfs",
-"name": "NOAA GFS",
-"nmae": 1.13,
-"acc": 55.64,
-"rank": 4
-},
-{
-"source": "icon_d2",
-"name": "DWD ICON-D2",
-"nmae": 1.2,
-"acc": 76.05,
-"rank": 5
 },
 {
 "source": "harmonie",
 "name": "DMI HARMONIE",
-"nmae": 1.26,
-"acc": 55.96,
-"rank": 6
-},
-{
-"source": "aifs",
-"name": "ECMWF AIFS (AI)",
-"nmae": 1.38,
-"acc": 68.32,
-"rank": 7
+"nmae": 0.96,
+"acc": 55.55,
+"rank": 4
 },
 {
 "source": "knmi",
 "name": "KNMI HARMONIE",
-"nmae": 1.57,
-"acc": 65.83,
-"rank": 8
+"nmae": 1.1,
+"acc": 67.36,
+"rank": 5
 },
 {
-"source": "j4catdk",
-"name": "J4catDK (my own model)",
-"nmae": 2.12,
-"acc": 53.85,
-"rank": 9
+"source": "aifs",
+"name": "ECMWF AIFS (AI)",
+"nmae": 1.17,
+"acc": 71.0,
+"rank": 6
+},
+{
+"source": "icon_d2",
+"name": "DWD ICON-D2",
+"nmae": 1.48,
+"acc": 70.03,
+"rank": 7
+},
+{
+"source": "gfs",
+"name": "NOAA GFS",
+"nmae": 1.55,
+"acc": 51.29,
+"rank": 8
 },
 {
 "source": "ukmo",
 "name": "UK Met Office",
-"nmae": 2.32,
-"acc": 49.64,
+"nmae": 1.61,
+"acc": 63.59,
+"rank": 9
+},
+{
+"source": "j4catdk",
+"name": "J4catDK (my own model)",
+"nmae": 1.66,
+"acc": 53.17,
 "rank": 10
 },
 {
 "source": "j4cat",
 "name": "J4cat (mine, without DKcast)",
-"nmae": 2.74,
-"acc": 38.51,
+"nmae": 2.39,
+"acc": 37.15,
 "rank": 11
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 3.68,
-"acc": 26.27,
+"nmae": 3.52,
+"acc": 28.8,
 "rank": 12
 }
 ],
@@ -104,7 +104,7 @@
 "p": 345,
 "lo": 180,
 "hi": 425,
-"a": null
+"a": 335
 },
 {
 "t": "2026-10-31T01",
