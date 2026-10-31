@@ -1,93 +1,93 @@
 {
-"built_utc": "2026-10-31T16:08Z",
+"built_utc": "2026-10-31T17:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-10-31",
-"hours_measured": 17,
+"hours_measured": 18,
 "hours_total": 24,
-"through_utc": "2026-10-31T16:00Z",
+"through_utc": "2026-10-31T17:00Z",
 "ranking": [
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 1.1,
-"acc": 65.72,
+"nmae": 1.09,
+"acc": 64.79,
 "rank": 1
 },
 {
 "source": "blend",
 "name": "4-model average",
-"nmae": 1.23,
-"acc": 62.67,
+"nmae": 1.19,
+"acc": 63.03,
 "rank": 2
 },
 {
 "source": "aifs",
 "name": "ECMWF AIFS (AI)",
-"nmae": 1.3,
-"acc": 56.81,
+"nmae": 1.33,
+"acc": 57.51,
 "rank": 3
 },
 {
 "source": "j4catdk",
 "name": "J4catDK (my own model)",
-"nmae": 1.61,
-"acc": 40.87,
+"nmae": 1.57,
+"acc": 41.79,
 "rank": 4
 },
 {
 "source": "j4cat",
 "name": "J4cat (mine, without DKcast)",
-"nmae": 1.99,
-"acc": 32.33,
+"nmae": 1.92,
+"acc": 33.3,
 "rank": 5
 },
 {
 "source": "icon",
 "name": "DWD ICON-EU",
-"nmae": 2.0,
-"acc": 48.97,
+"nmae": 2.03,
+"acc": 49.21,
 "rank": 6
 },
 {
 "source": "icon_d2",
 "name": "DWD ICON-D2",
-"nmae": 2.01,
-"acc": 49.56,
+"nmae": 2.09,
+"acc": 48.79,
 "rank": 7
 },
 {
 "source": "ukmo",
 "name": "UK Met Office",
-"nmae": 2.04,
-"acc": 51.43,
+"nmae": 2.1,
+"acc": 50.98,
 "rank": 8
 },
 {
 "source": "knmi",
 "name": "KNMI HARMONIE",
-"nmae": 2.43,
-"acc": 46.6,
+"nmae": 2.4,
+"acc": 47.6,
 "rank": 9
 },
 {
 "source": "harmonie",
 "name": "DMI HARMONIE",
-"nmae": 2.44,
-"acc": 44.23,
+"nmae": 2.48,
+"acc": 43.76,
 "rank": 10
 },
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 2.49,
-"acc": 44.22,
+"nmae": 2.48,
+"acc": 45.04,
 "rank": 11
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 2.7,
-"acc": 39.74,
+"nmae": 2.6,
+"acc": 40.93,
 "rank": 12
 }
 ],
@@ -216,7 +216,7 @@
 "p": 312,
 "lo": 154,
 "hi": 605,
-"a": null
+"a": 378
 },
 {
 "t": "2026-10-31T17",
