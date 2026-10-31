@@ -1,93 +1,93 @@
 {
-"built_utc": "2026-10-31T04:08Z",
+"built_utc": "2026-10-31T05:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-10-31",
-"hours_measured": 5,
+"hours_measured": 6,
 "hours_total": 24,
-"through_utc": "2026-10-31T04:00Z",
+"through_utc": "2026-10-31T05:00Z",
 "ranking": [
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 0.42,
-"acc": 79.52,
+"nmae": 0.48,
+"acc": 78.36,
 "rank": 1
 },
 {
 "source": "ukmo",
 "name": "UK Met Office",
-"nmae": 0.85,
-"acc": 74.79,
+"nmae": 0.86,
+"acc": 71.33,
 "rank": 2
 },
 {
 "source": "blend",
 "name": "4-model average",
-"nmae": 0.9,
-"acc": 69.36,
+"nmae": 1.03,
+"acc": 66.07,
 "rank": 3
 },
 {
 "source": "aifs",
 "name": "ECMWF AIFS (AI)",
-"nmae": 1.1,
-"acc": 68.76,
+"nmae": 1.22,
+"acc": 63.76,
 "rank": 4
-},
-{
-"source": "j4catdk",
-"name": "J4catDK (my own model)",
-"nmae": 1.46,
-"acc": 51.92,
-"rank": 5
-},
-{
-"source": "harmonie",
-"name": "DMI HARMONIE",
-"nmae": 1.49,
-"acc": 52.98,
-"rank": 6
 },
 {
 "source": "icon_d2",
 "name": "DWD ICON-D2",
-"nmae": 1.54,
-"acc": 63.56,
-"rank": 7
+"nmae": 1.51,
+"acc": 60.51,
+"rank": 5
 },
 {
 "source": "icon",
 "name": "DWD ICON-EU",
-"nmae": 1.57,
-"acc": 61.55,
-"rank": 8
+"nmae": 1.67,
+"acc": 58.46,
+"rank": 6
 },
 {
-"source": "knmi",
-"name": "KNMI HARMONIE",
-"nmae": 1.58,
-"acc": 58.26,
-"rank": 9
+"source": "j4catdk",
+"name": "J4catDK (my own model)",
+"nmae": 1.75,
+"acc": 46.27,
+"rank": 7
 },
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 1.96,
-"acc": 50.45,
+"nmae": 2.12,
+"acc": 49.05,
+"rank": 8
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"nmae": 2.15,
+"acc": 44.98,
+"rank": 9
+},
+{
+"source": "knmi",
+"name": "KNMI HARMONIE",
+"nmae": 2.24,
+"acc": 49.17,
 "rank": 10
 },
 {
 "source": "j4cat",
 "name": "J4cat (mine, without DKcast)",
-"nmae": 2.32,
-"acc": 38.72,
+"nmae": 2.5,
+"acc": 34.81,
 "rank": 11
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 3.21,
-"acc": 37.73,
+"nmae": 3.11,
+"acc": 40.49,
 "rank": 12
 }
 ],
@@ -132,7 +132,7 @@
 "p": 542,
 "lo": 226,
 "hi": 678,
-"a": null
+"a": 425
 },
 {
 "t": "2026-10-31T05",
