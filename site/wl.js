@@ -154,7 +154,7 @@ function rankWin(a) {
   const rep = [], live = [], put = (arr, r) => { if (![...rep, ...live].some(q => q.day == r.day && q.source == r.source)) arr.push({day: r.day, source: r.source, rank: r.rank, err: r.nmae != null ? r.nmae : r.mae}); };
   let names, ours, liveFrom, fmt, repLabel;
   if (a.src == "wx") { const v = a.var || "wind", RK = v == "wind" ? D.RK : D.RM && D.RM[v]; if (!RK || !RK.ranks) return null;
-    names = RK.names; ours = "dkcast"; liveFrom = RK.live_from || LIVE_FROM; repLabel = "2026 test";
+    names = RK.names; ours = "dkcast"; liveFrom = RK.live_from || LIVE_FROM; repLabel = RK.ranks.some(r => r.kind == "replayed") ? "Replayed" : "2026 test";
     (RK.live || []).forEach(r => put(live, r)); RK.ranks.forEach(r => put(r.kind == "live" || r.day >= liveFrom ? live : rep, r));
     fmt = {wind: e => `miss ${e.toFixed(2)} m/s`, temp: e => `miss ${e.toFixed(2)} °C`, sun: e => `miss ${e.toFixed(1)} min of sun`, rain: e => `Brier ${e.toFixed(3)}`}[v];
   } else { const TL = D.TL; names = TL.names; ours = "j4catdk"; liveFrom = TL.live_from || LIVE_FROM; repLabel = "Replayed";
@@ -198,7 +198,7 @@ function bump(host, a) {
     el("rect", {x: xb, y: top - 12, width: xEnd - xb, height: y(n) - top + 24, fill: th.live, rx: 4}, s);
     if (li > 0) { el("line", {x1: xb, x2: xb, y1: 4, y2: y(n) + 12, stroke: th.ink, "stroke-dasharray": "3 3"}, s);
       el("text", {x: xb - 8, y: 12, "text-anchor": "end", "font-size": 11, fill: th.mute}, s, R0.repLabel + (R0.gapFrom ? `, ${dS(all[0])} to ${dS(all[li - 1])}` : "")); }
-    const tail = R0.wx && !R0.liveRows ? "  ·  daily weather scores not published yet" : nx != null ? "  ·  next score " + dS(next(all[nx])) + ", 01:30" : "";
+    const tail = nx != null ? "  ·  next score " + dS(next(all[nx])) + (R0.wx ? ", morning" : ", 01:30") : "";
     el("text", {x: xb + 8, y: 12, "font-size": 11, "font-weight": 600, fill: th.ink}, s, (li > 0 ? "Live from " + dS(R0.liveFrom) : "Live") + tail); }
   if (R0.stand) el("text", {x: L, y: 12, "font-size": 11, fill: th.ours, "font-weight": 600}, s, "STAND-IN DATA");
   empty.forEach(i => el("line", {x1: x(i), x2: x(i), y1: top - 4, y2: y(n) + 4, stroke: th.line, "stroke-dasharray": "2 3"}, s));
@@ -317,7 +317,7 @@ function weatherHtml(k, v) {
 <p class="note">Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}); the public models are each corrected at every station, so the comparison is fair to them.</p>
 
 <h2>Who came first each day</h2>
-<p class="intro" style="margin-bottom:16px">Every model ranked by its error at the DMI stations that day. The last days of the 2026 test sit on the left; from 31 Oct each new day is live and joins at 01:30 the night after.</p>
+<p class="intro" style="margin-bottom:16px">Every model ranked by its error at the DMI stations that day. The days before 31 Oct are ${T("DKcast refitted on data up to 18 Oct only and run on the public forecasts as they stood the day before, exactly as the morning run would have.", "replayed")}; from 31 Oct each new day is live and joins the next morning.</p>
 <div class="card" style="padding:16px 20px 14px">
   <div class="pills" role="group" aria-label="Weather variable">${pills}</div>
   <div class="chart" data-chart="bump" data-src="wx" data-var="${v}"></div>
