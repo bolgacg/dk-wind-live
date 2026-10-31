@@ -9,7 +9,7 @@ if [ "$1" = score ] || [ "$1" = forecast ]; then  # forecast too, so the health 
   ../.venv/bin/python league.py --live-scores hourly_scores.csv >> ../logs/league.log 2>&1 \
     && ../.venv/bin/python export_summary.py >> ../logs/league.log 2>&1 \
     && { ../.venv/bin/python timeline.py >> ../logs/league.log 2>&1; true; } \
-    && mkdir -p docs && cp site/*.html site/*.json docs/ \
+    && mkdir -p docs && cp site/*.html site/*.json site/*.js site/*.css docs/ \
     && git add docs && git commit -qm "league update $(date -u +%F)" >> ../logs/league.log 2>&1
 fi
 if [ "$1" = today ]; then  # provisional running score of the day in progress, hourly
