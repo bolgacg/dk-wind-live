@@ -152,15 +152,16 @@ function wxRel(host) {
 // ---------- daily rank: a 14-day window around go-live that fills in nightly ----------
 function rankWin(a) {
   const rep = [], live = [], put = (arr, r) => { if (![...rep, ...live].some(q => q.day == r.day && q.source == r.source)) arr.push({day: r.day, source: r.source, rank: r.rank, err: r.nmae != null ? r.nmae : r.mae}); };
-  let names, ours, liveFrom, fmt, repLabel;
+  let names, ours, liveFrom, fmt, repLabel, errCol;
   if (a.src == "wx") { const v = a.var || "wind", RK = v == "wind" ? D.RK : D.RM && D.RM[v]; if (!RK || !RK.ranks) return null;
     names = RK.names; ours = "dkcast"; liveFrom = RK.live_from || LIVE_FROM; repLabel = RK.ranks.some(r => r.kind == "replayed") ? "Replayed" : "2026 test";
     (RK.live || []).forEach(r => put(live, r)); RK.ranks.forEach(r => put(r.kind == "live" || r.day >= liveFrom ? live : rep, r));
+    errCol = {wind: ["m/s", e => e.toFixed(2)], temp: ["°C", e => e.toFixed(2)], sun: ["min of sun", e => e.toFixed(1)], rain: ["Brier score", e => e.toFixed(3)]}[v];
     fmt = {wind: e => `miss ${e.toFixed(2)} m/s`, temp: e => `miss ${e.toFixed(2)} °C`, sun: e => `miss ${e.toFixed(1)} min of sun`, rain: e => `Brier ${e.toFixed(3)}`}[v];
   } else { const TL = D.TL; names = TL.names; ours = "j4catdk"; liveFrom = TL.live_from || LIVE_FROM; repLabel = "Replayed";
     ((D.D.live && D.D.live.daily) || []).filter(r => r.day >= liveFrom && !r.no_forecast).forEach(r => put(live, r));
     TL.ranks.forEach(r => put(r.kind == "live" || r.day >= liveFrom ? live : rep, r));
-    fmt = e => `error ${e.toFixed(2)}% of capacity`; }
+    fmt = e => `error ${e.toFixed(2)}% of capacity`; errCol = ["% of capacity", e => e.toFixed(2) + "%"]; }
   const SL = 14, HALF = 7, ld = [...new Set(live.map(r => r.day))].sort(), last = ld[ld.length - 1];
   let end = addD(liveFrom, HALF - 1); if (last && next(last) > end) end = next(last);
   let all = []; for (let k = SL - 1; k >= 0; k--) all.push(addD(end, -k));
@@ -183,7 +184,7 @@ function rankWin(a) {
   const at = (d, k) => rows.find(r => r.day == d && r.source == k), has = d => rows.some(r => r.day == d);
   const srcs = [...new Set(rows.map(r => r.source))].map(k => { const rk = rows.filter(r => r.source == k).map(r => r.rank); return {k, avg: rk.reduce((p, q) => p + q, 0) / rk.length}; }).sort((p, q) => p.avg - q.avg);
   const rival = a.src == "wx" ? srcs.find(q => q.k != ours).k : "energinet", li = all.findIndex(d => d >= liveFrom);
-  return {stand: rows.some(r => r.stand), all, rows, at, has, srcs, names, ours, rival, fmt, repLabel, liveFrom, li, gapFrom, liveRows: rows.some(r => r.day >= liveFrom), n: Math.max(...rows.map(r => r.rank)), wx: a.src == "wx"};
+  return {errCol, stand: rows.some(r => r.stand), all, rows, at, has, srcs, names, ours, rival, fmt, repLabel, liveFrom, li, gapFrom, liveRows: rows.some(r => r.day >= liveFrom), n: Math.max(...rows.map(r => r.rank)), wx: a.src == "wx"};
 }
 function bump(host, a) {
   const R0 = rankWin(a); if (!R0) { host.innerHTML = `<p style="font:13px ${th.font};color:${th.mute};padding:24px;text-align:center">Scores not available yet.</p>`; return; }
@@ -225,15 +226,15 @@ function bump(host, a) {
 function rankTable(host, a) {
   const R0 = rankWin(a); if (!R0) { host.innerHTML = ""; return; }
   const days = R0.all.filter(R0.has), N = days.length;
-  const rows = R0.srcs.map(q => { const rk = R0.rows.filter(r => r.source == q.k).map(r => r.rank); return {k: q.k, avg: q.avg, first: rk.filter(v => v == 1).length, worst: Math.max(...rk)}; });
-  const cell = "padding:10px 14px;border-top:1px solid " + th.grid, grid = "display:grid;grid-template-columns:minmax(0,2.2fr) repeat(3,minmax(0,1fr))";
-  host.innerHTML = `<div style="overflow-x:auto;margin-top:16px"><div style="font:13.5px/1.3 ${th.font};color:${th.ink};border:1px solid ${th.line};border-radius:8px;overflow:hidden;min-width:480px">
+  const rows = R0.srcs.map(q => { const rk = R0.rows.filter(r => r.source == q.k).map(r => r.rank); const er = R0.rows.filter(r => r.source == q.k && r.err != null).map(r => r.err); return {k: q.k, avg: q.avg, err: er.length ? er.reduce((p, v) => p + v, 0) / er.length : null, first: rk.filter(v => v == 1).length, worst: Math.max(...rk)}; });
+  const cell = "padding:10px 14px;border-top:1px solid " + th.grid, grid = "display:grid;grid-template-columns:minmax(0,2fr) repeat(4,minmax(0,1fr))";
+  host.innerHTML = `<div style="overflow-x:auto;margin-top:16px"><div style="font:13.5px/1.3 ${th.font};color:${th.ink};border:1px solid ${th.line};border-radius:8px;overflow:hidden;min-width:580px">
   <div style="${grid};font-size:12px;font-weight:600;color:${th.mute};background:#faf9f6">
-  <div style="padding:10px 14px">Source</div><div style="padding:10px 14px;text-align:right">Average rank</div><div style="padding:10px 14px;text-align:right">Days in first place</div><div style="padding:10px 14px;text-align:right">Worst day</div></div>` +
+  <div style="padding:10px 14px">Source</div><div style="padding:10px 14px;text-align:right">Average rank</div><div style="padding:10px 14px;text-align:right">Average error<br><span style="font-weight:400">${R0.errCol[0]}</span></div><div style="padding:10px 14px;text-align:right">Days in first place</div><div style="padding:10px 14px;text-align:right">Worst day</div></div>` +
   rows.map(r => { const me = r.k == R0.ours, rv = r.k == R0.rival, c = me ? th.ours : r.k == "energinet" ? th.en : isIfs(r.k) ? th.ifs : th.ink, w = me || rv || r.k == "energinet" || isIfs(r.k) ? 600 : 400;
     return `<div style="${grid};color:${c};font-weight:${w};${me ? "background:" + th.tint : ""}">
     <div style="${cell}">${esc((R0.names[r.k] || r.k).replace(" (my own model)", "").replace(", corrected at each station", ""))}</div>
-    <div style="${cell};text-align:right">${r.avg.toFixed(1)}</div><div style="${cell};text-align:right">${r.first} of ${N}</div><div style="${cell};text-align:right">${r.worst}</div></div>`; }).join("") + `</div></div>
+    <div style="${cell};text-align:right">${r.avg.toFixed(1)}</div><div style="${cell};text-align:right">${r.err == null ? "" : R0.errCol[1](r.err)}</div><div style="${cell};text-align:right">${r.first} of ${N}</div><div style="${cell};text-align:right">${r.worst}</div></div>`; }).join("") + `</div></div>
   <div style="font:12px ${th.font};color:${th.mute};margin-top:8px">Over the ${N} scored day${N == 1 ? "" : "s"} in the chart above, ${dS(days[0])} to ${dS(days[N - 1])}. Updates each night with the chart.${R0.stand ? ` <b style="color:${th.ours}">Stand-in data for days without scores yet; real scores replace it as they arrive.</b>` : ""}</div>`;
 }
 
