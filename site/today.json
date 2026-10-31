@@ -1,93 +1,93 @@
 {
-"built_utc": "2026-10-31T02:08Z",
+"built_utc": "2026-10-31T03:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-10-31",
-"hours_measured": 3,
+"hours_measured": 4,
 "hours_total": 24,
-"through_utc": "2026-10-31T02:00Z",
+"through_utc": "2026-10-31T03:00Z",
 "ranking": [
 {
 "source": "ifs",
 "name": "ECMWF IFS",
 "nmae": 0.41,
-"acc": 76.41,
+"acc": 77.85,
 "rank": 1
 },
 {
 "source": "blend",
 "name": "4-model average",
-"nmae": 0.92,
-"acc": 69.75,
+"nmae": 0.89,
+"acc": 69.57,
 "rank": 2
-},
-{
-"source": "aifs",
-"name": "ECMWF AIFS (AI)",
-"nmae": 1.11,
-"acc": 71.29,
-"rank": 3
-},
-{
-"source": "harmonie",
-"name": "DMI HARMONIE",
-"nmae": 1.18,
-"acc": 56.23,
-"rank": 4
-},
-{
-"source": "knmi",
-"name": "KNMI HARMONIE",
-"nmae": 1.19,
-"acc": 64.67,
-"rank": 5
 },
 {
 "source": "ukmo",
 "name": "UK Met Office",
-"nmae": 1.22,
-"acc": 67.57,
+"nmae": 0.99,
+"acc": 72.94,
+"rank": 3
+},
+{
+"source": "aifs",
+"name": "ECMWF AIFS (AI)",
+"nmae": 1.06,
+"acc": 70.56,
+"rank": 4
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"nmae": 1.11,
+"acc": 54.53,
+"rank": 5
+},
+{
+"source": "knmi",
+"name": "KNMI HARMONIE",
+"nmae": 1.18,
+"acc": 62.43,
 "rank": 6
-},
-{
-"source": "icon",
-"name": "DWD ICON-EU",
-"nmae": 1.41,
-"acc": 62.24,
-"rank": 7
-},
-{
-"source": "icon_d2",
-"name": "DWD ICON-D2",
-"nmae": 1.47,
-"acc": 69.3,
-"rank": 8
 },
 {
 "source": "j4catdk",
 "name": "J4catDK (my own model)",
-"nmae": 1.52,
-"acc": 53.72,
+"nmae": 1.4,
+"acc": 53.55,
+"rank": 7
+},
+{
+"source": "icon",
+"name": "DWD ICON-EU",
+"nmae": 1.51,
+"acc": 62.19,
+"rank": 8
+},
+{
+"source": "icon_d2",
+"name": "DWD ICON-D2",
+"nmae": 1.57,
+"acc": 65.78,
 "rank": 9
 },
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 1.75,
-"acc": 51.01,
+"nmae": 1.86,
+"acc": 50.5,
 "rank": 10
 },
 {
 "source": "j4cat",
 "name": "J4cat (mine, without DKcast)",
-"nmae": 2.31,
-"acc": 38.97,
+"nmae": 2.25,
+"acc": 39.14,
 "rank": 11
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 3.36,
-"acc": 32.41,
+"nmae": 3.29,
+"acc": 34.55,
 "rank": 12
 }
 ],
@@ -118,7 +118,7 @@
 "p": 361,
 "lo": 179,
 "hi": 463,
-"a": null
+"a": 355
 },
 {
 "t": "2026-10-31T03",
