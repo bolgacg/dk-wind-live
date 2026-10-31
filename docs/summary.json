@@ -37,18 +37,18 @@
   "note": "one run of a frozen script, published before it ran; nMAE = mean absolute error of each area's hourly total as % of installed capacity"
  },
  "health": {
-  "generated_utc": "2026-10-31T06:30Z",
-  "last_forecast_day": "2026-10-31",
-  "last_forecast_issued_utc": "2026-10-30T09:30:20Z",
+  "generated_utc": "2026-10-31T09:31Z",
+  "last_forecast_day": "2026-11-01",
+  "last_forecast_issued_utc": "2026-10-31T09:30:20Z",
   "last_forecast_missing": {},
   "forecasts": {
-   "2026-10-30": {
-    "issued_utc": "2026-10-28T22:16:00Z",
-    "j4_variant": null,
-    "missing": {}
-   },
    "2026-10-31": {
     "issued_utc": "2026-10-30T09:30:20Z",
+    "j4_variant": "j4catdk with DKcast",
+    "missing": {}
+   },
+   "2026-11-01": {
+    "issued_utc": "2026-10-31T09:30:20Z",
     "j4_variant": "j4catdk with DKcast",
     "missing": {}
    }
@@ -57,6 +57,13 @@
    "2026-10-31": [
     {
      "at_utc": "2026-10-30T09:30Z",
+     "result": "issued",
+     "final": true
+    }
+   ],
+   "2026-11-01": [
+    {
+     "at_utc": "2026-10-31T09:30Z",
      "result": "issued",
      "final": true
     }
