@@ -8258,6 +8258,147 @@
 }
 ]
 },
+"live": {
+"from": "2026-10-30",
+"to": "2026-10-30",
+"days": 1,
+"overall": [
+{
+"source": "blend",
+"name": "4-model average",
+"acc": 78.86,
+"nmae": 2.45,
+"nmae_DK1": 2.33,
+"nmae_DK2": 2.87,
+"skill_ifs": 16.25,
+"skill_energinet": 30.6,
+"imb_eur_mwh": 4.84,
+"days": 1,
+"wins": 1,
+"top3": 1
+},
+{
+"source": "ifs",
+"name": "ECMWF IFS",
+"acc": 74.23,
+"nmae": 2.93,
+"nmae_DK1": 2.8,
+"nmae_DK2": 3.36,
+"skill_ifs": 0.0,
+"skill_energinet": 17.13,
+"imb_eur_mwh": 2.48,
+"days": 1,
+"wins": 0,
+"top3": 1
+},
+{
+"source": "energinet",
+"name": "Energinet (bias-corrected)",
+"acc": 67.48,
+"nmae": 3.53,
+"nmae_DK1": 3.42,
+"nmae_DK2": 3.92,
+"skill_ifs": -20.67,
+"skill_energinet": 0.0,
+"imb_eur_mwh": 4.2,
+"days": 1,
+"wins": 0,
+"top3": 1
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"acc": 68.21,
+"nmae": 3.88,
+"nmae_DK1": 2.42,
+"nmae_DK2": 8.95,
+"skill_ifs": -32.39,
+"skill_energinet": -9.71,
+"imb_eur_mwh": 6.65,
+"days": 1,
+"wins": 0,
+"top3": 0
+},
+{
+"source": "icon",
+"name": "DWD ICON-EU",
+"acc": 58.7,
+"nmae": 4.61,
+"nmae_DK1": 4.91,
+"nmae_DK2": 3.54,
+"skill_ifs": -57.44,
+"skill_energinet": -30.46,
+"imb_eur_mwh": 2.2,
+"days": 1,
+"wins": 0,
+"top3": 0
+},
+{
+"source": "aifs",
+"name": "ECMWF AIFS (AI)",
+"acc": 64.43,
+"nmae": 4.61,
+"nmae_DK1": 4.69,
+"nmae_DK2": 4.32,
+"skill_ifs": -57.47,
+"skill_energinet": -30.49,
+"imb_eur_mwh": 8.02,
+"days": 1,
+"wins": 0,
+"top3": 0
+}
+],
+"daily": [
+{
+"day": "2026-10-30",
+"source": "blend",
+"acc": 78.86,
+"nmae": 2.45,
+"rank": 1,
+"no_forecast": false
+},
+{
+"day": "2026-10-30",
+"source": "ifs",
+"acc": 74.23,
+"nmae": 2.93,
+"rank": 2,
+"no_forecast": false
+},
+{
+"day": "2026-10-30",
+"source": "energinet",
+"acc": 67.48,
+"nmae": 3.53,
+"rank": 3,
+"no_forecast": false
+},
+{
+"day": "2026-10-30",
+"source": "harmonie",
+"acc": 68.21,
+"nmae": 3.88,
+"rank": 4,
+"no_forecast": false
+},
+{
+"day": "2026-10-30",
+"source": "icon",
+"acc": 58.7,
+"nmae": 4.61,
+"rank": 5,
+"no_forecast": false
+},
+{
+"day": "2026-10-30",
+"source": "aifs",
+"acc": 64.43,
+"nmae": 4.61,
+"rank": 6,
+"no_forecast": false
+}
+]
+},
 "band": {
 "backtest": {
 "hours": 1080,
@@ -9457,7 +9598,7 @@
 }
 },
 "health": {
-"generated_utc": "2026-10-30T10:30Z",
+"generated_utc": "2026-10-31T00:30Z",
 "last_forecast_day": "2026-10-31",
 "last_forecast_issued_utc": "2026-10-30T09:30:20Z",
 "last_forecast_missing": {},
@@ -9481,6 +9622,7 @@
 "final": true
 }
 ]
-}
+},
+"last_scored_day": "2026-10-30"
 }
 }
