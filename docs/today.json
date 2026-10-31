@@ -1,93 +1,93 @@
 {
-"built_utc": "2026-10-31T03:08Z",
+"built_utc": "2026-10-31T04:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-10-31",
-"hours_measured": 4,
+"hours_measured": 5,
 "hours_total": 24,
-"through_utc": "2026-10-31T03:00Z",
+"through_utc": "2026-10-31T04:00Z",
 "ranking": [
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 0.41,
-"acc": 77.85,
+"nmae": 0.42,
+"acc": 79.52,
 "rank": 1
-},
-{
-"source": "blend",
-"name": "4-model average",
-"nmae": 0.89,
-"acc": 69.57,
-"rank": 2
 },
 {
 "source": "ukmo",
 "name": "UK Met Office",
-"nmae": 0.99,
-"acc": 72.94,
+"nmae": 0.85,
+"acc": 74.79,
+"rank": 2
+},
+{
+"source": "blend",
+"name": "4-model average",
+"nmae": 0.9,
+"acc": 69.36,
 "rank": 3
 },
 {
 "source": "aifs",
 "name": "ECMWF AIFS (AI)",
-"nmae": 1.06,
-"acc": 70.56,
+"nmae": 1.1,
+"acc": 68.76,
 "rank": 4
-},
-{
-"source": "harmonie",
-"name": "DMI HARMONIE",
-"nmae": 1.11,
-"acc": 54.53,
-"rank": 5
-},
-{
-"source": "knmi",
-"name": "KNMI HARMONIE",
-"nmae": 1.18,
-"acc": 62.43,
-"rank": 6
 },
 {
 "source": "j4catdk",
 "name": "J4catDK (my own model)",
-"nmae": 1.4,
-"acc": 53.55,
+"nmae": 1.46,
+"acc": 51.92,
+"rank": 5
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"nmae": 1.49,
+"acc": 52.98,
+"rank": 6
+},
+{
+"source": "icon_d2",
+"name": "DWD ICON-D2",
+"nmae": 1.54,
+"acc": 63.56,
 "rank": 7
 },
 {
 "source": "icon",
 "name": "DWD ICON-EU",
-"nmae": 1.51,
-"acc": 62.19,
+"nmae": 1.57,
+"acc": 61.55,
 "rank": 8
 },
 {
-"source": "icon_d2",
-"name": "DWD ICON-D2",
-"nmae": 1.57,
-"acc": 65.78,
+"source": "knmi",
+"name": "KNMI HARMONIE",
+"nmae": 1.58,
+"acc": 58.26,
 "rank": 9
 },
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 1.86,
-"acc": 50.5,
+"nmae": 1.96,
+"acc": 50.45,
 "rank": 10
 },
 {
 "source": "j4cat",
 "name": "J4cat (mine, without DKcast)",
-"nmae": 2.25,
-"acc": 39.14,
+"nmae": 2.32,
+"acc": 38.72,
 "rank": 11
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 3.29,
-"acc": 34.55,
+"nmae": 3.21,
+"acc": 37.73,
 "rank": 12
 }
 ],
@@ -125,7 +125,7 @@
 "p": 433,
 "lo": 218,
 "hi": 556,
-"a": null
+"a": 388
 },
 {
 "t": "2026-10-31T04",
