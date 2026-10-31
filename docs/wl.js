@@ -258,7 +258,7 @@ function energyHtml(k) {
   <div class="kpi"><div class="kpi-l">Average error</div>${T(`The wind industry's standard day-ahead measure: mean absolute error of each area's hourly total (DK1, DK2) as a % of installed capacity. Lower is better. ECMWF IFS: ${k.tIfs}%. Energinet: ${k.tEn}%.`, k.tMine + "%", "kpi-n")}<div class="kpi-w">of installed capacity</div><div class="kpi-x">The wind industry's yardstick. Lower is better.</div></div>
   <div class="kpi"><div class="kpi-l">Imbalance cost</div>${T("What the forecast's errors would cost a wind producer that sells its forecast day-ahead: each hour's error settled at the difference between the day-ahead and imbalance price, per MWh produced. A perfect forecast costs nothing.", "€" + k.imbMine, "kpi-n")}<div class="kpi-w">per MWh produced</div><div class="kpi-x">What the misses would cost a trader. Energinet: €${k.imbEn}.</div></div>
 </div>
-<p class="note">All four from a ${T(`One run of a script fixed before it ran, on ${k.testHours} hours none of the models saw in training.`, "frozen test")} on 2026 data, ${k.testPeriod}, ${k.testDays} days.</p>
+<p class="note">Trained on 18 Feb to 31 Dec 2025. All four numbers come from one ${T(`One run of a script fixed before it ran, on ${k.testHours} hours none of the models saw in training.`, "frozen test")} on 2026 data the model never saw: ${k.testPeriod}, ${k.testDays} days, ${k.testHours} hours.</p>
 
 <h2>Published before the gate</h2>
 <p class="intro">Each forecast is committed to GitHub before the day it covers begins, so nothing can be adjusted after the fact.</p>
@@ -315,7 +315,7 @@ function weatherHtml(k, v) {
 <div class="kpis">${k.wx.map(w => `
   <div class="kpi"><div class="kpi-l">${w.label}</div>${T(`DKcast ${w.me} against ${w.best} for the best public forecast (${w.bestName}), ${w.unit}.`, w.lead + "%", "kpi-n ours")}<div class="kpi-w">${w.rain ? "better at calling rain or no rain" : "less error"}</div><div class="kpi-x">${w.me} vs ${w.best} ${w.rain ? "Brier" : w.unitShort} for ${esc(bn(w.bestName))}.</div></div>`).join("")}
 </div>
-<p class="note">Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}); the public models are each corrected at every station, so the comparison is fair to them.</p>
+<p class="note">Trained on 1 Mar to 31 Dec 2025, then tested once on 1 Jan to 18 Oct 2026, which it never saw: about 7,000 hours at 33 DMI stations for wind and about 20 for the rest. Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}); the public models are each corrected at every station, so the comparison is fair to them.</p>
 
 <h2>Who came first each day</h2>
 <p class="intro" style="margin-bottom:16px">Every model ranked by its error at the DMI stations that day. The days before 31 Oct are ${T("DKcast refitted on data up to 18 Oct only and run on the public forecasts as they stood the day before, exactly as the morning run would have.", "replayed")}; from 31 Oct each new day is live and joins the next morning.</p>
