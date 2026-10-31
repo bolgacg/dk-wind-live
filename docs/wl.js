@@ -368,7 +368,7 @@ function weatherHtml(k, v) {
 </div>
 
 <h2>Against every public model, all of the 2026 test</h2>
-<p class="intro">The dashed line is the best public forecast for each kind of weather, set to 100%. Left of it is less error.</p>
+<p class="intro">The dashed line is the best public forecast for each kind of weather, set to 100%. Left of it is less error. DKcast was trained on 1 Mar to 31 Dec 2025, and each public model got its own correction per station fitted on the same months; all of them were then scored once on 1 Jan to 18 Oct 2026, which none of them saw in training.</p>
 <div class="card">
   <div class="chart" data-chart="wxrel"></div>
   <div class="legend"><span><span class="sw" style="width:10px;height:10px;border-radius:50%;background:${th.ours}"></span>DKcast</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.ifs}"></span>ECMWF IFS</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.other}"></span>Other public models</span></div>
