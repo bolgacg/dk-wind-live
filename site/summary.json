@@ -130,95 +130,95 @@
   }
  },
  "today": {
-  "built_utc": "2026-10-31T08:08Z",
+  "built_utc": "2026-10-31T09:08Z",
   "line_name": "J4catDK (my own model)",
   "day": "2026-10-31",
-  "hours_measured": 9,
+  "hours_measured": 10,
   "hours_total": 24,
-  "through_utc": "2026-10-31T08:00Z",
+  "through_utc": "2026-10-31T09:00Z",
   "ranking": [
    {
     "source": "ifs",
     "name": "ECMWF IFS",
-    "nmae": 1.13,
-    "acc": 68.94,
+    "nmae": 1.18,
+    "acc": 68.2,
     "rank": 1
    },
    {
     "source": "blend",
     "name": "4-model average",
-    "nmae": 1.17,
-    "acc": 64.64,
+    "nmae": 1.29,
+    "acc": 63.06,
     "rank": 2
-   },
-   {
-    "source": "ukmo",
-    "name": "UK Met Office",
-    "nmae": 1.19,
-    "acc": 64.41,
-    "rank": 3
    },
    {
     "source": "aifs",
     "name": "ECMWF AIFS (AI)",
-    "nmae": 1.27,
-    "acc": 58.65,
+    "nmae": 1.38,
+    "acc": 57.08,
+    "rank": 3
+   },
+   {
+    "source": "ukmo",
+    "name": "UK Met Office",
+    "nmae": 1.38,
+    "acc": 61.0,
     "rank": 4
    },
    {
     "source": "icon_d2",
     "name": "DWD ICON-D2",
-    "nmae": 1.44,
-    "acc": 56.21,
+    "nmae": 1.47,
+    "acc": 55.04,
     "rank": 5
    },
    {
     "source": "icon",
     "name": "DWD ICON-EU",
     "nmae": 1.62,
-    "acc": 55.33,
+    "acc": 53.79,
     "rank": 6
    },
    {
     "source": "j4catdk",
     "name": "J4catDK (my own model)",
-    "nmae": 2.01,
-    "acc": 40.71,
+    "nmae": 2.08,
+    "acc": 40.16,
     "rank": 7
    },
    {
     "source": "gfs",
     "name": "NOAA GFS",
-    "nmae": 2.19,
-    "acc": 48.98,
+    "nmae": 2.16,
+    "acc": 48.96,
     "rank": 8
    },
    {
     "source": "harmonie",
     "name": "DMI HARMONIE",
-    "nmae": 2.3,
-    "acc": 45.55,
+    "nmae": 2.64,
+    "acc": 39.37,
     "rank": 9
    },
    {
     "source": "knmi",
     "name": "KNMI HARMONIE",
-    "nmae": 2.4,
-    "acc": 48.36,
+    "nmae": 2.72,
+    "acc": 42.24,
     "rank": 10
    },
    {
     "source": "j4cat",
     "name": "J4cat (mine, without DKcast)",
-    "nmae": 2.69,
-    "acc": 32.98,
+    "nmae": 2.75,
+    "acc": 32.37,
     "rank": 11
    },
    {
     "source": "energinet",
     "name": "Energinet (bias-corrected)",
-    "nmae": 3.14,
-    "acc": 37.75,
+    "nmae": 3.17,
+    "acc": 36.69,
     "rank": 12
    }
   ],
@@ -291,7 +291,7 @@
     "p": 383,
     "lo": 179,
     "hi": 630,
-    "a": null
+    "a": 320
    },
    {
     "t": "2026-10-31T09",
