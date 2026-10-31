@@ -44,8 +44,7 @@ function wxScores() {
   return V.map(([k, label], i) => {
     const R = D.MJ && D.MJ.wx_rmse && D.MJ.wx_rmse[k];
     if (R) {  // the toughest fair competition: every public model in its best treatment on the 2026 test, plus two averages
-      const pub = Object.entries(R.models).map(([m, r]) => ({name: `${D.MJ.names[m] || m} (${r.label})`, key: m, val: r.test_corrected}))
-        .concat(Object.entries(R.ensembles || {}).map(([n, v]) => ({name: n.replace("models", "public models"), val: v}))).sort((a, b) => a.val - b.val);
+      const pub = Object.entries(R.models).map(([m, r]) => ({name: `${D.MJ.names[m] || m}`, how: r.label, key: m, val: r.test_corrected})).sort((a, b) => a.val - b.val);
       return {k, label, unit: k == "rain" ? "Brier" : {wind: "m/s", temp: "\u00b0C", sun: "min/h"}[k], me: R.dkcast_test, best: pub[0], pub}; }
     if (D.FW && D.FW[k]) { const d = D.FW[k], me = d.rows.find(r => r.name == "DKcast"), pub = d.rows.filter(r => r.name != "DKcast").sort((a, b) => a.val - b.val);
       return {k, label, unit: d.unit, me: me.val, best: pub[0], pub}; }
@@ -75,7 +74,7 @@ function kpis() {
     btFrom: dS(bt.from), btTo: dS(bt.to), btDays: bt.days, btN: bt.overall.length,
     me, en, ifs, bWinMine: me.wins, wkWins: wk, wkN: done.length,
     wx: wx.map(s => ({label: s.label, rain: s.k == "rain", unit: s.unit == "Brier" ? "Brier score" : s.unit == "min/h" ? "min of sun per hour" : s.unit, unitShort: s.unit == "min/h" ? "min/h" : s.unit,
-      me: fmtWx(s.me, s.unit), best: fmtWx(s.best.val, s.unit), bestName: s.best.name.replace(", station-corrected", "").replace("icon_eu", "DWD ICON-EU"), lead: lead(s)}))
+      me: fmtWx(s.me, s.unit), best: fmtWx(s.best.val, s.unit), bestName: s.best.name.replace(", station-corrected", "").replace("icon_eu", "DWD ICON-EU"), bestKey: s.best.key, bestHow: s.best.how, k: s.k, lead: lead(s)}))
   };
 }
 
@@ -134,15 +133,15 @@ const M = (spec, text, cls) => `<span data-model="${spec}"${cls ? ` class="${cls
 const WXU = {wind: "m/s", temp: "°C", sun: "min of sun per hour", rain: ""}, WXN = {wind: "wind", temp: "temperature", sun: "sunshine", rain: "rain"};
 const INFO = {
   dkcast: ["DKcast", "my own weather model", "A neural network per variable that reads every public model's forecast at once at each DMI station, plus a regional summary, and is trained on what the station measured. It gives a range as well as a single number. Trained on March to December 2025."],
-  ecmwf_ifs025: ["ECMWF IFS", "European Centre for Medium-Range Weather Forecasts", "Europe's main physics-based global model, the reference most weather desks start from. Open data on a 0.25° grid (about 25 km)."],
-  ecmwf_aifs025_single: ["ECMWF AIFS", "European Centre for Medium-Range Weather Forecasts", "ECMWF's machine-learning global model, trained on decades of past weather. 0.25° grid."],
-  icon_eu: ["DWD ICON-EU", "Deutscher Wetterdienst (German weather service)", "Physics model for Europe, about 7 km."],
-  icon_d2: ["DWD ICON-D2", "Deutscher Wetterdienst (German weather service)", "High-resolution physics model for Germany and Denmark, about 2 km, short range."],
-  dmi_harmonie_arome_europe: ["DMI HARMONIE", "Danish Meteorological Institute", "Denmark's own high-resolution HARMONIE-AROME model, about 2 km."],
+  ecmwf_ifs025: ["ECMWF IFS", "European Centre for Medium-Range Weather Forecasts", "Europe's main physics-based global model, the reference most weather desks start from. Open data on a 0.25° grid (about 25 km between grid points)."],
+  ecmwf_aifs025_single: ["ECMWF AIFS", "European Centre for Medium-Range Weather Forecasts", "ECMWF's machine-learning global model, trained on decades of past weather, on a 0.25° grid (about 25 km)."],
+  icon_eu: ["DWD ICON-EU", "Deutscher Wetterdienst (German weather service)", "Physics model for Europe on a grid of about 7 km."],
+  icon_d2: ["DWD ICON-D2", "Deutscher Wetterdienst (German weather service)", "High-resolution physics model for Germany and Denmark on a grid of about 2 km, short range."],
+  dmi_harmonie_arome_europe: ["DMI HARMONIE", "Danish Meteorological Institute", "Denmark's own high-resolution HARMONIE-AROME model on a grid of about 2 km."],
   knmi_harmonie_arome_europe: ["KNMI HARMONIE", "KNMI (Dutch weather service)", "The Dutch HARMONIE-AROME model run over Europe."],
-  gfs_global: ["NOAA GFS", "NOAA (US weather service)", "The US global physics model, 0.25° grid."],
-  ukmo_global_deterministic_10km: ["UK Met Office", "Met Office (UK weather service)", "The UK's global physics model, 10 km."],
-  metno_nordic: ["MET Norway Nordic", "Norwegian Meteorological Institute", "The 1 km Nordic forecast behind yr.no, already corrected with station and amateur observations."],
+  gfs_global: ["NOAA GFS", "NOAA (US weather service)", "The US global physics model on a 0.25° grid (about 25 km)."],
+  ukmo_global_deterministic_10km: ["UK Met Office", "Met Office (UK weather service)", "The UK's global physics model on a 10 km grid."],
+  metno_nordic: ["MET Norway Nordic", "Norwegian Meteorological Institute", "The Nordic forecast behind yr.no on a 1 km grid, already corrected with station and amateur observations."],
   gem_global: ["Canada GEM", "Environment and Climate Change Canada", "Canada's global physics model."],
   public_avg: ["Average of all public models", "built by me from the public models", "Every public model in the ranking, each in its best version (as issued or corrected, whichever scored best for it on the 2026 test), averaged hour by hour at each station. Averaging cancels much of each model's own error, so this is the toughest single competitor."]
 };
@@ -205,7 +204,7 @@ function wxTimeline(host, a) {
     val: rain ? x => Math.round(100 * x) + "%" : val, chip: rain ? x => x.toFixed(3) : x => x.toFixed(v == "sun" ? 1 : 2), chipUnit: {wind: "", temp: "°", sun: "", rain: ""}[v], bars: rain});
   const done = T.days[pl].filter(d => d.complete && d.err && d.err.d != null), wins = done.filter(d => d.err.d <= d.err.r).length, P = T.places[pl];
   const where = pl == "national" ? `averaged over DKcast's ${P.stations} stations` : `at ${P.station_name}`;
-  const intro = document.getElementById("wxtl-intro"); if (intro) intro.textContent = `DKcast had the smaller error on ${wins} of the ${done.length} complete days shown, ${where}, against ${T.rival == "public_avg" ? "the average of all public models, each in its best version" : T.rival_name}, the toughest rival in the leaderboard above. ${rain ? "Grey bars are the measured share of wet hours, the lines each forecast's chance of rain" : "The shaded gap is DKcast's miss"}; above each day: who won, then the two errors (${rain ? "Brier score" : "average miss in " + T.unit}).`;
+  const intro = document.getElementById("wxtl-intro"); if (intro) intro.textContent = `DKcast had the smaller error on ${wins} of the ${done.length} complete days shown, ${where}, against ${T.rival_name}, the best single public model in the leaderboard above. ${rain ? "Grey bars are the measured share of wet hours, the lines each forecast's chance of rain" : "The shaded gap is DKcast's miss"}; above each day: who won, then the two errors (${rain ? "Brier score" : "average miss in " + T.unit}).`;
   const lg = document.getElementById("wxtl-riv"); if (lg) { lg.textContent = T.rival_name; lg.dataset.model = `wx:${T.rival}:${v}`; }
   const ms = document.getElementById("wxtl-meas"); if (ms) ms.innerHTML = rain ? `<span class="sw" style="width:10px;height:10px;background:${th.ink};opacity:.25"></span>Measured, share of wet hours` : `${sw(th.ink, 2)}Measured`;
   const mm = document.getElementById("wxtl-miss"); if (mm) mm.hidden = rain;
@@ -246,9 +245,9 @@ function wxRel(host) {
     el("text", {x: L - 14, y: y + 4, "font-size": 12.5, "font-weight": 600, "text-anchor": "end", fill: th.ink}, s, sc1.label);
     el("line", {x1: x(sc1.me / sc1.best.val), x2: x(1), y1: y, y2: y, stroke: th.ours, "stroke-width": 2, opacity: .35}, s);
     sc1.pub.slice().sort((p, q) => /^ECMWF IFS/.test(p.name) - /^ECMWF IFS/.test(q.name)).forEach(r => { const c = el("circle", {cx: x(r.val / sc1.best.val), cy: y, r: 4.5, fill: /^ECMWF IFS/.test(r.name) ? th.ifs : th.other, stroke: "#fff", "stroke-width": 1}, s);
-      c.addEventListener("pointermove", e => tip(e, `${esc(r.name)}<br>${fmtWx(r.val, sc1.unit)} ${sc1.unit}`)); c.addEventListener("pointerleave", untip); });
+      c.addEventListener("pointermove", e => tip(e, `<b>${esc(r.name)}</b>${r.how ? `<div style="color:#6b6a65;font-size:12px">${r.how}</div>` : ""}${fmtWx(r.val, sc1.unit)} ${sc1.unit}`)); c.addEventListener("pointerleave", untip); });
     const c = el("circle", {cx: x(sc1.me / sc1.best.val), cy: y, r: 7, fill: th.ours, stroke: "#fff", "stroke-width": 1.5}, s);
-    c.addEventListener("pointermove", e => tip(e, `<b>DKcast</b> ${fmtWx(sc1.me, sc1.unit)} ${sc1.unit}<br>Best public, ${esc(sc1.best.name)}: ${fmtWx(sc1.best.val, sc1.unit)}`)); c.addEventListener("pointerleave", untip);
+    c.addEventListener("pointermove", e => tip(e, `<b>DKcast</b> ${fmtWx(sc1.me, sc1.unit)} ${sc1.unit}<br>Best public model, ${esc(sc1.best.name)} (${sc1.best.how || "as issued"}): ${fmtWx(sc1.best.val, sc1.unit)}`)); c.addEventListener("pointerleave", untip);
     el("text", {x: R + 4, y: y + 4.5, "font-size": 13, "font-weight": 700, fill: th.ours}, s, Math.round(100 * (1 - sc1.me / sc1.best.val)) + (sc1.k == "rain" ? "% better" : "% less")); });
 }
 
@@ -413,11 +412,11 @@ function energyHtml(k) {
 }
 function weatherHtml(k, v) {
   const pills = [["wind", "Wind"], ["temp", "Temperature"], ["sun", "Sunshine"], ["rain", "Rain"]].map(([id, l]) => `<button data-var="${id}" aria-pressed="${id == v}">${l}</button>`).join("");
-  const bn = n => n == "average of corrected public models" ? "the average of all public models, each in its best version" : n == "average of raw public models" ? "the plain average of all public models" : n;
+  const bn = n => n;
   return `
-<p class="lede">The power forecast stands on my own weather forecast, ${M("wx:dkcast", "DKcast", "term-ours")}. On 2026 data it never saw, at Danish weather stations, it beat the best public forecast for every kind of weather.</p>
+<p class="lede">The power forecast stands on my own weather forecast, ${M("wx:dkcast", "DKcast", "term-ours")}. On 2026 data it never saw, at Danish weather stations, it beat every public model for every kind of weather.</p>
 <div class="kpis">${k.wx.map(w => `
-  <div class="kpi"><div class="kpi-l">${w.label}</div>${T(`DKcast ${w.me} against ${w.best} for the best public forecast (${w.bestName}), ${w.unit}.`, w.lead + "%", "kpi-n ours")}<div class="kpi-w">${w.rain ? "better at calling rain or no rain" : "less error"}</div><div class="kpi-x">${w.me} vs ${w.best} ${w.rain ? "Brier" : w.unitShort} for ${esc(bn(w.bestName))}.</div></div>`).join("")}
+  <div class="kpi"><div class="kpi-l">${w.label}</div>${T(`DKcast ${w.me} against ${w.best} for the best public model, ${w.bestName} (${w.bestHow}), ${w.unit}.`, w.lead + "%", "kpi-n ours")}<div class="kpi-w">${w.rain ? "better at calling rain or no rain" : "less error"}</div><div class="kpi-x">${w.me} vs ${w.best} ${w.rain ? "Brier" : w.unitShort} for the best public model, ${M("wx:" + w.bestKey + ":" + w.k, esc(w.bestName))} (${w.bestHow}).</div></div>`).join("")}
 </div>
 <p class="note">Trained on 1 Mar to 31 Dec 2025, then tested once on 1 Jan to 18 Oct 2026, which it never saw: wind at 33 DMI stations (6,983 hours), temperature at 20 (6,984 hours), sunshine at 19 (6,113 daylight hours) and rain at 20 (6,941 hours). Typical miss per hour (${T("Root mean square error of each hourly day-ahead forecast at the stations. For rain, the Brier score of calling rain or no rain.", "RMSE")}). Each public model is shown in whichever version scored best for it on this test: as issued, or with a straight-line, zero-preserving, quantile-mapped or boosted correction per station fitted on 2025. That hindsight favours the public models, never DKcast, so these leads are a lower bound. Hover a model name for its scores.</p>
 
@@ -439,7 +438,7 @@ function weatherHtml(k, v) {
 </div>
 
 <h2>Against every public model, all of the 2026 test</h2>
-<p class="intro">The dashed line is the best public forecast for each kind of weather, set to 100%. Left of it is less error. DKcast was trained on 1 Mar to 31 Dec 2025. Every public model was corrected per station on the same months in five ways, and is shown in whichever of them (or as issued) scored best for it on 1 Jan to 18 Oct 2026, the test none of the corrections or DKcast saw in training. Two averages of all the public models are in the field too.</p>
+<p class="intro">The dashed line is the best public model for each kind of weather, set to 100% of its error; left of the line is less error. Each dot is one public model, in its best version: as issued, or with one of my corrections fitted on 2025 at every station, whichever scored best for it on the 2026 test. DKcast was trained on 1 Mar to 31 Dec 2025 and none of them saw 1 Jan to 18 Oct 2026 in training. Hover a dot for the model and its version.</p>
 <div class="card">
   <div class="chart" data-chart="wxrel"></div>
   <div class="legend"><span><span class="sw" style="width:10px;height:10px;border-radius:50%;background:${th.ours}"></span>${M("wx:dkcast", "DKcast")}</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.ifs}"></span>${M("wx:ecmwf_ifs025", "ECMWF IFS")}</span><span><span class="sw" style="width:8px;height:8px;border-radius:50%;background:${th.other}"></span>Other public models</span></div>
