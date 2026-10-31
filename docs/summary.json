@@ -37,7 +37,7 @@
   "note": "one run of a frozen script, published before it ran; nMAE = mean absolute error of each area's hourly total as % of installed capacity"
  },
  "health": {
-  "generated_utc": "2026-10-31T00:30Z",
+  "generated_utc": "2026-10-31T06:30Z",
   "last_forecast_day": "2026-10-31",
   "last_forecast_issued_utc": "2026-10-30T09:30:20Z",
   "last_forecast_missing": {},
