@@ -37,7 +37,7 @@
   "note": "one run of a frozen script, published before it ran; nMAE = mean absolute error of each area's hourly total as % of installed capacity"
  },
  "health": {
-  "generated_utc": "2026-10-31T00:30Z",
+  "generated_utc": "2026-10-31T06:30Z",
   "last_forecast_day": "2026-10-31",
   "last_forecast_issued_utc": "2026-10-30T09:30:20Z",
   "last_forecast_missing": {},
@@ -130,95 +130,95 @@
   }
  },
  "today": {
-  "built_utc": "2026-10-31T06:08Z",
+  "built_utc": "2026-10-31T07:08Z",
   "line_name": "J4catDK (my own model)",
   "day": "2026-10-31",
-  "hours_measured": 7,
+  "hours_measured": 8,
   "hours_total": 24,
-  "through_utc": "2026-10-31T06:00Z",
+  "through_utc": "2026-10-31T07:00Z",
   "ranking": [
    {
     "source": "ifs",
     "name": "ECMWF IFS",
-    "nmae": 0.69,
-    "acc": 75.08,
+    "nmae": 0.95,
+    "acc": 71.24,
     "rank": 1
    },
    {
     "source": "ukmo",
     "name": "UK Met Office",
-    "nmae": 0.88,
-    "acc": 68.72,
+    "nmae": 0.96,
+    "acc": 67.3,
     "rank": 2
    },
    {
     "source": "blend",
     "name": "4-model average",
-    "nmae": 1.09,
-    "acc": 64.8,
+    "nmae": 1.11,
+    "acc": 64.53,
     "rank": 3
    },
    {
     "source": "aifs",
     "name": "ECMWF AIFS (AI)",
     "nmae": 1.24,
-    "acc": 61.15,
+    "acc": 60.09,
     "rank": 4
    },
    {
     "source": "icon_d2",
     "name": "DWD ICON-D2",
-    "nmae": 1.49,
-    "acc": 57.04,
+    "nmae": 1.44,
+    "acc": 56.92,
     "rank": 5
    },
    {
     "source": "icon",
     "name": "DWD ICON-EU",
-    "nmae": 1.64,
-    "acc": 57.46,
+    "nmae": 1.61,
+    "acc": 56.85,
     "rank": 6
    },
    {
     "source": "j4catdk",
     "name": "J4catDK (my own model)",
-    "nmae": 1.92,
-    "acc": 42.45,
+    "nmae": 1.99,
+    "acc": 40.94,
     "rank": 7
    },
    {
     "source": "gfs",
     "name": "NOAA GFS",
-    "nmae": 2.16,
-    "acc": 48.63,
+    "nmae": 2.17,
+    "acc": 48.7,
     "rank": 8
    },
    {
     "source": "harmonie",
     "name": "DMI HARMONIE",
-    "nmae": 2.29,
-    "acc": 44.66,
+    "nmae": 2.23,
+    "acc": 45.87,
     "rank": 9
    },
    {
     "source": "knmi",
     "name": "KNMI HARMONIE",
-    "nmae": 2.37,
-    "acc": 47.88,
+    "nmae": 2.26,
+    "acc": 50.21,
     "rank": 10
    },
    {
     "source": "j4cat",
     "name": "J4cat (mine, without DKcast)",
-    "nmae": 2.61,
+    "nmae": 2.63,
     "acc": 32.7,
     "rank": 11
    },
    {
     "source": "energinet",
     "name": "Energinet (bias-corrected)",
-    "nmae": 3.11,
-    "acc": 39.21,
+    "nmae": 3.12,
+    "acc": 37.83,
     "rank": 12
    }
   ],
@@ -277,7 +277,7 @@
     "p": 477,
     "lo": 236,
     "hi": 639,
-    "a": null
+    "a": 383
    },
    {
     "t": "2026-10-31T07",
