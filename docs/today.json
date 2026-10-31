@@ -1,93 +1,93 @@
 {
-"built_utc": "2026-10-31T11:08Z",
+"built_utc": "2026-10-31T12:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-10-31",
-"hours_measured": 12,
+"hours_measured": 13,
 "hours_total": 24,
-"through_utc": "2026-10-31T11:00Z",
+"through_utc": "2026-10-31T12:00Z",
 "ranking": [
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 1.13,
-"acc": 68.18,
+"nmae": 1.12,
+"acc": 68.62,
 "rank": 1
 },
 {
 "source": "blend",
 "name": "4-model average",
-"nmae": 1.29,
-"acc": 61.46,
+"nmae": 1.33,
+"acc": 61.29,
 "rank": 2
 },
 {
 "source": "aifs",
 "name": "ECMWF AIFS (AI)",
-"nmae": 1.36,
-"acc": 55.13,
+"nmae": 1.37,
+"acc": 55.32,
 "rank": 3
 },
 {
 "source": "ukmo",
 "name": "UK Met Office",
-"nmae": 1.63,
-"acc": 56.43,
+"nmae": 1.74,
+"acc": 55.3,
 "rank": 4
 },
 {
 "source": "icon",
 "name": "DWD ICON-EU",
-"nmae": 1.73,
-"acc": 51.08,
+"nmae": 1.8,
+"acc": 50.23,
 "rank": 5
-},
-{
-"source": "icon_d2",
-"name": "DWD ICON-D2",
-"nmae": 1.73,
-"acc": 51.33,
-"rank": 6
 },
 {
 "source": "j4catdk",
 "name": "J4catDK (my own model)",
-"nmae": 1.93,
-"acc": 38.89,
+"nmae": 1.89,
+"acc": 38.87,
+"rank": 6
+},
+{
+"source": "icon_d2",
+"name": "DWD ICON-D2",
+"nmae": 1.9,
+"acc": 49.29,
 "rank": 7
 },
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 2.18,
-"acc": 48.09,
+"nmae": 2.29,
+"acc": 46.63,
 "rank": 8
-},
-{
-"source": "harmonie",
-"name": "DMI HARMONIE",
-"nmae": 2.51,
-"acc": 40.97,
-"rank": 9
 },
 {
 "source": "j4cat",
 "name": "J4cat (mine, without DKcast)",
-"nmae": 2.54,
-"acc": 30.11,
+"nmae": 2.36,
+"acc": 30.25,
+"rank": 9
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"nmae": 2.48,
+"acc": 42.31,
 "rank": 10
 },
 {
 "source": "knmi",
 "name": "KNMI HARMONIE",
-"nmae": 2.66,
-"acc": 42.21,
+"nmae": 2.59,
+"acc": 43.99,
 "rank": 11
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 3.03,
-"acc": 36.19,
+"nmae": 2.92,
+"acc": 38.23,
 "rank": 12
 }
 ],
@@ -181,7 +181,7 @@
 "p": 255,
 "lo": 120,
 "hi": 370,
-"a": null
+"a": 350
 },
 {
 "t": "2026-10-31T12",
