@@ -1,0 +1,302 @@
+{
+"names": {
+"ecmwf_ifs025": "ECMWF IFS",
+"ecmwf_aifs025_single": "ECMWF AIFS (AI)",
+"icon_eu": "DWD ICON-EU",
+"icon_d2": "DWD ICON-D2",
+"dmi_harmonie_arome_europe": "DMI HARMONIE",
+"knmi_harmonie_arome_europe": "KNMI HARMONIE",
+"gfs_global": "NOAA GFS",
+"ukmo_global_deterministic_10km": "UK Met Office",
+"metno_nordic": "MET Norway Nordic",
+"gem_global": "Canada GEM"
+},
+"wx": {
+"temp": {
+"metric": "mean absolute error",
+"dkcast_test": 0.6217245637523853,
+"public_average": 0.6982,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 0.9238
+},
+"ecmwf_aifs025_single": {
+"score": 0.8711
+},
+"ecmwf_ifs025": {
+"score": 0.9357
+},
+"gfs_global": {
+"score": 1.1102
+},
+"icon_d2": {
+"score": 0.794
+},
+"icon_eu": {
+"score": 0.8118
+},
+"knmi_harmonie_arome_europe": {
+"score": 0.9315
+},
+"metno_nordic": {
+"score": 0.8593
+},
+"ukmo_global_deterministic_10km": {
+"score": 0.9535
+}
+}
+},
+"sun": {
+"metric": "mean absolute error",
+"dkcast_test": 7.120686881707397,
+"public_average": 7.4021,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 9.6714
+},
+"ecmwf_aifs025_single": {
+"score": 10.0942
+},
+"ecmwf_ifs025": {
+"score": 9.5806
+},
+"gfs_global": {
+"score": 11.7933
+},
+"icon_d2": {
+"score": 8.7361
+},
+"icon_eu": {
+"score": 9.0033
+},
+"knmi_harmonie_arome_europe": {
+"score": 8.7347
+},
+"metno_nordic": {
+"score": 8.5785
+},
+"ukmo_global_deterministic_10km": {
+"score": 9.8024
+}
+}
+},
+"rain": {
+"metric": "Brier score",
+"dkcast_test": 0.04123164149947061,
+"public_average": 0.044,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 0.0503
+},
+"ecmwf_aifs025_single": {
+"score": 0.049
+},
+"ecmwf_ifs025": {
+"score": 0.0488
+},
+"gfs_global": {
+"score": 0.0514
+},
+"icon_d2": {
+"score": 0.0503
+},
+"icon_eu": {
+"score": 0.0499
+},
+"knmi_harmonie_arome_europe": {
+"score": 0.0505
+},
+"metno_nordic": {
+"score": 0.0499
+},
+"ukmo_global_deterministic_10km": {
+"score": 0.0485
+}
+}
+},
+"wind": {
+"metric": "mean absolute error",
+"dkcast_test": 0.7419041963420072,
+"public_average": 0.9165,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 1.0788
+},
+"ecmwf_aifs025_single": {
+"score": 0.977
+},
+"ecmwf_ifs025": {
+"score": 0.996
+},
+"gem_global": {
+"score": 1.0002
+},
+"gfs_global": {
+"score": 1.047
+},
+"icon_d2": {
+"score": 1.029
+},
+"icon_eu": {
+"score": 1.0034
+},
+"knmi_harmonie_arome_europe": {
+"score": 1.0721
+},
+"metno_nordic": {
+"score": 1.0813
+},
+"ukmo_global_deterministic_10km": {
+"score": 1.0439
+}
+}
+}
+},
+"wx_rmse": {
+"temp": {
+"metric": "RMSE",
+"dkcast_test": 0.8570612352376114,
+"public_average": 0.9727,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 1.2278
+},
+"ecmwf_aifs025_single": {
+"score": 1.2446
+},
+"ecmwf_ifs025": {
+"score": 1.2749
+},
+"gfs_global": {
+"score": 1.5123
+},
+"icon_d2": {
+"score": 1.1004
+},
+"icon_eu": {
+"score": 1.122
+},
+"knmi_harmonie_arome_europe": {
+"score": 1.234
+},
+"metno_nordic": {
+"score": 1.1555
+},
+"ukmo_global_deterministic_10km": {
+"score": 1.3444
+}
+}
+},
+"sun": {
+"metric": "RMSE",
+"dkcast_test": 12.684315175228255,
+"public_average": 14.1108,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 17.9642
+},
+"ecmwf_aifs025_single": {
+"score": 16.3581
+},
+"ecmwf_ifs025": {
+"score": 15.8666
+},
+"gfs_global": {
+"score": 17.8023
+},
+"icon_d2": {
+"score": 15.1459
+},
+"icon_eu": {
+"score": 15.495
+},
+"knmi_harmonie_arome_europe": {
+"score": 15.6002
+},
+"metno_nordic": {
+"score": 15.6031
+},
+"ukmo_global_deterministic_10km": {
+"score": 16.6407
+}
+}
+},
+"rain": {
+"metric": "Brier score",
+"dkcast_test": 0.04123164149947061,
+"public_average": 0.044,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 0.0503
+},
+"ecmwf_aifs025_single": {
+"score": 0.049
+},
+"ecmwf_ifs025": {
+"score": 0.0488
+},
+"gfs_global": {
+"score": 0.0514
+},
+"icon_d2": {
+"score": 0.0503
+},
+"icon_eu": {
+"score": 0.0499
+},
+"knmi_harmonie_arome_europe": {
+"score": 0.0505
+},
+"metno_nordic": {
+"score": 0.0499
+},
+"ukmo_global_deterministic_10km": {
+"score": 0.0485
+}
+}
+},
+"wind": {
+"metric": "RMSE",
+"dkcast_test": 1.4188639837794508,
+"public_average": 1.5925,
+"models": {
+"dmi_harmonie_arome_europe": {
+"score": 1.7716
+},
+"ecmwf_aifs025_single": {
+"score": 1.6776
+},
+"ecmwf_ifs025": {
+"score": 1.6882
+},
+"gem_global": {
+"score": 1.6897
+},
+"gfs_global": {
+"score": 1.7292
+},
+"icon_d2": {
+"score": 1.7131
+},
+"icon_eu": {
+"score": 1.6904
+},
+"knmi_harmonie_arome_europe": {
+"score": 1.7601
+},
+"metno_nordic": {
+"score": 1.7707
+},
+"ukmo_global_deterministic_10km": {
+"score": 1.7478
+}
+}
+}
+},
+"energinet": {
+"published": 16.8,
+"raw": 44.9,
+"fair": 24.6,
+"toughest": 15.1
+}
+}

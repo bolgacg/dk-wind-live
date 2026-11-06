@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who forecasts Denmark's wind best? · DK Wind League</title>
+<meta name="description" content="A daily day-ahead forecast of Denmark's wind power, published before the market closes and scored every day against Energinet and the public weather models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap">
+<style>
+:root{--ink:#1d1d1b;--mute:#6b6a65;--faint:#9a988f;--rule:#e4e1d9;--grid:#efece5;--page:#fbfaf7;--card:#fff;
+  --ours:#c2410c;--tint:#fbf1e7;--tint2:#fdf6ef;--en:#0e8a7d;--ifs:#1e3a8a;--live:#f3f5fb;--body:#33322e;--intro:#4a4945;
+  --serif:'Source Serif 4',Georgia,serif;--sans:'IBM Plex Sans',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-variant-numeric:tabular-nums}
+a{color:var(--en)}a:hover{color:var(--ours)}
+.wrap{max-width:900px;margin:0 auto;padding:0 32px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--rule);font-size:12.5px;color:var(--mute)}
+.top b{font-weight:600;letter-spacing:.02em;color:var(--ink)}
+.eyebrow{font-size:12px;font-weight:600;color:var(--ours);letter-spacing:.06em;text-transform:uppercase;margin:48px 0 14px}
+h1{font:600 44px/1.1 var(--serif);margin:0 0 24px;letter-spacing:-.01em;text-wrap:balance}
+.tabs{display:inline-flex;gap:2px;padding:3px;background:#f1efe9;border-radius:999px}
+.tabs button{display:flex;align-items:baseline;gap:7px;white-space:nowrap;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;font:500 13.5px var(--sans);background:transparent;color:var(--mute)}
+.tabs button span+span{font-size:12px;opacity:.7}
+.tabs button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.lede{font:400 19px/1.55 var(--serif);margin:22px 0 0;max-width:680px;color:var(--body);text-wrap:pretty}
+[data-tip]{cursor:help;border-bottom:1px dotted var(--faint)}
+[data-model]{cursor:help;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:3px}
+svg text[data-model]{text-decoration:underline}
+.term-ours{color:var(--ours);font-weight:600;border-bottom-color:var(--ours)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:32px}
+.kpi{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:16px 16px 14px;display:flex;flex-direction:column}
+.kpi-l{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--mute);text-transform:uppercase}
+.kpi-n{font:600 32px/1.1 var(--serif);margin-top:10px;align-self:flex-start;border-bottom-color:#b9b6ad}
+.kpi-n.ours{color:var(--ours);border-bottom-color:#e7b493}
+.kpi-w{font-size:13px;font-weight:600;margin-top:6px}
+.kpi-x{font-size:12.5px;line-height:1.45;color:var(--mute);margin-top:6px}
+.note{font-size:12.5px;line-height:1.5;color:var(--mute);margin:12px 0 0}
+h2{font:600 24px/1.25 var(--serif);margin:60px 0 6px}
+.intro{font-size:15px;line-height:1.55;color:var(--intro);margin:0 0 18px;max-width:640px}
+.card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:20px 20px 14px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:12.5px;margin-top:12px;padding-top:12px;border-top:1px solid var(--grid)}
+.legend>span{display:flex;align-items:center;gap:7px}
+.legend .hint{margin-left:auto;color:var(--mute)}
+.sw{display:inline-block;width:16px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.pills button{white-space:nowrap;font:500 13px var(--sans);padding:6px 14px;border-radius:999px;border:1px solid var(--rule);background:#fff;color:var(--ink);cursor:pointer}
+.pills button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff}
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative}
+.pipe .rail{position:absolute;left:8px;right:8px;top:7px;height:2px;background:var(--rule)}
+.pipe .done-rail{position:absolute;left:8px;top:7px;height:2px;background:var(--ours)}
+.step{position:relative;padding-right:12px}
+.dot{width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--faint)}
+.dot.done{background:var(--ours);border-color:var(--ours)}.dot.next{border-color:var(--ink)}
+.step-t{font-size:11.5px;font-weight:600;color:var(--mute);margin-top:12px}
+.step-t.done{color:var(--ours)}.step-t.next{color:var(--ink)}
+.step-h{font-weight:600;font-size:14px;margin-top:4px}
+.step-s{font-size:12.5px;color:var(--mute);margin-top:2px}
+.today{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;margin-top:20px;padding-top:14px;border-top:1px solid var(--grid);font-size:13px;color:var(--intro)}
+.score{background:#fff;border:1px solid var(--rule);border-radius:10px;margin-top:14px;font-size:14px}
+.score .r{display:grid;grid-template-columns:minmax(0,2.2fr) repeat(3,minmax(0,1fr));border-bottom:1px solid var(--grid)}
+.score .r:last-child{border-bottom:0}
+.score .r.h{font-size:12px;color:var(--mute);border-bottom-color:var(--rule)}
+.score .r>div{padding:12px 18px}
+.score .num{text-align:right}
+.score .me{background:var(--tint2);color:var(--ours)}
+.score .b{font-weight:700}
+.score .sub{font-size:12px;color:var(--mute)}
+.score .lab{font-weight:600;display:inline}
+.scoring{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;font-size:14px;line-height:1.6;color:var(--body)}
+.scoring p{margin:0;text-wrap:pretty}
+.more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.more a{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.more a:hover{border-color:#cfccc3;color:inherit}
+.more img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--rule)}
+.more div{padding:12px 14px}.more b{font-weight:600;font-size:14px}
+.more p{font-size:12.5px;color:var(--mute);margin:4px 0 0;line-height:1.45}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.chart{overflow-x:auto;-webkit-overflow-scrolling:touch}
+[hidden]{display:none!important}
+@media (max-width:760px){
+  .wrap{padding:0 16px 48px}
+  h1{font-size:34px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .scoring,.more{grid-template-columns:1fr}
+  .chart>svg{min-width:640px}
+  .score{overflow-x:auto}.score .r{min-width:520px}
+  .legend .hint{margin-left:0}
+  .pipe{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}
+  .pipe .rail,.pipe .done-rail{display:none}
+}
+@media (max-width:400px){.tabs button{padding:8px 11px}.tabs button span+span{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><b>DK Wind League</b><span id="updated"></span></div>
+  <div class="eyebrow">A live day-ahead forecast, scored in public</div>
+  <h1>Who forecasts Denmark's wind best?</h1>
+  <div class="tabs" role="group" aria-label="View">
+    <button data-mode="weather" aria-pressed="true"><span>Meteorology</span><span>DKcast</span></button>
+    <button data-mode="energy" aria-pressed="false"><span>Energy</span><span>J4catDK</span></button>
+  </div>
+  <div id="pane-weather"></div>
+  <div id="pane-energy" hidden></div>
+
+  <h2 style="margin-bottom:16px">More from this project</h2>
+  <div class="more">
+    <a href="https://bolgacg.github.io/dk-forecast/"><img src="data_alt/thumb-forecast.jpg" alt="" loading="lazy"><div><b>The one-page summary</b><p>DKcast against ECMWF, DMI and yr.no.</p></div></a>
+    <a href="https://bolgacg.github.io/dkcast/"><img src="data_alt/thumb-dkcast.jpg" alt="" loading="lazy"><div><b>DKcast weather</b><p>Tomorrow at 21 Danish stations, checked daily against DMI.</p></div></a>
+    <a href="https://bolgacg.github.io/dk-wind-blend/"><img src="data_alt/thumb-study.jpg" alt="" loading="lazy"><div><b>The public models compared</b><p>Storm maps and station scores for the public weather models.</p></div></a>
+  </div>
+  <footer><span>Contains data from Open-Meteo (CC BY 4.0), Energinet Energi Data Service and DMI.</span><a href="https://github.com/bolgacg/dk-wind-live">Every forecast and score on GitHub</a></footer>
+</div>
+<script src="wl.js"></script>
+</body>
+</html>
