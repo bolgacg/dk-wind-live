@@ -8182,12 +8182,17 @@
 "last_forecast_day": "2026-11-07",
 "last_forecast_issued_utc": "2026-11-06T09:30:01Z",
 "last_scored_day": "2026-11-05",
+"publish_after": "12:05",
 "forecasts": {
 "2026-11-06": {
-"issued_utc": "2026-11-05T09:30:01Z"
+"issued_utc": "2026-11-05T09:30:01Z",
+"sha256": null,
+"held": false
 },
 "2026-11-07": {
-"issued_utc": "2026-11-06T09:30:01Z"
+"issued_utc": "2026-11-06T09:30:01Z",
+"sha256": null,
+"held": false
 }
 }
 }

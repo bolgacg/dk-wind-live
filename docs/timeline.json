@@ -2050,5 +2050,7 @@
 "icon_d2": "DWD ICON-D2",
 "ukmo": "UK Met Office",
 "j4catdk": "J4catDK (my own model)"
-}
+},
+"held_days": [],
+"publish_after": "12:05"
 }
