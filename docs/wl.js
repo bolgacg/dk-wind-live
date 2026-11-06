@@ -57,7 +57,7 @@ function kpis() {
     skillEn: f1(T.skill_vs_energinet_pct), skillEnLo: f1(T.skill_vs_energinet_ci95[0]), skillEnHi: f1(T.skill_vs_energinet_ci95[1]),
     daysBetter: T.days_better_than_energinet_pct, skillEnT: D.MJ && D.MJ.energinet ? D.MJ.energinet.toughest.toFixed(1) : f1(T.skill_vs_energinet_pct), skillEnRaw: D.MJ && D.MJ.energinet ? D.MJ.energinet.raw.toFixed(1) : "",
     tEnT: (T.nmae_pct.j4catdk / (1 - (D.MJ && D.MJ.energinet ? D.MJ.energinet.toughest : T.skill_vs_energinet_pct) / 100)).toFixed(2), imbMine: f2(T.imbalance_eur_mwh.j4catdk), imbEn: f2(T.imbalance_eur_mwh.energinet),
-    today, tom, todayLabel: dW(today), tomLabel: dW(tom), tomShort: dS(tom),
+    today, tom, todayLabel: dW(today), tomLabel: dW(tom), tomShort: dS(tom), pubAfter: (D.D.health && D.D.health.publish_after) || "12:05", tomHash: F[tom] ? F[tom].sha256 : null, tomHeld: !!(F[tom] && F[tom].held),
     todayIssued: F[today] ? `${dW(isoCph(F[today].issued_utc))}, ${hm(F[today].issued_utc)}` : null,
     tomIssued: F[tom] ? hm(F[tom].issued_utc) : null,
     measured: D.TD ? D.TD.hours_measured : 0, total: D.TD ? D.TD.hours_total : 24,
@@ -105,8 +105,8 @@ function tlChart(host, c) {
   const mv = ev => { const b = s.getBoundingClientRect(), px = (ev.clientX - b.left) * W / b.width, i = Math.max(0, Math.min(n - 1, Math.floor((px - L) / bw))), r = S[i];
     cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.setAttribute("opacity", .6);
     ["a", "mine", "riv"].forEach((k, q) => { if (r[k] == null) dots[q].setAttribute("opacity", 0); else { dots[q].setAttribute("cx", X(i)); dots[q].setAttribute("cy", Y(r[k])); dots[q].setAttribute("opacity", 1); } });
-    const t = new Date(r.t + ":00Z"), f = (v, none) => v == null ? none : c.val(v);
-    tip(ev, `<b>${dW(isoCph(t))}, ${hm(t)}</b><br>Measured ${f(r.a, "not measured yet")}<br><span style="color:${th.ours}">${esc(c.mineName)} ${f(r.mine, "no forecast")}</span><br><span style="color:${c.rivTip}">${esc(c.rivLong || c.rivName)} ${f(r.riv, "no forecast")}</span>` + (r.a != null && r.mine != null ? `<br><span style="opacity:.7">${esc(c.mineName)} miss ${c.val(Math.abs(r.mine - r.a))}</span>` : "")); };
+    const t = new Date(r.t + ":00Z"), f = (v, none) => v == null ? none : c.val(v), noMine = c.lockedDays && c.lockedDays.includes(isoCph(t)) ? "locked until " + c.lockedUntil : "no forecast";
+    tip(ev, `<b>${dW(isoCph(t))}, ${hm(t)}</b><br>Measured ${f(r.a, "not measured yet")}<br><span style="color:${th.ours}">${esc(c.mineName)} ${f(r.mine, noMine)}</span><br><span style="color:${c.rivTip}">${esc(c.rivLong || c.rivName)} ${f(r.riv, "no forecast")}</span>` + (r.a != null && r.mine != null ? `<br><span style="opacity:.7">${esc(c.mineName)} miss ${c.val(Math.abs(r.mine - r.a))}</span>` : "")); };
   pad.addEventListener("pointermove", mv); pad.addEventListener("pointerleave", () => { cross.setAttribute("opacity", 0); dots.forEach(q => q.setAttribute("opacity", 0)); untip(); });
 }
 const ticksFor = (vals, step, floor0) => { const v = vals.filter(x => x != null); let lo = floor0 ? 0 : Math.floor(Math.min(...v) / step) * step, hi = Math.ceil(Math.max(...v) / step) * step;
@@ -115,7 +115,7 @@ function timeline(host) {
   const TL = D.TL, S = TL.series.map(r => ({t: r.t, a: r.a, mine: r.j, riv: r.e}));
   const mx = Math.ceil(Math.max(...S.flatMap(r => [r.a, r.mine, r.riv]).filter(v => v != null)) / 1000) * 1000;
   tlChart(host, {S, days: TL.days.map(d => ({...d, err: d.err ? {mine: d.err.j4catdk, riv: d.err.energinet} : {}})), today: TL.today, now: TL.now_utc,
-    mineName: "J4catDK", rivName: "Energinet", rivCol: th.en, rivTip: th.en, ticks: ticksFor([0, mx], 1000, true), tickFmt: v => v ? (v / 1000) + "k" : "0", unit: "MW",
+    lockedDays: TL.held_days || [], lockedUntil: TL.publish_after, mineName: "J4catDK", rivName: "Energinet", rivCol: th.en, rivTip: th.en, ticks: ticksFor([0, mx], 1000, true), tickFmt: v => v ? (v / 1000) + "k" : "0", unit: "MW",
     val: v => v.toLocaleString("en") + " MW", chip: v => v.toFixed(1), chipUnit: "%"});
 }
 // ---------- model cards: every model name is underlined; hover shows who made it, what it is, and how it scores ----------
@@ -333,7 +333,7 @@ function energyHtml(k) {
   const nDone = st.filter(Boolean).length;
   const step = (i, t, h, sub) => `<div class="step"><div class="dot ${cls(i)}"></div><div class="step-t ${cls(i)}">${t}</div><div class="step-h">${h}</div><div class="step-s">${sub}</div></div>`;
   return `
-<p class="lede">Every morning before the 12:00 day-ahead auction, I publish an hourly forecast of tomorrow's Danish wind power, ${M("en:j4catdk", "J4catDK", "term-ours")}. Once the day is over, it is scored against what was measured, against ${M("en:energinet", "Energinet's own forecast")}, and against forecasts from ${word(others)} public weather models.</p>
+<p class="lede">Every morning before the 12:00 day-ahead auction, I lock an hourly forecast of tomorrow's Danish wind power, ${M("en:j4catdk", "J4catDK", "term-ours")}, with a public hash, and the numbers follow after ${k.pubAfter}. Once the day is over, it is scored against what was measured, against ${M("en:energinet", "Energinet's own forecast")}, and against forecasts from ${word(others)} public weather models.</p>
 <div class="kpis">
   <div class="kpi"><div class="kpi-l">Against Energinet</div>${T(`1 minus my error over Energinet's, on the same hours, against the toughest version of Energinet's forecast I found. Against the 60-day rescaled version used in the charts below it is ${k.skillEn}%; against Energinet as issued, ${k.skillEnRaw}%. Hover Energinet anywhere for all versions.`, k.skillEnT + "%", "kpi-n ours")}<div class="kpi-w">less error</div><div class="kpi-x">My average miss was ${k.tMine}% of capacity; ${M("en:energinet", "Energinet (toughest version)")}'s was ${k.tEnT}%.</div></div>
   <div class="kpi"><div class="kpi-l">Day by day</div>${T(`Each day is scored on its 24 hourly errors. On ${k.daysBetter}% of the ${k.testDays} test days, my day's error was smaller than Energinet's (60-day rescaling).`, k.daysBetter + "%", "kpi-n")}<div class="kpi-w">of days ahead</div><div class="kpi-x">Roughly three days in four, my forecast beat Energinet's.</div></div>
@@ -342,17 +342,18 @@ function energyHtml(k) {
 </div>
 <p class="note">All four numbers come from one scoring run on 2026 data outside the model's training period: ${k.testPeriod}, ${k.testDays} days, ${k.testHours} hours. The script was fixed before it ran. One earlier variant had been scored on 19 July to 18 October before the script was fixed.</p>
 
-<h2>Published before the gate</h2>
-<p class="intro">Each forecast is committed to GitHub before the day it covers begins, so nothing can be adjusted after the fact.</p>
+<h2>Locked before the gate</h2>
+<p class="intro">Each forecast's SHA-256 hash is committed to GitHub before the auction closes, so nothing can be adjusted after the fact. The numbers follow after ${k.pubAfter}.</p>
 <div class="card" style="padding:22px 24px">
   <div class="pipe"><div class="rail"></div><div class="done-rail" style="width:calc(${25 * nDone}% - 8px);${nDone ? "" : "display:none"}"></div>
-    ${step(0, k.tomIssued ? "DONE · " + k.tomIssued : "DUE · 10:30", "Forecast published", "for " + k.tomLabel)}
-    ${step(1, "12:00", "Auction gate", gatePassed ? "locked, no edits" : "locks the forecast")}
+    ${step(0, k.tomIssued ? "DONE · " + k.tomIssued : "DUE · 10:30", k.tomIssued && !k.tomHash ? "Forecast published" : "Forecast locked", (k.tomHash ? "hash for " : "for ") + k.tomLabel)}
+    ${step(1, "12:00", "Auction gate", k.tomHeld || !k.tomIssued ? "numbers after " + k.pubAfter : "numbers published")}
     ${step(2, k.tomShort, "Wind blows", "measured hourly")}
     ${step(3, "01:30 NEXT NIGHT", "Scored", `against ${k.btN - 1} other sources`)}
   </div>
-  <div class="today"><span style="font-weight:600;color:var(--ink)">Today, ${k.todayLabel}</span><span>${k.measured} of ${k.total} hours measured</span><span style="color:var(--mute)">${k.todayIssued ? "published " + k.todayIssued + " · " : ""}final score 01:30 tonight</span></div>
+  <div class="today"><span style="font-weight:600;color:var(--ink)">Today, ${k.todayLabel}</span><span>${k.measured} of ${k.total} hours measured</span><span style="color:var(--mute)">${k.todayIssued ? "issued " + k.todayIssued + " · " : ""}final score 01:30 tonight</span></div>
 </div>
+${k.tomHash ? `<p class="note">SHA-256 for ${k.tomLabel}: <code>${esc(k.tomHash)}</code></p>` : ""}
 
 <h2>Who came first each day</h2>
 <p class="intro">All ${k.btN} forecasts ranked by that day's error. The days before 31 Oct are ${T("Produced afterwards from what was available the morning before, by a version that had seen nothing after 18 Oct.", "replayed")}; from 31 Oct each new day is live and joins the chart at 01:30 the night after.</p>
@@ -385,7 +386,8 @@ function energyHtml(k) {
 
 <h2 style="margin-bottom:12px">How it is scored</h2>
 <div class="scoring">
-  <p>Each forecast covers the next day's 24 hours in four zones: offshore and onshore, in western and eastern Denmark. It is committed to this page's public repository before the 12:00 auction. After the day ends, I compare it with the output Energinet measured.</p>
+  <p>Each forecast covers the next day's 24 hours in four zones: offshore and onshore, in western and eastern Denmark. Its hash is committed to this page's public repository before the 12:00 auction, and the numbers follow after ${k.pubAfter}. After the day ends, I compare it with the output Energinet measured.</p>
+  <p>To check a day, open <code>forecasts/</code> in the <a href="https://github.com/bolgacg/dk-wind-live/tree/main/forecasts">public repository</a>: <code>&lt;day&gt;.sha256</code> holds the hash and <code>&lt;day&gt;.json</code> the numbers. Run <code>sha256sum -c &lt;day&gt;.sha256</code> in that folder; the commit times show when each one appeared. Forecasts up to 7 November were published directly, without a hash.</p>
   <p>Energinet publishes a wind power forecast. The weather centres publish wind, not power, so I convert each centre's forecast to power the same way for all of them and score the result. Those rows compare the weather forecasts; the centres do not publish them as power forecasts. Results are on three scales: error as % of capacity (industry), skill against ECMWF IFS (meteorology) and imbalance cost per MWh (trading).</p>
 </div>`;
 }
@@ -431,6 +433,7 @@ try { const m = new URLSearchParams(location.search).get("tab") || sessionStorag
 function render() {
   const k = state.k; if (!k) return;
   document.getElementById("updated").textContent = "Updated " + k.updated;
+  const lt = document.getElementById("lockt"); if (lt) lt.textContent = k.pubAfter;
   const pe = document.getElementById("pane-energy"), pw = document.getElementById("pane-weather");
   pe.innerHTML = energyHtml(k); pw.innerHTML = weatherHtml(k, state.wxVar);
   charts(pe); charts(pw); setMode(state.mode);

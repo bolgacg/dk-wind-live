@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who forecasts Denmark's wind best? · DK Wind League</title>
-<meta name="description" content="A daily day-ahead forecast of Denmark's wind power, published before the market closes and scored every day against Energinet and the public weather models.">
+<meta name="description" content="A daily day-ahead forecast of Denmark's wind power, locked with a hash before the market closes and scored every day against Energinet and the public weather models.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap">
@@ -18,6 +18,8 @@ a{color:var(--en)}a:hover{color:var(--ours)}
 .wrap{max-width:900px;margin:0 auto;padding:0 32px 64px}
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--rule);font-size:12.5px;color:var(--mute)}
 .top b{font-weight:600;letter-spacing:.02em;color:var(--ink)}
+.locknote{font-size:14px;line-height:1.5;color:var(--ink);background:var(--tint);border-left:3px solid var(--ours);border-radius:4px;padding:10px 14px;margin:0 0 20px;max-width:760px}
+code{font-size:.92em;overflow-wrap:anywhere}
 .eyebrow{font-size:12px;font-weight:600;color:var(--ours);letter-spacing:.06em;text-transform:uppercase;margin:48px 0 14px}
 h1{font:600 44px/1.1 var(--serif);margin:0 0 24px;letter-spacing:-.01em;text-wrap:balance}
 .tabs{display:inline-flex;gap:2px;padding:3px;background:#f1efe9;border-radius:999px}
@@ -98,6 +100,7 @@ footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);font-si
   <div class="top"><b>DK Wind League</b><span id="updated"></span></div>
   <div class="eyebrow">A live day-ahead forecast, scored in public</div>
   <h1>Who forecasts Denmark's wind best?</h1>
+  <p class="locknote">From 7 November 2026, each day's forecast is locked with a SHA-256 hash at 10:30 and the numbers appear after <span id="lockt">12:05</span>, because this model will be entering competitions.</p>
   <div class="tabs" role="group" aria-label="View">
     <button data-mode="weather" aria-pressed="true"><span>Meteorology</span><span>DKcast</span></button>
     <button data-mode="energy" aria-pressed="false"><span>Energy</span><span>J4catDK</span></button>
@@ -108,7 +111,7 @@ footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);font-si
   <h2 style="margin-bottom:16px">More from this project</h2>
   <div class="more">
     <a href="https://bolgacg.github.io/dk-forecast/"><img src="data_alt/thumb-forecast.jpg" alt="" loading="lazy"><div><b>The one-page summary</b><p>DKcast against ECMWF, DMI and yr.no.</p></div></a>
-    <a href="https://bolgacg.github.io/dkcast/"><img src="data_alt/thumb-dkcast.jpg" alt="" loading="lazy"><div><b>DKcast weather</b><p>Tomorrow at 21 Danish stations, checked daily against DMI.</p></div></a>
+    <a href="https://bolgacg.github.io/dkcast/"><img src="data_alt/thumb-dkcast.jpg" alt="" loading="lazy"><div><b>DKcast weather</b><p>Today and tomorrow at 21 Danish stations, checked daily against DMI.</p></div></a>
     <a href="https://bolgacg.github.io/dk-wind-blend/"><img src="data_alt/thumb-study.jpg" alt="" loading="lazy"><div><b>The public models compared</b><p>Storm maps and station scores for the public weather models.</p></div></a>
   </div>
   <footer><span>Contains data from Open-Meteo (CC BY 4.0), Energinet Energi Data Service and DMI.</span><a href="https://github.com/bolgacg/dk-wind-live">Every forecast and score on GitHub</a></footer>
