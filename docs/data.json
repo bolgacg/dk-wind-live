@@ -8272,7 +8272,7 @@
 "2026-11-08": {
 "issued_utc": "2026-11-07T09:30:00Z",
 "sha256": "5648620ece0e0ce2cdc6ddf9c6b61566e297fad17b778dd96064005c989bf98b",
-"held": true
+"held": false
 }
 }
 }
