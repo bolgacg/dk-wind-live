@@ -1,26 +1,26 @@
 # Live scoreboard
 
-Updated 2026-11-06 06:30 UTC. Error = mean absolute error in MW, summed over DK1/DK2 offshore and
+Updated 2026-11-07 00:30 UTC. Error = mean absolute error in MW, summed over DK1/DK2 offshore and
 onshore wind. Lower is better. energinet_da is Energinet's own day-ahead forecast; energinet_da_debiased scales it
 by its actual/forecast ratio over the previous 60 days, the fair bar to beat.
 
-Days scored: 7
+Days scored: 8
 
 | source | mean error, MW |
 |---|---|
 | j4catdk | 224 |
-| ifs | 246 |
-| aifs | 255 |
-| icon | 271 |
-| energinet_da_debiased | 288 |
-| icon_d2 | 294 |
-| ukmo | 297 |
-| gfs | 308 |
-| harmonie | 313 |
-| knmi | 317 |
-| energinet_da | 360 |
+| ifs | 242 |
+| aifs | 252 |
+| icon | 265 |
+| icon_d2 | 284 |
+| ukmo | 296 |
+| gfs | 297 |
+| knmi | 302 |
+| harmonie | 302 |
+| energinet_da_debiased | 311 |
+| energinet_da | 351 |
 
-80% band, total Denmark: actual inside the band in 88% of 144 scored hours (target 80%), mean width 541 MW.
+80% band, total Denmark: actual inside the band in 88% of 168 scored hours (target 80%), mean width 527 MW.
 
 Per day:
 
@@ -33,3 +33,4 @@ Per day:
 | 2026-11-03 |    184 |            412 |                     423 |   209 |        296 |    273 |       168 |   218 |       198 |    284 |    399 |
 | 2026-11-04 |    110 |            164 |                     258 |   152 |        161 |    131 |       103 |   102 |       140 |    151 |    112 |
 | 2026-11-05 |    148 |            187 |                     183 |   193 |        128 |    163 |       180 |   152 |       170 |    148 |    192 |
+| 2026-11-06 |    234 |            292 |                     473 |   235 |        228 |    221 |       224 |   210 |       220 |    214 |    290 |
