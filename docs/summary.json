@@ -36,7 +36,7 @@
 "note": "nMAE = mean absolute error of each area's hourly total as % of installed capacity"
 },
 "health": {
-"generated_utc": "2026-11-08T01:27Z",
+"generated_utc": "2026-11-08T07:26Z",
 "last_forecast_day": "2026-11-08",
 "last_forecast_issued_utc": "2026-11-07T09:30:00Z",
 "last_scored_day": "2026-11-07",
