@@ -8432,7 +8432,7 @@
 "2026-11-10": {
 "issued_utc": "2026-11-09T09:30:01Z",
 "sha256": "19b3be3f01fc378eef56d04873c881318f1cef3f393bada0a14135856cd52c18",
-"held": true
+"held": false
 }
 }
 }

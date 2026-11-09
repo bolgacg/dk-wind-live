@@ -1265,145 +1265,145 @@
 {
 "t": "2026-11-09T23",
 "a": null,
-"j": null,
+"j": 417,
 "e": null
 },
 {
 "t": "2026-11-10T00",
 "a": null,
-"j": null,
+"j": 303,
 "e": null
 },
 {
 "t": "2026-11-10T01",
 "a": null,
-"j": null,
+"j": 317,
 "e": null
 },
 {
 "t": "2026-11-10T02",
 "a": null,
-"j": null,
+"j": 284,
 "e": null
 },
 {
 "t": "2026-11-10T03",
 "a": null,
-"j": null,
+"j": 300,
 "e": null
 },
 {
 "t": "2026-11-10T04",
 "a": null,
-"j": null,
+"j": 262,
 "e": null
 },
 {
 "t": "2026-11-10T05",
 "a": null,
-"j": null,
+"j": 219,
 "e": null
 },
 {
 "t": "2026-11-10T06",
 "a": null,
-"j": null,
+"j": 219,
 "e": null
 },
 {
 "t": "2026-11-10T07",
 "a": null,
-"j": null,
+"j": 237,
 "e": null
 },
 {
 "t": "2026-11-10T08",
 "a": null,
-"j": null,
+"j": 256,
 "e": null
 },
 {
 "t": "2026-11-10T09",
 "a": null,
-"j": null,
+"j": 280,
 "e": null
 },
 {
 "t": "2026-11-10T10",
 "a": null,
-"j": null,
+"j": 269,
 "e": null
 },
 {
 "t": "2026-11-10T11",
 "a": null,
-"j": null,
+"j": 290,
 "e": null
 },
 {
 "t": "2026-11-10T12",
 "a": null,
-"j": null,
+"j": 328,
 "e": null
 },
 {
 "t": "2026-11-10T13",
 "a": null,
-"j": null,
+"j": 344,
 "e": null
 },
 {
 "t": "2026-11-10T14",
 "a": null,
-"j": null,
+"j": 382,
 "e": null
 },
 {
 "t": "2026-11-10T15",
 "a": null,
-"j": null,
+"j": 540,
 "e": null
 },
 {
 "t": "2026-11-10T16",
 "a": null,
-"j": null,
+"j": 611,
 "e": null
 },
 {
 "t": "2026-11-10T17",
 "a": null,
-"j": null,
+"j": 689,
 "e": null
 },
 {
 "t": "2026-11-10T18",
 "a": null,
-"j": null,
+"j": 802,
 "e": null
 },
 {
 "t": "2026-11-10T19",
 "a": null,
-"j": null,
+"j": 906,
 "e": null
 },
 {
 "t": "2026-11-10T20",
 "a": null,
-"j": null,
+"j": 1041,
 "e": null
 },
 {
 "t": "2026-11-10T21",
 "a": null,
-"j": null,
+"j": 1090,
 "e": null
 },
 {
 "t": "2026-11-10T22",
 "a": null,
-"j": null,
+"j": 1183,
 "e": null
 }
 ],
@@ -2051,8 +2051,6 @@
 "ukmo": "UK Met Office",
 "j4catdk": "J4catDK (my own model)"
 },
-"held_days": [
-"2026-11-10"
-],
+"held_days": [],
 "publish_after": "18:05"
 }
