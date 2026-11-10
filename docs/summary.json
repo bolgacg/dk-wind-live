@@ -36,7 +36,7 @@
 "note": "nMAE = mean absolute error of each area's hourly total as % of installed capacity"
 },
 "health": {
-"generated_utc": "2026-11-10T09:31Z",
+"generated_utc": "2026-11-10T10:00Z",
 "last_forecast_day": "2026-11-11",
 "last_forecast_issued_utc": "2026-11-10T09:30:01Z",
 "last_scored_day": "2026-11-09",
@@ -129,81 +129,81 @@
 }
 },
 "today": {
-"built_utc": "2026-11-10T09:08Z",
+"built_utc": "2026-11-10T10:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-11-10",
-"hours_measured": 10,
+"hours_measured": 11,
 "hours_total": 24,
-"through_utc": "2026-11-10T09:00Z",
+"through_utc": "2026-11-10T10:00Z",
 "ranking": [
 {
 "source": "j4catdk",
 "name": "J4catDK (my own model)",
-"nmae": 0.8,
-"acc": 46.78,
+"nmae": 0.77,
+"acc": 49.22,
 "rank": 1
 },
 {
 "source": "icon",
 "name": "DWD ICON-EU",
-"nmae": 1.36,
-"acc": 54.96,
-"rank": 2
-},
-{
-"source": "icon_d2",
-"name": "DWD ICON-D2",
 "nmae": 1.37,
-"acc": 60.84,
-"rank": 3
+"acc": 55.55,
+"rank": 2
 },
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 1.4,
-"acc": 55.43,
-"rank": 4
+"nmae": 1.38,
+"acc": 56.44,
+"rank": 3
 },
 {
 "source": "ukmo",
 "name": "UK Met Office",
-"nmae": 1.48,
-"acc": 40.06,
+"nmae": 1.42,
+"acc": 42.93,
+"rank": 4
+},
+{
+"source": "icon_d2",
+"name": "DWD ICON-D2",
+"nmae": 1.44,
+"acc": 59.85,
 "rank": 5
 },
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 1.76,
-"acc": 52.16,
+"nmae": 1.68,
+"acc": 54.83,
 "rank": 6
 },
 {
 "source": "harmonie",
 "name": "DMI HARMONIE",
-"nmae": 1.85,
-"acc": 38.8,
+"nmae": 1.83,
+"acc": 40.77,
 "rank": 7
 },
 {
 "source": "knmi",
 "name": "KNMI HARMONIE",
-"nmae": 2.03,
-"acc": 41.06,
+"nmae": 1.88,
+"acc": 43.35,
 "rank": 8
 },
 {
 "source": "aifs",
 "name": "ECMWF AIFS (AI)",
-"nmae": 2.05,
-"acc": 48.15,
+"nmae": 2.06,
+"acc": 47.98,
 "rank": 9
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 2.88,
-"acc": 24.81,
+"nmae": 2.78,
+"acc": 27.84,
 "rank": 10
 }
 ],
@@ -283,7 +283,7 @@
 "p": 280,
 "lo": 107,
 "hi": 401,
-"a": null
+"a": 295
 },
 {
 "t": "2026-11-10T10",
