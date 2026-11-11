@@ -8578,21 +8578,21 @@
 ]
 },
 "health": {
-"generated_utc": "2026-11-11T07:47Z",
-"last_forecast_day": "2026-11-11",
-"last_forecast_issued_utc": "2026-11-10T09:30:01Z",
+"generated_utc": "2026-11-11T09:31Z",
+"last_forecast_day": "2026-11-12",
+"last_forecast_issued_utc": "2026-11-11T09:30:01Z",
 "last_scored_day": "2026-11-10",
 "publish_after": "18:05",
 "forecasts": {
-"2026-11-10": {
-"issued_utc": "2026-11-09T09:30:01Z",
-"sha256": "19b3be3f01fc378eef56d04873c881318f1cef3f393bada0a14135856cd52c18",
-"held": false
-},
 "2026-11-11": {
 "issued_utc": "2026-11-10T09:30:01Z",
 "sha256": "d82f7c42f45f063de8f8ee5986fe93567d0bcd188355f0e5bc6b10cf768acc41",
 "held": false
+},
+"2026-11-12": {
+"issued_utc": "2026-11-11T09:30:01Z",
+"sha256": "99a3a061333d3d0c5e65547f90ba6294eaed0bd082feeb18fb321daa7f82335c",
+"held": true
 }
 }
 }
