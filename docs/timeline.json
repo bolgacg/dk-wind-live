@@ -1,7 +1,7 @@
 {
-"built_utc": "2026-11-12T04:08Z",
+"built_utc": "2026-11-12T05:08Z",
 "today": "2026-11-12",
-"now_utc": "2026-11-12T04:08Z",
+"now_utc": "2026-11-12T05:08Z",
 "days": [
 {
 "day": "2026-11-05",
@@ -92,11 +92,11 @@
 "kind": "live",
 "issued_utc": "2026-11-11T09:30:01Z",
 "hours": 24,
-"hours_scored": 5,
+"hours_scored": 6,
 "complete": false,
 "err": {
-"j4catdk": 9.34,
-"energinet": 8.87
+"j4catdk": 9.74,
+"energinet": 9.24
 }
 },
 {
@@ -1150,7 +1150,7 @@
 },
 {
 "t": "2026-11-12T04",
-"a": null,
+"a": 3893,
 "j": 3385,
 "e": 3429
 },
