@@ -1,7 +1,7 @@
 {
-"built_utc": "2026-11-13T06:08Z",
+"built_utc": "2026-11-13T07:10Z",
 "today": "2026-11-13",
-"now_utc": "2026-11-13T06:08Z",
+"now_utc": "2026-11-13T07:10Z",
 "days": [
 {
 "day": "2026-11-06",
@@ -92,11 +92,11 @@
 "kind": "live",
 "issued_utc": "2026-11-12T09:30:01Z",
 "hours": 24,
-"hours_scored": 7,
+"hours_scored": 8,
 "complete": false,
 "err": {
-"j4catdk": 14.1,
-"energinet": 8.64
+"j4catdk": 14.18,
+"energinet": 9.68
 }
 },
 {
@@ -1162,7 +1162,7 @@
 },
 {
 "t": "2026-11-13T06",
-"a": null,
+"a": 6161,
 "j": 5151,
 "e": 5004
 },
@@ -1621,7 +1621,7 @@
 {
 "day": "2026-10-25",
 "source": "aifs",
-"nmae": 8.695,
+"nmae": 8.694,
 "rank": 1,
 "kind": "replayed"
 },
@@ -1635,14 +1635,14 @@
 {
 "day": "2026-10-25",
 "source": "ukmo",
-"nmae": 9.857,
+"nmae": 9.856,
 "rank": 3,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "ifs",
-"nmae": 9.905,
+"nmae": 9.904,
 "rank": 4,
 "kind": "replayed"
 },
@@ -1656,7 +1656,7 @@
 {
 "day": "2026-10-25",
 "source": "icon_d2",
-"nmae": 10.493,
+"nmae": 10.492,
 "rank": 6,
 "kind": "replayed"
 },
@@ -1677,14 +1677,14 @@
 {
 "day": "2026-10-25",
 "source": "harmonie",
-"nmae": 12.202,
+"nmae": 12.201,
 "rank": 9,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "j4catdk",
-"nmae": 12.631,
+"nmae": 12.63,
 "rank": 10,
 "kind": "replayed"
 },
