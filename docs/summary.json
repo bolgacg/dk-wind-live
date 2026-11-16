@@ -129,81 +129,81 @@
 }
 },
 "today": {
-"built_utc": "2026-11-16T07:08Z",
+"built_utc": "2026-11-16T09:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-11-16",
-"hours_measured": 8,
+"hours_measured": 10,
 "hours_total": 24,
-"through_utc": "2026-11-16T07:00Z",
+"through_utc": "2026-11-16T09:00Z",
 "ranking": [
-{
-"source": "ukmo",
-"name": "UK Met Office",
-"nmae": 5.77,
-"acc": 81.68,
-"rank": 1
-},
 {
 "source": "j4catdk",
 "name": "J4catDK (my own model)",
-"nmae": 6.17,
-"acc": 79.98,
+"nmae": 5.83,
+"acc": 79.04,
+"rank": 1
+},
+{
+"source": "ukmo",
+"name": "UK Met Office",
+"nmae": 6.19,
+"acc": 78.37,
 "rank": 2
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 6.28,
-"acc": 74.09,
+"nmae": 7.12,
+"acc": 69.59,
 "rank": 3
-},
-{
-"source": "icon_d2",
-"name": "DWD ICON-D2",
-"nmae": 7.45,
-"acc": 72.74,
-"rank": 4
-},
-{
-"source": "knmi",
-"name": "KNMI HARMONIE",
-"nmae": 7.86,
-"acc": 73.89,
-"rank": 5
 },
 {
 "source": "ifs",
 "name": "ECMWF IFS",
 "nmae": 8.09,
-"acc": 72.54,
+"acc": 70.17,
+"rank": 4
+},
+{
+"source": "icon_d2",
+"name": "DWD ICON-D2",
+"nmae": 8.85,
+"acc": 65.05,
+"rank": 5
+},
+{
+"source": "knmi",
+"name": "KNMI HARMONIE",
+"nmae": 8.86,
+"acc": 68.05,
 "rank": 6
-},
-{
-"source": "harmonie",
-"name": "DMI HARMONIE",
-"nmae": 8.34,
-"acc": 72.94,
-"rank": 7
-},
-{
-"source": "icon",
-"name": "DWD ICON-EU",
-"nmae": 10.31,
-"acc": 67.09,
-"rank": 8
 },
 {
 "source": "aifs",
 "name": "ECMWF AIFS (AI)",
-"nmae": 10.94,
-"acc": 65.38,
+"nmae": 9.37,
+"acc": 66.89,
+"rank": 7
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"nmae": 9.79,
+"acc": 65.28,
+"rank": 8
+},
+{
+"source": "icon",
+"name": "DWD ICON-EU",
+"nmae": 10.58,
+"acc": 62.18,
 "rank": 9
 },
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 12.81,
-"acc": 55.3,
+"nmae": 15.41,
+"acc": 42.65,
 "rank": 10
 }
 ],
@@ -269,14 +269,14 @@
 "p": 1266,
 "lo": 1086,
 "hi": 1940,
-"a": null
+"a": 1216
 },
 {
 "t": "2026-11-16T08",
 "p": 1656,
 "lo": 1323,
 "hi": 2268,
-"a": null
+"a": 1226
 },
 {
 "t": "2026-11-16T09",
