@@ -36,10 +36,10 @@
 "note": "nMAE = mean absolute error of each area's hourly total as % of installed capacity"
 },
 "health": {
-"generated_utc": "2026-11-15T10:30Z",
+"generated_utc": "2026-11-16T02:26Z",
 "last_forecast_day": "2026-11-16",
 "last_forecast_issued_utc": "2026-11-15T09:30:02Z",
-"last_scored_day": "2026-11-14",
+"last_scored_day": "2026-11-15",
 "publish_after": "18:05",
 "forecasts": {
 "2026-11-15": {
@@ -93,38 +93,38 @@
 },
 "live": {
 "from": "2026-10-30",
-"to": "2026-11-14",
-"days": 16,
+"to": "2026-11-15",
+"days": 17,
 "sources": 10,
 "rank_j4catdk": 1,
 "j4catdk": {
 "name": "J4catDK (my own model)",
-"nmae": 4.08,
-"nmae_DK1": 4.05,
+"nmae": 4.22,
+"nmae_DK1": 4.22,
 "nmae_DK2": 4.2,
-"skill_ifs": 10.81,
-"skill_energinet": 19.65,
-"imb_eur_mwh": 1.06,
+"skill_ifs": 10.48,
+"skill_energinet": 18.3,
+"imb_eur_mwh": 1.41,
 "wins": 7
 },
 "energinet": {
 "name": "Energinet (bias-corrected)",
-"nmae": 4.98,
-"nmae_DK1": 4.95,
-"nmae_DK2": 5.09,
-"skill_ifs": -11.4,
+"nmae": 5.07,
+"nmae_DK1": 5.07,
+"nmae_DK2": 5.07,
+"skill_ifs": -9.98,
 "skill_energinet": 0.0,
-"imb_eur_mwh": 1.8,
+"imb_eur_mwh": 2.26,
 "wins": 2
 },
 "ifs": {
 "name": "ECMWF IFS",
-"nmae": 4.47,
-"nmae_DK1": 4.42,
-"nmae_DK2": 4.66,
+"nmae": 4.61,
+"nmae_DK1": 4.56,
+"nmae_DK2": 4.77,
 "skill_ifs": 0.0,
-"skill_energinet": 10.23,
-"imb_eur_mwh": 1.07,
+"skill_energinet": 9.08,
+"imb_eur_mwh": 1.23,
 "wins": 2
 }
 },
