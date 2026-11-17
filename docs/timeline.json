@@ -1,7 +1,7 @@
 {
-"built_utc": "2026-11-17T06:08Z",
+"built_utc": "2026-11-17T07:15Z",
 "today": "2026-11-17",
-"now_utc": "2026-11-17T06:08Z",
+"now_utc": "2026-11-17T07:15Z",
 "days": [
 {
 "day": "2026-11-10",
@@ -92,11 +92,11 @@
 "kind": "live",
 "issued_utc": "2026-11-16T09:30:02Z",
 "hours": 24,
-"hours_scored": 7,
+"hours_scored": 8,
 "complete": false,
 "err": {
-"j4catdk": 6.59,
-"energinet": 6.16
+"j4catdk": 6.36,
+"energinet": 5.8
 }
 },
 {
@@ -1162,7 +1162,7 @@
 },
 {
 "t": "2026-11-17T06",
-"a": null,
+"a": 771,
 "j": 1050,
 "e": 1008
 },
@@ -1621,42 +1621,42 @@
 {
 "day": "2026-10-25",
 "source": "aifs",
-"nmae": 8.695,
+"nmae": 8.694,
 "rank": 1,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "gfs",
-"nmae": 9.389,
+"nmae": 9.388,
 "rank": 2,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "ukmo",
-"nmae": 9.857,
+"nmae": 9.856,
 "rank": 3,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "ifs",
-"nmae": 9.904,
+"nmae": 9.903,
 "rank": 4,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "knmi",
-"nmae": 10.264,
+"nmae": 10.262,
 "rank": 5,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "icon_d2",
-"nmae": 10.493,
+"nmae": 10.492,
 "rank": 6,
 "kind": "replayed"
 },
@@ -1677,14 +1677,14 @@
 {
 "day": "2026-10-25",
 "source": "harmonie",
-"nmae": 12.202,
+"nmae": 12.201,
 "rank": 9,
 "kind": "replayed"
 },
 {
 "day": "2026-10-25",
 "source": "j4catdk",
-"nmae": 12.63,
+"nmae": 12.629,
 "rank": 10,
 "kind": "replayed"
 },
