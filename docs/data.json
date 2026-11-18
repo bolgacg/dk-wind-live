@@ -9152,7 +9152,7 @@
 "2026-11-19": {
 "issued_utc": "2026-11-18T09:30:02Z",
 "sha256": "bc5dfa8db971e309ac54eee7550962afcc90e91a45acc340212d667d702a13f9",
-"held": true
+"held": false
 }
 }
 }
