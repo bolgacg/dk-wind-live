@@ -9232,7 +9232,7 @@
 "2026-11-20": {
 "issued_utc": "2026-11-19T09:30:01Z",
 "sha256": "f62f4f1d3e073f1cf4e7aa1dd34b4d6ed51ea4b0d999aff626c2038a3579ee5d",
-"held": true
+"held": false
 }
 }
 }
