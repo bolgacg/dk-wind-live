@@ -7522,7 +7522,7 @@
 "nmae_DK2": 5.48,
 "skill_ifs": 11.88,
 "skill_energinet": 17.76,
-"imb_eur_mwh": 3.72,
+"imb_eur_mwh": 3.71,
 "days": 20,
 "wins": 9,
 "top3": 16
@@ -7536,7 +7536,7 @@
 "nmae_DK2": 5.79,
 "skill_ifs": 1.47,
 "skill_energinet": 8.33,
-"imb_eur_mwh": 2.18,
+"imb_eur_mwh": 2.16,
 "days": 21,
 "wins": 3,
 "top3": 7
@@ -7564,7 +7564,7 @@
 "nmae_DK2": 5.9,
 "skill_ifs": -7.48,
 "skill_energinet": 0.0,
-"imb_eur_mwh": 5.14,
+"imb_eur_mwh": 5.11,
 "days": 21,
 "wins": 2,
 "top3": 7
@@ -7648,7 +7648,7 @@
 "nmae_DK2": 6.23,
 "skill_ifs": -12.32,
 "skill_energinet": -4.83,
-"imb_eur_mwh": 3.99,
+"imb_eur_mwh": 4.0,
 "days": 20,
 "wins": 1,
 "top3": 5
@@ -9298,7 +9298,7 @@
 ]
 },
 "health": {
-"generated_utc": "2026-11-20T02:52Z",
+"generated_utc": "2026-11-20T08:52Z",
 "last_forecast_day": "2026-11-20",
 "last_forecast_issued_utc": "2026-11-19T09:30:01Z",
 "last_scored_day": "2026-11-19",
