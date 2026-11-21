@@ -2051,8 +2051,6 @@
 "ukmo": "UK Met Office",
 "j4catdk": "J4catDK (my own model)"
 },
-"held_days": [
-"2026-11-22"
-],
+"held_days": [],
 "publish_after": "18:05"
 }
