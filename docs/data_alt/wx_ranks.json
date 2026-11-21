@@ -5057,6 +5057,90 @@
 "mae": 0.9373,
 "rank": 12,
 "kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "dkcast",
+"mae": 0.6892,
+"rank": 1,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "gfs_global",
+"mae": 0.8395,
+"rank": 2,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "public_avg",
+"mae": 0.8825,
+"rank": 3,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "ecmwf_aifs025_single",
+"mae": 0.9208,
+"rank": 4,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "ecmwf_ifs025",
+"mae": 0.9486,
+"rank": 5,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "gem_global",
+"mae": 0.9492,
+"rank": 6,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "ukmo_global_deterministic_10km",
+"mae": 0.9537,
+"rank": 7,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "icon_d2",
+"mae": 0.9566,
+"rank": 8,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "knmi_harmonie_arome_europe",
+"mae": 1.0352,
+"rank": 9,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "dmi_harmonie_arome_europe",
+"mae": 1.0743,
+"rank": 10,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "icon_eu",
+"mae": 1.0801,
+"rank": 11,
+"kind": "live"
+},
+{
+"day": "2026-11-20",
+"source": "metno_nordic",
+"mae": 1.0903,
+"rank": 12,
+"kind": "live"
 }
 ],
 "live_from": "2026-10-31"
