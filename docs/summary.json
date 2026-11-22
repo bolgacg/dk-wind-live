@@ -50,7 +50,7 @@
 "2026-11-23": {
 "issued_utc": "2026-11-22T09:30:02Z",
 "sha256": "95c8965bf0be825c084c655cf97f482fd69aed123a4b730c4846db432ac7ebf7",
-"held": true
+"held": false
 }
 }
 },
