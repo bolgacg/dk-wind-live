@@ -9552,7 +9552,7 @@
 "2026-11-24": {
 "issued_utc": "2026-11-23T09:30:00Z",
 "sha256": "03919fa4da5f0b08e73ca91879b9b1fbd28759d84df723c570a9da2f31643fbb",
-"held": true
+"held": false
 }
 }
 }
