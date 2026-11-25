@@ -1,79 +1,79 @@
 {
-"built_utc": "2026-11-25T08:08Z",
+"built_utc": "2026-11-25T10:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-11-25",
-"hours_measured": 9,
+"hours_measured": 11,
 "hours_total": 24,
-"through_utc": "2026-11-25T08:00Z",
+"through_utc": "2026-11-25T10:00Z",
 "ranking": [
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 2.71,
-"acc": 76.34,
+"nmae": 2.66,
+"acc": 78.56,
 "rank": 1
 },
 {
 "source": "icon_d2",
 "name": "DWD ICON-D2",
-"nmae": 3.05,
-"acc": 69.83,
+"nmae": 3.11,
+"acc": 73.37,
 "rank": 2
-},
-{
-"source": "aifs",
-"name": "ECMWF AIFS (AI)",
-"nmae": 3.09,
-"acc": 81.96,
-"rank": 3
-},
-{
-"source": "energinet",
-"name": "Energinet (bias-corrected)",
-"nmae": 3.36,
-"acc": 74.84,
-"rank": 4
-},
-{
-"source": "j4catdk",
-"name": "J4catDK (my own model)",
-"nmae": 3.44,
-"acc": 77.9,
-"rank": 5
 },
 {
 "source": "icon",
 "name": "DWD ICON-EU",
-"nmae": 3.62,
-"acc": 75.6,
-"rank": 6
+"nmae": 3.41,
+"acc": 76.18,
+"rank": 3
 },
 {
-"source": "ukmo",
-"name": "UK Met Office",
-"nmae": 4.26,
-"acc": 72.17,
-"rank": 7
+"source": "j4catdk",
+"name": "J4catDK (my own model)",
+"nmae": 3.41,
+"acc": 80.59,
+"rank": 4
+},
+{
+"source": "aifs",
+"name": "ECMWF AIFS (AI)",
+"nmae": 3.42,
+"acc": 82.06,
+"rank": 5
+},
+{
+"source": "energinet",
+"name": "Energinet (bias-corrected)",
+"nmae": 3.43,
+"acc": 77.5,
+"rank": 6
 },
 {
 "source": "ifs",
 "name": "ECMWF IFS",
-"nmae": 4.46,
-"acc": 73.02,
-"rank": 8
+"nmae": 4.41,
+"acc": 76.07,
+"rank": 7
 },
 {
 "source": "knmi",
 "name": "KNMI HARMONIE",
-"nmae": 4.48,
-"acc": 69.96,
+"nmae": 4.43,
+"acc": 72.73,
+"rank": 8
+},
+{
+"source": "ukmo",
+"name": "UK Met Office",
+"nmae": 4.5,
+"acc": 74.33,
 "rank": 9
 },
 {
 "source": "harmonie",
 "name": "DMI HARMONIE",
-"nmae": 4.97,
-"acc": 69.1,
+"nmae": 4.56,
+"acc": 72.77,
 "rank": 10
 }
 ],
@@ -146,14 +146,14 @@
 "p": 1797,
 "lo": 1544,
 "hi": 2333,
-"a": null
+"a": 2070
 },
 {
 "t": "2026-11-25T09",
 "p": 1848,
 "lo": 1605,
 "hi": 2487,
-"a": null
+"a": 1969
 },
 {
 "t": "2026-11-25T10",
