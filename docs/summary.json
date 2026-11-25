@@ -36,21 +36,21 @@
 "note": "nMAE = mean absolute error of each area's hourly total as % of installed capacity"
 },
 "health": {
-"generated_utc": "2026-11-25T03:31Z",
-"last_forecast_day": "2026-11-25",
-"last_forecast_issued_utc": "2026-11-24T09:30:00Z",
+"generated_utc": "2026-11-25T09:33Z",
+"last_forecast_day": "2026-11-26",
+"last_forecast_issued_utc": "2026-11-25T09:30:00Z",
 "last_scored_day": "2026-11-24",
 "publish_after": "18:05",
 "forecasts": {
-"2026-11-24": {
-"issued_utc": "2026-11-23T09:30:00Z",
-"sha256": "03919fa4da5f0b08e73ca91879b9b1fbd28759d84df723c570a9da2f31643fbb",
-"held": false
-},
 "2026-11-25": {
 "issued_utc": "2026-11-24T09:30:00Z",
 "sha256": "773f60de0ea5f4c2d549fd52297baa6fb583ca30ee2cf976f5e5d7b477d90098",
 "held": false
+},
+"2026-11-26": {
+"issued_utc": "2026-11-25T09:30:00Z",
+"sha256": "37ded7a1ab9643592e93f5e06bc3164e5e884daaf1353aed63ef11c2f4969f02",
+"held": true
 }
 }
 },
