@@ -1,79 +1,79 @@
 {
-"built_utc": "2026-11-25T03:08Z",
+"built_utc": "2026-11-25T04:08Z",
 "line_name": "J4catDK (my own model)",
 "day": "2026-11-25",
-"hours_measured": 4,
+"hours_measured": 5,
 "hours_total": 24,
-"through_utc": "2026-11-25T03:00Z",
+"through_utc": "2026-11-25T04:00Z",
 "ranking": [
-{
-"source": "aifs",
-"name": "ECMWF AIFS (AI)",
-"nmae": 1.58,
-"acc": 85.65,
-"rank": 1
-},
 {
 "source": "gfs",
 "name": "NOAA GFS",
-"nmae": 1.64,
-"acc": 75.32,
+"nmae": 1.57,
+"acc": 75.9,
+"rank": 1
+},
+{
+"source": "aifs",
+"name": "ECMWF AIFS (AI)",
+"nmae": 2.52,
+"acc": 80.89,
 "rank": 2
 },
 {
 "source": "icon_d2",
 "name": "DWD ICON-D2",
-"nmae": 1.81,
-"acc": 52.55,
+"nmae": 2.62,
+"acc": 57.94,
 "rank": 3
-},
-{
-"source": "j4catdk",
-"name": "J4catDK (my own model)",
-"nmae": 2.12,
-"acc": 80.0,
-"rank": 4
-},
-{
-"source": "ifs",
-"name": "ECMWF IFS",
-"nmae": 2.21,
-"acc": 79.53,
-"rank": 5
-},
-{
-"source": "harmonie",
-"name": "DMI HARMONIE",
-"nmae": 2.21,
-"acc": 73.68,
-"rank": 6
-},
-{
-"source": "knmi",
-"name": "KNMI HARMONIE",
-"nmae": 2.34,
-"acc": 69.8,
-"rank": 7
 },
 {
 "source": "icon",
 "name": "DWD ICON-EU",
-"nmae": 2.42,
-"acc": 72.36,
-"rank": 8
+"nmae": 2.89,
+"acc": 73.28,
+"rank": 4
 },
 {
-"source": "ukmo",
-"name": "UK Met Office",
-"nmae": 2.5,
-"acc": 74.35,
-"rank": 9
+"source": "j4catdk",
+"name": "J4catDK (my own model)",
+"nmae": 3.1,
+"acc": 75.89,
+"rank": 5
+},
+{
+"source": "ifs",
+"name": "ECMWF IFS",
+"nmae": 3.46,
+"acc": 73.42,
+"rank": 6
 },
 {
 "source": "energinet",
 "name": "Energinet (bias-corrected)",
-"nmae": 4.21,
-"acc": 62.54,
+"nmae": 3.64,
+"acc": 71.32,
+"rank": 7
+},
+{
+"source": "ukmo",
+"name": "UK Met Office",
+"nmae": 3.92,
+"acc": 68.26,
+"rank": 8
+},
+{
+"source": "harmonie",
+"name": "DMI HARMONIE",
+"nmae": 3.99,
+"acc": 65.56,
+"rank": 9
+},
+{
+"source": "knmi",
+"name": "KNMI HARMONIE",
+"nmae": 4.03,
+"acc": 63.34,
 "rank": 10
 }
 ],
@@ -111,7 +111,7 @@
 "p": 1039,
 "lo": 737,
 "hi": 1347,
-"a": null
+"a": 1543
 },
 {
 "t": "2026-11-25T04",
