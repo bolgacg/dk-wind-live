@@ -9712,7 +9712,7 @@
 "2026-11-26": {
 "issued_utc": "2026-11-25T09:30:00Z",
 "sha256": "37ded7a1ab9643592e93f5e06bc3164e5e884daaf1353aed63ef11c2f4969f02",
-"held": true
+"held": false
 }
 }
 }
