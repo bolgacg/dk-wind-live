@@ -1,6 +1,6 @@
 # Live scoreboard
 
-Updated 2026-11-26 00:30 UTC. Error = mean absolute error in MW, summed over DK1/DK2 offshore and
+Updated 2026-11-26 06:30 UTC. Error = mean absolute error in MW, summed over DK1/DK2 offshore and
 onshore wind. Lower is better. energinet_da is Energinet's own day-ahead forecast; energinet_da_debiased scales it
 by its actual/forecast ratio over the previous 60 days, the fair bar to beat.
 
@@ -43,7 +43,7 @@ Per day:
 | 2026-11-13 |    796 |           1906 |                     971 |   992 |        957 |    986 |      1089 |   808 |       923 |    913 |    699 |
 | 2026-11-14 |    414 |           1768 |                     940 |   648 |        828 |    545 |       596 |   500 |       510 |    809 |    597 |
 | 2026-11-15 |    421 |           1261 |                     587 |   539 |        472 |    519 |       500 |   523 |       502 |    483 |    689 |
-| 2026-11-16 |    702 |           1000 |                     868 |  1477 |        942 |    792 |      1098 |   811 |       575 |    883 |    806 |
+| 2026-11-16 |    702 |           1000 |                     869 |  1477 |        942 |    792 |      1098 |   811 |       575 |    883 |    806 |
 | 2026-11-17 |    953 |           1362 |                    1038 |   830 |       1268 |    704 |       672 |  1205 |      1024 |   1234 |    650 |
 | 2026-11-18 |    448 |           1846 |                     966 |   947 |        776 |   1208 |       842 |   565 |       580 |    732 |    731 |
 | 2026-11-19 |    333 |            260 |                     390 |   294 |        350 |    298 |       404 |   320 |       262 |    330 |    357 |

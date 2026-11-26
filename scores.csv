@@ -767,9 +767,9 @@ day,zone,source,hours,actual_mwh,mae_mw,bias_mw,note
 2026-11-16,DK1_onshore,energinet_da,24,11342,204.1,195.1,energinet_da_fetched_at_scoring
 2026-11-16,DK2_offshore,energinet_da,24,19232,141.5,-137.8,energinet_da_fetched_at_scoring
 2026-11-16,DK2_onshore,energinet_da,24,5385,36.3,-9.6,energinet_da_fetched_at_scoring
-2026-11-16,DK1_offshore,energinet_da_debiased,24,27134,323.8,-66.1,energinet_da_fetched_at_scoring
-2026-11-16,DK1_onshore,energinet_da_debiased,24,11342,345.6,345.6,energinet_da_fetched_at_scoring
-2026-11-16,DK2_offshore,energinet_da_debiased,24,19232,159.6,-157.6,energinet_da_fetched_at_scoring
+2026-11-16,DK1_offshore,energinet_da_debiased,24,27134,324.0,-66.9,energinet_da_fetched_at_scoring
+2026-11-16,DK1_onshore,energinet_da_debiased,24,11342,346.0,346.0,energinet_da_fetched_at_scoring
+2026-11-16,DK2_offshore,energinet_da_debiased,24,19232,159.9,-157.9,energinet_da_fetched_at_scoring
 2026-11-16,DK2_onshore,energinet_da_debiased,24,5385,39.2,18.0,energinet_da_fetched_at_scoring
 2026-11-17,DK1_offshore,ifs,24,28463,463.6,-343.0,
 2026-11-17,DK1_onshore,ifs,24,20216,385.4,-236.4,
