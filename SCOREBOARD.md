@@ -1,26 +1,26 @@
 # Live scoreboard
 
-Updated 2026-11-25 06:30 UTC. Error = mean absolute error in MW, summed over DK1/DK2 offshore and
+Updated 2026-11-26 00:30 UTC. Error = mean absolute error in MW, summed over DK1/DK2 offshore and
 onshore wind. Lower is better. energinet_da is Energinet's own day-ahead forecast; energinet_da_debiased scales it
 by its actual/forecast ratio over the previous 60 days, the fair bar to beat.
 
-Days scored: 26
+Days scored: 27
 
 | source | mean error, MW |
 |---|---|
-| j4catdk | 410 |
-| aifs | 426 |
-| ifs | 457 |
-| icon | 478 |
-| icon_d2 | 497 |
-| ukmo | 524 |
-| energinet_da_debiased | 527 |
-| knmi | 544 |
-| harmonie | 545 |
-| gfs | 547 |
-| energinet_da | 793 |
+| j4catdk | 407 |
+| aifs | 425 |
+| ifs | 454 |
+| icon | 473 |
+| icon_d2 | 492 |
+| ukmo | 517 |
+| energinet_da_debiased | 520 |
+| knmi | 538 |
+| gfs | 539 |
+| harmonie | 540 |
+| energinet_da | 789 |
 
-80% band, total Denmark: actual inside the band in 82% of 600 scored hours (target 80%), mean width 901 MW.
+80% band, total Denmark: actual inside the band in 82% of 624 scored hours (target 80%), mean width 896 MW.
 
 Per day:
 
@@ -43,7 +43,7 @@ Per day:
 | 2026-11-13 |    796 |           1906 |                     971 |   992 |        957 |    986 |      1089 |   808 |       923 |    913 |    699 |
 | 2026-11-14 |    414 |           1768 |                     940 |   648 |        828 |    545 |       596 |   500 |       510 |    809 |    597 |
 | 2026-11-15 |    421 |           1261 |                     587 |   539 |        472 |    519 |       500 |   523 |       502 |    483 |    689 |
-| 2026-11-16 |    702 |           1000 |                     869 |  1477 |        942 |    792 |      1098 |   811 |       575 |    883 |    806 |
+| 2026-11-16 |    702 |           1000 |                     868 |  1477 |        942 |    792 |      1098 |   811 |       575 |    883 |    806 |
 | 2026-11-17 |    953 |           1362 |                    1038 |   830 |       1268 |    704 |       672 |  1205 |      1024 |   1234 |    650 |
 | 2026-11-18 |    448 |           1846 |                     966 |   947 |        776 |   1208 |       842 |   565 |       580 |    732 |    731 |
 | 2026-11-19 |    333 |            260 |                     390 |   294 |        350 |    298 |       404 |   320 |       262 |    330 |    357 |
@@ -52,3 +52,4 @@ Per day:
 | 2026-11-22 |    454 |           1291 |                     604 |   706 |        861 |    437 |       461 |   645 |       nan |    779 |   1712 |
 | 2026-11-23 |    452 |           1024 |                     478 |   943 |        568 |    456 |       402 |   628 |       485 |    550 |    778 |
 | 2026-11-24 |    183 |            234 |                     440 |   176 |        224 |    268 |       272 |   161 |       175 |    242 |    180 |
+| 2026-11-25 |    396 |            662 |                     334 |   341 |        414 |    346 |       365 |   361 |       331 |    400 |    335 |
