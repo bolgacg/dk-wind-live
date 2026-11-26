@@ -8986,7 +8986,7 @@
 {
 "day": "2026-11-16",
 "source": "energinet",
-"acc": 66.97,
+"acc": 66.94,
 "nmae": 7.36,
 "rank": 2,
 "no_forecast": false
@@ -9778,21 +9778,21 @@
 ]
 },
 "health": {
-"generated_utc": "2026-11-26T03:38Z",
-"last_forecast_day": "2026-11-26",
-"last_forecast_issued_utc": "2026-11-25T09:30:00Z",
+"generated_utc": "2026-11-26T09:39Z",
+"last_forecast_day": "2026-11-27",
+"last_forecast_issued_utc": "2026-11-26T09:30:00Z",
 "last_scored_day": "2026-11-25",
 "publish_after": "18:05",
 "forecasts": {
-"2026-11-25": {
-"issued_utc": "2026-11-24T09:30:00Z",
-"sha256": "773f60de0ea5f4c2d549fd52297baa6fb583ca30ee2cf976f5e5d7b477d90098",
-"held": false
-},
 "2026-11-26": {
 "issued_utc": "2026-11-25T09:30:00Z",
 "sha256": "37ded7a1ab9643592e93f5e06bc3164e5e884daaf1353aed63ef11c2f4969f02",
 "held": false
+},
+"2026-11-27": {
+"issued_utc": "2026-11-26T09:30:00Z",
+"sha256": "87beb8bc7d4983a19834614cb277a7e19c673b744b1bb37d5428b6d5bd728ea5",
+"held": true
 }
 }
 }
