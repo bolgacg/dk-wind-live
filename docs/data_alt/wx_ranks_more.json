@@ -5022,6 +5022,83 @@
 "mae": 1.3355,
 "rank": 11,
 "kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "public_avg",
+"mae": 0.6745,
+"rank": 1,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ukmo_global_deterministic_10km",
+"mae": 0.6776,
+"rank": 2,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ecmwf_ifs025",
+"mae": 0.6864,
+"rank": 3,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "icon_d2",
+"mae": 0.7462,
+"rank": 4,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ecmwf_aifs025_single",
+"mae": 0.7819,
+"rank": 5,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "gfs_global",
+"mae": 0.7927,
+"rank": 6,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "metno_nordic",
+"mae": 0.7962,
+"rank": 7,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "icon_eu",
+"mae": 0.841,
+"rank": 8,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "dkcast",
+"mae": 0.8759,
+"rank": 9,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "dmi_harmonie_arome_europe",
+"mae": 1.0332,
+"rank": 10,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "knmi_harmonie_arome_europe",
+"mae": 1.1497,
+"rank": 11,
+"kind": "live"
 }
 ],
 "live_from": "2026-10-31"
@@ -10049,6 +10126,83 @@
 "mae": 11.8846,
 "rank": 11,
 "kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ecmwf_aifs025_single",
+"mae": 3.5463,
+"rank": 1,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ecmwf_ifs025",
+"mae": 3.9023,
+"rank": 2,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "dkcast",
+"mae": 4.4517,
+"rank": 3,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "gfs_global",
+"mae": 4.7923,
+"rank": 4,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "public_avg",
+"mae": 5.4969,
+"rank": 5,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "dmi_harmonie_arome_europe",
+"mae": 7.0975,
+"rank": 6,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ukmo_global_deterministic_10km",
+"mae": 7.4913,
+"rank": 7,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "metno_nordic",
+"mae": 7.9483,
+"rank": 8,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "icon_d2",
+"mae": 8.2262,
+"rank": 9,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "knmi_harmonie_arome_europe",
+"mae": 8.5143,
+"rank": 10,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "icon_eu",
+"mae": 9.9478,
+"rank": 11,
+"kind": "live"
 }
 ],
 "live_from": "2026-10-31"
@@ -15074,6 +15228,83 @@
 "day": "2026-11-24",
 "source": "metno_nordic",
 "mae": 0.0035,
+"rank": 11,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ukmo_global_deterministic_10km",
+"mae": 0.0108,
+"rank": 1,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "public_avg",
+"mae": 0.0113,
+"rank": 2,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "dmi_harmonie_arome_europe",
+"mae": 0.0121,
+"rank": 3,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "metno_nordic",
+"mae": 0.0121,
+"rank": 4,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "dkcast",
+"mae": 0.0122,
+"rank": 5,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "icon_d2",
+"mae": 0.0125,
+"rank": 6,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "gfs_global",
+"mae": 0.013,
+"rank": 7,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ecmwf_aifs025_single",
+"mae": 0.0132,
+"rank": 8,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "icon_eu",
+"mae": 0.0135,
+"rank": 9,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "ecmwf_ifs025",
+"mae": 0.0136,
+"rank": 10,
+"kind": "live"
+},
+{
+"day": "2026-11-25",
+"source": "knmi_harmonie_arome_europe",
+"mae": 0.0143,
 "rank": 11,
 "kind": "live"
 }
