@@ -1,7 +1,7 @@
 {
-"built_utc": "2026-11-28T09:09Z",
+"built_utc": "2026-11-28T09:32Z",
 "today": "2026-11-28",
-"now_utc": "2026-11-28T09:09Z",
+"now_utc": "2026-11-28T09:32Z",
 "days": [
 {
 "day": "2026-11-21",
@@ -98,8 +98,8 @@
 },
 {
 "day": "2026-11-29",
-"kind": null,
-"issued_utc": null,
+"kind": "live",
+"issued_utc": "2026-11-28T09:30:00Z",
 "hours": 24,
 "hours_scored": 0,
 "complete": false,

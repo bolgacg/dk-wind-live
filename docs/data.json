@@ -9938,21 +9938,21 @@
 ]
 },
 "health": {
-"generated_utc": "2026-11-28T03:40Z",
-"last_forecast_day": "2026-11-28",
-"last_forecast_issued_utc": "2026-11-27T10:00:03Z",
+"generated_utc": "2026-11-28T09:32Z",
+"last_forecast_day": "2026-11-29",
+"last_forecast_issued_utc": "2026-11-28T09:30:00Z",
 "last_scored_day": "2026-11-27",
 "publish_after": "18:05",
 "forecasts": {
-"2026-11-27": {
-"issued_utc": "2026-11-26T09:30:00Z",
-"sha256": "87beb8bc7d4983a19834614cb277a7e19c673b744b1bb37d5428b6d5bd728ea5",
-"held": false
-},
 "2026-11-28": {
 "issued_utc": "2026-11-27T10:00:03Z",
 "sha256": "252d5b88e9edc51f0e4afb9a6f4d757964b7a12aa25c3d59ce28ed9fbd40af3f",
 "held": false
+},
+"2026-11-29": {
+"issued_utc": "2026-11-28T09:30:00Z",
+"sha256": "f33a33a917d2deafa32e49ada86dbbc1eb6ba013fa92600a873014ecf90a91ae",
+"held": true
 }
 }
 }
